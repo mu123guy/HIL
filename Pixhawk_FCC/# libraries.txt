@@ -1,0 +1,5 @@
+the following libraries are needed in the directory in order for this model to work
+(make sure to export them to version appropriate for Px4 Toolchain!!)
+- lib_flight_controller
+- lib_fin_deflections
+- lib_servo

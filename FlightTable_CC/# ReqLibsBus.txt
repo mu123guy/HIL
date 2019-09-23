@@ -1,0 +1,22 @@
+the following libraries are needed in the directory in order for this model to work
+(make sure to export them to appropriate version for the Flight Table HW Interface Control Computer -> R2017a)
+  - lib_Gimbal
+  - lib_Gimbal_Ctrl
+
+the following bus objects are needed in the directory in order for this model to work
+  - ATT_Euler_Bus
+  - ATT_Quaternions_Bus
+  - Attitude_States_Bus
+  - COM_Ctrl_Bus
+  - Encoder_Resolved_Bus
+  - Encoder_Signal_Bus
+  - FCC_Ctrl_Bus
+  - FDM_Ctrl_Bus
+  - Gimbal_Cmd_Bus
+  - Gimbal_Ctrl_Bus
+  - Gimbal_Encoder_Bus
+  - Gimbal_Monitor_Bus
+  - Gimbal_State_Bus
+  - Gimbal_Status_Bus
+  - HW_Ctrl_Bus
+  - Simulation_Ctrl_Bus
