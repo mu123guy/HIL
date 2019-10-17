@@ -33,6 +33,7 @@ function Simulation_Ctrl = init_Simulation_Ctrl(realtime,external,HW_usage)
     Simulation_Ctrl.reset        = 0; % <1> reset
     Simulation_Ctrl.realtime_flg = realtime;
     Simulation_Ctrl.external_flg = external;
+    Simulation_Ctrl.max_missed_ticks = 1000;
     
     % Configurate Flight Dynamic Model
     Simulation_Ctrl.FDM_Ctrl.enable_propulsion_flg = 0;
@@ -49,7 +50,7 @@ function Simulation_Ctrl = init_Simulation_Ctrl(realtime,external,HW_usage)
     % Specify Communication Rates and Params
     Simulation_Ctrl.Com_Ctrl.Pix.Com_freq_Hz = 200;  %must be nat fraction of Sim sample freq!!
     Simulation_Ctrl.Com_Ctrl.Pix.enable_CRC_flg = 0; %enable cyclic redundancy check for com with pixhawk
-    Simulation_Ctrl.Com_Ctrl.FT.Com_freq_Hz = 1000;  %must be nat fraction of Sim sample freq!!
+    Simulation_Ctrl.Com_Ctrl.FT.Com_freq_Hz = 500;  %must be nat fraction of Sim sample freq!!
     
     % Specify FCC Emulation Parameters
     Simulation_Ctrl.FCC_Ctrl.discrTF_flg = 0; %enable discrete Control TF for FCC emulation (<0> for continous TF)
