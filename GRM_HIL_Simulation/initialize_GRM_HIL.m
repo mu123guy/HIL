@@ -33,7 +33,7 @@ if(enable_output) disp([newline 'INITIALIZE GRM HARDWARE IN THE LOOP SIMULATION 
 enable_realtime = 1; % <1> if simulation should run in realtime, <0> if not
 
 % run simulation in external mode
-enable_external_mode = 0; % <1> for external mode, <0> for normal mode
+enable_external_mode = 1; % <1> for external mode, <0> for normal mode
 
 % Specify if the following components are used in hardware or should be simulated
 % <0> if real HW is used, <1> if HW should be simulated

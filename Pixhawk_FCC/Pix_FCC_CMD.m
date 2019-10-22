@@ -12,7 +12,7 @@ if(enable_output) disp([newline 'SENDING INITIALIZATION COMMAND TO PIXHAWK' newl
 %% Set up serial communication
 % change the comport value below to the one on which the Pixhawk board is
 % connected on your Host machine
-comport = 'COM5';
+comport = 'COM11';
 delete(instrfind('Port',comport));
 
 %open serial object
@@ -84,6 +84,7 @@ try
     %The data are 4 single precision values(16 bytes). The header
     %associated with this data is [5 5]. Hence expectedDataLength = 18
     expectedDataLength = 19;
+    expectedDataLength = 500;
     data = fread(s,expectedDataLength);
        
     %close the connection after reading
@@ -137,3 +138,4 @@ else
     end
 
 end
+data

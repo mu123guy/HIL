@@ -13,7 +13,7 @@ if(enable_output) disp([newline 'VERIFY SERIAL COMMUNICATION WITH PIXHAWK FCC' n
 %% Set up serial communication
 % change the comport value below to the one on which the Pixhawk board is
 % connected on your Host machine
-comport = 'COM5';
+comport = 'COM11';
 delete(instrfind('Port',comport));
 
 %open serial object
