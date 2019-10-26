@@ -24,7 +24,7 @@
 %
 
 %% Toggle Command Line Output
-enable_output = 0;
+enable_output = 1;
 if(enable_output) disp([newline 'INITIALIZE GRM HARDWARE IN THE LOOP SIMULATION ENVIRONMENT' newline]), end
 
 %% Specify Simulation Parameters
