@@ -44,6 +44,11 @@ function Initial_States = init_Initial_States()
     Att.ATT_Theta_rad = 0;
     Att.ATT_Psi_rad = 0;
     
+    Att.ATT_Phi_rad = deg2rad(10);
+    Att.ATT_Theta_rad = deg2rad(5);
+    Att.ATT_Psi_rad = deg2rad(20);
+    
+    
     Pos.POS_lambda_WGS84_rad = 0;
     Pos.POS_mue_WGS84_rad = 0;
     Pos.POS_h_WGS84_m = 0;

@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.41
+ * Model version              : 1.42
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Tue Oct 22 17:22:55 2019
+ * C source code generated on : Wed Oct 30 19:55:07 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -534,19 +534,19 @@ void GRM_HIL_IfActionpass_yaw(real_T rtu_In1, real_T *rty_Out1)
 void GRM_HIL_output(void)
 {
   /* local block i/o variables */
-  real_T rtb_Phi2MotorPitch;
-  boolean_T rtb_Compare;
+  real_T rtb_Add_pi;
+  boolean_T rtb_Compare_i;
   boolean_T rtb_Compare_o;
   boolean_T rtb_Compare_k;
   real_T rtb_Sum_dr;
   real_T rtb_Sum_i;
-  real_T rtb_Sum_o2;
+  real_T rtb_Sum_o;
   int_T cj;
   real_T rtb_Fin_1_Pos_rad;
   real_T rtb_Fin_2_Pos_rad;
   real_T rtb_Fin_3_Pos_rad;
   real_T rtb_Fin_4_Pos_rad;
-  real_T rtb_Phi2MotorRoll;
+  real_T rtb_Abs_lo;
   real_T rtb_q_B_radDs;
   real_T rtb_r_B_radDs;
   real_T rtb_ACC_y_B_mDs2;
@@ -554,20 +554,18 @@ void GRM_HIL_output(void)
   real_T rtb_PulseGenerator1;
   real_T rtb_PulseGenerator;
   real_T rtb_p_B_radDs;
-  real_T rtb_Phi2MotorYaw;
-  real_T rtb_Add16_j;
-  boolean_T rtb_RelationalOperator;
-  boolean_T rtb_RelationalOperator1;
-  real_T rtb_Add2;
-  boolean_T rtb_RelationalOperator2;
   real_T rtb_ProportionalGain;
   real_T rtb_DerivativeGain;
   real_T rtb_ProportionalGain_nx;
   real_T rtb_DerivativeGain_a;
   real_T rtb_ProportionalGain_c;
   real_T rtb_DerivativeGain_f;
-  real_T rtb_Abs_k;
+  real_T rtb_Abs_i;
+  boolean_T rtb_RelationalOperator;
+  boolean_T rtb_RelationalOperator1;
+  boolean_T rtb_RelationalOperator2;
   real_T rtb_Add_g;
+  real_T rtb_Sum_p3;
   int8_T rtAction;
   if (rtmIsMajorTimeStep(GRM_HIL_M)) {
     /* set solver stop time */
@@ -673,7 +671,7 @@ void GRM_HIL_output(void)
        GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) && rtmIsMajorTimeStep
       (GRM_HIL_M)) {
     /* Constant: '<S7>/Constant4' */
-    if (GRM_HIL_P.Constant4_Value) {
+    if (GRM_HIL_P.Constant4_Value_g) {
       GRM_HIL_DW.Propulsion_MODE = true;
     } else {
       if (GRM_HIL_DW.Propulsion_MODE) {
@@ -962,7 +960,7 @@ void GRM_HIL_output(void)
      */
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
       /* Constant: '<S7>/Constant5' */
-      if (GRM_HIL_P.Constant5_Value) {
+      if (GRM_HIL_P.Constant5_Value_k) {
         GRM_HIL_DW.Drag_MODE = true;
       } else {
         if (GRM_HIL_DW.Drag_MODE) {
@@ -1237,7 +1235,7 @@ void GRM_HIL_output(void)
        *  Constant: '<S16>/Constant7'
        *  Sum: '<S16>/Add'
        */
-      if (GRM_HIL_P.Constant6_Value) {
+      if (GRM_HIL_P.Constant6_Value_b) {
         rtb_PulseGenerator1 += GRM_HIL_P.Constant12_Value;
       } else {
         rtb_PulseGenerator1 = GRM_HIL_P.Constant7_Value;
@@ -1293,7 +1291,7 @@ void GRM_HIL_output(void)
        *  Constant: '<S16>/Constant9'
        *  Sum: '<S16>/Add1'
        */
-      if (GRM_HIL_P.Constant8_Value) {
+      if (GRM_HIL_P.Constant8_Value_e) {
         rtb_PulseGenerator1 += GRM_HIL_P.Constant13_Value;
       } else {
         rtb_PulseGenerator1 = GRM_HIL_P.Constant9_Value;
@@ -1391,674 +1389,20 @@ void GRM_HIL_output(void)
   GRM_HIL_B.w_z_K_IB_B_radDs = GRM_HIL_P.Gain8_Gain * rtb_r_B_radDs;
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Gain: '<S189>/Gain' incorporates:
-     *  Constant: '<S5>/Constant'
+    /* DataTypeConversion: '<S38>/Data Type Conversion1' incorporates:
+     *  Logic: '<S38>/Logical Operator2'
+     *  Logic: '<S38>/Logical Operator3'
+     *  Memory generated from: '<S36>/Memory'
      */
-    GRM_HIL_B.VEL_u_K_R_E_B_mDs = GRM_HIL_P.Gain_Gain_d *
-      GRM_HIL_P.Initial_States_Rigid_Body.Transl.VEL_u_K_R_E_B_mDs;
-  }
+    GRM_HIL_B.Gimbal_operational_flg = (GRM_HIL_DW.Memory_1_PreviousInput &&
+      (!GRM_HIL_DW.Memory_2_PreviousInput));
 
-  /* Integrator: '<S220>/Integrator' incorporates:
-   *  Constant: '<S7>/Constant2'
-   */
-  if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-    rtb_RelationalOperator = (GRM_HIL_P.Constant2_Value_f &&
-      (GRM_HIL_PrevZCX.Integrator_Reset_ZCE_i != POS_ZCSIG));
-    GRM_HIL_PrevZCX.Integrator_Reset_ZCE_i = GRM_HIL_P.Constant2_Value_f;
+    /* Constant: '<S38>/Constant1' */
+    GRM_HIL_B.Gimbal_Limit_flg = GRM_HIL_P.Constant1_Value_b;
 
-    /* evaluate zero-crossings */
-    if (rtb_RelationalOperator || (GRM_HIL_DW.Integrator_IWORK_ic != 0)) {
-      GRM_HIL_X.Integrator_CSTATE_j = GRM_HIL_B.VEL_u_K_R_E_B_mDs;
-    }
-  }
+    /* Constant: '<S38>/Constant2' */
+    GRM_HIL_B.Gimbal_StopSim_flg = GRM_HIL_P.Constant2_Value_c;
 
-  /* Gain: '<S195>/Gain' incorporates:
-   *  Integrator: '<S220>/Integrator'
-   */
-  GRM_HIL_B.VEL_u_K_R_E_B_mDs_e = GRM_HIL_P.Gain_Gain_k *
-    GRM_HIL_X.Integrator_CSTATE_j;
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Gain: '<S189>/Gain1' incorporates:
-     *  Constant: '<S5>/Constant1'
-     */
-    GRM_HIL_B.VEL_v_K_R_E_B_mDs = GRM_HIL_P.Gain1_Gain_i *
-      GRM_HIL_P.Initial_States_Rigid_Body.Transl.VEL_v_K_R_E_B_mDs;
-  }
-
-  /* Integrator: '<S220>/Integrator1' incorporates:
-   *  Constant: '<S7>/Constant2'
-   */
-  if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-    rtb_RelationalOperator = (GRM_HIL_P.Constant2_Value_f &&
-      (GRM_HIL_PrevZCX.Integrator1_Reset_ZCE_p != POS_ZCSIG));
-    GRM_HIL_PrevZCX.Integrator1_Reset_ZCE_p = GRM_HIL_P.Constant2_Value_f;
-
-    /* evaluate zero-crossings */
-    if (rtb_RelationalOperator || (GRM_HIL_DW.Integrator1_IWORK_g != 0)) {
-      GRM_HIL_X.Integrator1_CSTATE_p = GRM_HIL_B.VEL_v_K_R_E_B_mDs;
-    }
-  }
-
-  /* Gain: '<S195>/Gain1' incorporates:
-   *  Integrator: '<S220>/Integrator1'
-   */
-  GRM_HIL_B.VEL_v_K_R_E_B_mDs_e = GRM_HIL_P.Gain1_Gain_b *
-    GRM_HIL_X.Integrator1_CSTATE_p;
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Gain: '<S189>/Gain2' incorporates:
-     *  Constant: '<S5>/Constant2'
-     */
-    GRM_HIL_B.VEL_w_K_R_E_B_mDs = GRM_HIL_P.Gain2_Gain_l *
-      GRM_HIL_P.Initial_States_Rigid_Body.Transl.VEL_w_K_R_E_B_mDs;
-  }
-
-  /* Integrator: '<S220>/Integrator2' incorporates:
-   *  Constant: '<S7>/Constant2'
-   */
-  if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-    rtb_RelationalOperator = (GRM_HIL_P.Constant2_Value_f &&
-      (GRM_HIL_PrevZCX.Integrator2_Reset_ZCE_f != POS_ZCSIG));
-    GRM_HIL_PrevZCX.Integrator2_Reset_ZCE_f = GRM_HIL_P.Constant2_Value_f;
-
-    /* evaluate zero-crossings */
-    if (rtb_RelationalOperator || (GRM_HIL_DW.Integrator2_IWORK_m != 0)) {
-      GRM_HIL_X.Integrator2_CSTATE_a = GRM_HIL_B.VEL_w_K_R_E_B_mDs;
-    }
-  }
-
-  /* Gain: '<S195>/Gain2' incorporates:
-   *  Integrator: '<S220>/Integrator2'
-   */
-  GRM_HIL_B.VEL_w_K_R_E_B_mDs_d = GRM_HIL_P.Gain2_Gain_e *
-    GRM_HIL_X.Integrator2_CSTATE_a;
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Sum: '<S18>/Add' incorporates:
-     *  Constant: '<S18>/Constant'
-     *  Constant: '<S18>/Constant1'
-     *  Constant: '<S18>/Constant2'
-     *  Constant: '<S7>/Constant10'
-     *  Product: '<S18>/Divide'
-     *  Product: '<S18>/Divide1'
-     */
-    rtb_PulseGenerator = GRM_HIL_P.Constant1_Value_a / GRM_HIL_P.HIL_Sample_Time
-      / GRM_HIL_P.Constant10_Value - GRM_HIL_P.Constant2_Value_a;
-
-    /* MATLAB Function: '<S18>/Counter_with_external_limit' incorporates:
-     *  Memory: '<S18>/Memory'
-     */
-    if (GRM_HIL_DW.Memory_PreviousInput < rtb_PulseGenerator) {
-      GRM_HIL_B.value = GRM_HIL_DW.Memory_PreviousInput + 1.0;
-    } else {
-      GRM_HIL_B.value = 0.0;
-    }
-
-    /* End of MATLAB Function: '<S18>/Counter_with_external_limit' */
-
-    /* RelationalOperator: '<S18>/Equal' */
-    GRM_HIL_B.Equal = (rtb_PulseGenerator == GRM_HIL_B.value);
-
-    /* Outputs for Enabled SubSystem: '<S17>/Com_to_FCC_emul' incorporates:
-     *  EnablePort: '<S19>/Enable'
-     */
-    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-      GRM_HIL_DW.Com_to_FCC_emul_MODE = GRM_HIL_B.Equal;
-    }
-
-    /* End of Outputs for SubSystem: '<S17>/Com_to_FCC_emul' */
-  }
-
-  /* Outputs for Enabled SubSystem: '<S17>/Com_to_FCC_emul' incorporates:
-   *  EnablePort: '<S19>/Enable'
-   */
-  if (GRM_HIL_DW.Com_to_FCC_emul_MODE) {
-    /* SignalConversion generated from: '<S19>/States_hold' */
-    GRM_HIL_B.ATT_Phi_rad_f = GRM_HIL_B.ATT_Phi_rad_l;
-
-    /* SignalConversion generated from: '<S19>/States_hold' */
-    GRM_HIL_B.ACC_y_B_mDs2_o = GRM_HIL_B.ACC_y_B_mDs2;
-
-    /* SignalConversion generated from: '<S19>/States_hold' */
-    GRM_HIL_B.ACC_z_B_mDs2_e = GRM_HIL_B.ACC_z_B_mDs2;
-
-    /* SignalConversion generated from: '<S19>/States_hold' */
-    GRM_HIL_B.w_x_K_IB_B_radDs_f = GRM_HIL_B.w_x_K_IB_B_radDs;
-
-    /* SignalConversion generated from: '<S19>/States_hold' */
-    GRM_HIL_B.w_y_K_IB_B_radDs_e = GRM_HIL_B.w_y_K_IB_B_radDs;
-
-    /* SignalConversion generated from: '<S19>/States_hold' */
-    GRM_HIL_B.w_z_K_IB_B_radDs_n = GRM_HIL_B.w_z_K_IB_B_radDs;
-    if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-        GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-      /* SignalConversion generated from: '<S19>/External_Inputs_hold' */
-      GRM_HIL_B.CMD_phi_rad = GRM_HIL_B.Switch1;
-
-      /* SignalConversion generated from: '<S19>/External_Inputs_hold' */
-      GRM_HIL_B.CMD_acc_z_mDs2 = GRM_HIL_B.Switch;
-
-      /* SignalConversion generated from: '<S19>/External_Inputs_hold' */
-      GRM_HIL_B.CMD_acc_y_mDs2 = GRM_HIL_B.Switch2;
-    }
-
-    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-      srUpdateBC(GRM_HIL_DW.Com_to_FCC_emul_SubsysRanBC);
-    }
-  }
-
-  /* End of Outputs for SubSystem: '<S17>/Com_to_FCC_emul' */
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Gain: '<S25>/Gain2' */
-    GRM_HIL_B.phi_rad = GRM_HIL_P.Gain2_Gain_b * GRM_HIL_B.CMD_phi_rad;
-  }
-
-  /* Gain: '<S24>/Gain' incorporates:
-   *  Sum: '<S24>/Sum'
-   */
-  GRM_HIL_B.Gain = (GRM_HIL_B.phi_rad - GRM_HIL_B.w_x_K_IB_B_radDs_f) *
-    GRM_HIL_P.FlightController_FCC.Roll.Gain;
-
-  /* TransferFcn: '<S24>/Transfer Fcn' */
-  rtb_Phi2MotorYaw = GRM_HIL_P.FlightController_FCC.Roll.Lead.Num[0] /
-    GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[0];
-  rtb_Phi2MotorYaw = (GRM_HIL_P.FlightController_FCC.Roll.Lead.Num[1] /
-                      GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[0] -
-                      rtb_Phi2MotorYaw *
-                      (GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[1] /
-                       GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[0])) *
-    GRM_HIL_X.TransferFcn_CSTATE_j + rtb_Phi2MotorYaw * GRM_HIL_B.Gain;
-
-  /* Saturate: '<S23>/Limit2maxDeflection' */
-  if (rtb_Phi2MotorYaw >
-      GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad) {
-    rtb_Phi2MotorYaw =
-      GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad;
-  } else {
-    if (rtb_Phi2MotorYaw <
-        -GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad) {
-      rtb_Phi2MotorYaw =
-        -GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad;
-    }
-  }
-
-  /* End of Saturate: '<S23>/Limit2maxDeflection' */
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Gain: '<S25>/Gain' */
-    GRM_HIL_B.acc_y_mDs2 = GRM_HIL_P.Gain_Gain_e * GRM_HIL_B.CMD_acc_y_mDs2;
-
-    /* Gain: '<S25>/Gain1' */
-    GRM_HIL_B.acc_z_mDs2 = GRM_HIL_P.Gain1_Gain_c * GRM_HIL_B.CMD_acc_z_mDs2;
-  }
-
-  /* Sum: '<S24>/Sum3' */
-  GRM_HIL_B.Sum3 = GRM_HIL_B.acc_y_mDs2 - GRM_HIL_B.ACC_y_B_mDs2_o;
-
-  /* Gain: '<S24>/Gain2' incorporates:
-   *  Gain: '<S24>/Gain4'
-   *  Sum: '<S24>/Sum4'
-   *  Sum: '<S24>/Sum6'
-   *  TransferFcn: '<S24>/Transfer Fcn2'
-   */
-  rtb_Phi2MotorRoll = ((GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.IntGain.Num
-                        /
-                        GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.IntGain.Denom
-                        [0] * GRM_HIL_X.TransferFcn2_CSTATE_e +
-                        GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.PropGain *
-                        GRM_HIL_B.Sum3) - GRM_HIL_B.w_z_K_IB_B_radDs_n) *
-    GRM_HIL_P.FlightController_FCC.Yaw.innerLoop.PropGain;
-
-  /* Sum: '<S24>/Sum1' */
-  GRM_HIL_B.Sum1 = GRM_HIL_B.acc_z_mDs2 - GRM_HIL_B.ACC_z_B_mDs2_e;
-
-  /* TransferFcn: '<S24>/Transfer Fcn1' */
-  rtb_Phi2MotorPitch = 0.0;
-  rtb_Phi2MotorPitch +=
-    GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.IntGain.Num /
-    GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.IntGain.Denom[0] *
-    GRM_HIL_X.TransferFcn1_CSTATE_e;
-
-  /* Gain: '<S24>/Gain1' incorporates:
-   *  Gain: '<S24>/Gain3'
-   *  Sum: '<S24>/Sum2'
-   *  Sum: '<S24>/Sum5'
-   */
-  rtb_Phi2MotorPitch = ((GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.PropGain
-    * GRM_HIL_B.Sum1 + rtb_Phi2MotorPitch) - GRM_HIL_B.w_y_K_IB_B_radDs_e) *
-    GRM_HIL_P.FlightController_FCC.Pitch.innerLoop.PropGain;
-
-  /* Sum: '<S23>/Add4' incorporates:
-   *  Constant: '<S23>/Constant'
-   *  Sum: '<S23>/Add5'
-   */
-  rtb_PulseGenerator = GRM_HIL_P.FinDeflection_Control_Surfaces.phi_f1_rad +
-    GRM_HIL_B.ATT_Phi_rad_f;
-
-  /* Sum: '<S23>/Add' incorporates:
-   *  Fcn: '<S23>/Fcn'
-   *  Fcn: '<S23>/Fcn1'
-   *  Product: '<S23>/Multiply'
-   *  Product: '<S23>/Multiply1'
-   *  Sum: '<S23>/Add4'
-   */
-  rtb_PulseGenerator = -cos(rtb_PulseGenerator) * rtb_Phi2MotorRoll + sin
-    (rtb_PulseGenerator) * rtb_Phi2MotorPitch;
-
-  /* Sum: '<S23>/Add6' incorporates:
-   *  Constant: '<S23>/Constant1'
-   *  Sum: '<S23>/Add7'
-   */
-  rtb_Abs_k = GRM_HIL_P.FinDeflection_Control_Surfaces.phi_f2_rad +
-    GRM_HIL_B.ATT_Phi_rad_f;
-
-  /* Sum: '<S23>/Add1' incorporates:
-   *  Fcn: '<S23>/Fcn2'
-   *  Fcn: '<S23>/Fcn3'
-   *  Product: '<S23>/Multiply2'
-   *  Product: '<S23>/Multiply3'
-   *  Sum: '<S23>/Add6'
-   */
-  rtb_PulseGenerator1 = -cos(rtb_Abs_k) * rtb_Phi2MotorRoll + sin(rtb_Abs_k) *
-    rtb_Phi2MotorPitch;
-
-  /* Sum: '<S23>/Add8' incorporates:
-   *  Constant: '<S23>/Constant2'
-   *  Sum: '<S23>/Add9'
-   */
-  rtb_Abs_k = GRM_HIL_P.FinDeflection_Control_Surfaces.phi_f3_rad +
-    GRM_HIL_B.ATT_Phi_rad_f;
-
-  /* Sum: '<S23>/Add2' incorporates:
-   *  Fcn: '<S23>/Fcn4'
-   *  Fcn: '<S23>/Fcn5'
-   *  Product: '<S23>/Multiply4'
-   *  Product: '<S23>/Multiply5'
-   *  Sum: '<S23>/Add8'
-   */
-  rtb_Add2 = -cos(rtb_Abs_k) * rtb_Phi2MotorRoll + sin(rtb_Abs_k) *
-    rtb_Phi2MotorPitch;
-
-  /* Sum: '<S23>/Add10' incorporates:
-   *  Constant: '<S23>/Constant3'
-   *  Sum: '<S23>/Add11'
-   */
-  rtb_Abs_k = GRM_HIL_P.FinDeflection_Control_Surfaces.phi_f4_rad +
-    GRM_HIL_B.ATT_Phi_rad_f;
-
-  /* Sum: '<S23>/Add3' incorporates:
-   *  Fcn: '<S23>/Fcn6'
-   *  Fcn: '<S23>/Fcn7'
-   *  Product: '<S23>/Multiply6'
-   *  Product: '<S23>/Multiply7'
-   *  Sum: '<S23>/Add10'
-   */
-  rtb_Phi2MotorRoll = -cos(rtb_Abs_k) * rtb_Phi2MotorRoll + sin(rtb_Abs_k) *
-    rtb_Phi2MotorPitch;
-
-  /* Abs: '<S29>/Abs' */
-  rtb_Phi2MotorPitch = fabs(rtb_PulseGenerator);
-
-  /* Sum: '<S23>/Add16' incorporates:
-   *  Abs: '<S23>/Abs'
-   *  Constant: '<S23>/Constant4'
-   */
-  rtb_Add16_j = GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad -
-    fabs(rtb_Phi2MotorYaw);
-
-  /* RelationalOperator: '<S29>/Relational Operator' */
-  rtb_RelationalOperator = (rtb_Phi2MotorPitch > rtb_Add16_j);
-
-  /* Abs: '<S29>/Abs1' */
-  rtb_Phi2MotorPitch = fabs(rtb_PulseGenerator1);
-
-  /* RelationalOperator: '<S29>/Relational Operator1' */
-  rtb_RelationalOperator1 = (rtb_Phi2MotorPitch > rtb_Add16_j);
-
-  /* Abs: '<S29>/Abs2' */
-  rtb_Phi2MotorPitch = fabs(rtb_Add2);
-
-  /* RelationalOperator: '<S29>/Relational Operator2' */
-  rtb_RelationalOperator2 = (rtb_Phi2MotorPitch > rtb_Add16_j);
-
-  /* Abs: '<S29>/Abs3' */
-  rtb_Phi2MotorPitch = fabs(rtb_Phi2MotorRoll);
-
-  /* Logic: '<S29>/OR' incorporates:
-   *  RelationalOperator: '<S29>/Relational Operator3'
-   */
-  GRM_HIL_B.OR = (rtb_RelationalOperator || rtb_RelationalOperator1 ||
-                  rtb_RelationalOperator2 || (rtb_Phi2MotorPitch > rtb_Add16_j));
-
-  /* Logic: '<S28>/Logical Operator' */
-  GRM_HIL_B.LogicalOperator = !GRM_HIL_B.OR;
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* SignalConversion generated from: '<S30>/Enable' */
-    GRM_HIL_B.HiddenBuf_InsertedFor_Pass_at_inport_4 = GRM_HIL_B.LogicalOperator;
-
-    /* Outputs for Enabled SubSystem: '<S28>/Pass' incorporates:
-     *  EnablePort: '<S30>/Enable'
-     */
-    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-      GRM_HIL_DW.Pass_MODE = GRM_HIL_B.HiddenBuf_InsertedFor_Pass_at_inport_4;
-    }
-
-    /* End of Outputs for SubSystem: '<S28>/Pass' */
-  }
-
-  /* Outputs for Enabled SubSystem: '<S28>/Pass' incorporates:
-   *  EnablePort: '<S30>/Enable'
-   */
-  if (GRM_HIL_DW.Pass_MODE) {
-    /* Inport: '<S30>/Fin_1_Cmd_rad' */
-    GRM_HIL_B.Merge = rtb_PulseGenerator;
-
-    /* Inport: '<S30>/Fin_2_Cmd_rad' */
-    GRM_HIL_B.Merge1 = rtb_PulseGenerator1;
-
-    /* Inport: '<S30>/Fin_3_Cmd_rad' */
-    GRM_HIL_B.Merge2 = rtb_Add2;
-
-    /* Inport: '<S30>/Fin_4_Cmd_rad' */
-    GRM_HIL_B.Merge3 = rtb_Phi2MotorRoll;
-    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-      srUpdateBC(GRM_HIL_DW.Pass_SubsysRanBC);
-    }
-  }
-
-  /* End of Outputs for SubSystem: '<S28>/Pass' */
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* SignalConversion generated from: '<S31>/Enable' */
-    GRM_HIL_B.HiddenBuf_InsertedFor_Saturate_at_inport_5 = GRM_HIL_B.OR;
-
-    /* Outputs for Enabled SubSystem: '<S28>/Saturate' incorporates:
-     *  EnablePort: '<S31>/Enable'
-     */
-    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-      GRM_HIL_DW.Saturate_MODE =
-        GRM_HIL_B.HiddenBuf_InsertedFor_Saturate_at_inport_5;
-    }
-
-    /* End of Outputs for SubSystem: '<S28>/Saturate' */
-  }
-
-  /* Outputs for Enabled SubSystem: '<S28>/Saturate' incorporates:
-   *  EnablePort: '<S31>/Enable'
-   */
-  if (GRM_HIL_DW.Saturate_MODE) {
-    /* Abs: '<S31>/Abs1' incorporates:
-     *  MinMax: '<S31>/Max'
-     */
-    rtb_Abs_k = fabs(fmax(fmax(fmax(rtb_PulseGenerator, rtb_PulseGenerator1),
-      rtb_Add2), rtb_Phi2MotorRoll));
-
-    /* Product: '<S31>/Multiply' incorporates:
-     *  Product: '<S31>/Divide'
-     */
-    GRM_HIL_B.Merge = rtb_PulseGenerator / rtb_Abs_k * rtb_Add16_j;
-
-    /* Product: '<S31>/Multiply1' incorporates:
-     *  Product: '<S31>/Divide1'
-     */
-    GRM_HIL_B.Merge1 = rtb_PulseGenerator1 / rtb_Abs_k * rtb_Add16_j;
-
-    /* Product: '<S31>/Multiply2' incorporates:
-     *  Product: '<S31>/Divide4'
-     */
-    GRM_HIL_B.Merge2 = rtb_Add2 / rtb_Abs_k * rtb_Add16_j;
-
-    /* Product: '<S31>/Multiply3' incorporates:
-     *  Product: '<S31>/Divide2'
-     */
-    GRM_HIL_B.Merge3 = rtb_Phi2MotorRoll / rtb_Abs_k * rtb_Add16_j;
-    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-      srUpdateBC(GRM_HIL_DW.Saturate_SubsysRanBC);
-    }
-  }
-
-  /* End of Outputs for SubSystem: '<S28>/Saturate' */
-
-  /* Product: '<S35>/Product' incorporates:
-   *  Constant: '<S32>/Constant6'
-   *  Constant: '<S33>/Constant6'
-   *  Constant: '<S34>/Constant6'
-   *  Constant: '<S35>/Constant6'
-   *  Product: '<S32>/Product'
-   *  Product: '<S33>/Product'
-   *  Product: '<S34>/Product'
-   */
-  rtb_PulseGenerator = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms -
-    GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
-
-  /* Sum: '<S35>/Add' incorporates:
-   *  Constant: '<S27>/Constant'
-   *  Constant: '<S35>/Constant2'
-   *  Constant: '<S35>/Constant6'
-   *  Product: '<S35>/Divide'
-   *  Product: '<S35>/Product'
-   *  Sum: '<S23>/Add14'
-   */
-  rtb_Phi2MotorPitch = (rtb_Phi2MotorYaw + GRM_HIL_B.Merge3) /
-    GRM_HIL_P.Servo_Cmd_Control_Surfaces.max_deflection_rad * rtb_PulseGenerator
-    + GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
-
-  /* Saturate: '<S35>/Saturation' */
-  if (rtb_Phi2MotorPitch > GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms) {
-    GRM_HIL_B.pulse_width_ms = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms;
-  } else if (rtb_Phi2MotorPitch < GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms)
-  {
-    GRM_HIL_B.pulse_width_ms = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms;
-  } else {
-    GRM_HIL_B.pulse_width_ms = rtb_Phi2MotorPitch;
-  }
-
-  /* End of Saturate: '<S35>/Saturation' */
-
-  /* Sum: '<S34>/Add' incorporates:
-   *  Constant: '<S27>/Constant'
-   *  Constant: '<S34>/Constant2'
-   *  Product: '<S34>/Divide'
-   *  Product: '<S34>/Product'
-   *  Sum: '<S23>/Add13'
-   */
-  rtb_Phi2MotorPitch = (rtb_Phi2MotorYaw + GRM_HIL_B.Merge2) /
-    GRM_HIL_P.Servo_Cmd_Control_Surfaces.max_deflection_rad * rtb_PulseGenerator
-    + GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
-
-  /* Saturate: '<S34>/Saturation' */
-  if (rtb_Phi2MotorPitch > GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms) {
-    GRM_HIL_B.pulse_width_ms_e = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms;
-  } else if (rtb_Phi2MotorPitch < GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms)
-  {
-    GRM_HIL_B.pulse_width_ms_e = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms;
-  } else {
-    GRM_HIL_B.pulse_width_ms_e = rtb_Phi2MotorPitch;
-  }
-
-  /* End of Saturate: '<S34>/Saturation' */
-
-  /* Sum: '<S33>/Add' incorporates:
-   *  Constant: '<S27>/Constant'
-   *  Constant: '<S33>/Constant2'
-   *  Product: '<S33>/Divide'
-   *  Product: '<S33>/Product'
-   *  Sum: '<S23>/Add12'
-   */
-  rtb_Phi2MotorPitch = (rtb_Phi2MotorYaw + GRM_HIL_B.Merge1) /
-    GRM_HIL_P.Servo_Cmd_Control_Surfaces.max_deflection_rad * rtb_PulseGenerator
-    + GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
-
-  /* Saturate: '<S33>/Saturation' */
-  if (rtb_Phi2MotorPitch > GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms) {
-    GRM_HIL_B.pulse_width_ms_c = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms;
-  } else if (rtb_Phi2MotorPitch < GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms)
-  {
-    GRM_HIL_B.pulse_width_ms_c = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms;
-  } else {
-    GRM_HIL_B.pulse_width_ms_c = rtb_Phi2MotorPitch;
-  }
-
-  /* End of Saturate: '<S33>/Saturation' */
-
-  /* Sum: '<S32>/Add' incorporates:
-   *  Constant: '<S27>/Constant'
-   *  Constant: '<S32>/Constant2'
-   *  Product: '<S32>/Divide'
-   *  Product: '<S32>/Product'
-   *  Sum: '<S23>/Add15'
-   */
-  rtb_Phi2MotorPitch = (rtb_Phi2MotorYaw + GRM_HIL_B.Merge) /
-    GRM_HIL_P.Servo_Cmd_Control_Surfaces.max_deflection_rad * rtb_PulseGenerator
-    + GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
-
-  /* Saturate: '<S32>/Saturation' */
-  if (rtb_Phi2MotorPitch > GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms) {
-    GRM_HIL_B.pulse_width_ms_p = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms;
-  } else if (rtb_Phi2MotorPitch < GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms)
-  {
-    GRM_HIL_B.pulse_width_ms_p = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms;
-  } else {
-    GRM_HIL_B.pulse_width_ms_p = rtb_Phi2MotorPitch;
-  }
-
-  /* End of Saturate: '<S32>/Saturation' */
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[3] == 0) {
-    /* S-Function (fcncallgen): '<S17>/Function-Call Generator1' incorporates:
-     *  SubSystem: '<S17>/FB_Com_freq_emul'
-     */
-    GRM_HIL_DW.FB_Com_freq_emul_SubsysRanBC = 4;
-
-    /* End of Outputs for S-Function (fcncallgen): '<S17>/Function-Call Generator1' */
-
-    /* Product: '<S12>/Divide' incorporates:
-     *  Constant: '<S12>/Constant1'
-     *  Constant: '<S13>/Constant1'
-     *  Constant: '<S14>/Constant1'
-     *  Constant: '<S15>/Constant1'
-     *  Product: '<S13>/Divide'
-     *  Product: '<S14>/Divide'
-     *  Product: '<S15>/Divide'
-     */
-    rtb_Phi2MotorYaw = GRM_HIL_P.Servo_PWM.Pulswidth_cmd_max_ms -
-      GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms;
-
-    /* S-Function (fcncallgen): '<S17>/Function-Call Generator1' incorporates:
-     *  SubSystem: '<S17>/FB_Com_freq_emul'
-     */
-    /* Product: '<S12>/Multiply' incorporates:
-     *  Constant: '<S12>/Constant'
-     *  Constant: '<S12>/Constant1'
-     *  Constant: '<S12>/Constant2'
-     *  Product: '<S12>/Divide'
-     *  SignalConversion generated from: '<S20>/hold'
-     *  Sum: '<S12>/Add'
-     */
-    rtb_PulseGenerator = (GRM_HIL_B.pulse_width_ms_p -
-                          GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms) /
-      rtb_Phi2MotorYaw * GRM_HIL_P.Servo_PWM.max_deflection_rad;
-
-    /* End of Outputs for S-Function (fcncallgen): '<S17>/Function-Call Generator1' */
-
-    /* Saturate: '<S12>/Saturation' */
-    if (rtb_PulseGenerator > GRM_HIL_P.Servo_PWM.max_deflection_rad) {
-      GRM_HIL_B.Saturation_o = GRM_HIL_P.Servo_PWM.max_deflection_rad;
-    } else if (rtb_PulseGenerator < -GRM_HIL_P.Servo_PWM.max_deflection_rad) {
-      GRM_HIL_B.Saturation_o = -GRM_HIL_P.Servo_PWM.max_deflection_rad;
-    } else {
-      GRM_HIL_B.Saturation_o = rtb_PulseGenerator;
-    }
-
-    /* End of Saturate: '<S12>/Saturation' */
-
-    /* S-Function (fcncallgen): '<S17>/Function-Call Generator1' incorporates:
-     *  SubSystem: '<S17>/FB_Com_freq_emul'
-     */
-    /* Product: '<S13>/Multiply' incorporates:
-     *  Constant: '<S13>/Constant'
-     *  Constant: '<S13>/Constant2'
-     *  Product: '<S13>/Divide'
-     *  SignalConversion generated from: '<S20>/hold'
-     *  Sum: '<S13>/Add'
-     */
-    rtb_PulseGenerator = (GRM_HIL_B.pulse_width_ms_c -
-                          GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms) /
-      rtb_Phi2MotorYaw * GRM_HIL_P.Servo_PWM.max_deflection_rad;
-
-    /* End of Outputs for S-Function (fcncallgen): '<S17>/Function-Call Generator1' */
-
-    /* Saturate: '<S13>/Saturation' */
-    if (rtb_PulseGenerator > GRM_HIL_P.Servo_PWM.max_deflection_rad) {
-      GRM_HIL_B.Saturation_c = GRM_HIL_P.Servo_PWM.max_deflection_rad;
-    } else if (rtb_PulseGenerator < -GRM_HIL_P.Servo_PWM.max_deflection_rad) {
-      GRM_HIL_B.Saturation_c = -GRM_HIL_P.Servo_PWM.max_deflection_rad;
-    } else {
-      GRM_HIL_B.Saturation_c = rtb_PulseGenerator;
-    }
-
-    /* End of Saturate: '<S13>/Saturation' */
-
-    /* S-Function (fcncallgen): '<S17>/Function-Call Generator1' incorporates:
-     *  SubSystem: '<S17>/FB_Com_freq_emul'
-     */
-    /* Product: '<S14>/Multiply' incorporates:
-     *  Constant: '<S14>/Constant'
-     *  Constant: '<S14>/Constant2'
-     *  Product: '<S14>/Divide'
-     *  SignalConversion generated from: '<S20>/hold'
-     *  Sum: '<S14>/Add'
-     */
-    rtb_PulseGenerator = (GRM_HIL_B.pulse_width_ms_e -
-                          GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms) /
-      rtb_Phi2MotorYaw * GRM_HIL_P.Servo_PWM.max_deflection_rad;
-
-    /* End of Outputs for S-Function (fcncallgen): '<S17>/Function-Call Generator1' */
-
-    /* Saturate: '<S14>/Saturation' */
-    if (rtb_PulseGenerator > GRM_HIL_P.Servo_PWM.max_deflection_rad) {
-      GRM_HIL_B.Saturation_jy = GRM_HIL_P.Servo_PWM.max_deflection_rad;
-    } else if (rtb_PulseGenerator < -GRM_HIL_P.Servo_PWM.max_deflection_rad) {
-      GRM_HIL_B.Saturation_jy = -GRM_HIL_P.Servo_PWM.max_deflection_rad;
-    } else {
-      GRM_HIL_B.Saturation_jy = rtb_PulseGenerator;
-    }
-
-    /* End of Saturate: '<S14>/Saturation' */
-
-    /* S-Function (fcncallgen): '<S17>/Function-Call Generator1' incorporates:
-     *  SubSystem: '<S17>/FB_Com_freq_emul'
-     */
-    /* Product: '<S15>/Multiply' incorporates:
-     *  Constant: '<S15>/Constant'
-     *  Constant: '<S15>/Constant2'
-     *  Product: '<S15>/Divide'
-     *  SignalConversion generated from: '<S20>/hold'
-     *  Sum: '<S15>/Add'
-     */
-    rtb_PulseGenerator = (GRM_HIL_B.pulse_width_ms -
-                          GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms) /
-      rtb_Phi2MotorYaw * GRM_HIL_P.Servo_PWM.max_deflection_rad;
-
-    /* End of Outputs for S-Function (fcncallgen): '<S17>/Function-Call Generator1' */
-
-    /* Saturate: '<S15>/Saturation' */
-    if (rtb_PulseGenerator > GRM_HIL_P.Servo_PWM.max_deflection_rad) {
-      GRM_HIL_B.Saturation_a = GRM_HIL_P.Servo_PWM.max_deflection_rad;
-    } else if (rtb_PulseGenerator < -GRM_HIL_P.Servo_PWM.max_deflection_rad) {
-      GRM_HIL_B.Saturation_a = -GRM_HIL_P.Servo_PWM.max_deflection_rad;
-    } else {
-      GRM_HIL_B.Saturation_a = rtb_PulseGenerator;
-    }
-
-    /* End of Saturate: '<S15>/Saturation' */
-  }
-
-  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* Gain: '<S45>/Shaft2degYaw' incorporates:
      *  Memory generated from: '<S36>/Memory1'
      */
@@ -2066,13 +1410,32 @@ void GRM_HIL_output(void)
       GRM_HIL_DW.Memory1_1_PreviousInput;
   }
 
+  /* TransferFcn: '<S49>/Transfer Fcn1' */
+  rtb_Abs_lo = GRM_HIL_P.TransferFcn1_C[0] * GRM_HIL_X.TransferFcn1_CSTATE_d[0]
+    + GRM_HIL_P.TransferFcn1_C[1] * GRM_HIL_X.TransferFcn1_CSTATE_d[1];
+
+  /* Sum: '<S49>/Subtract' incorporates:
+   *  Constant: '<S49>/Constant2'
+   */
+  rtb_Add_pi = rtb_Abs_lo - GRM_HIL_P.Constant2_Value_h;
+
+  /* Abs: '<S49>/Abs' */
+  rtb_Add_pi = fabs(rtb_Add_pi);
+
+  /* DataTypeConversion: '<S38>/Data Type Conversion' incorporates:
+   *  Constant: '<S173>/Constant'
+   *  Logic: '<S38>/Logical Operator'
+   *  RelationalOperator: '<S173>/Compare'
+   */
+  GRM_HIL_B.Gimbal_Ramp_flg = !(rtb_Add_pi < GRM_HIL_P.CompareToConstant_const);
+
   /* TransportDelay: '<S176>/Transport Delay' */
   {
     real_T **uBuffer = (real_T**)&GRM_HIL_DW.TransportDelay_PWORK.TUbufferPtrs[0];
     real_T **tBuffer = (real_T**)&GRM_HIL_DW.TransportDelay_PWORK.TUbufferPtrs[1];
     real_T simTime = GRM_HIL_M->Timing.t[0];
     real_T tMinusDelay = simTime - (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.MaxCheck);
-    rtb_Phi2MotorPitch = rt_TDelayInterpolate(
+    rtb_Add_pi = rt_TDelayInterpolate(
       tMinusDelay,
       0.0,
       *tBuffer,
@@ -2089,8 +1452,8 @@ void GRM_HIL_output(void)
   /* Gain: '<S176>/Gain' incorporates:
    *  Sum: '<S176>/Sum'
    */
-  GRM_HIL_B.Gain_e = 1.0 / GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.MaxCheck *
-    (GRM_HIL_B.yaw_deg - rtb_Phi2MotorPitch);
+  GRM_HIL_B.Gain = 1.0 / GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.MaxCheck *
+    (GRM_HIL_B.yaw_deg - rtb_Add_pi);
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* Gain: '<S45>/Shaft2degPitch' incorporates:
@@ -2108,7 +1471,7 @@ void GRM_HIL_output(void)
       &GRM_HIL_DW.TransportDelay_PWORK_j.TUbufferPtrs[1];
     real_T simTime = GRM_HIL_M->Timing.t[0];
     real_T tMinusDelay = simTime - (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.MaxCheck);
-    rtb_Phi2MotorPitch = rt_TDelayInterpolate(
+    rtb_Add_pi = rt_TDelayInterpolate(
       tMinusDelay,
       0.0,
       *tBuffer,
@@ -2126,7 +1489,7 @@ void GRM_HIL_output(void)
    *  Sum: '<S174>/Sum'
    */
   GRM_HIL_B.Gain_h = 1.0 / GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.MaxCheck *
-    (GRM_HIL_B.pitch_deg - rtb_Phi2MotorPitch);
+    (GRM_HIL_B.pitch_deg - rtb_Add_pi);
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* Gain: '<S45>/Shaft2degRoll' incorporates:
@@ -2144,7 +1507,7 @@ void GRM_HIL_output(void)
       &GRM_HIL_DW.TransportDelay_PWORK_l.TUbufferPtrs[1];
     real_T simTime = GRM_HIL_M->Timing.t[0];
     real_T tMinusDelay = simTime - (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.MaxCheck);
-    rtb_Phi2MotorPitch = rt_TDelayInterpolate(
+    rtb_Add_pi = rt_TDelayInterpolate(
       tMinusDelay,
       0.0,
       *tBuffer,
@@ -2162,7 +1525,7 @@ void GRM_HIL_output(void)
    *  Sum: '<S175>/Sum'
    */
   GRM_HIL_B.Gain_j = 1.0 / GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.MaxCheck *
-    (GRM_HIL_B.roll_deg - rtb_Phi2MotorPitch);
+    (GRM_HIL_B.roll_deg - rtb_Add_pi);
 
   /* Outputs for Enabled SubSystem: '<S45>/Voltage_Limitations' incorporates:
    *  EnablePort: '<S52>/Enable'
@@ -2171,7 +1534,7 @@ void GRM_HIL_output(void)
    *  Abs: '<S176>/Abs'
    *  Abs: '<S52>/Abs'
    */
-  rtb_PulseGenerator = fabs(GRM_HIL_B.Gain_e);
+  rtb_PulseGenerator = fabs(GRM_HIL_B.Gain);
 
   /* End of Outputs for SubSystem: '<S45>/Voltage_Limitations' */
 
@@ -2179,28 +1542,28 @@ void GRM_HIL_output(void)
    *  Abs: '<S72>/Abs'
    *  Constant: '<S167>/Constant'
    */
-  rtb_Compare = (rtb_PulseGenerator >=
-                 GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_hard_limit_vel);
+  rtb_Compare_i = (rtb_PulseGenerator >=
+                   GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_hard_limit_vel);
 
   /* Outputs for Enabled SubSystem: '<S72>/Enabled pass' */
   /* Constant: '<S72>/const_upper_limit' incorporates:
    *  Constant: '<S72>/const_lower_limit'
    */
-  GRM_HIL_Enabledpass(GRM_HIL_M, rtb_Compare,
+  GRM_HIL_Enabledpass(GRM_HIL_M, rtb_Compare_i,
                       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.YawCmdMaxVolt,
                       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.YawCmdMinVolt,
-                      &GRM_HIL_B.Merge_h, &GRM_HIL_B.Merge1_p,
+                      &GRM_HIL_B.Merge, &GRM_HIL_B.Merge1,
                       &GRM_HIL_DW.Enabledpass_a);
 
   /* End of Outputs for SubSystem: '<S72>/Enabled pass' */
 
   /* Logic: '<S72>/Logical Operator' */
-  GRM_HIL_B.LogicalOperator_l = !rtb_Compare;
+  GRM_HIL_B.LogicalOperator = !rtb_Compare_i;
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* SignalConversion generated from: '<S168>/Enable' */
     GRM_HIL_B.HiddenBuf_InsertedFor_Enabledadapt_at_inport_3 =
-      GRM_HIL_B.LogicalOperator_l;
+      GRM_HIL_B.LogicalOperator;
 
     /* Outputs for Enabled SubSystem: '<S72>/Enabled adapt' incorporates:
      *  EnablePort: '<S168>/Enable'
@@ -2231,20 +1594,20 @@ void GRM_HIL_output(void)
      *  Gain: '<S168>/Gain'
      *  Product: '<S168>/Divide'
      */
-    rtb_Abs_k = GRM_HIL_B.Abs / rtb_PulseGenerator *
+    rtb_Abs_i = GRM_HIL_B.Abs / rtb_PulseGenerator *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_limit_adaption_coef -
       (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_limit_adaption_coef - 1.0);
 
     /* Product: '<S168>/Product' incorporates:
      *  Constant: '<S72>/const_upper_limit'
      */
-    GRM_HIL_B.Merge_h = rtb_Abs_k *
+    GRM_HIL_B.Merge = rtb_Abs_i *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.YawCmdMaxVolt;
 
     /* Product: '<S168>/Product1' incorporates:
      *  Constant: '<S72>/const_lower_limit'
      */
-    GRM_HIL_B.Merge1_p = rtb_Abs_k *
+    GRM_HIL_B.Merge1 = rtb_Abs_i *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.YawCmdMinVolt;
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
       srUpdateBC(GRM_HIL_DW.Enabledadapt_SubsysRanBC);
@@ -2256,8 +1619,8 @@ void GRM_HIL_output(void)
   /* Switch: '<S72>/Switch2' incorporates:
    *  Constant: '<S72>/Constant2'
    */
-  if (GRM_HIL_B.Gain_e > GRM_HIL_P.Switch2_Threshold_l) {
-    GRM_HIL_B.Switch2_p = GRM_HIL_B.Merge_h;
+  if (GRM_HIL_B.Gain > GRM_HIL_P.Switch2_Threshold_l) {
+    GRM_HIL_B.Switch2_p = GRM_HIL_B.Merge;
   } else {
     GRM_HIL_B.Switch2_p = GRM_HIL_P.Constant2_Value_o;
   }
@@ -2268,30 +1631,24 @@ void GRM_HIL_output(void)
     /* Gain: '<S72>/Gain' incorporates:
      *  Constant: '<S72>/Constant2'
      */
-    GRM_HIL_B.Gain_ec = GRM_HIL_P.Gain_Gain_a * GRM_HIL_P.Constant2_Value_o;
+    GRM_HIL_B.Gain_e = GRM_HIL_P.Gain_Gain_a * GRM_HIL_P.Constant2_Value_o;
   }
 
   /* Switch: '<S72>/Switch1' */
-  if (GRM_HIL_B.Gain_e > GRM_HIL_P.Switch1_Threshold_k) {
-    GRM_HIL_B.Switch1_h = GRM_HIL_B.Gain_ec;
+  if (GRM_HIL_B.Gain > GRM_HIL_P.Switch1_Threshold_k) {
+    GRM_HIL_B.Switch1_h = GRM_HIL_B.Gain_e;
   } else {
-    GRM_HIL_B.Switch1_h = GRM_HIL_B.Merge1_p;
+    GRM_HIL_B.Switch1_h = GRM_HIL_B.Merge1;
   }
 
   /* End of Switch: '<S72>/Switch1' */
 
-  /* TransferFcn: '<S49>/Transfer Fcn1' */
-  rtb_Phi2MotorPitch = 0.0;
-  rtb_Phi2MotorPitch += GRM_HIL_P.TransferFcn1_C[0] *
-    GRM_HIL_X.TransferFcn1_CSTATE_d[0];
-  rtb_Phi2MotorPitch += GRM_HIL_P.TransferFcn1_C[1] *
-    GRM_HIL_X.TransferFcn1_CSTATE_d[1];
+  /* Gain: '<S192>/rad2deg' */
+  GRM_HIL_B.Gimbal_Phi_Cmd_deg = GRM_HIL_P.rad2deg_Gain *
+    GRM_HIL_B.ATT_Phi_rad_l;
 
-  /* Product: '<S48>/Product' incorporates:
-   *  Gain: '<S192>/rad2deg'
-   */
-  GRM_HIL_B.Product = GRM_HIL_P.rad2deg_Gain * GRM_HIL_B.ATT_Phi_rad_l *
-    rtb_Phi2MotorPitch;
+  /* Product: '<S48>/Product' */
+  GRM_HIL_B.Product = rtb_Abs_lo * GRM_HIL_B.Gimbal_Phi_Cmd_deg;
 
   /* Sum: '<S48>/Sum' */
   GRM_HIL_B.Yaw_err = GRM_HIL_B.Product - GRM_HIL_B.yaw_deg;
@@ -2408,8 +1765,8 @@ void GRM_HIL_output(void)
      *  Gain: '<S74>/Gain2'
      *  Sum: '<S74>/Subtract'
      */
-    rtb_Abs_k = GRM_HIL_P.Constant_Value /
-      ((GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.YawMaxV - GRM_HIL_B.Gain_e) *
+    rtb_Abs_i = GRM_HIL_P.Constant_Value /
+      ((GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.YawMaxV - GRM_HIL_B.Gain) *
        GRM_HIL_P.Gain2_Gain);
 
     /* Product: '<S74>/Divide1' incorporates:
@@ -2418,7 +1775,7 @@ void GRM_HIL_output(void)
      *  Gain: '<S74>/Gain3'
      *  Sum: '<S74>/Subtract1'
      */
-    rtb_ProportionalGain = GRM_HIL_P.Constant3_Value / ((GRM_HIL_B.Gain_e -
+    rtb_Add_pi = GRM_HIL_P.Constant3_Value / ((GRM_HIL_B.Gain -
       (-GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.YawMaxV)) * GRM_HIL_P.Gain3_Gain);
 
     /* Gain: '<S110>/Filter Coefficient' incorporates:
@@ -2427,7 +1784,7 @@ void GRM_HIL_output(void)
      *  Sum: '<S102>/SumD'
      */
     GRM_HIL_B.FilterCoefficient_f =
-      (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Derivative_Gain * rtb_Abs_k -
+      (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Derivative_Gain * rtb_Abs_i -
        GRM_HIL_X.Filter_CSTATE_p) * GRM_HIL_P.PIDController_N;
 
     /* Sum: '<S116>/Sum' incorporates:
@@ -2435,7 +1792,7 @@ void GRM_HIL_output(void)
      *  Integrator: '<S107>/Integrator'
      */
     rtb_DerivativeGain =
-      (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Proportional_Gain * rtb_Abs_k +
+      (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Proportional_Gain * rtb_Abs_i +
        GRM_HIL_X.Integrator_CSTATE_i) + GRM_HIL_B.FilterCoefficient_f;
 
     /* Saturate: '<S114>/Saturation' */
@@ -2456,27 +1813,24 @@ void GRM_HIL_output(void)
      *  Sum: '<S146>/SumD'
      */
     GRM_HIL_B.FilterCoefficient_j =
-      (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Derivative_Gain *
-       rtb_ProportionalGain - GRM_HIL_X.Filter_CSTATE_k) *
-      GRM_HIL_P.PIDController1_N;
+      (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Derivative_Gain * rtb_Add_pi -
+       GRM_HIL_X.Filter_CSTATE_k) * GRM_HIL_P.PIDController1_N;
 
     /* Sum: '<S160>/Sum' incorporates:
      *  Gain: '<S156>/Proportional Gain'
      *  Integrator: '<S151>/Integrator'
      */
-    rtb_Phi2MotorRoll =
-      (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Proportional_Gain *
-       rtb_ProportionalGain + GRM_HIL_X.Integrator_CSTATE_fq) +
+    rtb_Sum_p3 = (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Proportional_Gain *
+                  rtb_Add_pi + GRM_HIL_X.Integrator_CSTATE_fq) +
       GRM_HIL_B.FilterCoefficient_j;
 
     /* Saturate: '<S158>/Saturation' */
-    if (rtb_Phi2MotorRoll > GRM_HIL_P.PIDController1_UpperSaturationLimit) {
-      rtb_Phi2MotorYaw = GRM_HIL_P.PIDController1_UpperSaturationLimit;
-    } else if (rtb_Phi2MotorRoll < GRM_HIL_P.PIDController1_LowerSaturationLimit)
-    {
-      rtb_Phi2MotorYaw = GRM_HIL_P.PIDController1_LowerSaturationLimit;
+    if (rtb_Sum_p3 > GRM_HIL_P.PIDController1_UpperSaturationLimit) {
+      rtb_ProportionalGain = GRM_HIL_P.PIDController1_UpperSaturationLimit;
+    } else if (rtb_Sum_p3 < GRM_HIL_P.PIDController1_LowerSaturationLimit) {
+      rtb_ProportionalGain = GRM_HIL_P.PIDController1_LowerSaturationLimit;
     } else {
-      rtb_Phi2MotorYaw = rtb_Phi2MotorRoll;
+      rtb_ProportionalGain = rtb_Sum_p3;
     }
 
     /* End of Saturate: '<S158>/Saturation' */
@@ -2488,17 +1842,16 @@ void GRM_HIL_output(void)
      */
     GRM_HIL_B.SumI4 = (rtb_PulseGenerator1 - rtb_DerivativeGain) *
       GRM_HIL_P.PIDController_Kb +
-      GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Integral_Gain * rtb_Abs_k;
+      GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Integral_Gain * rtb_Abs_i;
 
     /* Sum: '<S144>/SumI4' incorporates:
      *  Gain: '<S144>/Kb'
      *  Gain: '<S148>/Integral Gain'
      *  Sum: '<S144>/SumI2'
      */
-    GRM_HIL_B.SumI4_c = (rtb_Phi2MotorYaw - rtb_Phi2MotorRoll) *
+    GRM_HIL_B.SumI4_c = (rtb_ProportionalGain - rtb_Sum_p3) *
       GRM_HIL_P.PIDController1_Kb +
-      GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Integral_Gain *
-      rtb_ProportionalGain;
+      GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Integral_Gain * rtb_Add_pi;
 
     /* Sum: '<S74>/Sum' incorporates:
      *  Gain: '<S74>/Gain'
@@ -2507,7 +1860,7 @@ void GRM_HIL_output(void)
     GRM_HIL_B.Merge_a = (GRM_HIL_B.Merge_f -
                          GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Weighting *
                          rtb_PulseGenerator1) +
-      GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Weighting * rtb_Phi2MotorYaw;
+      GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Yaw_LC_Weighting * rtb_ProportionalGain;
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
       srUpdateBC(GRM_HIL_DW.Control_Limits_SubsysRanBC);
     }
@@ -2522,7 +1875,7 @@ void GRM_HIL_output(void)
    *  Abs: '<S174>/Abs'
    *  Abs: '<S52>/Abs2'
    */
-  rtb_ProportionalGain = fabs(GRM_HIL_B.Gain_h);
+  rtb_DerivativeGain = fabs(GRM_HIL_B.Gain_h);
 
   /* End of Outputs for SubSystem: '<S45>/Voltage_Limitations' */
 
@@ -2530,7 +1883,7 @@ void GRM_HIL_output(void)
    *  Abs: '<S53>/Abs'
    *  Constant: '<S56>/Constant'
    */
-  rtb_Compare_o = (rtb_ProportionalGain >=
+  rtb_Compare_o = (rtb_DerivativeGain >=
                    GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Pitch_hard_limit_vel);
 
   /* Outputs for Enabled SubSystem: '<S53>/Enabled pass' */
@@ -2583,20 +1936,20 @@ void GRM_HIL_output(void)
      *  Gain: '<S57>/Gain'
      *  Product: '<S57>/Divide'
      */
-    rtb_Abs_k = GRM_HIL_B.Abs_b / rtb_ProportionalGain *
+    rtb_ProportionalGain = GRM_HIL_B.Abs_b / rtb_DerivativeGain *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Pitch_limit_adaption_coef -
       (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Pitch_limit_adaption_coef - 1.0);
 
     /* Product: '<S57>/Product' incorporates:
      *  Constant: '<S53>/const_upper_limit'
      */
-    GRM_HIL_B.Merge_m = rtb_Abs_k *
+    GRM_HIL_B.Merge_m = rtb_ProportionalGain *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.PitchCmdMaxVolt;
 
     /* Product: '<S57>/Product1' incorporates:
      *  Constant: '<S53>/const_lower_limit'
      */
-    GRM_HIL_B.Merge1_j = rtb_Abs_k *
+    GRM_HIL_B.Merge1_j = rtb_ProportionalGain *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.PitchCmdMinVolt;
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
       srUpdateBC(GRM_HIL_DW.Enabledadapt_SubsysRanBC_g);
@@ -2611,7 +1964,7 @@ void GRM_HIL_output(void)
   if (GRM_HIL_B.Gain_h > GRM_HIL_P.Switch2_Threshold_k) {
     GRM_HIL_B.Switch2_h = GRM_HIL_B.Merge_m;
   } else {
-    GRM_HIL_B.Switch2_h = GRM_HIL_P.Constant2_Value_h;
+    GRM_HIL_B.Switch2_h = GRM_HIL_P.Constant2_Value_h5;
   }
 
   /* End of Switch: '<S53>/Switch2' */
@@ -2620,7 +1973,7 @@ void GRM_HIL_output(void)
     /* Gain: '<S53>/Gain' incorporates:
      *  Constant: '<S53>/Constant2'
      */
-    GRM_HIL_B.Gain_hi = GRM_HIL_P.Gain_Gain_g * GRM_HIL_P.Constant2_Value_h;
+    GRM_HIL_B.Gain_hi = GRM_HIL_P.Gain_Gain_g * GRM_HIL_P.Constant2_Value_h5;
   }
 
   /* Switch: '<S53>/Switch1' */
@@ -2632,11 +1985,12 @@ void GRM_HIL_output(void)
 
   /* End of Switch: '<S53>/Switch1' */
 
-  /* Product: '<S46>/Product' incorporates:
-   *  Gain: '<S192>/rad2deg1'
-   */
-  GRM_HIL_B.pitch_cmd = GRM_HIL_P.rad2deg1_Gain * GRM_HIL_B.ATT_Theta_rad_k *
-    rtb_Phi2MotorPitch;
+  /* Gain: '<S192>/rad2deg1' */
+  GRM_HIL_B.Gimbal_Theta_Cmd_deg = GRM_HIL_P.rad2deg1_Gain *
+    GRM_HIL_B.ATT_Theta_rad_k;
+
+  /* Product: '<S46>/Product' */
+  GRM_HIL_B.pitch_cmd = rtb_Abs_lo * GRM_HIL_B.Gimbal_Theta_Cmd_deg;
 
   /* Sum: '<S46>/Sum2' */
   GRM_HIL_B.pitch_err = GRM_HIL_B.pitch_cmd - GRM_HIL_B.pitch_deg;
@@ -2687,7 +2041,7 @@ void GRM_HIL_output(void)
   if (GRM_HIL_B.LogicalOperator1_i) {
     GRM_HIL_B.Switch_a = GRM_HIL_P.Constant1_Value_m;
   } else {
-    GRM_HIL_B.Switch_a = (rtb_ProportionalGain >=
+    GRM_HIL_B.Switch_a = (rtb_DerivativeGain >=
                           GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Pitch_soft_limit_vel);
   }
 
@@ -2741,7 +2095,7 @@ void GRM_HIL_output(void)
   GRM_HIL_Enabledpass(GRM_HIL_M, rtb_Compare_k,
                       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMaxVolt,
                       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMinVolt,
-                      &GRM_HIL_B.Merge_hj, &GRM_HIL_B.Merge1_k,
+                      &GRM_HIL_B.Merge_h, &GRM_HIL_B.Merge1_k,
                       &GRM_HIL_DW.Enabledpass_j);
 
   /* End of Outputs for SubSystem: '<S62>/Enabled pass' */
@@ -2784,20 +2138,20 @@ void GRM_HIL_output(void)
      *  Gain: '<S66>/Gain'
      *  Product: '<S66>/Divide'
      */
-    rtb_Abs_k = GRM_HIL_B.Abs_j / rtb_ProportionalGain_nx *
+    rtb_ProportionalGain = GRM_HIL_B.Abs_j / rtb_ProportionalGain_nx *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Roll_limit_adaption_coef -
       (GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.Roll_limit_adaption_coef - 1.0);
 
     /* Product: '<S66>/Product' incorporates:
      *  Constant: '<S62>/const_upper_limit'
      */
-    GRM_HIL_B.Merge_hj = rtb_Abs_k *
+    GRM_HIL_B.Merge_h = rtb_ProportionalGain *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMaxVolt;
 
     /* Product: '<S66>/Product1' incorporates:
      *  Constant: '<S62>/const_lower_limit'
      */
-    GRM_HIL_B.Merge1_k = rtb_Abs_k *
+    GRM_HIL_B.Merge1_k = rtb_ProportionalGain *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMinVolt;
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
       srUpdateBC(GRM_HIL_DW.Enabledadapt_SubsysRanBC_b);
@@ -2810,7 +2164,7 @@ void GRM_HIL_output(void)
    *  Constant: '<S62>/Constant2'
    */
   if (GRM_HIL_B.Gain_j > GRM_HIL_P.Switch2_Threshold_i) {
-    GRM_HIL_B.Switch2_i = GRM_HIL_B.Merge_hj;
+    GRM_HIL_B.Switch2_i = GRM_HIL_B.Merge_h;
   } else {
     GRM_HIL_B.Switch2_i = GRM_HIL_P.Constant2_Value_ht;
   }
@@ -2833,11 +2187,12 @@ void GRM_HIL_output(void)
 
   /* End of Switch: '<S62>/Switch1' */
 
-  /* Product: '<S47>/Product1' incorporates:
-   *  Gain: '<S192>/rad2deg2'
-   */
-  GRM_HIL_B.Product1 = GRM_HIL_P.rad2deg2_Gain * GRM_HIL_B.ATT_Psi_rad_j *
-    rtb_Phi2MotorPitch;
+  /* Gain: '<S192>/rad2deg2' */
+  GRM_HIL_B.Gimbal_Psi_Cmd_deg = GRM_HIL_P.rad2deg2_Gain *
+    GRM_HIL_B.ATT_Psi_rad_j;
+
+  /* Product: '<S47>/Product1' */
+  GRM_HIL_B.Product1 = rtb_Abs_lo * GRM_HIL_B.Gimbal_Psi_Cmd_deg;
 
   /* Sum: '<S47>/Sum1' */
   GRM_HIL_B.Roll_err = GRM_HIL_B.Product1 - GRM_HIL_B.roll_deg;
@@ -2868,7 +2223,7 @@ void GRM_HIL_output(void)
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.PID_Roll_Filter_Coefficient;
 
     /* Sum: '<S63>/Sum' */
-    rtb_Sum_o2 = (rtb_ProportionalGain_c + GRM_HIL_B.Integrator_a) +
+    rtb_Sum_o = (rtb_ProportionalGain_c + GRM_HIL_B.Integrator_a) +
       GRM_HIL_B.FilterCoefficient_l;
 
     /* Logic: '<S62>/Logical Operator1' incorporates:
@@ -2902,7 +2257,7 @@ void GRM_HIL_output(void)
     /* Outputs for Enabled SubSystem: '<S63>/Saturation' */
     GRM_HIL_Saturation(GRM_HIL_M,
                        GRM_HIL_B.HiddenBuf_InsertedFor_Saturation_at_inport_3_kk,
-                       GRM_HIL_B.Switch2_i, GRM_HIL_B.Switch1_l, rtb_Sum_o2,
+                       GRM_HIL_B.Switch2_i, GRM_HIL_B.Switch1_l, rtb_Sum_o,
                        &GRM_HIL_B.Merge_c, &GRM_HIL_DW.Saturation_j);
 
     /* End of Outputs for SubSystem: '<S63>/Saturation' */
@@ -2911,7 +2266,7 @@ void GRM_HIL_output(void)
     GRM_HIL_B.LogicalOperator_p = !GRM_HIL_B.Switch_p;
 
     /* Outputs for Enabled SubSystem: '<S63>/pass' */
-    GRM_HIL_pass(GRM_HIL_M, GRM_HIL_B.LogicalOperator_p, rtb_Sum_o2,
+    GRM_HIL_pass(GRM_HIL_M, GRM_HIL_B.LogicalOperator_p, rtb_Sum_o,
                  &GRM_HIL_B.Merge_c, &GRM_HIL_DW.pass_c);
 
     /* End of Outputs for SubSystem: '<S63>/pass' */
@@ -3009,7 +2364,7 @@ void GRM_HIL_output(void)
 
     /* If: '<S52>/If1' */
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-      rtAction = (int8_T)!(rtb_ProportionalGain >= GRM_HIL_B.Abs3);
+      rtAction = (int8_T)!(rtb_DerivativeGain >= GRM_HIL_B.Abs3);
       GRM_HIL_DW.If1_ActiveSubsystem = rtAction;
     } else {
       rtAction = GRM_HIL_DW.If1_ActiveSubsystem;
@@ -3077,12 +2432,12 @@ void GRM_HIL_output(void)
       /* Saturate: '<S184>/Limit_Voltage_Roll' */
       if (GRM_HIL_B.Merge_c > GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMaxVolt)
       {
-        GRM_HIL_B.Merge2_p = GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMaxVolt;
+        GRM_HIL_B.Merge2 = GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMaxVolt;
       } else if (GRM_HIL_B.Merge_c <
                  -GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMaxVolt) {
-        GRM_HIL_B.Merge2_p = -GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMaxVolt;
+        GRM_HIL_B.Merge2 = -GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.RollCmdMaxVolt;
       } else {
-        GRM_HIL_B.Merge2_p = GRM_HIL_B.Merge_c;
+        GRM_HIL_B.Merge2 = GRM_HIL_B.Merge_c;
       }
 
       /* End of Saturate: '<S184>/Limit_Voltage_Roll' */
@@ -3097,7 +2452,7 @@ void GRM_HIL_output(void)
       /* Outputs for IfAction SubSystem: '<S52>/If Action pass_roll' incorporates:
        *  ActionPort: '<S187>/Action Port'
        */
-      GRM_HIL_IfActionpass_yaw(GRM_HIL_B.Merge_c, &GRM_HIL_B.Merge2_p);
+      GRM_HIL_IfActionpass_yaw(GRM_HIL_B.Merge_c, &GRM_HIL_B.Merge2);
       if (rtmIsMajorTimeStep(GRM_HIL_M)) {
         srUpdateBC(GRM_HIL_DW.IfActionpass_roll.IfActionpass_yaw_SubsysRanBC);
       }
@@ -3143,7 +2498,7 @@ void GRM_HIL_output(void)
       GRM_HIL_B.Merge1_o = GRM_HIL_B.Merge_fu;
 
       /* Inport: '<S50>/roll' */
-      GRM_HIL_B.Merge2_p = GRM_HIL_B.Merge_c;
+      GRM_HIL_B.Merge2 = GRM_HIL_B.Merge_c;
     }
 
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
@@ -3153,54 +2508,14 @@ void GRM_HIL_output(void)
 
   /* End of Outputs for SubSystem: '<S45>/If Action Pass' */
 
-  /* TransferFcn: '<S39>/Phi2Motor -> Pitch' */
-  rtb_Phi2MotorPitch = 0.0;
-  rtb_Phi2MotorPitch +=
-    GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Pitch.Num_Coef /
-    GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Pitch.Denom_Coef *
-    GRM_HIL_B.Merge2_p;
-
-  /* Sum: '<S39>/Sum' incorporates:
-   *  TransferFcn: '<S39>/Phi2Motor -> Yaw'
-   *  TransferFcn: '<S39>/Psi2Motor -> Yaw'
-   *  TransferFcn: '<S39>/Theta2Motor -> Yaw'
-   */
-  GRM_HIL_B.Sum =
-    ((GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Num_Coef[0] /
-      GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[0] *
-      GRM_HIL_X.Psi2MotorYaw_CSTATE[0] +
-      GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Num_Coef[1] /
-      GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[0] *
-      GRM_HIL_X.Psi2MotorYaw_CSTATE[1]) +
-     GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Yaw.Num_Coef /
-     GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Yaw.Denom_Coef *
-     GRM_HIL_B.Merge1_o) +
-    GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Yaw.Num_Coef /
-    GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Yaw.Denom_Coef *
-    GRM_HIL_B.Merge2_p;
-
-  /* TransferFcn: '<S39>/Theta2Motor -> Pitch' */
-  rtb_Abs_k = 0.0;
-  for (cj = 0; cj < 5; cj++) {
-    rtb_Abs_k +=
-      GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Pitch.Num_Coef[cj] /
-      GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Pitch.Denom_Coef[0] *
-      GRM_HIL_X.Theta2MotorPitch_CSTATE[cj];
-  }
-
-  /* End of TransferFcn: '<S39>/Theta2Motor -> Pitch' */
-
-  /* Sum: '<S39>/Sum1' incorporates:
-   *  TransferFcn: '<S39>/Psi2Motor -> Pitch'
-   */
-  GRM_HIL_B.Sum1_n =
-    (GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Pitch.Num_Coef /
-     GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Pitch.Denom_Coef *
-     GRM_HIL_B.Merge_o + rtb_Abs_k) + rtb_Phi2MotorPitch;
+  /* TransferFcn: '<S39>/Psi2Motor -> Roll' */
+  rtb_Add_pi = 0.0;
+  rtb_Add_pi += GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Roll.Num_Coef
+    / GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Roll.Denom_Coef *
+    GRM_HIL_B.Merge_o;
 
   /* Sum: '<S39>/Sum2' incorporates:
    *  TransferFcn: '<S39>/Phi2Motor -> Roll'
-   *  TransferFcn: '<S39>/Psi2Motor -> Roll'
    *  TransferFcn: '<S39>/Theta2Motor -> Roll'
    */
   GRM_HIL_B.Sum2 =
@@ -3213,14 +2528,837 @@ void GRM_HIL_output(void)
      GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Roll.Num_Coef[2] /
      GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Roll.Denom_Coef[0] *
      GRM_HIL_X.Phi2MotorRoll_CSTATE[2]) +
-    (GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Roll.Num_Coef /
-     GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Roll.Denom_Coef *
-     GRM_HIL_B.Merge_o +
-     GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Roll.Num_Coef /
+    (GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Roll.Num_Coef /
      GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Roll.Denom_Coef *
-     GRM_HIL_B.Merge1_o);
+     GRM_HIL_B.Merge1_o + rtb_Add_pi);
+
+  /* Gain: '<S40>/Shaft2radRoll' */
+  GRM_HIL_B.ATT_Phi_rad_a = GRM_HIL_P.Shaft2radRoll_Gain * GRM_HIL_B.Sum2;
+
+  /* TransferFcn: '<S39>/Theta2Motor -> Pitch' */
+  rtb_Add_pi = 0.0;
+  for (cj = 0; cj < 5; cj++) {
+    rtb_Add_pi +=
+      GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Pitch.Num_Coef[cj] /
+      GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Pitch.Denom_Coef[0] *
+      GRM_HIL_X.Theta2MotorPitch_CSTATE[cj];
+  }
+
+  /* End of TransferFcn: '<S39>/Theta2Motor -> Pitch' */
+
+  /* Sum: '<S39>/Sum1' incorporates:
+   *  TransferFcn: '<S39>/Phi2Motor -> Pitch'
+   *  TransferFcn: '<S39>/Psi2Motor -> Pitch'
+   */
+  GRM_HIL_B.Sum1 =
+    (GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Pitch.Num_Coef /
+     GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Pitch.Denom_Coef *
+     GRM_HIL_B.Merge_o + rtb_Add_pi) +
+    GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Pitch.Num_Coef /
+    GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Pitch.Denom_Coef *
+    GRM_HIL_B.Merge2;
+
+  /* Gain: '<S40>/Shaft2radPitch' */
+  GRM_HIL_B.ATT_Theta_rad_i = GRM_HIL_P.Shaft2radPitch_Gain * GRM_HIL_B.Sum1;
+
+  /* TransferFcn: '<S39>/Theta2Motor -> Yaw' */
+  rtb_Add_pi = 0.0;
+  rtb_Add_pi +=
+    GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Yaw.Num_Coef /
+    GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Yaw.Denom_Coef *
+    GRM_HIL_B.Merge1_o;
+
+  /* Sum: '<S39>/Sum' incorporates:
+   *  TransferFcn: '<S39>/Phi2Motor -> Yaw'
+   *  TransferFcn: '<S39>/Psi2Motor -> Yaw'
+   */
+  GRM_HIL_B.Sum =
+    ((GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Num_Coef[0] /
+      GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[0] *
+      GRM_HIL_X.Psi2MotorYaw_CSTATE[0] +
+      GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Num_Coef[1] /
+      GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[0] *
+      GRM_HIL_X.Psi2MotorYaw_CSTATE[1]) + rtb_Add_pi) +
+    GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Yaw.Num_Coef /
+    GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Yaw.Denom_Coef *
+    GRM_HIL_B.Merge2;
+
+  /* Gain: '<S40>/Shaft2radYaw' */
+  GRM_HIL_B.ATT_Psi_rad_g = GRM_HIL_P.Shaft2radYaw_Gain * GRM_HIL_B.Sum;
+
+  /* Gain: '<S43>/1//2' */
+  rtb_DerivativeGain_f = GRM_HIL_P.u2_Gain * GRM_HIL_B.ATT_Psi_rad_g;
+  rtb_PulseGenerator1 = GRM_HIL_P.u2_Gain * GRM_HIL_B.ATT_Theta_rad_i;
+  rtb_DerivativeGain_a = GRM_HIL_P.u2_Gain * GRM_HIL_B.ATT_Phi_rad_a;
+
+  /* Trigonometry: '<S43>/sincos' */
+  rtb_Sum_p3 = cos(rtb_DerivativeGain_f);
+  rtb_DerivativeGain_f = sin(rtb_DerivativeGain_f);
+  rtb_ProportionalGain = cos(rtb_PulseGenerator1);
+  rtb_PulseGenerator1 = sin(rtb_PulseGenerator1);
+  rtb_ProportionalGain_c = cos(rtb_DerivativeGain_a);
+  rtb_DerivativeGain_a = sin(rtb_DerivativeGain_a);
+
+  /* Fcn: '<S43>/q0' incorporates:
+   *  Fcn: '<S43>/q3'
+   */
+  rtb_Abs_i = rtb_Sum_p3 * rtb_ProportionalGain;
+  rtb_Abs_lo = rtb_DerivativeGain_f * rtb_PulseGenerator1;
+  GRM_HIL_B.q0 = rtb_Abs_i * rtb_ProportionalGain_c - rtb_Abs_lo *
+    rtb_DerivativeGain_a;
+
+  /* Fcn: '<S43>/q1' incorporates:
+   *  Fcn: '<S43>/q2'
+   */
+  rtb_PulseGenerator1 *= rtb_Sum_p3;
+  rtb_DerivativeGain_f *= rtb_ProportionalGain;
+  GRM_HIL_B.q1 = rtb_PulseGenerator1 * rtb_DerivativeGain_a +
+    rtb_DerivativeGain_f * rtb_ProportionalGain_c;
+
+  /* Fcn: '<S43>/q2' */
+  GRM_HIL_B.q2 = rtb_PulseGenerator1 * rtb_ProportionalGain_c -
+    rtb_DerivativeGain_f * rtb_DerivativeGain_a;
+
+  /* Fcn: '<S43>/q3' */
+  GRM_HIL_B.q3 = rtb_Abs_i * rtb_DerivativeGain_a + rtb_Abs_lo *
+    rtb_ProportionalGain_c;
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Constant: '<S41>/Constant' */
+    GRM_HIL_B.Data_plus = GRM_HIL_P.Constant_Value_k;
+
+    /* Constant: '<S41>/Constant1' */
+    GRM_HIL_B.Data_minus = GRM_HIL_P.Constant1_Value_h;
+
+    /* Constant: '<S41>/Constant2' */
+    GRM_HIL_B.Clock_plus = GRM_HIL_P.Constant2_Value_e;
+
+    /* Constant: '<S41>/Constant3' */
+    GRM_HIL_B.Clock_minus = GRM_HIL_P.Constant3_Value_p;
+
+    /* Constant: '<S41>/Constant4' */
+    GRM_HIL_B.Data_plus_a = GRM_HIL_P.Constant4_Value;
+
+    /* Constant: '<S41>/Constant5' */
+    GRM_HIL_B.Data_minus_k = GRM_HIL_P.Constant5_Value;
+
+    /* Constant: '<S41>/Constant6' */
+    GRM_HIL_B.Clock_plus_c = GRM_HIL_P.Constant6_Value;
+
+    /* Constant: '<S41>/Constant7' */
+    GRM_HIL_B.Clock_minus_i = GRM_HIL_P.Constant7_Value_e;
+
+    /* Constant: '<S41>/Constant8' */
+    GRM_HIL_B.Data_plus_k = GRM_HIL_P.Constant8_Value;
+
+    /* Constant: '<S41>/Constant9' */
+    GRM_HIL_B.Data_minus_kw = GRM_HIL_P.Constant9_Value_g;
+
+    /* Constant: '<S41>/Constant10' */
+    GRM_HIL_B.Clock_plus_b = GRM_HIL_P.Constant10_Value;
+
+    /* Constant: '<S41>/Constant11' */
+    GRM_HIL_B.Clock_minus_g = GRM_HIL_P.Constant11_Value_c;
+
+    /* Sum: '<S18>/Add' incorporates:
+     *  Constant: '<S18>/Constant'
+     *  Constant: '<S18>/Constant1'
+     *  Constant: '<S18>/Constant2'
+     *  Constant: '<S7>/Constant10'
+     *  Product: '<S18>/Divide'
+     *  Product: '<S18>/Divide1'
+     */
+    rtb_Abs_i = GRM_HIL_P.Constant1_Value_a / GRM_HIL_P.HIL_Sample_Time /
+      GRM_HIL_P.Constant10_Value_l - GRM_HIL_P.Constant2_Value_a;
+
+    /* MATLAB Function: '<S18>/Counter_with_external_limit' incorporates:
+     *  Memory: '<S18>/Memory'
+     */
+    if (GRM_HIL_DW.Memory_PreviousInput < rtb_Abs_i) {
+      GRM_HIL_B.value = GRM_HIL_DW.Memory_PreviousInput + 1.0;
+    } else {
+      GRM_HIL_B.value = 0.0;
+    }
+
+    /* End of MATLAB Function: '<S18>/Counter_with_external_limit' */
+
+    /* RelationalOperator: '<S18>/Equal' */
+    GRM_HIL_B.Equal = (rtb_Abs_i == GRM_HIL_B.value);
+
+    /* Outputs for Enabled SubSystem: '<S17>/Com_to_FCC_emul' incorporates:
+     *  EnablePort: '<S19>/Enable'
+     */
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      GRM_HIL_DW.Com_to_FCC_emul_MODE = GRM_HIL_B.Equal;
+    }
+
+    /* End of Outputs for SubSystem: '<S17>/Com_to_FCC_emul' */
+  }
+
+  /* Outputs for Enabled SubSystem: '<S17>/Com_to_FCC_emul' incorporates:
+   *  EnablePort: '<S19>/Enable'
+   */
+  if (GRM_HIL_DW.Com_to_FCC_emul_MODE) {
+    /* SignalConversion generated from: '<S19>/States_hold' */
+    GRM_HIL_B.ATT_Phi_rad_f = GRM_HIL_B.ATT_Phi_rad_l;
+
+    /* SignalConversion generated from: '<S19>/States_hold' */
+    GRM_HIL_B.ACC_y_B_mDs2_o = GRM_HIL_B.ACC_y_B_mDs2;
+
+    /* SignalConversion generated from: '<S19>/States_hold' */
+    GRM_HIL_B.ACC_z_B_mDs2_e = GRM_HIL_B.ACC_z_B_mDs2;
+
+    /* SignalConversion generated from: '<S19>/States_hold' */
+    GRM_HIL_B.w_x_K_IB_B_radDs_f = GRM_HIL_B.w_x_K_IB_B_radDs;
+
+    /* SignalConversion generated from: '<S19>/States_hold' */
+    GRM_HIL_B.w_y_K_IB_B_radDs_e = GRM_HIL_B.w_y_K_IB_B_radDs;
+
+    /* SignalConversion generated from: '<S19>/States_hold' */
+    GRM_HIL_B.w_z_K_IB_B_radDs_n = GRM_HIL_B.w_z_K_IB_B_radDs;
+    if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+        GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+      /* SignalConversion generated from: '<S19>/External_Inputs_hold' */
+      GRM_HIL_B.CMD_phi_rad = GRM_HIL_B.Switch1;
+
+      /* SignalConversion generated from: '<S19>/External_Inputs_hold' */
+      GRM_HIL_B.CMD_acc_z_mDs2 = GRM_HIL_B.Switch;
+
+      /* SignalConversion generated from: '<S19>/External_Inputs_hold' */
+      GRM_HIL_B.CMD_acc_y_mDs2 = GRM_HIL_B.Switch2;
+    }
+
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      srUpdateBC(GRM_HIL_DW.Com_to_FCC_emul_SubsysRanBC);
+    }
+  }
+
+  /* End of Outputs for SubSystem: '<S17>/Com_to_FCC_emul' */
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Gain: '<S25>/Gain2' */
+    GRM_HIL_B.phi_rad = GRM_HIL_P.Gain2_Gain_b * GRM_HIL_B.CMD_phi_rad;
+  }
+
+  /* Gain: '<S24>/Gain' incorporates:
+   *  Sum: '<S24>/Sum'
+   */
+  GRM_HIL_B.Gain_a = (GRM_HIL_B.phi_rad - GRM_HIL_B.w_x_K_IB_B_radDs_f) *
+    GRM_HIL_P.FlightController_FCC.Roll.Gain;
+
+  /* TransferFcn: '<S24>/Transfer Fcn' */
+  GRM_HIL_B.Phi_Cmd_rad = 0.0;
+  rtb_ProportionalGain_c = GRM_HIL_P.FlightController_FCC.Roll.Lead.Num[0] /
+    GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[0];
+  GRM_HIL_B.Phi_Cmd_rad += rtb_ProportionalGain_c * GRM_HIL_B.Gain_a;
+  GRM_HIL_B.Phi_Cmd_rad += (GRM_HIL_P.FlightController_FCC.Roll.Lead.Num[1] /
+    GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[0] - rtb_ProportionalGain_c *
+    (GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[1] /
+     GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[0])) *
+    GRM_HIL_X.TransferFcn_CSTATE_j;
+
+  /* Saturate: '<S23>/Limit2maxDeflection' */
+  if (GRM_HIL_B.Phi_Cmd_rad >
+      GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad) {
+    rtb_Abs_i = GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad;
+  } else if (GRM_HIL_B.Phi_Cmd_rad <
+             -GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad) {
+    rtb_Abs_i = -GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad;
+  } else {
+    rtb_Abs_i = GRM_HIL_B.Phi_Cmd_rad;
+  }
+
+  /* End of Saturate: '<S23>/Limit2maxDeflection' */
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Gain: '<S25>/Gain' */
+    GRM_HIL_B.acc_y_mDs2 = GRM_HIL_P.Gain_Gain_e * GRM_HIL_B.CMD_acc_y_mDs2;
+
+    /* Gain: '<S25>/Gain1' */
+    GRM_HIL_B.acc_z_mDs2 = GRM_HIL_P.Gain1_Gain_c * GRM_HIL_B.CMD_acc_z_mDs2;
+  }
+
+  /* Sum: '<S24>/Sum3' */
+  GRM_HIL_B.Sum3 = GRM_HIL_B.acc_y_mDs2 - GRM_HIL_B.ACC_y_B_mDs2_o;
+
+  /* TransferFcn: '<S24>/Transfer Fcn2' */
+  rtb_Add_pi = 0.0;
+  rtb_Add_pi += GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.IntGain.Num /
+    GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.IntGain.Denom[0] *
+    GRM_HIL_X.TransferFcn2_CSTATE_e;
+
+  /* Gain: '<S24>/Gain2' incorporates:
+   *  Gain: '<S24>/Gain4'
+   *  Sum: '<S24>/Sum4'
+   *  Sum: '<S24>/Sum6'
+   */
+  GRM_HIL_B.Psi_Cmd_rad =
+    ((GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.PropGain * GRM_HIL_B.Sum3 +
+      rtb_Add_pi) - GRM_HIL_B.w_z_K_IB_B_radDs_n) *
+    GRM_HIL_P.FlightController_FCC.Yaw.innerLoop.PropGain;
+
+  /* Sum: '<S24>/Sum1' */
+  GRM_HIL_B.Sum1_d = GRM_HIL_B.acc_z_mDs2 - GRM_HIL_B.ACC_z_B_mDs2_e;
+
+  /* TransferFcn: '<S24>/Transfer Fcn1' */
+  rtb_Add_pi = 0.0;
+  rtb_Add_pi += GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.IntGain.Num /
+    GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.IntGain.Denom[0] *
+    GRM_HIL_X.TransferFcn1_CSTATE_e;
+
+  /* Gain: '<S24>/Gain1' incorporates:
+   *  Gain: '<S24>/Gain3'
+   *  Sum: '<S24>/Sum2'
+   *  Sum: '<S24>/Sum5'
+   */
+  GRM_HIL_B.Theta_Cmd_rad =
+    ((GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.PropGain * GRM_HIL_B.Sum1_d
+      + rtb_Add_pi) - GRM_HIL_B.w_y_K_IB_B_radDs_e) *
+    GRM_HIL_P.FlightController_FCC.Pitch.innerLoop.PropGain;
+
+  /* Sum: '<S23>/Add4' incorporates:
+   *  Constant: '<S23>/Constant'
+   *  Sum: '<S23>/Add5'
+   */
+  rtb_ProportionalGain_c = GRM_HIL_P.FinDeflection_Control_Surfaces.phi_f1_rad +
+    GRM_HIL_B.ATT_Phi_rad_f;
+
+  /* Sum: '<S23>/Add' incorporates:
+   *  Fcn: '<S23>/Fcn'
+   *  Fcn: '<S23>/Fcn1'
+   *  Product: '<S23>/Multiply'
+   *  Product: '<S23>/Multiply1'
+   *  Sum: '<S23>/Add4'
+   */
+  rtb_Abs_lo = -cos(rtb_ProportionalGain_c) * GRM_HIL_B.Psi_Cmd_rad + sin
+    (rtb_ProportionalGain_c) * GRM_HIL_B.Theta_Cmd_rad;
+
+  /* Sum: '<S23>/Add6' incorporates:
+   *  Constant: '<S23>/Constant1'
+   *  Sum: '<S23>/Add7'
+   */
+  rtb_ProportionalGain_c = GRM_HIL_P.FinDeflection_Control_Surfaces.phi_f2_rad +
+    GRM_HIL_B.ATT_Phi_rad_f;
+
+  /* Sum: '<S23>/Add1' incorporates:
+   *  Fcn: '<S23>/Fcn2'
+   *  Fcn: '<S23>/Fcn3'
+   *  Product: '<S23>/Multiply2'
+   *  Product: '<S23>/Multiply3'
+   *  Sum: '<S23>/Add6'
+   */
+  rtb_ProportionalGain_c = -cos(rtb_ProportionalGain_c) * GRM_HIL_B.Psi_Cmd_rad
+    + sin(rtb_ProportionalGain_c) * GRM_HIL_B.Theta_Cmd_rad;
+
+  /* Sum: '<S23>/Add8' incorporates:
+   *  Constant: '<S23>/Constant2'
+   *  Sum: '<S23>/Add9'
+   */
+  rtb_DerivativeGain_f = GRM_HIL_P.FinDeflection_Control_Surfaces.phi_f3_rad +
+    GRM_HIL_B.ATT_Phi_rad_f;
+
+  /* Sum: '<S23>/Add2' incorporates:
+   *  Fcn: '<S23>/Fcn4'
+   *  Fcn: '<S23>/Fcn5'
+   *  Product: '<S23>/Multiply4'
+   *  Product: '<S23>/Multiply5'
+   *  Sum: '<S23>/Add8'
+   */
+  rtb_DerivativeGain_f = -cos(rtb_DerivativeGain_f) * GRM_HIL_B.Psi_Cmd_rad +
+    sin(rtb_DerivativeGain_f) * GRM_HIL_B.Theta_Cmd_rad;
+
+  /* Sum: '<S23>/Add10' incorporates:
+   *  Constant: '<S23>/Constant3'
+   *  Sum: '<S23>/Add11'
+   */
+  rtb_ProportionalGain = GRM_HIL_P.FinDeflection_Control_Surfaces.phi_f4_rad +
+    GRM_HIL_B.ATT_Phi_rad_f;
+
+  /* Sum: '<S23>/Add3' incorporates:
+   *  Fcn: '<S23>/Fcn6'
+   *  Fcn: '<S23>/Fcn7'
+   *  Product: '<S23>/Multiply6'
+   *  Product: '<S23>/Multiply7'
+   *  Sum: '<S23>/Add10'
+   */
+  rtb_DerivativeGain_a = -cos(rtb_ProportionalGain) * GRM_HIL_B.Psi_Cmd_rad +
+    sin(rtb_ProportionalGain) * GRM_HIL_B.Theta_Cmd_rad;
+
+  /* Abs: '<S29>/Abs' */
+  rtb_Add_pi = fabs(rtb_Abs_lo);
+
+  /* Sum: '<S23>/Add16' incorporates:
+   *  Abs: '<S23>/Abs'
+   *  Constant: '<S23>/Constant4'
+   */
+  rtb_PulseGenerator1 =
+    GRM_HIL_P.FinDeflection_Control_Surfaces.max_deflection_rad - fabs(rtb_Abs_i);
+
+  /* RelationalOperator: '<S29>/Relational Operator' */
+  rtb_RelationalOperator = (rtb_Add_pi > rtb_PulseGenerator1);
+
+  /* Abs: '<S29>/Abs1' */
+  rtb_Add_pi = fabs(rtb_ProportionalGain_c);
+
+  /* RelationalOperator: '<S29>/Relational Operator1' */
+  rtb_RelationalOperator1 = (rtb_Add_pi > rtb_PulseGenerator1);
+
+  /* Abs: '<S29>/Abs2' */
+  rtb_Add_pi = fabs(rtb_DerivativeGain_f);
+
+  /* RelationalOperator: '<S29>/Relational Operator2' */
+  rtb_RelationalOperator2 = (rtb_Add_pi > rtb_PulseGenerator1);
+
+  /* Abs: '<S29>/Abs3' */
+  rtb_Add_pi = fabs(rtb_DerivativeGain_a);
+
+  /* Logic: '<S29>/OR' incorporates:
+   *  RelationalOperator: '<S29>/Relational Operator3'
+   */
+  GRM_HIL_B.OR = (rtb_RelationalOperator || rtb_RelationalOperator1 ||
+                  rtb_RelationalOperator2 || (rtb_Add_pi > rtb_PulseGenerator1));
+
+  /* Logic: '<S28>/Logical Operator' */
+  GRM_HIL_B.LogicalOperator_at = !GRM_HIL_B.OR;
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* SignalConversion generated from: '<S30>/Enable' */
+    GRM_HIL_B.HiddenBuf_InsertedFor_Pass_at_inport_4 =
+      GRM_HIL_B.LogicalOperator_at;
+
+    /* Outputs for Enabled SubSystem: '<S28>/Pass' incorporates:
+     *  EnablePort: '<S30>/Enable'
+     */
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      GRM_HIL_DW.Pass_MODE = GRM_HIL_B.HiddenBuf_InsertedFor_Pass_at_inport_4;
+    }
+
+    /* End of Outputs for SubSystem: '<S28>/Pass' */
+  }
+
+  /* Outputs for Enabled SubSystem: '<S28>/Pass' incorporates:
+   *  EnablePort: '<S30>/Enable'
+   */
+  if (GRM_HIL_DW.Pass_MODE) {
+    /* Inport: '<S30>/Fin_1_Cmd_rad' */
+    GRM_HIL_B.Merge_n = rtb_Abs_lo;
+
+    /* Inport: '<S30>/Fin_2_Cmd_rad' */
+    GRM_HIL_B.Merge1_n = rtb_ProportionalGain_c;
+
+    /* Inport: '<S30>/Fin_3_Cmd_rad' */
+    GRM_HIL_B.Merge2_i = rtb_DerivativeGain_f;
+
+    /* Inport: '<S30>/Fin_4_Cmd_rad' */
+    GRM_HIL_B.Merge3 = rtb_DerivativeGain_a;
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      srUpdateBC(GRM_HIL_DW.Pass_SubsysRanBC);
+    }
+  }
+
+  /* End of Outputs for SubSystem: '<S28>/Pass' */
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* SignalConversion generated from: '<S31>/Enable' */
+    GRM_HIL_B.HiddenBuf_InsertedFor_Saturate_at_inport_5 = GRM_HIL_B.OR;
+
+    /* Outputs for Enabled SubSystem: '<S28>/Saturate' incorporates:
+     *  EnablePort: '<S31>/Enable'
+     */
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      GRM_HIL_DW.Saturate_MODE =
+        GRM_HIL_B.HiddenBuf_InsertedFor_Saturate_at_inport_5;
+    }
+
+    /* End of Outputs for SubSystem: '<S28>/Saturate' */
+  }
+
+  /* Outputs for Enabled SubSystem: '<S28>/Saturate' incorporates:
+   *  EnablePort: '<S31>/Enable'
+   */
+  if (GRM_HIL_DW.Saturate_MODE) {
+    /* Abs: '<S31>/Abs1' incorporates:
+     *  MinMax: '<S31>/Max'
+     */
+    rtb_ProportionalGain = fabs(fmax(fmax(fmax(rtb_Abs_lo,
+      rtb_ProportionalGain_c), rtb_DerivativeGain_f), rtb_DerivativeGain_a));
+
+    /* Product: '<S31>/Multiply' incorporates:
+     *  Product: '<S31>/Divide'
+     */
+    GRM_HIL_B.Merge_n = rtb_Abs_lo / rtb_ProportionalGain * rtb_PulseGenerator1;
+
+    /* Product: '<S31>/Multiply1' incorporates:
+     *  Product: '<S31>/Divide1'
+     */
+    GRM_HIL_B.Merge1_n = rtb_ProportionalGain_c / rtb_ProportionalGain *
+      rtb_PulseGenerator1;
+
+    /* Product: '<S31>/Multiply2' incorporates:
+     *  Product: '<S31>/Divide4'
+     */
+    GRM_HIL_B.Merge2_i = rtb_DerivativeGain_f / rtb_ProportionalGain *
+      rtb_PulseGenerator1;
+
+    /* Product: '<S31>/Multiply3' incorporates:
+     *  Product: '<S31>/Divide2'
+     */
+    GRM_HIL_B.Merge3 = rtb_DerivativeGain_a / rtb_ProportionalGain *
+      rtb_PulseGenerator1;
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      srUpdateBC(GRM_HIL_DW.Saturate_SubsysRanBC);
+    }
+  }
+
+  /* End of Outputs for SubSystem: '<S28>/Saturate' */
+
+  /* Sum: '<S23>/Add14' */
+  GRM_HIL_B.Fin_4_Cmd_rad = rtb_Abs_i + GRM_HIL_B.Merge3;
+
+  /* Product: '<S35>/Product' incorporates:
+   *  Constant: '<S32>/Constant6'
+   *  Constant: '<S33>/Constant6'
+   *  Constant: '<S34>/Constant6'
+   *  Constant: '<S35>/Constant6'
+   *  Product: '<S32>/Product'
+   *  Product: '<S33>/Product'
+   *  Product: '<S34>/Product'
+   */
+  rtb_ProportionalGain_c = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms -
+    GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
+
+  /* Sum: '<S35>/Add' incorporates:
+   *  Constant: '<S27>/Constant'
+   *  Constant: '<S35>/Constant2'
+   *  Constant: '<S35>/Constant6'
+   *  Product: '<S35>/Divide'
+   *  Product: '<S35>/Product'
+   */
+  rtb_Add_pi = rtb_ProportionalGain_c * (GRM_HIL_B.Fin_4_Cmd_rad /
+    GRM_HIL_P.Servo_Cmd_Control_Surfaces.max_deflection_rad) +
+    GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
+
+  /* Saturate: '<S35>/Saturation' */
+  if (rtb_Add_pi > GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms) {
+    GRM_HIL_B.pulse_width_ms = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms;
+  } else if (rtb_Add_pi < GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms) {
+    GRM_HIL_B.pulse_width_ms = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms;
+  } else {
+    GRM_HIL_B.pulse_width_ms = rtb_Add_pi;
+  }
+
+  /* End of Saturate: '<S35>/Saturation' */
+
+  /* Sum: '<S23>/Add13' */
+  GRM_HIL_B.Fin_3_Cmd_rad = rtb_Abs_i + GRM_HIL_B.Merge2_i;
+
+  /* Sum: '<S34>/Add' incorporates:
+   *  Constant: '<S27>/Constant'
+   *  Constant: '<S34>/Constant2'
+   *  Product: '<S34>/Divide'
+   *  Product: '<S34>/Product'
+   */
+  rtb_Add_pi = rtb_ProportionalGain_c * (GRM_HIL_B.Fin_3_Cmd_rad /
+    GRM_HIL_P.Servo_Cmd_Control_Surfaces.max_deflection_rad) +
+    GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
+
+  /* Saturate: '<S34>/Saturation' */
+  if (rtb_Add_pi > GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms) {
+    GRM_HIL_B.pulse_width_ms_e = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms;
+  } else if (rtb_Add_pi < GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms) {
+    GRM_HIL_B.pulse_width_ms_e = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms;
+  } else {
+    GRM_HIL_B.pulse_width_ms_e = rtb_Add_pi;
+  }
+
+  /* End of Saturate: '<S34>/Saturation' */
+
+  /* Sum: '<S23>/Add12' */
+  GRM_HIL_B.Fin_2_Cmd_rad = rtb_Abs_i + GRM_HIL_B.Merge1_n;
+
+  /* Sum: '<S33>/Add' incorporates:
+   *  Constant: '<S27>/Constant'
+   *  Constant: '<S33>/Constant2'
+   *  Product: '<S33>/Divide'
+   *  Product: '<S33>/Product'
+   */
+  rtb_Add_pi = rtb_ProportionalGain_c * (GRM_HIL_B.Fin_2_Cmd_rad /
+    GRM_HIL_P.Servo_Cmd_Control_Surfaces.max_deflection_rad) +
+    GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
+
+  /* Saturate: '<S33>/Saturation' */
+  if (rtb_Add_pi > GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms) {
+    GRM_HIL_B.pulse_width_ms_c = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms;
+  } else if (rtb_Add_pi < GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms) {
+    GRM_HIL_B.pulse_width_ms_c = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms;
+  } else {
+    GRM_HIL_B.pulse_width_ms_c = rtb_Add_pi;
+  }
+
+  /* End of Saturate: '<S33>/Saturation' */
+
+  /* Sum: '<S23>/Add15' */
+  GRM_HIL_B.Fin_1_Cmd_rad = rtb_Abs_i + GRM_HIL_B.Merge_n;
+
+  /* Sum: '<S32>/Add' incorporates:
+   *  Constant: '<S27>/Constant'
+   *  Constant: '<S32>/Constant2'
+   *  Product: '<S32>/Divide'
+   *  Product: '<S32>/Product'
+   */
+  rtb_ProportionalGain_c = rtb_ProportionalGain_c * (GRM_HIL_B.Fin_1_Cmd_rad /
+    GRM_HIL_P.Servo_Cmd_Control_Surfaces.max_deflection_rad) +
+    GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_middle_pos_ms;
+
+  /* Saturate: '<S32>/Saturation' */
+  if (rtb_ProportionalGain_c > GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms) {
+    GRM_HIL_B.pulse_width_ms_p = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_max_ms;
+  } else if (rtb_ProportionalGain_c <
+             GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms) {
+    GRM_HIL_B.pulse_width_ms_p = GRM_HIL_P.Servo_Cmd_PWM.Pulswidth_cmd_min_ms;
+  } else {
+    GRM_HIL_B.pulse_width_ms_p = rtb_ProportionalGain_c;
+  }
+
+  /* End of Saturate: '<S32>/Saturation' */
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[3] == 0) {
+    /* S-Function (fcncallgen): '<S17>/Function-Call Generator1' incorporates:
+     *  SubSystem: '<S17>/FB_Com_freq_emul'
+     */
+    /* SignalConversion generated from: '<S20>/hold' */
+    GRM_HIL_B.Fin_3_Cmd_rad_o = GRM_HIL_B.Fin_3_Cmd_rad;
+
+    /* SignalConversion generated from: '<S20>/hold' */
+    GRM_HIL_B.Fin_4_Cmd_rad_c = GRM_HIL_B.Fin_4_Cmd_rad;
+
+    /* SignalConversion generated from: '<S20>/hold' */
+    GRM_HIL_B.pulse_width_ms_p2 = GRM_HIL_B.pulse_width_ms_p;
+
+    /* SignalConversion generated from: '<S20>/hold' */
+    GRM_HIL_B.pulse_width_ms_p2d = GRM_HIL_B.pulse_width_ms_c;
+
+    /* SignalConversion generated from: '<S20>/hold' */
+    GRM_HIL_B.pulse_width_ms_p2de = GRM_HIL_B.pulse_width_ms_e;
+
+    /* SignalConversion generated from: '<S20>/hold' */
+    GRM_HIL_B.pulse_width_ms_p2dee = GRM_HIL_B.pulse_width_ms;
+
+    /* SignalConversion generated from: '<S20>/hold' */
+    GRM_HIL_B.Fin_1_Cmd_rad_l = GRM_HIL_B.Fin_1_Cmd_rad;
+
+    /* SignalConversion generated from: '<S20>/hold' */
+    GRM_HIL_B.Fin_2_Cmd_rad_e = GRM_HIL_B.Fin_2_Cmd_rad;
+    GRM_HIL_DW.FB_Com_freq_emul_SubsysRanBC = 4;
+
+    /* End of Outputs for S-Function (fcncallgen): '<S17>/Function-Call Generator1' */
+  }
+
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Gain: '<S189>/Gain' incorporates:
+     *  Constant: '<S5>/Constant'
+     */
+    GRM_HIL_B.VEL_u_K_R_E_B_mDs = GRM_HIL_P.Gain_Gain_d *
+      GRM_HIL_P.Initial_States_Rigid_Body.Transl.VEL_u_K_R_E_B_mDs;
+  }
+
+  /* Integrator: '<S220>/Integrator' incorporates:
+   *  Constant: '<S7>/Constant2'
+   */
+  if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+    rtb_RelationalOperator = (GRM_HIL_P.Constant2_Value_f &&
+      (GRM_HIL_PrevZCX.Integrator_Reset_ZCE_i != POS_ZCSIG));
+    GRM_HIL_PrevZCX.Integrator_Reset_ZCE_i = GRM_HIL_P.Constant2_Value_f;
+
+    /* evaluate zero-crossings */
+    if (rtb_RelationalOperator || (GRM_HIL_DW.Integrator_IWORK_ic != 0)) {
+      GRM_HIL_X.Integrator_CSTATE_j = GRM_HIL_B.VEL_u_K_R_E_B_mDs;
+    }
+  }
+
+  /* Gain: '<S195>/Gain' incorporates:
+   *  Integrator: '<S220>/Integrator'
+   */
+  GRM_HIL_B.VEL_u_K_R_E_B_mDs_e = GRM_HIL_P.Gain_Gain_k *
+    GRM_HIL_X.Integrator_CSTATE_j;
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Gain: '<S189>/Gain1' incorporates:
+     *  Constant: '<S5>/Constant1'
+     */
+    GRM_HIL_B.VEL_v_K_R_E_B_mDs = GRM_HIL_P.Gain1_Gain_i *
+      GRM_HIL_P.Initial_States_Rigid_Body.Transl.VEL_v_K_R_E_B_mDs;
+  }
+
+  /* Integrator: '<S220>/Integrator1' incorporates:
+   *  Constant: '<S7>/Constant2'
+   */
+  if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+    rtb_RelationalOperator = (GRM_HIL_P.Constant2_Value_f &&
+      (GRM_HIL_PrevZCX.Integrator1_Reset_ZCE_p != POS_ZCSIG));
+    GRM_HIL_PrevZCX.Integrator1_Reset_ZCE_p = GRM_HIL_P.Constant2_Value_f;
+
+    /* evaluate zero-crossings */
+    if (rtb_RelationalOperator || (GRM_HIL_DW.Integrator1_IWORK_g != 0)) {
+      GRM_HIL_X.Integrator1_CSTATE_p = GRM_HIL_B.VEL_v_K_R_E_B_mDs;
+    }
+  }
+
+  /* Gain: '<S195>/Gain1' incorporates:
+   *  Integrator: '<S220>/Integrator1'
+   */
+  GRM_HIL_B.VEL_v_K_R_E_B_mDs_e = GRM_HIL_P.Gain1_Gain_b *
+    GRM_HIL_X.Integrator1_CSTATE_p;
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Gain: '<S189>/Gain2' incorporates:
+     *  Constant: '<S5>/Constant2'
+     */
+    GRM_HIL_B.VEL_w_K_R_E_B_mDs = GRM_HIL_P.Gain2_Gain_l *
+      GRM_HIL_P.Initial_States_Rigid_Body.Transl.VEL_w_K_R_E_B_mDs;
+  }
+
+  /* Integrator: '<S220>/Integrator2' incorporates:
+   *  Constant: '<S7>/Constant2'
+   */
+  if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+    rtb_RelationalOperator = (GRM_HIL_P.Constant2_Value_f &&
+      (GRM_HIL_PrevZCX.Integrator2_Reset_ZCE_f != POS_ZCSIG));
+    GRM_HIL_PrevZCX.Integrator2_Reset_ZCE_f = GRM_HIL_P.Constant2_Value_f;
+
+    /* evaluate zero-crossings */
+    if (rtb_RelationalOperator || (GRM_HIL_DW.Integrator2_IWORK_m != 0)) {
+      GRM_HIL_X.Integrator2_CSTATE_a = GRM_HIL_B.VEL_w_K_R_E_B_mDs;
+    }
+  }
+
+  /* Gain: '<S195>/Gain2' incorporates:
+   *  Integrator: '<S220>/Integrator2'
+   */
+  GRM_HIL_B.VEL_w_K_R_E_B_mDs_d = GRM_HIL_P.Gain2_Gain_e *
+    GRM_HIL_X.Integrator2_CSTATE_a;
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+  }
+
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[3] == 0) {
+    /* Product: '<S12>/Divide' incorporates:
+     *  Constant: '<S12>/Constant1'
+     *  Constant: '<S13>/Constant1'
+     *  Constant: '<S14>/Constant1'
+     *  Constant: '<S15>/Constant1'
+     *  Product: '<S13>/Divide'
+     *  Product: '<S14>/Divide'
+     *  Product: '<S15>/Divide'
+     */
+    rtb_DerivativeGain_f = GRM_HIL_P.Servo_PWM.Pulswidth_cmd_max_ms -
+      GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms;
+
+    /* Product: '<S12>/Multiply' incorporates:
+     *  Constant: '<S12>/Constant'
+     *  Constant: '<S12>/Constant1'
+     *  Constant: '<S12>/Constant2'
+     *  Product: '<S12>/Divide'
+     *  Sum: '<S12>/Add'
+     */
+    rtb_ProportionalGain_c = (GRM_HIL_B.pulse_width_ms_p2 -
+      GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms) / rtb_DerivativeGain_f *
+      GRM_HIL_P.Servo_PWM.max_deflection_rad;
+
+    /* Saturate: '<S12>/Saturation' */
+    if (rtb_ProportionalGain_c > GRM_HIL_P.Servo_PWM.max_deflection_rad) {
+      GRM_HIL_B.Saturation_o = GRM_HIL_P.Servo_PWM.max_deflection_rad;
+    } else if (rtb_ProportionalGain_c < -GRM_HIL_P.Servo_PWM.max_deflection_rad)
+    {
+      GRM_HIL_B.Saturation_o = -GRM_HIL_P.Servo_PWM.max_deflection_rad;
+    } else {
+      GRM_HIL_B.Saturation_o = rtb_ProportionalGain_c;
+    }
+
+    /* End of Saturate: '<S12>/Saturation' */
+
+    /* Product: '<S13>/Multiply' incorporates:
+     *  Constant: '<S13>/Constant'
+     *  Constant: '<S13>/Constant2'
+     *  Product: '<S13>/Divide'
+     *  Sum: '<S13>/Add'
+     */
+    rtb_ProportionalGain_c = (GRM_HIL_B.pulse_width_ms_p2d -
+      GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms) / rtb_DerivativeGain_f *
+      GRM_HIL_P.Servo_PWM.max_deflection_rad;
+
+    /* Saturate: '<S13>/Saturation' */
+    if (rtb_ProportionalGain_c > GRM_HIL_P.Servo_PWM.max_deflection_rad) {
+      GRM_HIL_B.Saturation_c = GRM_HIL_P.Servo_PWM.max_deflection_rad;
+    } else if (rtb_ProportionalGain_c < -GRM_HIL_P.Servo_PWM.max_deflection_rad)
+    {
+      GRM_HIL_B.Saturation_c = -GRM_HIL_P.Servo_PWM.max_deflection_rad;
+    } else {
+      GRM_HIL_B.Saturation_c = rtb_ProportionalGain_c;
+    }
+
+    /* End of Saturate: '<S13>/Saturation' */
+
+    /* Product: '<S14>/Multiply' incorporates:
+     *  Constant: '<S14>/Constant'
+     *  Constant: '<S14>/Constant2'
+     *  Product: '<S14>/Divide'
+     *  Sum: '<S14>/Add'
+     */
+    rtb_ProportionalGain_c = (GRM_HIL_B.pulse_width_ms_p2de -
+      GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms) / rtb_DerivativeGain_f *
+      GRM_HIL_P.Servo_PWM.max_deflection_rad;
+
+    /* Saturate: '<S14>/Saturation' */
+    if (rtb_ProportionalGain_c > GRM_HIL_P.Servo_PWM.max_deflection_rad) {
+      GRM_HIL_B.Saturation_jy = GRM_HIL_P.Servo_PWM.max_deflection_rad;
+    } else if (rtb_ProportionalGain_c < -GRM_HIL_P.Servo_PWM.max_deflection_rad)
+    {
+      GRM_HIL_B.Saturation_jy = -GRM_HIL_P.Servo_PWM.max_deflection_rad;
+    } else {
+      GRM_HIL_B.Saturation_jy = rtb_ProportionalGain_c;
+    }
+
+    /* End of Saturate: '<S14>/Saturation' */
+
+    /* Product: '<S15>/Multiply' incorporates:
+     *  Constant: '<S15>/Constant'
+     *  Constant: '<S15>/Constant2'
+     *  Product: '<S15>/Divide'
+     *  Sum: '<S15>/Add'
+     */
+    rtb_ProportionalGain_c = (GRM_HIL_B.pulse_width_ms_p2dee -
+      GRM_HIL_P.Servo_PWM.Pulswidth_cmd_middle_pos_ms) / rtb_DerivativeGain_f *
+      GRM_HIL_P.Servo_PWM.max_deflection_rad;
+
+    /* Saturate: '<S15>/Saturation' */
+    if (rtb_ProportionalGain_c > GRM_HIL_P.Servo_PWM.max_deflection_rad) {
+      GRM_HIL_B.Saturation_a = GRM_HIL_P.Servo_PWM.max_deflection_rad;
+    } else if (rtb_ProportionalGain_c < -GRM_HIL_P.Servo_PWM.max_deflection_rad)
+    {
+      GRM_HIL_B.Saturation_a = -GRM_HIL_P.Servo_PWM.max_deflection_rad;
+    } else {
+      GRM_HIL_B.Saturation_a = rtb_ProportionalGain_c;
+    }
+
+    /* End of Saturate: '<S15>/Saturation' */
+  }
+
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* DataTypeConversion: '<S39>/Data Type Conversion' incorporates:
+     *  Constant: '<S7>/Constant7'
+     *  Gain: '<S44>/Gain'
+     */
+    GRM_HIL_B.cmd_pass_enable_flg = (GRM_HIL_P.Gain_Gain_o *
+      GRM_HIL_P.Constant7_Value_e5 != 0.0);
+
+    /* DataTypeConversion: '<S39>/Data Type Conversion1' incorporates:
+     *  Constant: '<S39>/Constant'
+     */
+    GRM_HIL_B.emergency_stop_flg = (GRM_HIL_P.Constant_Value_n != 0.0);
   }
 
   /* If: '<S176>/If' incorporates:
@@ -3269,7 +3407,7 @@ void GRM_HIL_output(void)
    *  Constant: '<S174>/Constant1'
    */
   if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-    rtAction = (int8_T)!(rtb_ProportionalGain >
+    rtAction = (int8_T)!(rtb_DerivativeGain >
                          GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.PitchMaxV);
     GRM_HIL_DW.If_ActiveSubsystem_l = rtAction;
   } else {
@@ -3362,7 +3500,7 @@ void GRM_HIL_output(void)
      *  Gain: '<S63>/Kb'
      *  Sum: '<S63>/SumI2'
      */
-    GRM_HIL_B.SumI1_n = (GRM_HIL_B.Merge_c - rtb_Sum_o2) *
+    GRM_HIL_B.SumI1_n = (GRM_HIL_B.Merge_c - rtb_Sum_o) *
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.PID_Roll_BackCalculation_Coefficient +
       GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl.PID_Roll_Integral_Gain *
       GRM_HIL_B.Roll_err;
@@ -3446,40 +3584,39 @@ void GRM_HIL_output(void)
    *  MATLAB Function: '<S206>/MATLAB Function1'
    *  MATLAB Function: '<S206>/MATLAB Function2'
    */
-  rtb_DerivativeGain = cos(GRM_HIL_X.Integrator2_CSTATE);
-  rtb_ProportionalGain_c = sin(GRM_HIL_X.Integrator2_CSTATE);
-  rtb_Abs_k = sin(GRM_HIL_X.Integrator_CSTATE_k);
-  rtb_PulseGenerator1 = sin(GRM_HIL_X.Integrator1_CSTATE);
-  rtb_Phi2MotorYaw = cos(GRM_HIL_X.Integrator1_CSTATE);
-  rtb_Phi2MotorRoll = cos(GRM_HIL_X.Integrator_CSTATE_k);
-  rtb_ProportionalGain = ((rtb_DerivativeGain * rtb_PulseGenerator1 * rtb_Abs_k
-    - rtb_ProportionalGain_c * rtb_Phi2MotorRoll) *
+  rtb_ProportionalGain_nx = cos(GRM_HIL_X.Integrator2_CSTATE);
+  rtb_PulseGenerator = sin(GRM_HIL_X.Integrator2_CSTATE);
+  rtb_Abs_i = sin(GRM_HIL_X.Integrator_CSTATE_k);
+  rtb_DerivativeGain_a = sin(GRM_HIL_X.Integrator1_CSTATE);
+  rtb_Abs_lo = cos(GRM_HIL_X.Integrator1_CSTATE);
+  rtb_ProportionalGain_c = cos(GRM_HIL_X.Integrator_CSTATE_k);
+  rtb_DerivativeGain_f = ((rtb_ProportionalGain_nx * rtb_DerivativeGain_a *
+    rtb_Abs_i - rtb_PulseGenerator * rtb_ProportionalGain_c) *
     GRM_HIL_X.Integrator1_CSTATE_p + GRM_HIL_X.Integrator_CSTATE_j *
-    rtb_DerivativeGain * rtb_Phi2MotorYaw) + (rtb_DerivativeGain *
-    rtb_DerivativeGain * rtb_PulseGenerator1 + rtb_ProportionalGain_c *
-    rtb_Abs_k) * GRM_HIL_X.Integrator2_CSTATE_a;
+    rtb_ProportionalGain_nx * rtb_Abs_lo) + (rtb_ProportionalGain_nx *
+    rtb_ProportionalGain_nx * rtb_DerivativeGain_a + rtb_PulseGenerator *
+    rtb_Abs_i) * GRM_HIL_X.Integrator2_CSTATE_a;
 
   /* MATLAB Function: '<S206>/MATLAB Function1' incorporates:
    *  Integrator: '<S220>/Integrator'
    *  Integrator: '<S220>/Integrator1'
    *  Integrator: '<S220>/Integrator2'
    */
-  rtb_DerivativeGain = ((rtb_Abs_k * rtb_PulseGenerator1 *
-    rtb_ProportionalGain_c + rtb_DerivativeGain * rtb_Phi2MotorRoll) *
-                        GRM_HIL_X.Integrator1_CSTATE_p +
-                        GRM_HIL_X.Integrator_CSTATE_j * rtb_ProportionalGain_c *
-                        rtb_Phi2MotorYaw) + (rtb_PulseGenerator1 *
-    rtb_ProportionalGain_c * rtb_Phi2MotorRoll - rtb_DerivativeGain * rtb_Abs_k)
-    * GRM_HIL_X.Integrator2_CSTATE_a;
+  rtb_ProportionalGain_nx = ((rtb_Abs_i * rtb_DerivativeGain_a *
+    rtb_PulseGenerator + rtb_ProportionalGain_nx * rtb_ProportionalGain_c) *
+    GRM_HIL_X.Integrator1_CSTATE_p + GRM_HIL_X.Integrator_CSTATE_j *
+    rtb_PulseGenerator * rtb_Abs_lo) + (rtb_DerivativeGain_a *
+    rtb_PulseGenerator * rtb_ProportionalGain_c - rtb_ProportionalGain_nx *
+    rtb_Abs_i) * GRM_HIL_X.Integrator2_CSTATE_a;
 
   /* MATLAB Function: '<S206>/MATLAB Function2' incorporates:
    *  Integrator: '<S220>/Integrator'
    *  Integrator: '<S220>/Integrator1'
    *  Integrator: '<S220>/Integrator2'
    */
-  rtb_PulseGenerator1 = (GRM_HIL_X.Integrator1_CSTATE_p * rtb_Phi2MotorYaw *
-    rtb_Abs_k + -GRM_HIL_X.Integrator_CSTATE_j * rtb_PulseGenerator1) +
-    GRM_HIL_X.Integrator2_CSTATE_a * rtb_Phi2MotorYaw * rtb_Phi2MotorRoll;
+  rtb_DerivativeGain_a = (GRM_HIL_X.Integrator1_CSTATE_p * rtb_Abs_lo *
+    rtb_Abs_i + -GRM_HIL_X.Integrator_CSTATE_j * rtb_DerivativeGain_a) +
+    GRM_HIL_X.Integrator2_CSTATE_a * rtb_Abs_lo * rtb_ProportionalGain_c;
 
   /* Integrator: '<S219>/Integrator1' incorporates:
    *  Constant: '<S7>/Constant2'
@@ -3508,10 +3645,10 @@ void GRM_HIL_output(void)
   /* MATLAB Function: '<S202>/MATLAB Function' incorporates:
    *  Integrator: '<S219>/Integrator1'
    */
-  rtb_ProportionalGain_c = sin(GRM_HIL_X.Integrator1_CSTATE_e);
-  rtb_ProportionalGain_nx = 1.0 - rtb_ProportionalGain_c *
-    rtb_ProportionalGain_c * 0.0066943800042608363;
-  rtb_DerivativeGain_f = 6.378137E+6 / sqrt(rtb_ProportionalGain_nx);
+  rtb_PulseGenerator = sin(GRM_HIL_X.Integrator1_CSTATE_e);
+  rtb_DerivativeGain = 1.0 - rtb_PulseGenerator * rtb_PulseGenerator *
+    0.0066943800042608363;
+  rtb_ProportionalGain = 6.378137E+6 / sqrt(rtb_DerivativeGain);
 
   /* Gain: '<S204>/Gain' incorporates:
    *  Sum: '<S204>/Add12'
@@ -3546,9 +3683,9 @@ void GRM_HIL_output(void)
    *  Product: '<S205>/Multiply3'
    *  Sum: '<S205>/Add'
    */
-  GRM_HIL_B.Product_f = ((rtb_Abs_k * rtb_Fin_1_Pos_rad * rtb_q_B_radDs +
-    rtb_p_B_radDs) + rtb_Phi2MotorRoll * rtb_Fin_1_Pos_rad * rtb_r_B_radDs) *
-    GRM_HIL_B.DataTypeConversion_i;
+  GRM_HIL_B.Product_f = ((rtb_Abs_i * rtb_Fin_1_Pos_rad * rtb_q_B_radDs +
+    rtb_p_B_radDs) + rtb_ProportionalGain_c * rtb_Fin_1_Pos_rad * rtb_r_B_radDs)
+    * GRM_HIL_B.DataTypeConversion_i;
 
   /* Product: '<S215>/Product1' incorporates:
    *  Fcn: '<S205>/Fcn1'
@@ -3556,7 +3693,7 @@ void GRM_HIL_output(void)
    *  Product: '<S205>/Multiply5'
    *  Sum: '<S205>/Add1'
    */
-  GRM_HIL_B.Product1_j = (rtb_Phi2MotorRoll * rtb_q_B_radDs + -rtb_Abs_k *
+  GRM_HIL_B.Product1_j = (rtb_ProportionalGain_c * rtb_q_B_radDs + -rtb_Abs_i *
     rtb_r_B_radDs) * GRM_HIL_B.DataTypeConversion_i;
 
   /* Product: '<S215>/Product2' incorporates:
@@ -3566,8 +3703,8 @@ void GRM_HIL_output(void)
    *  Product: '<S205>/Multiply7'
    *  Sum: '<S205>/Add2'
    */
-  GRM_HIL_B.Product2 = (rtb_Abs_k / rtb_Phi2MotorYaw * rtb_q_B_radDs +
-                        rtb_Phi2MotorRoll / rtb_Phi2MotorYaw * rtb_r_B_radDs) *
+  GRM_HIL_B.Product2 = (rtb_Abs_i / rtb_Abs_lo * rtb_q_B_radDs +
+                        rtb_ProportionalGain_c / rtb_Abs_lo * rtb_r_B_radDs) *
     GRM_HIL_B.DataTypeConversion_i;
 
   /* Product: '<S217>/Multiply' */
@@ -3618,13 +3755,14 @@ void GRM_HIL_output(void)
   /* End of Integrator: '<S218>/Integrator' */
 
   /* Product: '<S218>/Product' */
-  GRM_HIL_B.Product_b = rtb_ProportionalGain * GRM_HIL_B.DataTypeConversion_n;
+  GRM_HIL_B.Product_b = rtb_DerivativeGain_f * GRM_HIL_B.DataTypeConversion_n;
 
   /* Product: '<S218>/Product1' */
-  GRM_HIL_B.Product1_f = rtb_DerivativeGain * GRM_HIL_B.DataTypeConversion_n;
+  GRM_HIL_B.Product1_f = rtb_ProportionalGain_nx *
+    GRM_HIL_B.DataTypeConversion_n;
 
   /* Product: '<S218>/Product2' */
-  GRM_HIL_B.Product2_d = rtb_PulseGenerator1 * GRM_HIL_B.DataTypeConversion_n;
+  GRM_HIL_B.Product2_d = rtb_DerivativeGain_a * GRM_HIL_B.DataTypeConversion_n;
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* DataTypeConversion: '<S219>/Data Type Conversion' incorporates:
@@ -3654,7 +3792,7 @@ void GRM_HIL_output(void)
    *  Integrator: '<S219>/Integrator2'
    *  MATLAB Function: '<S202>/MATLAB Function'
    */
-  GRM_HIL_B.Product_g = rtb_DerivativeGain / ((rtb_DerivativeGain_f +
+  GRM_HIL_B.Product_g = rtb_ProportionalGain_nx / ((rtb_ProportionalGain +
     GRM_HIL_X.Integrator2_CSTATE_d) * cos(GRM_HIL_X.Integrator1_CSTATE_e)) *
     GRM_HIL_B.DataTypeConversion_k;
 
@@ -3662,14 +3800,14 @@ void GRM_HIL_output(void)
    *  Integrator: '<S219>/Integrator2'
    *  MATLAB Function: '<S202>/MATLAB Function'
    */
-  GRM_HIL_B.Product1_g = rtb_ProportionalGain / (rtb_DerivativeGain_f *
-    0.99330561999573919 / rtb_ProportionalGain_nx +
-    GRM_HIL_X.Integrator2_CSTATE_d) * GRM_HIL_B.DataTypeConversion_k;
+  GRM_HIL_B.Product1_g = rtb_DerivativeGain_f / (rtb_ProportionalGain *
+    0.99330561999573919 / rtb_DerivativeGain + GRM_HIL_X.Integrator2_CSTATE_d) *
+    GRM_HIL_B.DataTypeConversion_k;
 
   /* Product: '<S219>/Product2' incorporates:
    *  MATLAB Function: '<S202>/MATLAB Function'
    */
-  GRM_HIL_B.Product2_d1 = -rtb_PulseGenerator1 * GRM_HIL_B.DataTypeConversion_k;
+  GRM_HIL_B.Product2_d1 = -rtb_DerivativeGain_a * GRM_HIL_B.DataTypeConversion_k;
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* DataTypeConversion: '<S220>/Data Type Conversion' incorporates:
@@ -3742,19 +3880,13 @@ void GRM_HIL_update(void)
 
   /* Update for Integrator: '<S215>/Integrator2' */
   GRM_HIL_DW.Integrator2_IWORK = 0;
-
-  /* Update for Integrator: '<S220>/Integrator' */
-  GRM_HIL_DW.Integrator_IWORK_ic = 0;
-
-  /* Update for Integrator: '<S220>/Integrator1' */
-  GRM_HIL_DW.Integrator1_IWORK_g = 0;
-
-  /* Update for Integrator: '<S220>/Integrator2' */
-  GRM_HIL_DW.Integrator2_IWORK_m = 0;
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Update for Memory: '<S18>/Memory' */
-    GRM_HIL_DW.Memory_PreviousInput = GRM_HIL_B.value;
+    /* Update for Memory generated from: '<S36>/Memory' */
+    GRM_HIL_DW.Memory_1_PreviousInput = GRM_HIL_B.cmd_pass_enable_flg;
+
+    /* Update for Memory generated from: '<S36>/Memory' */
+    GRM_HIL_DW.Memory_2_PreviousInput = GRM_HIL_B.emergency_stop_flg;
 
     /* Update for Memory generated from: '<S36>/Memory1' */
     GRM_HIL_DW.Memory1_1_PreviousInput = GRM_HIL_B.Sum;
@@ -3784,7 +3916,7 @@ void GRM_HIL_update(void)
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* Update for Memory generated from: '<S36>/Memory1' */
-    GRM_HIL_DW.Memory1_2_PreviousInput = GRM_HIL_B.Sum1_n;
+    GRM_HIL_DW.Memory1_2_PreviousInput = GRM_HIL_B.Sum1;
   }
 
   /* Update for TransportDelay: '<S174>/Transport Delay' */
@@ -3838,6 +3970,21 @@ void GRM_HIL_update(void)
     (*tBuffer)[GRM_HIL_DW.TransportDelay_IWORK_k.Head] = simTime;
     (*uBuffer)[GRM_HIL_DW.TransportDelay_IWORK_k.Head] = GRM_HIL_B.roll_deg;
   }
+
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Update for Memory: '<S18>/Memory' */
+    GRM_HIL_DW.Memory_PreviousInput = GRM_HIL_B.value;
+  }
+
+  /* Update for Integrator: '<S220>/Integrator' */
+  GRM_HIL_DW.Integrator_IWORK_ic = 0;
+
+  /* Update for Integrator: '<S220>/Integrator1' */
+  GRM_HIL_DW.Integrator1_IWORK_g = 0;
+
+  /* Update for Integrator: '<S220>/Integrator2' */
+  GRM_HIL_DW.Integrator2_IWORK_m = 0;
 
   /* Update for Integrator: '<S219>/Integrator1' */
   GRM_HIL_DW.Integrator1_IWORK_n = 0;
@@ -4055,39 +4202,6 @@ void GRM_HIL_derivatives(void)
   _rtXdot->dy2yaw_CSTATE[1] += GRM_HIL_X.dy2yaw_CSTATE[0];
   _rtXdot->dy2yaw_CSTATE[0] += GRM_HIL_B.Gain2;
 
-  /* Derivatives for Integrator: '<S220>/Integrator' */
-  _rtXdot->Integrator_CSTATE_j = GRM_HIL_B.Product_p;
-
-  /* Derivatives for Integrator: '<S220>/Integrator1' */
-  _rtXdot->Integrator1_CSTATE_p = GRM_HIL_B.Product1_o;
-
-  /* Derivatives for Integrator: '<S220>/Integrator2' */
-  _rtXdot->Integrator2_CSTATE_a = GRM_HIL_B.Product2_n;
-
-  /* Derivatives for TransferFcn: '<S24>/Transfer Fcn' */
-  _rtXdot->TransferFcn_CSTATE_j = 0.0;
-  _rtXdot->TransferFcn_CSTATE_j +=
-    -GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[1] /
-    GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[0] *
-    GRM_HIL_X.TransferFcn_CSTATE_j;
-  _rtXdot->TransferFcn_CSTATE_j += GRM_HIL_B.Gain;
-
-  /* Derivatives for TransferFcn: '<S24>/Transfer Fcn2' */
-  _rtXdot->TransferFcn2_CSTATE_e = 0.0;
-  _rtXdot->TransferFcn2_CSTATE_e +=
-    -GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.IntGain.Denom[1] /
-    GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.IntGain.Denom[0] *
-    GRM_HIL_X.TransferFcn2_CSTATE_e;
-  _rtXdot->TransferFcn2_CSTATE_e += GRM_HIL_B.Sum3;
-
-  /* Derivatives for TransferFcn: '<S24>/Transfer Fcn1' */
-  _rtXdot->TransferFcn1_CSTATE_e = 0.0;
-  _rtXdot->TransferFcn1_CSTATE_e +=
-    -GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.IntGain.Denom[1] /
-    GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.IntGain.Denom[0] *
-    GRM_HIL_X.TransferFcn1_CSTATE_e;
-  _rtXdot->TransferFcn1_CSTATE_e += GRM_HIL_B.Sum1;
-
   /* Derivatives for TransferFcn: '<S49>/Transfer Fcn1' */
   _rtXdot->TransferFcn1_CSTATE_d[0] = 0.0;
   _rtXdot->TransferFcn1_CSTATE_d[0] += GRM_HIL_P.TransferFcn1_A[0] *
@@ -4158,27 +4272,9 @@ void GRM_HIL_derivatives(void)
     -GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Roll.Denom_Coef[3] /
     GRM_HIL_P.Gimbal_TransferFunctions_TF.Phi2Motor_to_Roll.Denom_Coef[0] *
     GRM_HIL_X.Phi2MotorRoll_CSTATE[2];
-  _rtXdot->Phi2MotorRoll_CSTATE[0] += GRM_HIL_B.Merge2_p;
   _rtXdot->Phi2MotorRoll_CSTATE[1] += GRM_HIL_X.Phi2MotorRoll_CSTATE[0];
-
-  /* Derivatives for TransferFcn: '<S39>/Psi2Motor -> Yaw' */
-  _rtXdot->Psi2MotorYaw_CSTATE[0] = 0.0;
-  _rtXdot->Psi2MotorYaw_CSTATE[0] +=
-    -GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[1] /
-    GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[0] *
-    GRM_HIL_X.Psi2MotorYaw_CSTATE[0];
-
-  /* Derivatives for TransferFcn: '<S39>/Phi2Motor -> Roll' */
   _rtXdot->Phi2MotorRoll_CSTATE[2] += GRM_HIL_X.Phi2MotorRoll_CSTATE[1];
-
-  /* Derivatives for TransferFcn: '<S39>/Psi2Motor -> Yaw' */
-  _rtXdot->Psi2MotorYaw_CSTATE[1] = 0.0;
-  _rtXdot->Psi2MotorYaw_CSTATE[0] +=
-    -GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[2] /
-    GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[0] *
-    GRM_HIL_X.Psi2MotorYaw_CSTATE[1];
-  _rtXdot->Psi2MotorYaw_CSTATE[1] += GRM_HIL_X.Psi2MotorYaw_CSTATE[0];
-  _rtXdot->Psi2MotorYaw_CSTATE[0] += GRM_HIL_B.Merge_o;
+  _rtXdot->Phi2MotorRoll_CSTATE[0] += GRM_HIL_B.Merge2;
 
   /* Derivatives for TransferFcn: '<S39>/Theta2Motor -> Pitch' */
   for (is = 0; is < 5; is++) {
@@ -4197,6 +4293,53 @@ void GRM_HIL_derivatives(void)
   _rtXdot->Theta2MotorPitch_CSTATE[0] += GRM_HIL_B.Merge1_o;
 
   /* End of Derivatives for TransferFcn: '<S39>/Theta2Motor -> Pitch' */
+
+  /* Derivatives for TransferFcn: '<S39>/Psi2Motor -> Yaw' */
+  _rtXdot->Psi2MotorYaw_CSTATE[0] = 0.0;
+  _rtXdot->Psi2MotorYaw_CSTATE[0] +=
+    -GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[1] /
+    GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[0] *
+    GRM_HIL_X.Psi2MotorYaw_CSTATE[0];
+  _rtXdot->Psi2MotorYaw_CSTATE[1] = 0.0;
+  _rtXdot->Psi2MotorYaw_CSTATE[0] +=
+    -GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[2] /
+    GRM_HIL_P.Gimbal_TransferFunctions_TF.Psi2Motor_to_Yaw.Denom_Coef[0] *
+    GRM_HIL_X.Psi2MotorYaw_CSTATE[1];
+  _rtXdot->Psi2MotorYaw_CSTATE[1] += GRM_HIL_X.Psi2MotorYaw_CSTATE[0];
+  _rtXdot->Psi2MotorYaw_CSTATE[0] += GRM_HIL_B.Merge_o;
+
+  /* Derivatives for TransferFcn: '<S24>/Transfer Fcn' */
+  _rtXdot->TransferFcn_CSTATE_j = 0.0;
+  _rtXdot->TransferFcn_CSTATE_j +=
+    -GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[1] /
+    GRM_HIL_P.FlightController_FCC.Roll.Lead.Denom[0] *
+    GRM_HIL_X.TransferFcn_CSTATE_j;
+  _rtXdot->TransferFcn_CSTATE_j += GRM_HIL_B.Gain_a;
+
+  /* Derivatives for TransferFcn: '<S24>/Transfer Fcn2' */
+  _rtXdot->TransferFcn2_CSTATE_e = 0.0;
+  _rtXdot->TransferFcn2_CSTATE_e +=
+    -GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.IntGain.Denom[1] /
+    GRM_HIL_P.FlightController_FCC.Yaw.outerLoop.IntGain.Denom[0] *
+    GRM_HIL_X.TransferFcn2_CSTATE_e;
+  _rtXdot->TransferFcn2_CSTATE_e += GRM_HIL_B.Sum3;
+
+  /* Derivatives for TransferFcn: '<S24>/Transfer Fcn1' */
+  _rtXdot->TransferFcn1_CSTATE_e = 0.0;
+  _rtXdot->TransferFcn1_CSTATE_e +=
+    -GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.IntGain.Denom[1] /
+    GRM_HIL_P.FlightController_FCC.Pitch.outerLoop.IntGain.Denom[0] *
+    GRM_HIL_X.TransferFcn1_CSTATE_e;
+  _rtXdot->TransferFcn1_CSTATE_e += GRM_HIL_B.Sum1_d;
+
+  /* Derivatives for Integrator: '<S220>/Integrator' */
+  _rtXdot->Integrator_CSTATE_j = GRM_HIL_B.Product_p;
+
+  /* Derivatives for Integrator: '<S220>/Integrator1' */
+  _rtXdot->Integrator1_CSTATE_p = GRM_HIL_B.Product1_o;
+
+  /* Derivatives for Integrator: '<S220>/Integrator2' */
+  _rtXdot->Integrator2_CSTATE_a = GRM_HIL_B.Product2_n;
 
   /* Derivatives for Integrator: '<S219>/Integrator1' */
   _rtXdot->Integrator1_CSTATE_e = GRM_HIL_B.Product1_g;
@@ -4261,21 +4404,6 @@ void GRM_HIL_initialize(void)
 
   /* Start for DiscretePulseGenerator: '<S16>/Pulse Generator6' */
   GRM_HIL_DW.clockTickCounter_l = -10000;
-
-  /* Start for Enabled SubSystem: '<S17>/Com_to_FCC_emul' */
-  GRM_HIL_DW.Com_to_FCC_emul_MODE = false;
-
-  /* End of Start for SubSystem: '<S17>/Com_to_FCC_emul' */
-
-  /* Start for Enabled SubSystem: '<S28>/Pass' */
-  GRM_HIL_DW.Pass_MODE = false;
-
-  /* End of Start for SubSystem: '<S28>/Pass' */
-
-  /* Start for Enabled SubSystem: '<S28>/Saturate' */
-  GRM_HIL_DW.Saturate_MODE = false;
-
-  /* End of Start for SubSystem: '<S28>/Saturate' */
 
   /* Start for TransportDelay: '<S176>/Transport Delay' */
   {
@@ -4369,6 +4497,21 @@ void GRM_HIL_initialize(void)
   GRM_HIL_DW.IfActionPass_MODE = false;
 
   /* End of Start for SubSystem: '<S45>/If Action Pass' */
+
+  /* Start for Enabled SubSystem: '<S17>/Com_to_FCC_emul' */
+  GRM_HIL_DW.Com_to_FCC_emul_MODE = false;
+
+  /* End of Start for SubSystem: '<S17>/Com_to_FCC_emul' */
+
+  /* Start for Enabled SubSystem: '<S28>/Pass' */
+  GRM_HIL_DW.Pass_MODE = false;
+
+  /* End of Start for SubSystem: '<S28>/Pass' */
+
+  /* Start for Enabled SubSystem: '<S28>/Saturate' */
+  GRM_HIL_DW.Saturate_MODE = false;
+
+  /* End of Start for SubSystem: '<S28>/Saturate' */
 
   /* Start for If: '<S176>/If' */
   GRM_HIL_DW.If_ActiveSubsystem = -1;
@@ -4464,11 +4607,20 @@ void GRM_HIL_initialize(void)
     /* InitializeConditions for TransferFcn: '<S197>/dr2roll' */
     GRM_HIL_X.dr2roll_CSTATE = 0.0;
 
+    /* InitializeConditions for Memory generated from: '<S36>/Memory' */
+    GRM_HIL_DW.Memory_1_PreviousInput = GRM_HIL_P.Memory_1_InitialCondition;
+
+    /* InitializeConditions for Memory generated from: '<S36>/Memory' */
+    GRM_HIL_DW.Memory_2_PreviousInput = GRM_HIL_P.Memory_2_InitialCondition;
+
     /* InitializeConditions for TransferFcn: '<S197>/dp2pitch' */
     GRM_HIL_X.dp2pitch_CSTATE[0] = 0.0;
 
     /* InitializeConditions for TransferFcn: '<S197>/dy2yaw' */
     GRM_HIL_X.dy2yaw_CSTATE[0] = 0.0;
+
+    /* InitializeConditions for TransferFcn: '<S49>/Transfer Fcn1' */
+    GRM_HIL_X.TransferFcn1_CSTATE_d[0] = 0.0;
 
     /* InitializeConditions for TransferFcn: '<S197>/dp2pitch' */
     GRM_HIL_X.dp2pitch_CSTATE[1] = 0.0;
@@ -4476,41 +4628,8 @@ void GRM_HIL_initialize(void)
     /* InitializeConditions for TransferFcn: '<S197>/dy2yaw' */
     GRM_HIL_X.dy2yaw_CSTATE[1] = 0.0;
 
-    /* InitializeConditions for Integrator: '<S220>/Integrator' incorporates:
-     *  Integrator: '<S220>/Integrator1'
-     */
-    if (rtmIsFirstInitCond(GRM_HIL_M)) {
-      GRM_HIL_X.Integrator_CSTATE_j = 0.0;
-      GRM_HIL_X.Integrator1_CSTATE_p = 0.0;
-    }
-
-    GRM_HIL_DW.Integrator_IWORK_ic = 1;
-
-    /* End of InitializeConditions for Integrator: '<S220>/Integrator' */
-
-    /* InitializeConditions for Integrator: '<S220>/Integrator1' */
-    GRM_HIL_DW.Integrator1_IWORK_g = 1;
-
-    /* InitializeConditions for Integrator: '<S220>/Integrator2' */
-    if (rtmIsFirstInitCond(GRM_HIL_M)) {
-      GRM_HIL_X.Integrator2_CSTATE_a = 0.0;
-    }
-
-    GRM_HIL_DW.Integrator2_IWORK_m = 1;
-
-    /* End of InitializeConditions for Integrator: '<S220>/Integrator2' */
-
-    /* InitializeConditions for Memory: '<S18>/Memory' */
-    GRM_HIL_DW.Memory_PreviousInput = GRM_HIL_P.Memory_InitialCondition;
-
-    /* InitializeConditions for TransferFcn: '<S24>/Transfer Fcn' */
-    GRM_HIL_X.TransferFcn_CSTATE_j = 0.0;
-
-    /* InitializeConditions for TransferFcn: '<S24>/Transfer Fcn2' */
-    GRM_HIL_X.TransferFcn2_CSTATE_e = 0.0;
-
-    /* InitializeConditions for TransferFcn: '<S24>/Transfer Fcn1' */
-    GRM_HIL_X.TransferFcn1_CSTATE_e = 0.0;
+    /* InitializeConditions for TransferFcn: '<S49>/Transfer Fcn1' */
+    GRM_HIL_X.TransferFcn1_CSTATE_d[1] = 0.0;
 
     /* InitializeConditions for Memory generated from: '<S36>/Memory1' */
     GRM_HIL_DW.Memory1_1_PreviousInput = GRM_HIL_P.Memory1_1_InitialCondition;
@@ -4520,10 +4639,6 @@ void GRM_HIL_initialize(void)
 
     /* InitializeConditions for Memory generated from: '<S36>/Memory1' */
     GRM_HIL_DW.Memory1_3_PreviousInput = GRM_HIL_P.Memory1_3_InitialCondition;
-
-    /* InitializeConditions for TransferFcn: '<S49>/Transfer Fcn1' */
-    GRM_HIL_X.TransferFcn1_CSTATE_d[0] = 0.0;
-    GRM_HIL_X.TransferFcn1_CSTATE_d[1] = 0.0;
 
     /* InitializeConditions for Integrator: '<S73>/Integrator' */
     GRM_HIL_X.Integrator_CSTATE_c = GRM_HIL_P.Integrator_IC;
@@ -4548,10 +4663,6 @@ void GRM_HIL_initialize(void)
     GRM_HIL_X.Phi2MotorRoll_CSTATE[1] = 0.0;
     GRM_HIL_X.Phi2MotorRoll_CSTATE[2] = 0.0;
 
-    /* InitializeConditions for TransferFcn: '<S39>/Psi2Motor -> Yaw' */
-    GRM_HIL_X.Psi2MotorYaw_CSTATE[0] = 0.0;
-    GRM_HIL_X.Psi2MotorYaw_CSTATE[1] = 0.0;
-
     /* InitializeConditions for TransferFcn: '<S39>/Theta2Motor -> Pitch' */
     for (is = 0; is < 5; is++) {
       GRM_HIL_X.Theta2MotorPitch_CSTATE[is] = 0.0;
@@ -4559,50 +4670,90 @@ void GRM_HIL_initialize(void)
 
     /* End of InitializeConditions for TransferFcn: '<S39>/Theta2Motor -> Pitch' */
 
-    /* InitializeConditions for Integrator: '<S219>/Integrator1' incorporates:
-     *  Integrator: '<S219>/Integrator2'
+    /* InitializeConditions for TransferFcn: '<S39>/Psi2Motor -> Yaw' */
+    GRM_HIL_X.Psi2MotorYaw_CSTATE[0] = 0.0;
+    GRM_HIL_X.Psi2MotorYaw_CSTATE[1] = 0.0;
+
+    /* InitializeConditions for Memory: '<S18>/Memory' */
+    GRM_HIL_DW.Memory_PreviousInput = GRM_HIL_P.Memory_InitialCondition;
+
+    /* InitializeConditions for TransferFcn: '<S24>/Transfer Fcn' */
+    GRM_HIL_X.TransferFcn_CSTATE_j = 0.0;
+
+    /* InitializeConditions for TransferFcn: '<S24>/Transfer Fcn2' */
+    GRM_HIL_X.TransferFcn2_CSTATE_e = 0.0;
+
+    /* InitializeConditions for TransferFcn: '<S24>/Transfer Fcn1' */
+    GRM_HIL_X.TransferFcn1_CSTATE_e = 0.0;
+
+    /* InitializeConditions for Integrator: '<S220>/Integrator' incorporates:
+     *  Integrator: '<S220>/Integrator1'
      */
     if (rtmIsFirstInitCond(GRM_HIL_M)) {
-      GRM_HIL_X.Integrator1_CSTATE_e = 0.0;
-      GRM_HIL_X.Integrator2_CSTATE_d = 0.0;
+      GRM_HIL_X.Integrator_CSTATE_j = 0.0;
+      GRM_HIL_X.Integrator1_CSTATE_p = 0.0;
     }
 
+    GRM_HIL_DW.Integrator_IWORK_ic = 1;
+
+    /* End of InitializeConditions for Integrator: '<S220>/Integrator' */
+
+    /* InitializeConditions for Integrator: '<S220>/Integrator1' */
+    GRM_HIL_DW.Integrator1_IWORK_g = 1;
+
+    /* InitializeConditions for Integrator: '<S220>/Integrator2' incorporates:
+     *  Integrator: '<S219>/Integrator1'
+     */
+    if (rtmIsFirstInitCond(GRM_HIL_M)) {
+      GRM_HIL_X.Integrator2_CSTATE_a = 0.0;
+      GRM_HIL_X.Integrator1_CSTATE_e = 0.0;
+    }
+
+    GRM_HIL_DW.Integrator2_IWORK_m = 1;
+
+    /* End of InitializeConditions for Integrator: '<S220>/Integrator2' */
+
+    /* InitializeConditions for Integrator: '<S219>/Integrator1' */
     GRM_HIL_DW.Integrator1_IWORK_n = 1;
 
-    /* End of InitializeConditions for Integrator: '<S219>/Integrator1' */
-
-    /* InitializeConditions for Integrator: '<S219>/Integrator2' */
-    GRM_HIL_DW.Integrator2_IWORK_e = 1;
-
-    /* InitializeConditions for Integrator: '<S218>/Integrator' incorporates:
-     *  Integrator: '<S218>/Integrator1'
+    /* InitializeConditions for Integrator: '<S219>/Integrator2' incorporates:
+     *  Integrator: '<S218>/Integrator'
      */
     if (rtmIsFirstInitCond(GRM_HIL_M)) {
+      GRM_HIL_X.Integrator2_CSTATE_d = 0.0;
       GRM_HIL_X.Integrator_CSTATE_d = 0.0;
-      GRM_HIL_X.Integrator1_CSTATE_eg = 0.0;
     }
 
+    GRM_HIL_DW.Integrator2_IWORK_e = 1;
+
+    /* End of InitializeConditions for Integrator: '<S219>/Integrator2' */
+
+    /* InitializeConditions for Integrator: '<S218>/Integrator' */
     GRM_HIL_DW.Integrator_IWORK_m = 1;
 
-    /* End of InitializeConditions for Integrator: '<S218>/Integrator' */
-
-    /* InitializeConditions for Integrator: '<S218>/Integrator1' */
-    GRM_HIL_DW.Integrator1_IWORK_m = 1;
-
-    /* InitializeConditions for Integrator: '<S218>/Integrator2' incorporates:
-     *  Integrator: '<S219>/Integrator'
+    /* InitializeConditions for Integrator: '<S218>/Integrator1' incorporates:
+     *  Integrator: '<S218>/Integrator2'
      */
     if (rtmIsFirstInitCond(GRM_HIL_M)) {
+      GRM_HIL_X.Integrator1_CSTATE_eg = 0.0;
       GRM_HIL_X.Integrator2_CSTATE_e = 0.0;
+    }
+
+    GRM_HIL_DW.Integrator1_IWORK_m = 1;
+
+    /* End of InitializeConditions for Integrator: '<S218>/Integrator1' */
+
+    /* InitializeConditions for Integrator: '<S218>/Integrator2' */
+    GRM_HIL_DW.Integrator2_IWORK_c = 1;
+
+    /* InitializeConditions for Integrator: '<S219>/Integrator' */
+    if (rtmIsFirstInitCond(GRM_HIL_M)) {
       GRM_HIL_X.Integrator_CSTATE_jz = 0.0;
     }
 
-    GRM_HIL_DW.Integrator2_IWORK_c = 1;
-
-    /* End of InitializeConditions for Integrator: '<S218>/Integrator2' */
-
-    /* InitializeConditions for Integrator: '<S219>/Integrator' */
     GRM_HIL_DW.Integrator_IWORK_l = 1;
+
+    /* End of InitializeConditions for Integrator: '<S219>/Integrator' */
 
     /* SystemInitialize for Enabled SubSystem: '<S197>/Propulsion' */
     /* InitializeConditions for Memory: '<S203>/lock' */
@@ -4653,31 +4804,6 @@ void GRM_HIL_initialize(void)
 
     /* End of SystemInitialize for SubSystem: '<S197>/Drag' */
 
-    /* SystemInitialize for Enabled SubSystem: '<S17>/Com_to_FCC_emul' */
-    /* SystemInitialize for Outport: '<S19>/States_hold' */
-    GRM_HIL_B.ACC_y_B_mDs2_o =
-      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Translation_States_Dot.ACC_y_B_mDs2;
-    GRM_HIL_B.ACC_z_B_mDs2_e =
-      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Translation_States_Dot.ACC_z_B_mDs2;
-    GRM_HIL_B.w_x_K_IB_B_radDs_f =
-      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Rotation_States.w_x_K_IB_B_radDs;
-    GRM_HIL_B.w_y_K_IB_B_radDs_e =
-      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Rotation_States.w_y_K_IB_B_radDs;
-    GRM_HIL_B.w_z_K_IB_B_radDs_n =
-      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Rotation_States.w_z_K_IB_B_radDs;
-    GRM_HIL_B.ATT_Phi_rad_f =
-      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Attitude_States.ATT_Euler.ATT_Phi_rad;
-
-    /* SystemInitialize for Outport: '<S19>/External_Inputs_hold' */
-    GRM_HIL_B.CMD_phi_rad =
-      GRM_HIL_P.External_Inputs_hold_Y0.FCC_External_Inputs_Bus.CMD_phi_rad;
-    GRM_HIL_B.CMD_acc_z_mDs2 =
-      GRM_HIL_P.External_Inputs_hold_Y0.FCC_External_Inputs_Bus.CMD_acc_z_mDs2;
-    GRM_HIL_B.CMD_acc_y_mDs2 =
-      GRM_HIL_P.External_Inputs_hold_Y0.FCC_External_Inputs_Bus.CMD_acc_y_mDs2;
-
-    /* End of SystemInitialize for SubSystem: '<S17>/Com_to_FCC_emul' */
-
     /* SystemInitialize for Merge: '<S73>/Merge' */
     GRM_HIL_B.Merge_f = GRM_HIL_P.Merge_InitialOutput;
 
@@ -4709,14 +4835,62 @@ void GRM_HIL_initialize(void)
     /* SystemInitialize for Merge: '<S63>/Merge' */
     GRM_HIL_B.Merge_c = GRM_HIL_P.Merge_InitialOutput_j;
 
-    /* SystemInitialize for Merge: '<S45>/Merge2' */
-    GRM_HIL_B.Merge2_p = GRM_HIL_P.Merge2_InitialOutput;
-
     /* SystemInitialize for Merge: '<S45>/Merge' */
     GRM_HIL_B.Merge_o = GRM_HIL_P.Merge_InitialOutput_a0;
 
     /* SystemInitialize for Merge: '<S45>/Merge1' */
     GRM_HIL_B.Merge1_o = GRM_HIL_P.Merge1_InitialOutput;
+
+    /* SystemInitialize for Merge: '<S45>/Merge2' */
+    GRM_HIL_B.Merge2 = GRM_HIL_P.Merge2_InitialOutput;
+
+    /* SystemInitialize for Enabled SubSystem: '<S17>/Com_to_FCC_emul' */
+    /* SystemInitialize for Outport: '<S19>/States_hold' */
+    GRM_HIL_B.ACC_y_B_mDs2_o =
+      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Translation_States_Dot.ACC_y_B_mDs2;
+    GRM_HIL_B.ACC_z_B_mDs2_e =
+      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Translation_States_Dot.ACC_z_B_mDs2;
+    GRM_HIL_B.w_x_K_IB_B_radDs_f =
+      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Rotation_States.w_x_K_IB_B_radDs;
+    GRM_HIL_B.w_y_K_IB_B_radDs_e =
+      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Rotation_States.w_y_K_IB_B_radDs;
+    GRM_HIL_B.w_z_K_IB_B_radDs_n =
+      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Rotation_States.w_z_K_IB_B_radDs;
+    GRM_HIL_B.ATT_Phi_rad_f =
+      GRM_HIL_P.States_hold_Y0.Rigid_Body_States.Attitude_States.ATT_Euler.ATT_Phi_rad;
+
+    /* SystemInitialize for Outport: '<S19>/External_Inputs_hold' */
+    GRM_HIL_B.CMD_phi_rad =
+      GRM_HIL_P.External_Inputs_hold_Y0.FCC_External_Inputs_Bus.CMD_phi_rad;
+    GRM_HIL_B.CMD_acc_z_mDs2 =
+      GRM_HIL_P.External_Inputs_hold_Y0.FCC_External_Inputs_Bus.CMD_acc_z_mDs2;
+    GRM_HIL_B.CMD_acc_y_mDs2 =
+      GRM_HIL_P.External_Inputs_hold_Y0.FCC_External_Inputs_Bus.CMD_acc_y_mDs2;
+
+    /* End of SystemInitialize for SubSystem: '<S17>/Com_to_FCC_emul' */
+
+    /* SystemInitialize for S-Function (fcncallgen): '<S17>/Function-Call Generator1' incorporates:
+     *  SubSystem: '<S17>/FB_Com_freq_emul'
+     */
+    /* SystemInitialize for Outport: '<S20>/hold' */
+    GRM_HIL_B.Fin_1_Cmd_rad_l =
+      GRM_HIL_P.hold_Y0.Airframe_Cmd.Control_Surface_Cmd.Fin_1_Cmd_rad;
+    GRM_HIL_B.Fin_2_Cmd_rad_e =
+      GRM_HIL_P.hold_Y0.Airframe_Cmd.Control_Surface_Cmd.Fin_2_Cmd_rad;
+    GRM_HIL_B.Fin_3_Cmd_rad_o =
+      GRM_HIL_P.hold_Y0.Airframe_Cmd.Control_Surface_Cmd.Fin_3_Cmd_rad;
+    GRM_HIL_B.Fin_4_Cmd_rad_c =
+      GRM_HIL_P.hold_Y0.Airframe_Cmd.Control_Surface_Cmd.Fin_4_Cmd_rad;
+    GRM_HIL_B.pulse_width_ms_p2 =
+      GRM_HIL_P.hold_Y0.Airframe_Cmd.Servo_Cmd.Servo_1_Cmd_PWM.pulse_width_ms;
+    GRM_HIL_B.pulse_width_ms_p2d =
+      GRM_HIL_P.hold_Y0.Airframe_Cmd.Servo_Cmd.Servo_2_Cmd_PWM.pulse_width_ms;
+    GRM_HIL_B.pulse_width_ms_p2de =
+      GRM_HIL_P.hold_Y0.Airframe_Cmd.Servo_Cmd.Servo_3_Cmd_PWM.pulse_width_ms;
+    GRM_HIL_B.pulse_width_ms_p2dee =
+      GRM_HIL_P.hold_Y0.Airframe_Cmd.Servo_Cmd.Servo_4_Cmd_PWM.pulse_width_ms;
+
+    /* End of SystemInitialize for S-Function (fcncallgen): '<S17>/Function-Call Generator1' */
 
     /* SystemInitialize for IfAction SubSystem: '<S176>/If Action Subsystem1' */
     GRM_HIL_IfActionSubsystem1_Init(&GRM_HIL_B.IfActionSubsystem1_e,
@@ -4838,7 +5012,7 @@ RT_MODEL_GRM_HIL_T *GRM_HIL(void)
 
   /* non-finite (run-time) assignments */
   GRM_HIL_P.Constant2_Value_o = rtInf;
-  GRM_HIL_P.Constant2_Value_h = rtInf;
+  GRM_HIL_P.Constant2_Value_h5 = rtInf;
   GRM_HIL_P.Constant2_Value_ht = rtInf;
 
   /* initialize real-time model */
@@ -4917,10 +5091,10 @@ RT_MODEL_GRM_HIL_T *GRM_HIL(void)
   rtmSetFirstInitCond(GRM_HIL_M, 1);
 
   /* External mode info */
-  GRM_HIL_M->Sizes.checksums[0] = (2969365357U);
-  GRM_HIL_M->Sizes.checksums[1] = (5707411U);
-  GRM_HIL_M->Sizes.checksums[2] = (3617225130U);
-  GRM_HIL_M->Sizes.checksums[3] = (3935603788U);
+  GRM_HIL_M->Sizes.checksums[0] = (143544100U);
+  GRM_HIL_M->Sizes.checksums[1] = (3447471112U);
+  GRM_HIL_M->Sizes.checksums[2] = (588967388U);
+  GRM_HIL_M->Sizes.checksums[3] = (529766825U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
@@ -5065,9 +5239,9 @@ RT_MODEL_GRM_HIL_T *GRM_HIL(void)
   GRM_HIL_M->Sizes.numU = (0);         /* Number of model inputs */
   GRM_HIL_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   GRM_HIL_M->Sizes.numSampTimes = (4); /* Number of sample times */
-  GRM_HIL_M->Sizes.numBlocks = (720);  /* Number of blocks */
-  GRM_HIL_M->Sizes.numBlockIO = (191); /* Number of block outputs */
-  GRM_HIL_M->Sizes.numBlockPrms = (188);/* Sum of parameter "widths" */
+  GRM_HIL_M->Sizes.numBlocks = (770);  /* Number of blocks */
+  GRM_HIL_M->Sizes.numBlockIO = (230); /* Number of block outputs */
+  GRM_HIL_M->Sizes.numBlockPrms = (213);/* Sum of parameter "widths" */
   return GRM_HIL_M;
 }
 

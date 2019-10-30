@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.41
+ * Model version              : 1.42
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Tue Oct 22 17:22:55 2019
+ * C source code generated on : Wed Oct 30 19:55:07 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -318,9 +318,9 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&GRM_HIL_B.motor_state_perc), 0, 0, 148 },
+  { (char_T *)(&GRM_HIL_B.motor_state_perc), 0, 0, 189 },
 
-  { (char_T *)(&GRM_HIL_B.Equal), 8, 0, 31 },
+  { (char_T *)(&GRM_HIL_B.LogicalOperator), 8, 0, 33 },
 
   { (char_T *)(&GRM_HIL_B.IfActionSubsystem_m.In1), 0, 0, 1 },
 
@@ -335,9 +335,9 @@ static DataTypeTransition rtBTransitions[] = {
   { (char_T *)(&GRM_HIL_B.IfActionSubsystem1.In1), 0, 0, 1 }
   ,
 
-  { (char_T *)(&GRM_HIL_DW.Memory_PreviousInput), 0, 0, 7 },
+  { (char_T *)(&GRM_HIL_DW.Memory1_1_PreviousInput), 0, 0, 7 },
 
-  { (char_T *)(&GRM_HIL_DW.ACC_PWORK.LoggedData[0]), 11, 0, 29 },
+  { (char_T *)(&GRM_HIL_DW.ACC_PWORK.LoggedData[0]), 11, 0, 35 },
 
   { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 6 },
 
@@ -345,7 +345,7 @@ static DataTypeTransition rtBTransitions[] = {
 
   { (char_T *)(&GRM_HIL_DW.If_ActiveSubsystem), 2, 0, 26 },
 
-  { (char_T *)(&GRM_HIL_DW.lock_PreviousInput), 8, 0, 15 },
+  { (char_T *)(&GRM_HIL_DW.Memory_1_PreviousInput), 8, 0, 17 },
 
   { (char_T *)(&GRM_HIL_DW.IfActionpass_roll.IfActionpass_yaw_SubsysRanBC), 2, 0,
     1 },
@@ -437,7 +437,7 @@ static DataTypeTransition rtPTransitions[] = {
 
   { (char_T *)(&GRM_HIL_P.Initial_States_Airframe), 60, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.PIDController_InitialConditionForFilter), 0, 0, 14 },
+  { (char_T *)(&GRM_HIL_P.PIDController_InitialConditionForFilter), 0, 0, 15 },
 
   { (char_T *)(&GRM_HIL_P.States_hold_Y0), 126, 0, 1 },
 
@@ -449,9 +449,9 @@ static DataTypeTransition rtPTransitions[] = {
 
   { (char_T *)(&GRM_HIL_P.External_Inputs_hold_Y0), 135, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 133 },
+  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 155 },
 
-  { (char_T *)(&GRM_HIL_P.Constant10_Value_c), 8, 0, 15 },
+  { (char_T *)(&GRM_HIL_P.Constant10_Value_c), 8, 0, 17 },
 
   { (char_T *)(&GRM_HIL_P.IfActionSubsystem_m.Out1_Y0), 0, 0, 1 },
 

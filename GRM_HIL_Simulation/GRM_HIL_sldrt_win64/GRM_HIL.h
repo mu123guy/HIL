@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.41
+ * Model version              : 1.42
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Tue Oct 22 17:22:55 2019
+ * C source code generated on : Wed Oct 30 19:55:07 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -921,41 +921,22 @@ typedef struct {
   real_T w_x_K_IB_B_radDs;             /* '<S195>/Gain6' */
   real_T w_y_K_IB_B_radDs;             /* '<S195>/Gain7' */
   real_T w_z_K_IB_B_radDs;             /* '<S195>/Gain8' */
-  real_T VEL_u_K_R_E_B_mDs;            /* '<S189>/Gain' */
-  real_T VEL_u_K_R_E_B_mDs_e;          /* '<S195>/Gain' */
-  real_T VEL_v_K_R_E_B_mDs;            /* '<S189>/Gain1' */
-  real_T VEL_v_K_R_E_B_mDs_e;          /* '<S195>/Gain1' */
-  real_T VEL_w_K_R_E_B_mDs;            /* '<S189>/Gain2' */
-  real_T VEL_w_K_R_E_B_mDs_d;          /* '<S195>/Gain2' */
-  real_T phi_rad;                      /* '<S25>/Gain2' */
-  real_T Gain;                         /* '<S24>/Gain' */
-  real_T acc_y_mDs2;                   /* '<S25>/Gain' */
-  real_T Sum3;                         /* '<S24>/Sum3' */
-  real_T acc_z_mDs2;                   /* '<S25>/Gain1' */
-  real_T Sum1;                         /* '<S24>/Sum1' */
-  real_T Merge3;                       /* '<S28>/Merge3' */
-  real_T pulse_width_ms;               /* '<S35>/Saturation' */
-  real_T Merge2;                       /* '<S28>/Merge2' */
-  real_T pulse_width_ms_e;             /* '<S34>/Saturation' */
-  real_T Merge1;                       /* '<S28>/Merge1' */
-  real_T pulse_width_ms_c;             /* '<S33>/Saturation' */
-  real_T Merge;                        /* '<S28>/Merge' */
-  real_T pulse_width_ms_p;             /* '<S32>/Saturation' */
-  real_T Saturation_o;                 /* '<S12>/Saturation' */
-  real_T Saturation_c;                 /* '<S13>/Saturation' */
-  real_T Saturation_jy;                /* '<S14>/Saturation' */
-  real_T Saturation_a;                 /* '<S15>/Saturation' */
+  real_T Gimbal_operational_flg;       /* '<S38>/Data Type Conversion1' */
+  real_T Gimbal_Ramp_flg;              /* '<S38>/Data Type Conversion' */
+  real_T Gimbal_Limit_flg;             /* '<S38>/Constant1' */
+  real_T Gimbal_StopSim_flg;           /* '<S38>/Constant2' */
   real_T yaw_deg;                      /* '<S45>/Shaft2degYaw' */
-  real_T Gain_e;                       /* '<S176>/Gain' */
+  real_T Gain;                         /* '<S176>/Gain' */
   real_T pitch_deg;                    /* '<S45>/Shaft2degPitch' */
   real_T Gain_h;                       /* '<S174>/Gain' */
   real_T roll_deg;                     /* '<S45>/Shaft2degRoll' */
   real_T Gain_j;                       /* '<S175>/Gain' */
-  real_T Merge_h;                      /* '<S72>/Merge' */
+  real_T Merge;                        /* '<S72>/Merge' */
   real_T Switch2_p;                    /* '<S72>/Switch2' */
-  real_T Gain_ec;                      /* '<S72>/Gain' */
-  real_T Merge1_p;                     /* '<S72>/Merge1' */
+  real_T Gain_e;                       /* '<S72>/Gain' */
+  real_T Merge1;                       /* '<S72>/Merge1' */
   real_T Switch1_h;                    /* '<S72>/Switch1' */
+  real_T Gimbal_Phi_Cmd_deg;           /* '<S192>/rad2deg' */
   real_T Product;                      /* '<S48>/Product' */
   real_T Yaw_err;                      /* '<S48>/Sum' */
   real_T Integrator;                   /* '<S73>/Integrator' */
@@ -968,29 +949,81 @@ typedef struct {
   real_T Gain_hi;                      /* '<S53>/Gain' */
   real_T Merge1_j;                     /* '<S53>/Merge1' */
   real_T Switch1_f;                    /* '<S53>/Switch1' */
+  real_T Gimbal_Theta_Cmd_deg;         /* '<S192>/rad2deg1' */
   real_T pitch_cmd;                    /* '<S46>/Product' */
   real_T pitch_err;                    /* '<S46>/Sum2' */
   real_T Integrator_o;                 /* '<S54>/Integrator' */
   real_T Filter_m;                     /* '<S54>/Filter' */
   real_T FilterCoefficient_a;          /* '<S54>/Filter Coefficient' */
   real_T Merge_fu;                     /* '<S54>/Merge' */
-  real_T Merge_hj;                     /* '<S62>/Merge' */
+  real_T Merge_h;                      /* '<S62>/Merge' */
   real_T Switch2_i;                    /* '<S62>/Switch2' */
   real_T Gain_l;                       /* '<S62>/Gain' */
   real_T Merge1_k;                     /* '<S62>/Merge1' */
   real_T Switch1_l;                    /* '<S62>/Switch1' */
+  real_T Gimbal_Psi_Cmd_deg;           /* '<S192>/rad2deg2' */
   real_T Product1;                     /* '<S47>/Product1' */
   real_T Roll_err;                     /* '<S47>/Sum1' */
   real_T Integrator_a;                 /* '<S63>/Integrator' */
   real_T Filter_n;                     /* '<S63>/Filter' */
   real_T FilterCoefficient_l;          /* '<S63>/Filter Coefficient' */
   real_T Merge_c;                      /* '<S63>/Merge' */
-  real_T Merge2_p;                     /* '<S45>/Merge2' */
   real_T Merge_o;                      /* '<S45>/Merge' */
   real_T Merge1_o;                     /* '<S45>/Merge1' */
-  real_T Sum;                          /* '<S39>/Sum' */
-  real_T Sum1_n;                       /* '<S39>/Sum1' */
   real_T Sum2;                         /* '<S39>/Sum2' */
+  real_T ATT_Phi_rad_a;                /* '<S40>/Shaft2radRoll' */
+  real_T Merge2;                       /* '<S45>/Merge2' */
+  real_T Sum1;                         /* '<S39>/Sum1' */
+  real_T ATT_Theta_rad_i;              /* '<S40>/Shaft2radPitch' */
+  real_T Sum;                          /* '<S39>/Sum' */
+  real_T ATT_Psi_rad_g;                /* '<S40>/Shaft2radYaw' */
+  real_T q0;                           /* '<S43>/q0' */
+  real_T q1;                           /* '<S43>/q1' */
+  real_T q2;                           /* '<S43>/q2' */
+  real_T q3;                           /* '<S43>/q3' */
+  real_T Data_plus;                    /* '<S41>/Constant' */
+  real_T Data_minus;                   /* '<S41>/Constant1' */
+  real_T Clock_plus;                   /* '<S41>/Constant2' */
+  real_T Clock_minus;                  /* '<S41>/Constant3' */
+  real_T Data_plus_a;                  /* '<S41>/Constant4' */
+  real_T Data_minus_k;                 /* '<S41>/Constant5' */
+  real_T Clock_plus_c;                 /* '<S41>/Constant6' */
+  real_T Clock_minus_i;                /* '<S41>/Constant7' */
+  real_T Data_plus_k;                  /* '<S41>/Constant8' */
+  real_T Data_minus_kw;                /* '<S41>/Constant9' */
+  real_T Clock_plus_b;                 /* '<S41>/Constant10' */
+  real_T Clock_minus_g;                /* '<S41>/Constant11' */
+  real_T phi_rad;                      /* '<S25>/Gain2' */
+  real_T Gain_a;                       /* '<S24>/Gain' */
+  real_T Phi_Cmd_rad;                  /* '<S24>/Transfer Fcn' */
+  real_T acc_y_mDs2;                   /* '<S25>/Gain' */
+  real_T Sum3;                         /* '<S24>/Sum3' */
+  real_T Psi_Cmd_rad;                  /* '<S24>/Gain2' */
+  real_T acc_z_mDs2;                   /* '<S25>/Gain1' */
+  real_T Sum1_d;                       /* '<S24>/Sum1' */
+  real_T Theta_Cmd_rad;                /* '<S24>/Gain1' */
+  real_T Merge3;                       /* '<S28>/Merge3' */
+  real_T Fin_4_Cmd_rad;                /* '<S23>/Add14' */
+  real_T pulse_width_ms;               /* '<S35>/Saturation' */
+  real_T Merge2_i;                     /* '<S28>/Merge2' */
+  real_T Fin_3_Cmd_rad;                /* '<S23>/Add13' */
+  real_T pulse_width_ms_e;             /* '<S34>/Saturation' */
+  real_T Merge1_n;                     /* '<S28>/Merge1' */
+  real_T Fin_2_Cmd_rad;                /* '<S23>/Add12' */
+  real_T pulse_width_ms_c;             /* '<S33>/Saturation' */
+  real_T Merge_n;                      /* '<S28>/Merge' */
+  real_T Fin_1_Cmd_rad;                /* '<S23>/Add15' */
+  real_T pulse_width_ms_p;             /* '<S32>/Saturation' */
+  real_T VEL_u_K_R_E_B_mDs;            /* '<S189>/Gain' */
+  real_T VEL_u_K_R_E_B_mDs_e;          /* '<S195>/Gain' */
+  real_T VEL_v_K_R_E_B_mDs;            /* '<S189>/Gain1' */
+  real_T VEL_v_K_R_E_B_mDs_e;          /* '<S195>/Gain1' */
+  real_T VEL_w_K_R_E_B_mDs;            /* '<S189>/Gain2' */
+  real_T VEL_w_K_R_E_B_mDs_d;          /* '<S195>/Gain2' */
+  real_T Saturation_o;                 /* '<S12>/Saturation' */
+  real_T Saturation_c;                 /* '<S13>/Saturation' */
+  real_T Saturation_jy;                /* '<S14>/Saturation' */
+  real_T Saturation_a;                 /* '<S15>/Saturation' */
   real_T SumI1;                        /* '<S54>/SumI1' */
   real_T SumI1_n;                      /* '<S63>/SumI1' */
   real_T SumI1_i;                      /* '<S73>/SumI1' */
@@ -1041,6 +1074,22 @@ typedef struct {
   real_T SumI4_c;                      /* '<S144>/SumI4' */
   real_T Abs_j;                        /* '<S66>/Abs' */
   real_T Abs_b;                        /* '<S57>/Abs' */
+  real_T Fin_3_Cmd_rad_o;
+                        /* '<S20>/BusConversion_InsertedFor_hold_at_inport_0' */
+  real_T Fin_4_Cmd_rad_c;
+                        /* '<S20>/BusConversion_InsertedFor_hold_at_inport_0' */
+  real_T pulse_width_ms_p2;
+                        /* '<S20>/BusConversion_InsertedFor_hold_at_inport_0' */
+  real_T pulse_width_ms_p2d;
+                        /* '<S20>/BusConversion_InsertedFor_hold_at_inport_0' */
+  real_T pulse_width_ms_p2de;
+                        /* '<S20>/BusConversion_InsertedFor_hold_at_inport_0' */
+  real_T pulse_width_ms_p2dee;
+                        /* '<S20>/BusConversion_InsertedFor_hold_at_inport_0' */
+  real_T Fin_1_Cmd_rad_l;
+                        /* '<S20>/BusConversion_InsertedFor_hold_at_inport_0' */
+  real_T Fin_2_Cmd_rad_e;
+                        /* '<S20>/BusConversion_InsertedFor_hold_at_inport_0' */
   real_T ATT_Phi_rad_f;
                  /* '<S19>/BusConversion_InsertedFor_States_hold_at_inport_0' */
   real_T ACC_y_B_mDs2_o;
@@ -1060,12 +1109,7 @@ typedef struct {
   real_T CMD_acc_y_mDs2;
         /* '<S19>/BusConversion_InsertedFor_External_Inputs_hold_at_inport_0' */
   real_T value;                        /* '<S18>/Counter_with_external_limit' */
-  boolean_T Equal;                     /* '<S18>/Equal' */
-  boolean_T OR;                        /* '<S29>/OR' */
-  boolean_T LogicalOperator;           /* '<S28>/Logical Operator' */
-  boolean_T HiddenBuf_InsertedFor_Pass_at_inport_4;/* '<S28>/Logical Operator' */
-  boolean_T HiddenBuf_InsertedFor_Saturate_at_inport_5;/* '<S28>/Check_Limit_exceeding' */
-  boolean_T LogicalOperator_l;         /* '<S72>/Logical Operator' */
+  boolean_T LogicalOperator;           /* '<S72>/Logical Operator' */
   boolean_T HiddenBuf_InsertedFor_Enabledadapt_at_inport_3;/* '<S72>/Logical Operator' */
   boolean_T LogicalOperator1;          /* '<S72>/Logical Operator1' */
   boolean_T Switch_g;                  /* '<S72>/Switch' */
@@ -1084,6 +1128,13 @@ typedef struct {
   boolean_T HiddenBuf_InsertedFor_Saturation_at_inport_3_kk;
   boolean_T LogicalOperator_p;         /* '<S63>/Logical Operator' */
   boolean_T LogicalOperator_c;         /* '<S45>/Logical Operator' */
+  boolean_T Equal;                     /* '<S18>/Equal' */
+  boolean_T OR;                        /* '<S29>/OR' */
+  boolean_T LogicalOperator_at;        /* '<S28>/Logical Operator' */
+  boolean_T HiddenBuf_InsertedFor_Pass_at_inport_4;/* '<S28>/Logical Operator' */
+  boolean_T HiddenBuf_InsertedFor_Saturate_at_inport_5;/* '<S28>/Check_Limit_exceeding' */
+  boolean_T cmd_pass_enable_flg;       /* '<S39>/Data Type Conversion' */
+  boolean_T emergency_stop_flg;        /* '<S39>/Data Type Conversion1' */
   boolean_T LogicalOperator2;          /* '<S7>/Logical Operator2' */
   boolean_T lock;                      /* '<S203>/lock' */
   boolean_T LogicalOperator1_ii;       /* '<S203>/Logical Operator1' */
@@ -1101,10 +1152,10 @@ typedef struct {
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  real_T Memory_PreviousInput;         /* '<S18>/Memory' */
   real_T Memory1_1_PreviousInput;      /* '<S36>/Memory1' */
   real_T Memory1_2_PreviousInput;      /* '<S36>/Memory1' */
   real_T Memory1_3_PreviousInput;      /* '<S36>/Memory1' */
+  real_T Memory_PreviousInput;         /* '<S18>/Memory' */
   struct {
     real_T modelTStart;
     real_T TUbufferArea[2048];
@@ -1137,10 +1188,6 @@ typedef struct {
   } ROT_PWORK;                         /* '<Root>/ROT' */
 
   struct {
-    void *LoggedData[3];
-  } VEL_PWORK;                         /* '<Root>/VEL' */
-
-  struct {
     void *TUbufferPtrs[2];
   } TransportDelay_PWORK;              /* '<S176>/Transport Delay' */
 
@@ -1151,6 +1198,22 @@ typedef struct {
   struct {
     void *TUbufferPtrs[2];
   } TransportDelay_PWORK_l;            /* '<S175>/Transport Delay' */
+
+  struct {
+    void *LoggedData;
+  } Scope_PWORK;                       /* '<Root>/Scope' */
+
+  struct {
+    void *LoggedData;
+  } Scope1_PWORK;                      /* '<Root>/Scope1' */
+
+  struct {
+    void *LoggedData[4];
+  } Scope2_PWORK;                      /* '<Root>/Scope2' */
+
+  struct {
+    void *LoggedData[3];
+  } VEL_PWORK;                         /* '<Root>/VEL' */
 
   struct {
     void *LoggedData;
@@ -1191,9 +1254,6 @@ typedef struct {
   int_T Integrator_IWORK_i;            /* '<S215>/Integrator' */
   int_T Integrator1_IWORK;             /* '<S215>/Integrator1' */
   int_T Integrator2_IWORK;             /* '<S215>/Integrator2' */
-  int_T Integrator_IWORK_ic;           /* '<S220>/Integrator' */
-  int_T Integrator1_IWORK_g;           /* '<S220>/Integrator1' */
-  int_T Integrator2_IWORK_m;           /* '<S220>/Integrator2' */
   struct {
     int_T Tail;
     int_T Head;
@@ -1215,6 +1275,9 @@ typedef struct {
     int_T CircularBufSize;
   } TransportDelay_IWORK_k;            /* '<S175>/Transport Delay' */
 
+  int_T Integrator_IWORK_ic;           /* '<S220>/Integrator' */
+  int_T Integrator1_IWORK_g;           /* '<S220>/Integrator1' */
+  int_T Integrator2_IWORK_m;           /* '<S220>/Integrator2' */
   int_T Integrator1_IWORK_n;           /* '<S219>/Integrator1' */
   int_T Integrator2_IWORK_e;           /* '<S219>/Integrator2' */
   int_T Integrator_IWORK_m;            /* '<S218>/Integrator' */
@@ -1247,6 +1310,8 @@ typedef struct {
   int8_T Saturate_SubsysRanBC;         /* '<S28>/Saturate' */
   int8_T Pass_SubsysRanBC;             /* '<S28>/Pass' */
   int8_T Com_to_FCC_emul_SubsysRanBC;  /* '<S17>/Com_to_FCC_emul' */
+  boolean_T Memory_1_PreviousInput;    /* '<S36>/Memory' */
+  boolean_T Memory_2_PreviousInput;    /* '<S36>/Memory' */
   boolean_T lock_PreviousInput;        /* '<S203>/lock' */
   boolean_T Propulsion_MODE;           /* '<S197>/Propulsion' */
   boolean_T hold_time_MODE;            /* '<S203>/hold_time' */
@@ -1297,12 +1362,6 @@ typedef struct {
   real_T dr2roll_CSTATE;               /* '<S197>/dr2roll' */
   real_T dp2pitch_CSTATE[2];           /* '<S197>/dp2pitch' */
   real_T dy2yaw_CSTATE[2];             /* '<S197>/dy2yaw' */
-  real_T Integrator_CSTATE_j;          /* '<S220>/Integrator' */
-  real_T Integrator1_CSTATE_p;         /* '<S220>/Integrator1' */
-  real_T Integrator2_CSTATE_a;         /* '<S220>/Integrator2' */
-  real_T TransferFcn_CSTATE_j;         /* '<S24>/Transfer Fcn' */
-  real_T TransferFcn2_CSTATE_e;        /* '<S24>/Transfer Fcn2' */
-  real_T TransferFcn1_CSTATE_e;        /* '<S24>/Transfer Fcn1' */
   real_T TransferFcn1_CSTATE_d[2];     /* '<S49>/Transfer Fcn1' */
   real_T Integrator_CSTATE_c;          /* '<S73>/Integrator' */
   real_T Filter_CSTATE;                /* '<S73>/Filter' */
@@ -1311,8 +1370,14 @@ typedef struct {
   real_T Integrator_CSTATE_f;          /* '<S63>/Integrator' */
   real_T Filter_CSTATE_n;              /* '<S63>/Filter' */
   real_T Phi2MotorRoll_CSTATE[3];      /* '<S39>/Phi2Motor -> Roll' */
-  real_T Psi2MotorYaw_CSTATE[2];       /* '<S39>/Psi2Motor -> Yaw' */
   real_T Theta2MotorPitch_CSTATE[5];   /* '<S39>/Theta2Motor -> Pitch' */
+  real_T Psi2MotorYaw_CSTATE[2];       /* '<S39>/Psi2Motor -> Yaw' */
+  real_T TransferFcn_CSTATE_j;         /* '<S24>/Transfer Fcn' */
+  real_T TransferFcn2_CSTATE_e;        /* '<S24>/Transfer Fcn2' */
+  real_T TransferFcn1_CSTATE_e;        /* '<S24>/Transfer Fcn1' */
+  real_T Integrator_CSTATE_j;          /* '<S220>/Integrator' */
+  real_T Integrator1_CSTATE_p;         /* '<S220>/Integrator1' */
+  real_T Integrator2_CSTATE_a;         /* '<S220>/Integrator2' */
   real_T Integrator1_CSTATE_e;         /* '<S219>/Integrator1' */
   real_T Integrator2_CSTATE_d;         /* '<S219>/Integrator2' */
   real_T Integrator_CSTATE_d;          /* '<S218>/Integrator' */
@@ -1340,12 +1405,6 @@ typedef struct {
   real_T dr2roll_CSTATE;               /* '<S197>/dr2roll' */
   real_T dp2pitch_CSTATE[2];           /* '<S197>/dp2pitch' */
   real_T dy2yaw_CSTATE[2];             /* '<S197>/dy2yaw' */
-  real_T Integrator_CSTATE_j;          /* '<S220>/Integrator' */
-  real_T Integrator1_CSTATE_p;         /* '<S220>/Integrator1' */
-  real_T Integrator2_CSTATE_a;         /* '<S220>/Integrator2' */
-  real_T TransferFcn_CSTATE_j;         /* '<S24>/Transfer Fcn' */
-  real_T TransferFcn2_CSTATE_e;        /* '<S24>/Transfer Fcn2' */
-  real_T TransferFcn1_CSTATE_e;        /* '<S24>/Transfer Fcn1' */
   real_T TransferFcn1_CSTATE_d[2];     /* '<S49>/Transfer Fcn1' */
   real_T Integrator_CSTATE_c;          /* '<S73>/Integrator' */
   real_T Filter_CSTATE;                /* '<S73>/Filter' */
@@ -1354,8 +1413,14 @@ typedef struct {
   real_T Integrator_CSTATE_f;          /* '<S63>/Integrator' */
   real_T Filter_CSTATE_n;              /* '<S63>/Filter' */
   real_T Phi2MotorRoll_CSTATE[3];      /* '<S39>/Phi2Motor -> Roll' */
-  real_T Psi2MotorYaw_CSTATE[2];       /* '<S39>/Psi2Motor -> Yaw' */
   real_T Theta2MotorPitch_CSTATE[5];   /* '<S39>/Theta2Motor -> Pitch' */
+  real_T Psi2MotorYaw_CSTATE[2];       /* '<S39>/Psi2Motor -> Yaw' */
+  real_T TransferFcn_CSTATE_j;         /* '<S24>/Transfer Fcn' */
+  real_T TransferFcn2_CSTATE_e;        /* '<S24>/Transfer Fcn2' */
+  real_T TransferFcn1_CSTATE_e;        /* '<S24>/Transfer Fcn1' */
+  real_T Integrator_CSTATE_j;          /* '<S220>/Integrator' */
+  real_T Integrator1_CSTATE_p;         /* '<S220>/Integrator1' */
+  real_T Integrator2_CSTATE_a;         /* '<S220>/Integrator2' */
   real_T Integrator1_CSTATE_e;         /* '<S219>/Integrator1' */
   real_T Integrator2_CSTATE_d;         /* '<S219>/Integrator2' */
   real_T Integrator_CSTATE_d;          /* '<S218>/Integrator' */
@@ -1383,12 +1448,6 @@ typedef struct {
   boolean_T dr2roll_CSTATE;            /* '<S197>/dr2roll' */
   boolean_T dp2pitch_CSTATE[2];        /* '<S197>/dp2pitch' */
   boolean_T dy2yaw_CSTATE[2];          /* '<S197>/dy2yaw' */
-  boolean_T Integrator_CSTATE_j;       /* '<S220>/Integrator' */
-  boolean_T Integrator1_CSTATE_p;      /* '<S220>/Integrator1' */
-  boolean_T Integrator2_CSTATE_a;      /* '<S220>/Integrator2' */
-  boolean_T TransferFcn_CSTATE_j;      /* '<S24>/Transfer Fcn' */
-  boolean_T TransferFcn2_CSTATE_e;     /* '<S24>/Transfer Fcn2' */
-  boolean_T TransferFcn1_CSTATE_e;     /* '<S24>/Transfer Fcn1' */
   boolean_T TransferFcn1_CSTATE_d[2];  /* '<S49>/Transfer Fcn1' */
   boolean_T Integrator_CSTATE_c;       /* '<S73>/Integrator' */
   boolean_T Filter_CSTATE;             /* '<S73>/Filter' */
@@ -1397,8 +1456,14 @@ typedef struct {
   boolean_T Integrator_CSTATE_f;       /* '<S63>/Integrator' */
   boolean_T Filter_CSTATE_n;           /* '<S63>/Filter' */
   boolean_T Phi2MotorRoll_CSTATE[3];   /* '<S39>/Phi2Motor -> Roll' */
-  boolean_T Psi2MotorYaw_CSTATE[2];    /* '<S39>/Psi2Motor -> Yaw' */
   boolean_T Theta2MotorPitch_CSTATE[5];/* '<S39>/Theta2Motor -> Pitch' */
+  boolean_T Psi2MotorYaw_CSTATE[2];    /* '<S39>/Psi2Motor -> Yaw' */
+  boolean_T TransferFcn_CSTATE_j;      /* '<S24>/Transfer Fcn' */
+  boolean_T TransferFcn2_CSTATE_e;     /* '<S24>/Transfer Fcn2' */
+  boolean_T TransferFcn1_CSTATE_e;     /* '<S24>/Transfer Fcn1' */
+  boolean_T Integrator_CSTATE_j;       /* '<S220>/Integrator' */
+  boolean_T Integrator1_CSTATE_p;      /* '<S220>/Integrator1' */
+  boolean_T Integrator2_CSTATE_a;      /* '<S220>/Integrator2' */
   boolean_T Integrator1_CSTATE_e;      /* '<S219>/Integrator1' */
   boolean_T Integrator2_CSTATE_d;      /* '<S219>/Integrator2' */
   boolean_T Integrator_CSTATE_d;       /* '<S218>/Integrator' */
@@ -1735,6 +1800,9 @@ struct P_GRM_HIL_T_ {
                      /* Mask Parameter: RealTimeSynchronization_YieldWhenWaiting
                       * Referenced by: '<S221>/Real-Time Synchronization'
                       */
+  real_T CompareToConstant_const;     /* Mask Parameter: CompareToConstant_const
+                                       * Referenced by: '<S173>/Constant'
+                                       */
   struct_4BEF1wwN52Uf7px5A1b9LF States_hold_Y0;/* Computed Parameter: States_hold_Y0
                                                 * Referenced by: '<S19>/States_hold'
                                                 */
@@ -1966,45 +2034,20 @@ struct P_GRM_HIL_T_ {
   real_T Gain8_Gain;                   /* Expression: 1
                                         * Referenced by: '<S195>/Gain8'
                                         */
-  real_T Gain_Gain_d;                  /* Expression: 1
-                                        * Referenced by: '<S189>/Gain'
+  real_T TransferFcn1_A[2];            /* Computed Parameter: TransferFcn1_A
+                                        * Referenced by: '<S49>/Transfer Fcn1'
                                         */
-  real_T Gain_Gain_k;                  /* Expression: 1
-                                        * Referenced by: '<S195>/Gain'
+  real_T TransferFcn1_C[2];            /* Computed Parameter: TransferFcn1_C
+                                        * Referenced by: '<S49>/Transfer Fcn1'
                                         */
-  real_T Gain1_Gain_i;                 /* Expression: 1
-                                        * Referenced by: '<S189>/Gain1'
+  real_T Constant2_Value_h;            /* Expression: 1
+                                        * Referenced by: '<S49>/Constant2'
                                         */
-  real_T Gain1_Gain_b;                 /* Expression: 1
-                                        * Referenced by: '<S195>/Gain1'
+  real_T Constant1_Value_b;            /* Expression: 0
+                                        * Referenced by: '<S38>/Constant1'
                                         */
-  real_T Gain2_Gain_l;                 /* Expression: 1
-                                        * Referenced by: '<S189>/Gain2'
-                                        */
-  real_T Gain2_Gain_e;                 /* Expression: 1
-                                        * Referenced by: '<S195>/Gain2'
-                                        */
-  real_T Constant1_Value_a;            /* Expression: 1
-                                        * Referenced by: '<S18>/Constant1'
-                                        */
-  real_T Constant10_Value;
-                /* Expression: HIL_Data.Simulation_Ctrl.Com_Ctrl.Pix.Com_freq_Hz
-                 * Referenced by: '<S7>/Constant10'
-                 */
-  real_T Constant2_Value_a;            /* Expression: 1
-                                        * Referenced by: '<S18>/Constant2'
-                                        */
-  real_T Memory_InitialCondition;      /* Expression: -1
-                                        * Referenced by: '<S18>/Memory'
-                                        */
-  real_T Gain2_Gain_b;                 /* Expression: 1
-                                        * Referenced by: '<S25>/Gain2'
-                                        */
-  real_T Gain_Gain_e;                  /* Expression: 1
-                                        * Referenced by: '<S25>/Gain'
-                                        */
-  real_T Gain1_Gain_c;                 /* Expression: 1
-                                        * Referenced by: '<S25>/Gain1'
+  real_T Constant2_Value_c;            /* Expression: 0
+                                        * Referenced by: '<S38>/Constant2'
                                         */
   real_T Memory1_1_InitialCondition;   /* Expression: 0
                                         * Referenced by: '<S36>/Memory1'
@@ -2045,12 +2088,6 @@ struct P_GRM_HIL_T_ {
   real_T Switch1_Threshold_k;          /* Expression: 0
                                         * Referenced by: '<S72>/Switch1'
                                         */
-  real_T TransferFcn1_A[2];            /* Computed Parameter: TransferFcn1_A
-                                        * Referenced by: '<S49>/Transfer Fcn1'
-                                        */
-  real_T TransferFcn1_C[2];            /* Computed Parameter: TransferFcn1_C
-                                        * Referenced by: '<S49>/Transfer Fcn1'
-                                        */
   real_T rad2deg_Gain;                 /* Expression: 360/(2*pi)
                                         * Referenced by: '<S192>/rad2deg'
                                         */
@@ -2066,7 +2103,7 @@ struct P_GRM_HIL_T_ {
   real_T Merge_InitialOutput_d;     /* Computed Parameter: Merge_InitialOutput_d
                                      * Referenced by: '<S71>/Merge'
                                      */
-  real_T Constant2_Value_h;            /* Expression: inf
+  real_T Constant2_Value_h5;           /* Expression: inf
                                         * Referenced by: '<S53>/Constant2'
                                         */
   real_T Switch2_Threshold_k;          /* Expression: 0
@@ -2114,15 +2151,113 @@ struct P_GRM_HIL_T_ {
   real_T Merge_InitialOutput_j;     /* Computed Parameter: Merge_InitialOutput_j
                                      * Referenced by: '<S63>/Merge'
                                      */
-  real_T Merge2_InitialOutput;       /* Computed Parameter: Merge2_InitialOutput
-                                      * Referenced by: '<S45>/Merge2'
-                                      */
   real_T Merge_InitialOutput_a0;   /* Computed Parameter: Merge_InitialOutput_a0
                                     * Referenced by: '<S45>/Merge'
                                     */
   real_T Merge1_InitialOutput;       /* Computed Parameter: Merge1_InitialOutput
                                       * Referenced by: '<S45>/Merge1'
                                       */
+  real_T Shaft2radRoll_Gain;           /* Expression: (2*pi)/(65536)
+                                        * Referenced by: '<S40>/Shaft2radRoll'
+                                        */
+  real_T Merge2_InitialOutput;       /* Computed Parameter: Merge2_InitialOutput
+                                      * Referenced by: '<S45>/Merge2'
+                                      */
+  real_T Shaft2radPitch_Gain;          /* Expression: (2*pi)/(65536)
+                                        * Referenced by: '<S40>/Shaft2radPitch'
+                                        */
+  real_T Shaft2radYaw_Gain;            /* Expression: (2*pi)/(65536)
+                                        * Referenced by: '<S40>/Shaft2radYaw'
+                                        */
+  real_T u2_Gain;                      /* Expression: 0.5
+                                        * Referenced by: '<S43>/1//2'
+                                        */
+  real_T Constant_Value_k;             /* Expression: -1
+                                        * Referenced by: '<S41>/Constant'
+                                        */
+  real_T Constant1_Value_h;            /* Expression: -1
+                                        * Referenced by: '<S41>/Constant1'
+                                        */
+  real_T Constant2_Value_e;            /* Expression: -1
+                                        * Referenced by: '<S41>/Constant2'
+                                        */
+  real_T Constant3_Value_p;            /* Expression: -1
+                                        * Referenced by: '<S41>/Constant3'
+                                        */
+  real_T Constant4_Value;              /* Expression: -1
+                                        * Referenced by: '<S41>/Constant4'
+                                        */
+  real_T Constant5_Value;              /* Expression: -1
+                                        * Referenced by: '<S41>/Constant5'
+                                        */
+  real_T Constant6_Value;              /* Expression: -1
+                                        * Referenced by: '<S41>/Constant6'
+                                        */
+  real_T Constant7_Value_e;            /* Expression: -1
+                                        * Referenced by: '<S41>/Constant7'
+                                        */
+  real_T Constant8_Value;              /* Expression: -1
+                                        * Referenced by: '<S41>/Constant8'
+                                        */
+  real_T Constant9_Value_g;            /* Expression: -1
+                                        * Referenced by: '<S41>/Constant9'
+                                        */
+  real_T Constant10_Value;             /* Expression: -1
+                                        * Referenced by: '<S41>/Constant10'
+                                        */
+  real_T Constant11_Value_c;           /* Expression: -1
+                                        * Referenced by: '<S41>/Constant11'
+                                        */
+  real_T Constant1_Value_a;            /* Expression: 1
+                                        * Referenced by: '<S18>/Constant1'
+                                        */
+  real_T Constant10_Value_l;
+                /* Expression: HIL_Data.Simulation_Ctrl.Com_Ctrl.Pix.Com_freq_Hz
+                 * Referenced by: '<S7>/Constant10'
+                 */
+  real_T Constant2_Value_a;            /* Expression: 1
+                                        * Referenced by: '<S18>/Constant2'
+                                        */
+  real_T Memory_InitialCondition;      /* Expression: -1
+                                        * Referenced by: '<S18>/Memory'
+                                        */
+  real_T Gain2_Gain_b;                 /* Expression: 1
+                                        * Referenced by: '<S25>/Gain2'
+                                        */
+  real_T Gain_Gain_e;                  /* Expression: 1
+                                        * Referenced by: '<S25>/Gain'
+                                        */
+  real_T Gain1_Gain_c;                 /* Expression: 1
+                                        * Referenced by: '<S25>/Gain1'
+                                        */
+  real_T Gain_Gain_d;                  /* Expression: 1
+                                        * Referenced by: '<S189>/Gain'
+                                        */
+  real_T Gain_Gain_k;                  /* Expression: 1
+                                        * Referenced by: '<S195>/Gain'
+                                        */
+  real_T Gain1_Gain_i;                 /* Expression: 1
+                                        * Referenced by: '<S189>/Gain1'
+                                        */
+  real_T Gain1_Gain_b;                 /* Expression: 1
+                                        * Referenced by: '<S195>/Gain1'
+                                        */
+  real_T Gain2_Gain_l;                 /* Expression: 1
+                                        * Referenced by: '<S189>/Gain2'
+                                        */
+  real_T Gain2_Gain_e;                 /* Expression: 1
+                                        * Referenced by: '<S195>/Gain2'
+                                        */
+  real_T Constant_Value_n;             /* Expression: 0
+                                        * Referenced by: '<S39>/Constant'
+                                        */
+  real_T Constant7_Value_e5;
+          /* Expression: HIL_Data.Simulation_Ctrl.HW_Ctrl.enable_gimbal_ctrl_flg
+           * Referenced by: '<S7>/Constant7'
+           */
+  real_T Gain_Gain_o;                  /* Expression: 1
+                                        * Referenced by: '<S44>/Gain'
+                                        */
   real_T Constant_Value_p;             /* Expression: 1
                                         * Referenced by: '<S176>/Constant'
                                         */
@@ -2157,18 +2292,18 @@ struct P_GRM_HIL_T_ {
                 /* Expression: External_Inputs.FCC.CMD.yaw.pulse.alternating_flg
                  * Referenced by: '<S16>/Constant10'
                  */
-  boolean_T Constant6_Value;
+  boolean_T Constant6_Value_b;
                /* Expression: External_Inputs.FCC.CMD.roll.pulse.alternating_flg
                 * Referenced by: '<S16>/Constant6'
                 */
-  boolean_T Constant8_Value;
+  boolean_T Constant8_Value_e;
               /* Expression: External_Inputs.FCC.CMD.pitch.pulse.alternating_flg
                * Referenced by: '<S16>/Constant8'
                */
   boolean_T lock_InitialCondition;  /* Computed Parameter: lock_InitialCondition
                                      * Referenced by: '<S203>/lock'
                                      */
-  boolean_T Constant4_Value;           /* Computed Parameter: Constant4_Value
+  boolean_T Constant4_Value_g;         /* Computed Parameter: Constant4_Value_g
                                         * Referenced by: '<S7>/Constant4'
                                         */
   boolean_T Constant2_Value_f;         /* Computed Parameter: Constant2_Value_f
@@ -2177,9 +2312,17 @@ struct P_GRM_HIL_T_ {
   boolean_T Constant6_Value_k;         /* Computed Parameter: Constant6_Value_k
                                         * Referenced by: '<S7>/Constant6'
                                         */
-  boolean_T Constant5_Value;           /* Computed Parameter: Constant5_Value
+  boolean_T Constant5_Value_k;         /* Computed Parameter: Constant5_Value_k
                                         * Referenced by: '<S7>/Constant5'
                                         */
+  boolean_T Memory_1_InitialCondition;
+                                /* Computed Parameter: Memory_1_InitialCondition
+                                 * Referenced by: '<S36>/Memory'
+                                 */
+  boolean_T Memory_2_InitialCondition;
+                                /* Computed Parameter: Memory_2_InitialCondition
+                                 * Referenced by: '<S36>/Memory'
+                                 */
   boolean_T Constant1_Value_f;         /* Computed Parameter: Constant1_Value_f
                                         * Referenced by: '<S72>/Constant1'
                                         */

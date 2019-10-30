@@ -116,9 +116,7 @@ function FDM = init_FDM (variant)
         % Parameters
         Basic.param1 = -1;
               
-        
-        
-        
+                   
         % Add to struct
         FDM.Basic = Basic;
     

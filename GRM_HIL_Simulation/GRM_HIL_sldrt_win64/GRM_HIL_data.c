@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.41
+ * Model version              : 1.42
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Tue Oct 22 17:22:55 2019
+ * C source code generated on : Wed Oct 30 19:55:07 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -484,9 +484,9 @@ P_GRM_HIL_T GRM_HIL_P = {
     },
 
     {
-      0.0,
-      0.0,
-      0.0
+      0.17453292519943295,
+      0.087266462599716474,
+      0.3490658503988659
     },
 
     {
@@ -751,6 +751,11 @@ P_GRM_HIL_T GRM_HIL_P = {
    * Referenced by: '<S221>/Real-Time Synchronization'
    */
   0.0,
+
+  /* Mask Parameter: CompareToConstant_const
+   * Referenced by: '<S173>/Constant'
+   */
+  0.01,
 
   /* Computed Parameter: States_hold_Y0
    * Referenced by: '<S19>/States_hold'
@@ -1324,70 +1329,30 @@ P_GRM_HIL_T GRM_HIL_P = {
    */
   1.0,
 
+  /* Computed Parameter: TransferFcn1_A
+   * Referenced by: '<S49>/Transfer Fcn1'
+   */
+  { -1.0, -0.25 },
+
+  /* Computed Parameter: TransferFcn1_C
+   * Referenced by: '<S49>/Transfer Fcn1'
+   */
+  { 0.0, 0.25 },
+
   /* Expression: 1
-   * Referenced by: '<S189>/Gain'
+   * Referenced by: '<S49>/Constant2'
    */
   1.0,
 
-  /* Expression: 1
-   * Referenced by: '<S195>/Gain'
+  /* Expression: 0
+   * Referenced by: '<S38>/Constant1'
    */
-  1.0,
+  0.0,
 
-  /* Expression: 1
-   * Referenced by: '<S189>/Gain1'
+  /* Expression: 0
+   * Referenced by: '<S38>/Constant2'
    */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S195>/Gain1'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S189>/Gain2'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S195>/Gain2'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S18>/Constant1'
-   */
-  1.0,
-
-  /* Expression: HIL_Data.Simulation_Ctrl.Com_Ctrl.Pix.Com_freq_Hz
-   * Referenced by: '<S7>/Constant10'
-   */
-  200.0,
-
-  /* Expression: 1
-   * Referenced by: '<S18>/Constant2'
-   */
-  1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S18>/Memory'
-   */
-  -1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S25>/Gain2'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S25>/Gain'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S25>/Gain1'
-   */
-  1.0,
+  0.0,
 
   /* Expression: 0
    * Referenced by: '<S36>/Memory1'
@@ -1453,16 +1418,6 @@ P_GRM_HIL_T GRM_HIL_P = {
    * Referenced by: '<S72>/Switch1'
    */
   0.0,
-
-  /* Computed Parameter: TransferFcn1_A
-   * Referenced by: '<S49>/Transfer Fcn1'
-   */
-  { -1.0, -0.25 },
-
-  /* Computed Parameter: TransferFcn1_C
-   * Referenced by: '<S49>/Transfer Fcn1'
-   */
-  { 0.0, 0.25 },
 
   /* Expression: 360/(2*pi)
    * Referenced by: '<S192>/rad2deg'
@@ -1569,11 +1524,6 @@ P_GRM_HIL_T GRM_HIL_P = {
    */
   0.0,
 
-  /* Computed Parameter: Merge2_InitialOutput
-   * Referenced by: '<S45>/Merge2'
-   */
-  0.0,
-
   /* Computed Parameter: Merge_InitialOutput_a0
    * Referenced by: '<S45>/Merge'
    */
@@ -1583,6 +1533,171 @@ P_GRM_HIL_T GRM_HIL_P = {
    * Referenced by: '<S45>/Merge1'
    */
   0.0,
+
+  /* Expression: (2*pi)/(65536)
+   * Referenced by: '<S40>/Shaft2radRoll'
+   */
+  9.5873799242852573E-5,
+
+  /* Computed Parameter: Merge2_InitialOutput
+   * Referenced by: '<S45>/Merge2'
+   */
+  0.0,
+
+  /* Expression: (2*pi)/(65536)
+   * Referenced by: '<S40>/Shaft2radPitch'
+   */
+  9.5873799242852573E-5,
+
+  /* Expression: (2*pi)/(65536)
+   * Referenced by: '<S40>/Shaft2radYaw'
+   */
+  9.5873799242852573E-5,
+
+  /* Expression: 0.5
+   * Referenced by: '<S43>/1//2'
+   */
+  0.5,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant1'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant2'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant3'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant4'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant5'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant6'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant7'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant8'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant9'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant10'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S41>/Constant11'
+   */
+  -1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S18>/Constant1'
+   */
+  1.0,
+
+  /* Expression: HIL_Data.Simulation_Ctrl.Com_Ctrl.Pix.Com_freq_Hz
+   * Referenced by: '<S7>/Constant10'
+   */
+  200.0,
+
+  /* Expression: 1
+   * Referenced by: '<S18>/Constant2'
+   */
+  1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S18>/Memory'
+   */
+  -1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S25>/Gain2'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S25>/Gain'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S25>/Gain1'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S189>/Gain'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S195>/Gain'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S189>/Gain1'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S195>/Gain1'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S189>/Gain2'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S195>/Gain2'
+   */
+  1.0,
+
+  /* Expression: 0
+   * Referenced by: '<S39>/Constant'
+   */
+  0.0,
+
+  /* Expression: HIL_Data.Simulation_Ctrl.HW_Ctrl.enable_gimbal_ctrl_flg
+   * Referenced by: '<S7>/Constant7'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S44>/Gain'
+   */
+  1.0,
 
   /* Expression: 1
    * Referenced by: '<S176>/Constant'
@@ -1654,7 +1769,7 @@ P_GRM_HIL_T GRM_HIL_P = {
    */
   0,
 
-  /* Computed Parameter: Constant4_Value
+  /* Computed Parameter: Constant4_Value_g
    * Referenced by: '<S7>/Constant4'
    */
   0,
@@ -1669,8 +1784,18 @@ P_GRM_HIL_T GRM_HIL_P = {
    */
   0,
 
-  /* Computed Parameter: Constant5_Value
+  /* Computed Parameter: Constant5_Value_k
    * Referenced by: '<S7>/Constant5'
+   */
+  0,
+
+  /* Computed Parameter: Memory_1_InitialCondition
+   * Referenced by: '<S36>/Memory'
+   */
+  0,
+
+  /* Computed Parameter: Memory_2_InitialCondition
+   * Referenced by: '<S36>/Memory'
    */
   0,
 

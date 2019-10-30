@@ -108,9 +108,9 @@ function Gimbal = init_Gimbal (emulate,variant)
     %% Control Gimbal via HW interface Control Computer
         
         %Frequency of communication with HWI CC
-        FTHWICC.SampTime = 1/1000;
+        HW.SampTime = 1/1000;
         %FTHWICC.SampTime = HIL_Sample_Time; %TBD!!
-        FTHWICC.MaxMissTick = 10;
+        HW.MaxMissTick = 10;
         
         %Specify directly in Library block!!!
         %FTHWICC.Port = 36864;
@@ -118,7 +118,7 @@ function Gimbal = init_Gimbal (emulate,variant)
         %FTHWICC.RemotePort = 36880;
         
         Mode = -1; % not needed for that one
-        Gimbal.FTHWICC = FTHWICC;
+        Gimbal.HW = HW;
         
     else
     %% Use real Gimbal     
