@@ -20,17 +20,17 @@
 %
 %
 % AUTHOR:
-% Max Hiepp
+% Max Hiepp & Guy Nevo
 %
-
+clear,clc
 %% Toggle Command Line Output
-enable_output = 1;
+enable_output = 4;
 if(enable_output) disp([newline 'INITIALIZE GRM HARDWARE IN THE LOOP SIMULATION ENVIRONMENT' newline]), end
 
 %% Specify Simulation Parameters
 
 % run simulation in real time
-enable_realtime = 1; % <1> if simulation should run in realtime, <0> if not
+enable_realtime = 0; % <1> if simulation should run in realtime, <0> if not
 
 % run simulation in external mode
 enable_external_mode = 0; % <1> for external mode, <0> for normal mode
@@ -47,7 +47,7 @@ Emulate_Gimbal   = 1; % <2> if Gimbal is used and controlled via HW interface Co
 Gimbal_Variant = 1;      % <1> for simulation via Transfer Functions
                          % <2> for physical simulation
                          % <3> for Simscape model
-FDM_Variant = 1;         % <1> Linear Version
+FDM_Variant = 4;         % <1> Linear Version
                          % <2> Basic Version
                          % <3> Student Version
                          % <4> Sophisticated Version

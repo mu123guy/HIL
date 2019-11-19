@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.42
+ * Model version              : 1.44
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Oct 30 19:55:07 2019
+ * C source code generated on : Sun Nov 17 18:40:04 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -1827,7 +1827,7 @@ P_GRM_HIL_T GRM_HIL_P = {
   /* Computed Parameter: Constant9_Value_b
    * Referenced by: '<S7>/Constant9'
    */
-  1,
+  0,
 
   /* Expression: HIL_Data.Simulation_Ctrl.offline_flg
    * Referenced by: '<S7>/Constant3'

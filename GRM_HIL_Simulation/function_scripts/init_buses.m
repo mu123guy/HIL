@@ -42,6 +42,8 @@ Control_Surface_Cmd_Bus;
 Control_Surface_Deflections_Bus;
 Control_Surface_Encoder_Bus;
 
+Disturbances_Bus
+
 Encoder_Resolved_Bus;
 Encoder_Signal_Bus;
 External_Inputs_Bus;
@@ -87,6 +89,7 @@ States_Bus;
 
 Translation_States_Bus;
 Translation_States_Dot_Bus;
+
 
 
 % ------- EOF -------
