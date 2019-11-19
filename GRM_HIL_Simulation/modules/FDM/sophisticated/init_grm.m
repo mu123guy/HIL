@@ -44,8 +44,7 @@ function bus2 = init_grm()
     % uncomment used one
 
     %   Simulation mode full missile flight
-    bus2.tmpvar = 123;
-    bus2.flag_sim_mode = 1;
+    bus2.flag_sim_mode = 3;
 
     %   Simulation mode Monte Carlo Safety assessment
     % flag_sim_mode = 2;
@@ -86,7 +85,7 @@ function bus2 = init_grm()
         %   in a flat earth scenario the inertial and earth fixed frame reduce
         %   down to a NED oriented navigation Frame, usually notated with an L
         %   according to the ISim design guidelines
-        bus2.hBE_0 = 10*eps;                 % [m] initial geoemtric height/altitude
+        bus2.hBE_0 = 556.3;                 % [m] initial geoemtric height/altitude
         bus2.pBII_0 = [0;0;-bus2.hBE_0 ];        % [m] initial position in the L frame
         %   for the WGS84 gravitational model some values for the longitude and
         %   lattitude have to be given. In the flat earth case they are set to
@@ -105,11 +104,12 @@ function bus2 = init_grm()
         bus2.qEG_0 = bus2.qIE_0;
         bus2.qIG_0 = qumul(bus2.qIE_0,bus2.qEG_0);
         %   With the orientation of the missile relative to the NED-Frame
-        bus2.qGB_0 = euler_to_q([0;-pi/2+0.17;0]);
+        bus2.qGB_0 = euler_to_q([0;-1.356;0]);
+            %bus2.qGB_0 = euler_to_q([0;0;0]);
     %     qGB_0 = euler_to_q([0;0;0]);
         bus2.qIB_0 = qumul(bus2.qIG_0,bus2.qGB_0);
         %   And the initial Velocity follows to
-        bus2.vBII_0 = [0;0;0];           % [m/s]
+        bus2.vBII_0 = [49.201;0;-223.014]*1;           % [m/s]
 
     else
         %   For a spherical earth the position has to be above the reference
@@ -198,17 +198,17 @@ function bus2 = init_grm()
 
     %   Wind velocity
     bus2.a_vBEW = 0;                     % [m/s] absolute value wind velocity relative to earth surface
-    bus2.chW = pi/2;                        % [rad] course angle wind direction 
+    bus2.chW = 0;                        % [rad] course angle wind direction 
 
     if bus2.flag_sim_mode == 1
         bus2.T_sim_lnch = 1;                 %[s] start time missile in global simulation time
         bus2.flag_I_gravity_switch = 0;    % [m] Threshhold launch gravity switch default
         bus2.flag_I_aero_switch = 0;
-    elseif flag_sim_mode == 2
+    elseif bus2.flag_sim_mode == 2
         bus2.T_sim_lnch = 0;                 %[s] start time missile in global simulation time
         bus2.flag_I_aero_switch = 0;
         bus2.flag_I_gravity_switch = 0;    % [m] Threshhold launch gravity switch default
-    elseif flag_sim_mode == 3
+    elseif bus2.flag_sim_mode == 3
         bus2.T_sim_lnch = -5;                 %[s] start time missile in global simulation time
         bus2.flag_I_gravity_switch = 1;    % [m] Threshhold launch gravity switch default
         bus2.flag_I_aero_switch = 1;
