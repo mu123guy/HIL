@@ -177,7 +177,7 @@ function bus1 = para_def_grm()
     bus1.unc_chW_bl = 0;                %   [rad] Bias uncertainty course angle wind
 
 
-    bus1.unc_fin_def_roll =          1;
+    bus1.unc_fin_def_roll =          0;
     bus1.unc_fin_def_pitch =         0;
     bus1.unc_fin_def_yaw =           0;
 

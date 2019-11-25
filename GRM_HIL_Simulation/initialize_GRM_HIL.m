@@ -90,7 +90,7 @@ end
 if exist('HIL_Sample_Time','var')
     if(enable_output) disp(['inherit HIL sample frequency (' num2str(1/HIL_Sample_Time) 'Hz)' ]), end
 else
-    HIL_Sample_Time = 0.01; % -> tbd
+    HIL_Sample_Time = 0.001; % -> tbd
     if(enable_output) disp(['setting HIL sample frequency to ' num2str(1/HIL_Sample_Time) 'Hz ...' ]), end
 end
 
