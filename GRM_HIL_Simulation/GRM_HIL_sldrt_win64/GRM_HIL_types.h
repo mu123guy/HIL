@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.56
+ * Model version              : 1.63
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Tue Nov 26 15:53:25 2019
+ * C source code generated on : Wed Nov 27 00:50:20 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -500,29 +500,6 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_Gimbal_Ctrl_Bus_
-#define DEFINED_TYPEDEF_FOR_Gimbal_Ctrl_Bus_
-
-typedef struct {
-  real_T enable_gimbal_ctrl_flg;
-  real_T stop_gimbal_flg;
-  real_T Gimbal_Phi2Motor;
-  real_T Gimbal_Theta2Motor;
-  real_T Gimbal_Psi2Motor;
-} Gimbal_Ctrl_Bus;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Gimbal_Monitor_Bus_
-#define DEFINED_TYPEDEF_FOR_Gimbal_Monitor_Bus_
-
-typedef struct {
-  boolean_T cmd_pass_enable_flg;
-  boolean_T emergency_stop_flg;
-} Gimbal_Monitor_Bus;
-
-#endif
-
 #ifndef DEFINED_TYPEDEF_FOR_struct_fqhbejXln8QRylaPqhUyTF_
 #define DEFINED_TYPEDEF_FOR_struct_fqhbejXln8QRylaPqhUyTF_
 
@@ -774,66 +751,6 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_t5lid3aqguggysQaotuOhC_
-#define DEFINED_TYPEDEF_FOR_struct_t5lid3aqguggysQaotuOhC_
-
-typedef struct {
-  real_T SampFreq;
-  real_T SampTime;
-  real_T MaxMissTick;
-  real_T MaxCheck;
-  real_T YawMaxV;
-  real_T PitchMaxV;
-  real_T RollMaxV;
-  real_T Enable_Voltage_Limits_atOutput;
-  real_T Enable_Voltage_Limits_atController;
-  real_T YawCmdMaxVolt;
-  real_T YawCmdMinVolt;
-  real_T PitchCmdMaxVolt;
-  real_T PitchCmdMinVolt;
-  real_T RollCmdMaxVolt;
-  real_T RollCmdMinVolt;
-  real_T Yaw_soft_limit_vel;
-  real_T Yaw_hard_limit_vel;
-  real_T Yaw_limit_adaption_coef;
-  real_T Pitch_soft_limit_vel;
-  real_T Pitch_hard_limit_vel;
-  real_T Pitch_limit_adaption_coef;
-  real_T Roll_soft_limit_vel;
-  real_T Roll_hard_limit_vel;
-  real_T Roll_limit_adaption_coef;
-  real_T PID_Yaw_Proportional_Gain;
-  real_T PID_Yaw_Integral_Gain;
-  real_T PID_Yaw_Derivative_Gain;
-  real_T PID_Yaw_Filter_Coefficient;
-  real_T PID_Yaw_BackCalculation_Coefficient;
-  real_T PID_Pitch_Proportional_Gain;
-  real_T PID_Pitch_Integral_Gain;
-  real_T PID_Pitch_Derivative_Gain;
-  real_T PID_Pitch_Filter_Coefficient;
-  real_T PID_Pitch_BackCalculation_Coefficient;
-  real_T PID_Roll_Proportional_Gain;
-  real_T PID_Roll_Integral_Gain;
-  real_T PID_Roll_Derivative_Gain;
-  real_T PID_Roll_Filter_Coefficient;
-  real_T PID_Roll_BackCalculation_Coefficient;
-  real_T Enable_Limit_Controllers;
-  real_T Yaw_LC_Proportional_Gain;
-  real_T Yaw_LC_Integral_Gain;
-  real_T Yaw_LC_Derivative_Gain;
-  real_T Yaw_LC_Weighting;
-  real_T Pitch_LC_Proportional_Gain;
-  real_T Pitch_LC_Integral_Gain;
-  real_T Pitch_LC_Derivative_Gain;
-  real_T Pitch_LC_Weighting;
-  real_T Roll_LC_Proportional_Gain;
-  real_T Roll_LC_Integral_Gain;
-  real_T Roll_LC_Derivative_Gain;
-  real_T Roll_LC_Weighting;
-} struct_t5lid3aqguggysQaotuOhC;
-
-#endif
-
 #ifndef DEFINED_TYPEDEF_FOR_struct_mYoNNcm8zkJZX9FXsF2g2F_
 #define DEFINED_TYPEDEF_FOR_struct_mYoNNcm8zkJZX9FXsF2g2F_
 
@@ -967,12 +884,6 @@ typedef struct {
 } struct_F8un5srqOha4P4SBfdUeHD;
 
 #endif
-
-/* Parameters for system: '<S174>/If Action Subsystem1' */
-typedef struct P_IfActionSubsystem1_GRM_HIL_T_ P_IfActionSubsystem1_GRM_HIL_T;
-
-/* Parameters for system: '<S174>/If Action Subsystem' */
-typedef struct P_IfActionSubsystem_GRM_HIL_T_ P_IfActionSubsystem_GRM_HIL_T;
 
 /* Parameters (default storage) */
 typedef struct P_GRM_HIL_T_ P_GRM_HIL_T;
