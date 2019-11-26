@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.42
+ * Model version              : 1.44
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Oct 30 19:55:07 2019
+ * C source code generated on : Fri Nov  8 10:21:14 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -24,18 +24,20 @@
 /* Block parameters (default storage) */
 P_GRM_HIL_T GRM_HIL_P = {
   /* Variable: HIL_Sample_Time
-   * Referenced by: '<S18>/Constant'
+   * Referenced by:
+   *   '<S18>/Constant'
+   *   '<S38>/Constant'
    */
   0.01,
 
   /* Mask Parameter: FDM_Linear_FDM
    * Referenced by:
-   *   '<S201>/Constant1'
-   *   '<S216>/Constant'
-   *   '<S216>/Constant1'
-   *   '<S209>/Constant'
-   *   '<S210>/Constant'
-   *   '<S210>/Constant1'
+   *   '<S58>/Constant1'
+   *   '<S73>/Constant'
+   *   '<S73>/Constant1'
+   *   '<S66>/Constant'
+   *   '<S67>/Constant'
+   *   '<S67>/Constant1'
    */
   {
     {
@@ -137,138 +139,13 @@ P_GRM_HIL_T GRM_HIL_P = {
     }
   },
 
-  /* Mask Parameter: Gimbel_Ctrl_Gimbal_Ctrl
-   * Referenced by:
-   *   '<S45>/Constant2'
-   *   '<S45>/Samp_Freq'
-   *   '<S52>/max_vel_pitch'
-   *   '<S52>/max_vel_roll'
-   *   '<S52>/max_vel_yaw'
-   *   '<S53>/Constant'
-   *   '<S53>/const_lower_limit'
-   *   '<S53>/const_upper_limit'
-   *   '<S54>/Derivative Gain'
-   *   '<S54>/Filter Coefficient'
-   *   '<S54>/Integral Gain'
-   *   '<S54>/Kb'
-   *   '<S54>/Proportional Gain'
-   *   '<S62>/Constant'
-   *   '<S62>/const_lower_limit'
-   *   '<S62>/const_upper_limit'
-   *   '<S63>/Derivative Gain'
-   *   '<S63>/Filter Coefficient'
-   *   '<S63>/Integral Gain'
-   *   '<S63>/Kb'
-   *   '<S63>/Proportional Gain'
-   *   '<S71>/Constant'
-   *   '<S72>/Constant'
-   *   '<S72>/const_lower_limit'
-   *   '<S72>/const_upper_limit'
-   *   '<S73>/Derivative Gain'
-   *   '<S73>/Filter Coefficient'
-   *   '<S73>/Integral Gain'
-   *   '<S73>/Kb'
-   *   '<S73>/Proportional Gain'
-   *   '<S174>/Constant1'
-   *   '<S174>/Gain'
-   *   '<S174>/Transport Delay'
-   *   '<S175>/Constant1'
-   *   '<S175>/Gain'
-   *   '<S175>/Transport Delay'
-   *   '<S176>/Constant1'
-   *   '<S176>/Gain'
-   *   '<S176>/Transport Delay'
-   *   '<S183>/Limit_Voltage_Pitch'
-   *   '<S184>/Limit_Voltage_Roll'
-   *   '<S185>/Limit_Voltage_Yaw'
-   *   '<S55>/Constant'
-   *   '<S56>/Constant'
-   *   '<S57>/Constant'
-   *   '<S57>/Constant1'
-   *   '<S57>/Gain'
-   *   '<S64>/Constant'
-   *   '<S65>/Constant'
-   *   '<S66>/Constant'
-   *   '<S66>/Constant1'
-   *   '<S66>/Gain'
-   *   '<S74>/Constant1'
-   *   '<S74>/Constant2'
-   *   '<S74>/Gain'
-   *   '<S74>/Gain1'
-   *   '<S166>/Constant'
-   *   '<S167>/Constant'
-   *   '<S168>/Constant'
-   *   '<S168>/Constant1'
-   *   '<S168>/Gain'
-   *   '<S101>/Derivative Gain'
-   *   '<S104>/Integral Gain'
-   *   '<S112>/Proportional Gain'
-   *   '<S145>/Derivative Gain'
-   *   '<S148>/Integral Gain'
-   *   '<S156>/Proportional Gain'
-   */
-  {
-    1000.0,
-    0.001,
-    10.0,
-    0.005,
-    100.0,
-    150.0,
-    480.0,
-    0.0,
-    0.0,
-    0.8,
-    -0.8,
-    1.0,
-    -0.2,
-    1.1,
-    1.1,
-    50.0,
-    90.0,
-    10.0,
-    75.0,
-    135.0,
-    10.0,
-    240.0,
-    432.0,
-    10.0,
-    3.0,
-    0.1,
-    0.4,
-    100.0,
-    0.2,
-    20.0,
-    0.0,
-    0.4,
-    100.0,
-    0.0,
-    8.0,
-    0.2,
-    0.35,
-    100.0,
-    0.264575131106459,
-    0.0,
-    3.0,
-    0.0,
-    0.4,
-    1.0,
-    20.0,
-    0.0,
-    0.4,
-    1.0,
-    8.0,
-    0.0,
-    0.4,
-    1.0
-  },
-
   /* Mask Parameter: FDM_Linear_TF
    * Referenced by:
-   *   '<S197>/dp2az'
-   *   '<S197>/dp2pitch'
-   *   '<S197>/dr2roll'
-   *   '<S197>/dy2ay'
-   *   '<S197>/dy2yaw'
+   *   '<S54>/dp2az'
+   *   '<S54>/dp2pitch'
+   *   '<S54>/dr2roll'
+   *   '<S54>/dy2ay'
+   *   '<S54>/dy2yaw'
    */
   {
     {
@@ -311,68 +188,6 @@ P_GRM_HIL_T GRM_HIL_P = {
       { -26.5678, -29.5185, -11902.0 },
 
       { 1.0, 3.2255, 166.199 }
-    }
-  },
-
-  /* Mask Parameter: Gimbal_TransferFunctions_TF
-   * Referenced by:
-   *   '<S39>/Phi2Motor -> Pitch'
-   *   '<S39>/Phi2Motor -> Roll'
-   *   '<S39>/Phi2Motor -> Yaw'
-   *   '<S39>/Psi2Motor -> Pitch'
-   *   '<S39>/Psi2Motor -> Roll'
-   *   '<S39>/Psi2Motor -> Yaw'
-   *   '<S39>/Theta2Motor -> Pitch'
-   *   '<S39>/Theta2Motor -> Roll'
-   *   '<S39>/Theta2Motor -> Yaw'
-   */
-  {
-    {
-      { 4.207, 368.2 },
-
-      { 1.0, 18.62, 365.1 }
-    },
-
-    {
-      0.0,
-      1.0
-    },
-
-    {
-      0.0,
-      1.0
-    },
-
-    {
-      0.0,
-      1.0
-    },
-
-    {
-      { -0.1691, 6.862, 80.36, 1063.0, -95.88 },
-
-      { 1.0, 26.16, 229.7, 1734.0, 2366.0, 1787.0 }
-    },
-
-    {
-      0.0,
-      1.0
-    },
-
-    {
-      0.0,
-      1.0
-    },
-
-    {
-      0.0,
-      1.0
-    },
-
-    {
-      { -0.3003, 128.8, 6.16 },
-
-      { 1.0, 12.34, 201.8, 184.5 }
     }
   },
 
@@ -633,10 +448,10 @@ P_GRM_HIL_T GRM_HIL_P = {
 
   /* Mask Parameter: ReverseFinDeflection_Control_Surfaces
    * Referenced by:
-   *   '<S204>/Constant4'
-   *   '<S204>/Constant5'
-   *   '<S204>/Constant6'
-   *   '<S204>/Constant7'
+   *   '<S61>/Constant4'
+   *   '<S61>/Constant5'
+   *   '<S61>/Constant6'
+   *   '<S61>/Constant7'
    */
   {
     -1.5707963267948966,
@@ -674,6 +489,14 @@ P_GRM_HIL_T GRM_HIL_P = {
     0.3490658503988659
   },
 
+  /* Mask Parameter: Communication_FT_HWI_ControlComputer_FTHWICC
+   * Referenced by: '<S40>/Send_to_FTHWICC'
+   */
+  {
+    0.001,
+    10.0
+  },
+
   /* Mask Parameter: Initial_States_Airframe
    * Referenced by: '<S5>/Constant18'
    */
@@ -682,80 +505,45 @@ P_GRM_HIL_T GRM_HIL_P = {
     4.171
   },
 
-  /* Mask Parameter: PIDController_InitialConditionForFilter
-   * Referenced by: '<S102>/Filter'
-   */
-  0.0,
-
-  /* Mask Parameter: PIDController1_InitialConditionForFilter
-   * Referenced by: '<S146>/Filter'
-   */
-  0.0,
-
-  /* Mask Parameter: PIDController_InitialConditionForIntegrator
-   * Referenced by: '<S107>/Integrator'
-   */
-  0.0,
-
-  /* Mask Parameter: PIDController1_InitialConditionForIntegrator
-   * Referenced by: '<S151>/Integrator'
-   */
-  0.0,
-
-  /* Mask Parameter: PIDController_Kb
-   * Referenced by: '<S100>/Kb'
-   */
-  1.0,
-
-  /* Mask Parameter: PIDController1_Kb
-   * Referenced by: '<S144>/Kb'
-   */
-  1.0,
-
-  /* Mask Parameter: PIDController_LowerSaturationLimit
-   * Referenced by: '<S114>/Saturation'
-   */
-  -20.0,
-
-  /* Mask Parameter: PIDController1_LowerSaturationLimit
-   * Referenced by: '<S158>/Saturation'
-   */
-  -20.0,
-
   /* Mask Parameter: RealTimeSynchronization_MaxMissedTicks
-   * Referenced by: '<S221>/Real-Time Synchronization'
+   * Referenced by: '<S78>/Real-Time Synchronization'
    */
   1000.0,
 
-  /* Mask Parameter: PIDController_N
-   * Referenced by: '<S110>/Filter Coefficient'
+  /* Mask Parameter: Receive_from_FTHWICC_MaxMissedTicks
+   * Referenced by: '<S37>/Receive_from_FTHWICC'
    */
-  100.0,
+  10.0,
 
-  /* Mask Parameter: PIDController1_N
-   * Referenced by: '<S154>/Filter Coefficient'
+  /* Mask Parameter: Send_to_FTHWICC_YieldWhenWaiting
+   * Referenced by: '<S40>/Send_to_FTHWICC'
    */
-  100.0,
-
-  /* Mask Parameter: PIDController_UpperSaturationLimit
-   * Referenced by: '<S114>/Saturation'
-   */
-  20.0,
-
-  /* Mask Parameter: PIDController1_UpperSaturationLimit
-   * Referenced by: '<S158>/Saturation'
-   */
-  20.0,
+  1.0,
 
   /* Mask Parameter: RealTimeSynchronization_YieldWhenWaiting
-   * Referenced by: '<S221>/Real-Time Synchronization'
+   * Referenced by: '<S78>/Real-Time Synchronization'
    */
   0.0,
 
-  /* Mask Parameter: CompareToConstant_const
-   * Referenced by: '<S173>/Constant'
+  /* Mask Parameter: Receive_from_FTHWICC_YieldWhenWaiting
+   * Referenced by: '<S37>/Receive_from_FTHWICC'
    */
-  0.01,
+  1.0,
+
+  /* Mask Parameter: Send_to_FTHWICC_PacketID
+   * Referenced by: '<S40>/Send_to_FTHWICC'
+   */
+  1,
+
+  /* Mask Parameter: Receive_from_FTHWICC_PacketID
+   * Referenced by: '<S37>/Receive_from_FTHWICC'
+   */
+  1,
+
+  /* Mask Parameter: WrapToZero_Threshold
+   * Referenced by: '<S82>/FixPt Switch'
+   */
+  65535U,
 
   /* Computed Parameter: States_hold_Y0
    * Referenced by: '<S19>/States_hold'
@@ -934,6 +722,38 @@ P_GRM_HIL_T GRM_HIL_P = {
     }                                  /* Airframe_Cmd */
   },
 
+  /* Computed Parameter: Gimbal_Pos_Encoder_Y0
+   * Referenced by: '<S39>/Gimbal_Pos_Encoder'
+   */
+  {
+    {
+      0.0,                             /* Gimbal_yaw_sns */
+      0.0,                             /* Gimbal_pitch_sns */
+      0.0                              /* Gimbal_roll_sns */
+    },                                 /* Encoder_Resolved */
+
+    {
+      0.0,                             /* Data_plus */
+      0.0,                             /* Data_minus */
+      0.0,                             /* Clock_plus */
+      0.0                              /* Clock_minus */
+    },                                 /* Pos_Yaw_Encoder */
+
+    {
+      0.0,                             /* Data_plus */
+      0.0,                             /* Data_minus */
+      0.0,                             /* Clock_plus */
+      0.0                              /* Clock_minus */
+    },                                 /* Pos_Pitch_Encoder */
+
+    {
+      0.0,                             /* Data_plus */
+      0.0,                             /* Data_minus */
+      0.0,                             /* Clock_plus */
+      0.0                              /* Clock_minus */
+    }                                  /* Pos_Roll_Encoder */
+  },
+
   /* Computed Parameter: Simulation_Control_hold_Y0
    * Referenced by: '<S19>/Simulation_Control_hold'
    */
@@ -968,6 +788,24 @@ P_GRM_HIL_T GRM_HIL_P = {
     0U                                 /* heartbeat */
   },
 
+  /* Computed Parameter: Gimbal_Pos_Y0
+   * Referenced by: '<S39>/Gimbal_Pos'
+   */
+  {
+    {
+      0.0,                             /* ATT_Phi_rad */
+      0.0,                             /* ATT_Theta_rad */
+      0.0                              /* ATT_Psi_rad */
+    },                                 /* ATT_Euler_Bus */
+
+    {
+      0.0,                             /* ATT_q_0 */
+      0.0,                             /* ATT_q_1 */
+      0.0,                             /* ATT_q_2 */
+      0.0                              /* ATT_q_3 */
+    }                                  /* ATT_Quaternions_Bus */
+  },
+
   /* Computed Parameter: External_Inputs_hold_Y0
    * Referenced by: '<S19>/External_Inputs_hold'
    */
@@ -982,6 +820,16 @@ P_GRM_HIL_T GRM_HIL_P = {
       0.0,                             /* CMD_acc_z_mDs2 */
       0.0                              /* CMD_acc_y_mDs2 */
     }                                  /* FCC_External_Inputs_Bus */
+  },
+
+  /* Computed Parameter: Gimbal_Status_Y0
+   * Referenced by: '<S39>/Gimbal_Status'
+   */
+  {
+    0.0,                               /* Gimbal_operational_flg */
+    0.0,                               /* Gimbal_Ramp_flg */
+    0.0,                               /* Gimbal_Limit_flg */
+    0.0                                /* Gimbal_StopSim_flg */
   },
 
   /* Expression: 1
@@ -1014,93 +862,158 @@ P_GRM_HIL_T GRM_HIL_P = {
    */
   1.0,
 
-  /* Expression: 1
-   * Referenced by: '<S74>/Constant'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S74>/Constant3'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S74>/Gain2'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S74>/Gain3'
-   */
-  1.0,
-
-  /* Expression: 0
-   * Referenced by: '<S200>/acc_x_drag_mDs2'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S200>/acc_y_drag_mDs2'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S200>/acc_z_drag_mDs2'
+  /* Computed Parameter: ComCheck_Y0
+   * Referenced by: '<S39>/ComCheck'
    */
   0.0,
 
   /* Expression: -1
-   * Referenced by: '<S200>/Constant'
+   * Referenced by: '<S43>/Constant'
    */
   -1.0,
 
   /* Expression: -1
-   * Referenced by: '<S200>/Constant1'
+   * Referenced by: '<S43>/Constant1'
    */
   -1.0,
 
   /* Expression: -1
-   * Referenced by: '<S200>/Constant2'
+   * Referenced by: '<S43>/Constant2'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant3'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant4'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant5'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant6'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant7'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant10'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant11'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant8'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S43>/Constant9'
+   */
+  -1.0,
+
+  /* Expression: (2*pi)/(65536)
+   * Referenced by: '<S42>/Shaft2radYaw'
+   */
+  9.5873799242852573E-5,
+
+  /* Expression: (2*pi)/(65536)
+   * Referenced by: '<S42>/Shaft2radPitch'
+   */
+  9.5873799242852573E-5,
+
+  /* Expression: (2*pi)/(65536)
+   * Referenced by: '<S42>/Shaft2radRoll'
+   */
+  9.5873799242852573E-5,
+
+  /* Expression: 0.5
+   * Referenced by: '<S45>/1//2'
+   */
+  0.5,
+
+  /* Expression: 0
+   * Referenced by: '<S57>/acc_x_drag_mDs2'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S57>/acc_y_drag_mDs2'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S57>/acc_z_drag_mDs2'
+   */
+  0.0,
+
+  /* Expression: -1
+   * Referenced by: '<S57>/Constant'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S57>/Constant1'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S57>/Constant2'
    */
   -1.0,
 
   /* Expression: 0
-   * Referenced by: '<S201>/acc_x_grav_mDs'
+   * Referenced by: '<S58>/acc_x_grav_mDs'
    */
   0.0,
 
   /* Expression: 0
-   * Referenced by: '<S201>/acc_y_grav_mDs'
+   * Referenced by: '<S58>/acc_y_grav_mDs'
    */
   0.0,
 
   /* Expression: 0
-   * Referenced by: '<S201>/acc_z_grav_mDs'
+   * Referenced by: '<S58>/acc_z_grav_mDs'
    */
   0.0,
 
   /* Expression: 0
-   * Referenced by: '<S210>/thrust'
+   * Referenced by: '<S67>/thrust'
    */
   0.0,
 
   /* Expression: 1
-   * Referenced by: '<S210>/state_percentage_change'
+   * Referenced by: '<S67>/state_percentage_change'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S210>/Constant2'
+   * Referenced by: '<S67>/Constant2'
    */
   1.0,
 
   /* Computed Parameter: exec_time_hold_s_Y0
-   * Referenced by: '<S211>/exec_time_hold_s'
+   * Referenced by: '<S68>/exec_time_hold_s'
    */
   0.0,
 
   /* Expression: 0
-   * Referenced by: '<S203>/motor_state_perc_dot'
+   * Referenced by: '<S60>/motor_state_perc_dot'
    */
   0.0,
 
@@ -1115,27 +1028,27 @@ P_GRM_HIL_T GRM_HIL_P = {
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain18'
+   * Referenced by: '<S46>/Gain18'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain9'
+   * Referenced by: '<S46>/Gain9'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain10'
+   * Referenced by: '<S46>/Gain10'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain11'
+   * Referenced by: '<S46>/Gain11'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain3'
+   * Referenced by: '<S52>/Gain3'
    */
   1.0,
 
@@ -1160,37 +1073,37 @@ P_GRM_HIL_T GRM_HIL_P = {
   1.0,
 
   /* Expression: 1/4
-   * Referenced by: '<S204>/Gain2'
+   * Referenced by: '<S61>/Gain2'
    */
   0.25,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain4'
+   * Referenced by: '<S52>/Gain4'
    */
   1.0,
 
   /* Expression: 1/4
-   * Referenced by: '<S204>/Gain1'
+   * Referenced by: '<S61>/Gain1'
    */
   0.25,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain5'
+   * Referenced by: '<S52>/Gain5'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain9'
+   * Referenced by: '<S52>/Gain9'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain10'
+   * Referenced by: '<S52>/Gain10'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain11'
+   * Referenced by: '<S52>/Gain11'
    */
   1.0,
 
@@ -1315,309 +1228,34 @@ P_GRM_HIL_T GRM_HIL_P = {
   0.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain6'
+   * Referenced by: '<S52>/Gain6'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain7'
+   * Referenced by: '<S52>/Gain7'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain8'
+   * Referenced by: '<S52>/Gain8'
    */
   1.0,
 
-  /* Computed Parameter: TransferFcn1_A
-   * Referenced by: '<S49>/Transfer Fcn1'
-   */
-  { -1.0, -0.25 },
-
-  /* Computed Parameter: TransferFcn1_C
-   * Referenced by: '<S49>/Transfer Fcn1'
-   */
-  { 0.0, 0.25 },
-
-  /* Expression: 1
-   * Referenced by: '<S49>/Constant2'
-   */
-  1.0,
-
-  /* Expression: 0
-   * Referenced by: '<S38>/Constant1'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S38>/Constant2'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S36>/Memory1'
-   */
-  0.0,
-
-  /* Expression: 360/(65536)
-   * Referenced by: '<S45>/Shaft2degYaw'
-   */
-  0.0054931640625,
-
-  /* Expression: 0
-   * Referenced by: '<S176>/Transport Delay'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S36>/Memory1'
-   */
-  0.0,
-
-  /* Expression: -360/(65536)
-   * Referenced by: '<S45>/Shaft2degPitch'
-   */
-  -0.0054931640625,
-
-  /* Expression: 0
-   * Referenced by: '<S174>/Transport Delay'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S36>/Memory1'
-   */
-  0.0,
-
-  /* Expression: -360/(65536)
-   * Referenced by: '<S45>/Shaft2degRoll'
-   */
-  -0.0054931640625,
-
-  /* Expression: 0
-   * Referenced by: '<S175>/Transport Delay'
-   */
-  0.0,
-
-  /* Expression: inf
-   * Referenced by: '<S72>/Constant2'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S72>/Switch2'
-   */
-  0.0,
-
-  /* Expression: -1
-   * Referenced by: '<S72>/Gain'
-   */
-  -1.0,
-
-  /* Expression: 0
-   * Referenced by: '<S72>/Switch1'
-   */
-  0.0,
-
   /* Expression: 360/(2*pi)
-   * Referenced by: '<S192>/rad2deg'
+   * Referenced by: '<S49>/rad2deg'
    */
   57.295779513082323,
 
-  /* Expression: 0
-   * Referenced by: '<S73>/Integrator'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S73>/Filter'
-   */
-  0.0,
-
-  /* Computed Parameter: Merge_InitialOutput
-   * Referenced by: '<S73>/Merge'
-   */
-  0.0,
-
-  /* Computed Parameter: Merge_InitialOutput_d
-   * Referenced by: '<S71>/Merge'
-   */
-  0.0,
-
-  /* Expression: inf
-   * Referenced by: '<S53>/Constant2'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S53>/Switch2'
-   */
-  0.0,
-
-  /* Expression: -1
-   * Referenced by: '<S53>/Gain'
-   */
-  -1.0,
-
-  /* Expression: 0
-   * Referenced by: '<S53>/Switch1'
-   */
-  0.0,
-
   /* Expression: 360/(2*pi)
-   * Referenced by: '<S192>/rad2deg1'
+   * Referenced by: '<S49>/rad2deg1'
    */
   57.295779513082323,
 
-  /* Expression: 0
-   * Referenced by: '<S54>/Integrator'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S54>/Filter'
-   */
-  0.0,
-
-  /* Computed Parameter: Merge_InitialOutput_a
-   * Referenced by: '<S54>/Merge'
-   */
-  0.0,
-
-  /* Expression: inf
-   * Referenced by: '<S62>/Constant2'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S62>/Switch2'
-   */
-  0.0,
-
-  /* Expression: -1
-   * Referenced by: '<S62>/Gain'
-   */
-  -1.0,
-
-  /* Expression: 0
-   * Referenced by: '<S62>/Switch1'
-   */
-  0.0,
-
   /* Expression: 360/(2*pi)
-   * Referenced by: '<S192>/rad2deg2'
+   * Referenced by: '<S49>/rad2deg2'
    */
   57.295779513082323,
-
-  /* Expression: 0
-   * Referenced by: '<S63>/Integrator'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<S63>/Filter'
-   */
-  0.0,
-
-  /* Computed Parameter: Merge_InitialOutput_j
-   * Referenced by: '<S63>/Merge'
-   */
-  0.0,
-
-  /* Computed Parameter: Merge_InitialOutput_a0
-   * Referenced by: '<S45>/Merge'
-   */
-  0.0,
-
-  /* Computed Parameter: Merge1_InitialOutput
-   * Referenced by: '<S45>/Merge1'
-   */
-  0.0,
-
-  /* Expression: (2*pi)/(65536)
-   * Referenced by: '<S40>/Shaft2radRoll'
-   */
-  9.5873799242852573E-5,
-
-  /* Computed Parameter: Merge2_InitialOutput
-   * Referenced by: '<S45>/Merge2'
-   */
-  0.0,
-
-  /* Expression: (2*pi)/(65536)
-   * Referenced by: '<S40>/Shaft2radPitch'
-   */
-  9.5873799242852573E-5,
-
-  /* Expression: (2*pi)/(65536)
-   * Referenced by: '<S40>/Shaft2radYaw'
-   */
-  9.5873799242852573E-5,
-
-  /* Expression: 0.5
-   * Referenced by: '<S43>/1//2'
-   */
-  0.5,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant1'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant2'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant3'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant4'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant5'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant6'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant7'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant8'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant9'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant10'
-   */
-  -1.0,
-
-  /* Expression: -1
-   * Referenced by: '<S41>/Constant11'
-   */
-  -1.0,
 
   /* Expression: 1
    * Referenced by: '<S18>/Constant1'
@@ -1655,99 +1293,124 @@ P_GRM_HIL_T GRM_HIL_P = {
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain'
+   * Referenced by: '<S46>/Gain'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain'
+   * Referenced by: '<S52>/Gain'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain1'
+   * Referenced by: '<S46>/Gain1'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain1'
+   * Referenced by: '<S52>/Gain1'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain2'
+   * Referenced by: '<S46>/Gain2'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S195>/Gain2'
+   * Referenced by: '<S52>/Gain2'
    */
   1.0,
-
-  /* Expression: 0
-   * Referenced by: '<S39>/Constant'
-   */
-  0.0,
 
   /* Expression: HIL_Data.Simulation_Ctrl.HW_Ctrl.enable_gimbal_ctrl_flg
    * Referenced by: '<S7>/Constant7'
    */
   1.0,
 
+  /* Expression: HIL_Data.Simulation_Ctrl.HW_Ctrl.stop_gimbal_flg
+   * Referenced by: '<S7>/Constant8'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S37>/Constant'
+   */
+  0.0,
+
   /* Expression: 1
-   * Referenced by: '<S44>/Gain'
+   * Referenced by: '<S38>/Constant1'
+   */
+  1.0,
+
+  /* Expression: HIL_Data.Simulation_Ctrl.Com_Ctrl.FT.Com_freq_Hz
+   * Referenced by: '<S7>/Constant11'
+   */
+  500.0,
+
+  /* Expression: 1
+   * Referenced by: '<S38>/Constant2'
+   */
+  1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S38>/Memory'
+   */
+  -1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S46>/Gain12'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S176>/Constant'
+   * Referenced by: '<S46>/Gain13'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S174>/Constant'
+   * Referenced by: '<S46>/Gain14'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S175>/Constant'
+   * Referenced by: '<S46>/Gain15'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain12'
+   * Referenced by: '<S46>/Gain16'
    */
   1.0,
 
   /* Expression: 1
-   * Referenced by: '<S189>/Gain13'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S189>/Gain14'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S189>/Gain15'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S189>/Gain16'
-   */
-  1.0,
-
-  /* Expression: 1
-   * Referenced by: '<S189>/Gain17'
+   * Referenced by: '<S46>/Gain17'
    */
   1.0,
 
   /* Expression: 1/4
-   * Referenced by: '<S204>/Gain'
+   * Referenced by: '<S61>/Gain'
    */
   0.25,
+
+  /* Computed Parameter: FCC_heartbeat_Y0
+   * Referenced by: '<S39>/FCC_heartbeat'
+   */
+  0U,
+
+  /* Computed Parameter: Constant_Value_l
+   * Referenced by: '<S82>/Constant'
+   */
+  0U,
+
+  /* Computed Parameter: Output_InitialCondition
+   * Referenced by: '<S80>/Output'
+   */
+  0U,
+
+  /* Computed Parameter: FixPtConstant_Value
+   * Referenced by: '<S81>/FixPt Constant'
+   */
+  1U,
 
   /* Expression: External_Inputs.FCC.CMD.yaw.pulse.alternating_flg
    * Referenced by: '<S16>/Constant10'
@@ -1765,7 +1428,7 @@ P_GRM_HIL_T GRM_HIL_P = {
   1,
 
   /* Computed Parameter: lock_InitialCondition
-   * Referenced by: '<S203>/lock'
+   * Referenced by: '<S60>/lock'
    */
   0,
 
@@ -1774,7 +1437,7 @@ P_GRM_HIL_T GRM_HIL_P = {
    */
   0,
 
-  /* Computed Parameter: Constant2_Value_f
+  /* Computed Parameter: Constant2_Value_f5
    * Referenced by: '<S7>/Constant2'
    */
   0,
@@ -1789,33 +1452,13 @@ P_GRM_HIL_T GRM_HIL_P = {
    */
   0,
 
-  /* Computed Parameter: Memory_1_InitialCondition
-   * Referenced by: '<S36>/Memory'
-   */
-  0,
-
-  /* Computed Parameter: Memory_2_InitialCondition
-   * Referenced by: '<S36>/Memory'
-   */
-  0,
-
-  /* Computed Parameter: Constant1_Value_f
-   * Referenced by: '<S72>/Constant1'
-   */
-  0,
-
-  /* Computed Parameter: Constant1_Value_m
-   * Referenced by: '<S53>/Constant1'
-   */
-  0,
-
-  /* Computed Parameter: Constant1_Value_j
-   * Referenced by: '<S62>/Constant1'
-   */
-  0,
-
   /* Computed Parameter: Constant_Value_g
    * Referenced by: '<S7>/Constant'
+   */
+  1,
+
+  /* Computed Parameter: Constant3_Value_b
+   * Referenced by: '<S38>/Constant3'
    */
   1,
 
@@ -1834,67 +1477,33 @@ P_GRM_HIL_T GRM_HIL_P = {
    */
   1,
 
-  /* Start of '<S176>/If Action Subsystem' */
-  {
-    /* Computed Parameter: Out1_Y0
-     * Referenced by: '<S181>/Out1'
-     */
-    0.0
-  }
-  ,
+  /* Computed Parameter: ManualSwitch_5_CurrentSetting
+   * Referenced by: '<S50>/Manual Switch'
+   */
+  1U,
 
-  /* End of '<S176>/If Action Subsystem' */
+  /* Computed Parameter: ManualSwitch_6_CurrentSetting
+   * Referenced by: '<S50>/Manual Switch'
+   */
+  1U,
 
-  /* Start of '<S176>/If Action Subsystem1' */
-  {
-    /* Computed Parameter: Out1_Y0
-     * Referenced by: '<S182>/Out1'
-     */
-    0.0
-  }
-  ,
+  /* Computed Parameter: ManualSwitch_7_CurrentSetting
+   * Referenced by: '<S50>/Manual Switch'
+   */
+  1U,
 
-  /* End of '<S176>/If Action Subsystem1' */
+  /* Computed Parameter: ManualSwitch_8_CurrentSetting
+   * Referenced by: '<S50>/Manual Switch'
+   */
+  1U,
 
-  /* Start of '<S175>/If Action Subsystem' */
-  {
-    /* Computed Parameter: Out1_Y0
-     * Referenced by: '<S179>/Out1'
-     */
-    0.0
-  }
-  ,
+  /* Computed Parameter: ManualSwitch_9_CurrentSetting
+   * Referenced by: '<S50>/Manual Switch'
+   */
+  1U,
 
-  /* End of '<S175>/If Action Subsystem' */
-
-  /* Start of '<S175>/If Action Subsystem1' */
-  {
-    /* Computed Parameter: Out1_Y0
-     * Referenced by: '<S180>/Out1'
-     */
-    0.0
-  }
-  ,
-
-  /* End of '<S175>/If Action Subsystem1' */
-
-  /* Start of '<S174>/If Action Subsystem' */
-  {
-    /* Computed Parameter: Out1_Y0
-     * Referenced by: '<S177>/Out1'
-     */
-    0.0
-  }
-  ,
-
-  /* End of '<S174>/If Action Subsystem' */
-
-  /* Start of '<S174>/If Action Subsystem1' */
-  {
-    /* Computed Parameter: Out1_Y0
-     * Referenced by: '<S178>/Out1'
-     */
-    0.0
-  }
-  /* End of '<S174>/If Action Subsystem1' */
+  /* Computed Parameter: ManualSwitch_10_CurrentSetting
+   * Referenced by: '<S50>/Manual Switch'
+   */
+  1U
 };
