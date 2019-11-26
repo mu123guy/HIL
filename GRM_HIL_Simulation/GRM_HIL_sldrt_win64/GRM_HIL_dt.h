@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.44
+ * Model version              : 1.56
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Sun Nov 17 18:40:04 2019
+ * C source code generated on : Tue Nov 26 15:53:25 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -57,6 +57,7 @@ static uint_T rtDataTypeSizes[] = {
   sizeof(Servo_State_Bus),
   sizeof(struct_fqhbejXln8QRylaPqhUyTF),
   sizeof(struct_7SrGNOW0Gr039ZOMvXVVTD),
+  sizeof(Disturbances_Bus),
   sizeof(struct_JmsfHiggjss7x7dzfcXt9F),
   sizeof(struct_BTftwrJbWeM670O1XPTZ1C),
   sizeof(struct_E9xfJrDS8wEcyfYN6eOlYG),
@@ -100,12 +101,8 @@ static uint_T rtDataTypeSizes[] = {
   sizeof(struct_mvMpa6roJ3cC08QEKeHpUD),
   sizeof(struct_SpfmErt2JG4vKmjTJRH6OB),
   sizeof(Gimbal_Cmd_Bus),
+  sizeof(struct_RIcaXENoLMkyG3vAzx3LrF),
   sizeof(Gimbal_Ctrl_Bus),
-  sizeof(struct_2rU9DLCenxPBMI086Phyx),
-  sizeof(struct_u9tuPjUAEO3XkpAUDGTraG),
-  sizeof(struct_3GFOl0CrpEtPiCeQKu5bZE),
-  sizeof(struct_1jtd4lthR1rS618lzimrEB),
-  sizeof(struct_X0z48mq1MJmnXMBjrHYvYC),
   sizeof(Gimbal_Monitor_Bus),
   sizeof(struct_t5lid3aqguggysQaotuOhC),
   sizeof(int32_T),
@@ -116,26 +113,6 @@ static uint_T rtDataTypeSizes[] = {
   sizeof(struct_FhGLidBATzAyVEgGPUcCPB),
   sizeof(int32_T),
   sizeof(int32_T),
-  sizeof(struct_errdMCbHz1cMJbppgk8LIB),
-  sizeof(struct_gVgWE69OTiTtzAMsR3MJsC),
-  sizeof(struct_gVSI4amxfkcy305kW5mKdH),
-  sizeof(struct_wyEKKkcd8BACb1iLAvhQk),
-  sizeof(struct_xafWrx5dwrT8wEsj34nY2B),
-  sizeof(struct_VJfvuolwvM7SfBw5IatJHB),
-  sizeof(struct_6yieiUosI8n55HFNH6sc1E),
-  sizeof(struct_rbGXZIRavRMiH1t6AwY3XC),
-  sizeof(struct_1C0BjtB5SsjK4VFo76IvTB),
-  sizeof(struct_fe7TJqA5KkvdSuJ9ACOEtE),
-  sizeof(struct_QYQbPonDnj8SpvphQIjHLE),
-  sizeof(struct_0kz5Xf5aDCvwuRhz9h36UB),
-  sizeof(FDM_States_Bus),
-  sizeof(ATT_Euler_Dot_Bus),
-  sizeof(POS_WGS84_Dot_Bus),
-  sizeof(POS_NED_Dot_Bus),
-  sizeof(Position_States_Dot_Bus),
-  sizeof(Airframe_States_Dot_Bus),
-  sizeof(FDM_States_Dot_Bus),
-  sizeof(FDM_Rot_Body_Bus),
   sizeof(struct_ox3hNlE5f9EVkxBowKM3IG),
   sizeof(int32_T),
   sizeof(int32_T),
@@ -205,6 +182,7 @@ static const char_T * rtDataTypeNames[] = {
   "Servo_State_Bus",
   "struct_fqhbejXln8QRylaPqhUyTF",
   "struct_7SrGNOW0Gr039ZOMvXVVTD",
+  "Disturbances_Bus",
   "struct_JmsfHiggjss7x7dzfcXt9F",
   "struct_BTftwrJbWeM670O1XPTZ1C",
   "struct_E9xfJrDS8wEcyfYN6eOlYG",
@@ -248,12 +226,8 @@ static const char_T * rtDataTypeNames[] = {
   "struct_mvMpa6roJ3cC08QEKeHpUD",
   "struct_SpfmErt2JG4vKmjTJRH6OB",
   "Gimbal_Cmd_Bus",
+  "struct_RIcaXENoLMkyG3vAzx3LrF",
   "Gimbal_Ctrl_Bus",
-  "struct_2rU9DLCenxPBMI086Phyx",
-  "struct_u9tuPjUAEO3XkpAUDGTraG",
-  "struct_3GFOl0CrpEtPiCeQKu5bZE",
-  "struct_1jtd4lthR1rS618lzimrEB",
-  "struct_X0z48mq1MJmnXMBjrHYvYC",
   "Gimbal_Monitor_Bus",
   "struct_t5lid3aqguggysQaotuOhC",
   "struct_6JYiwTdRKKhxfBKN0w9nVE",
@@ -264,26 +238,6 @@ static const char_T * rtDataTypeNames[] = {
   "struct_FhGLidBATzAyVEgGPUcCPB",
   "struct_sFIRz83TC31UH8oSne9u9B",
   "struct_PMY2MVbokF6bomnXxgdnTE",
-  "struct_errdMCbHz1cMJbppgk8LIB",
-  "struct_gVgWE69OTiTtzAMsR3MJsC",
-  "struct_gVSI4amxfkcy305kW5mKdH",
-  "struct_wyEKKkcd8BACb1iLAvhQk",
-  "struct_xafWrx5dwrT8wEsj34nY2B",
-  "struct_VJfvuolwvM7SfBw5IatJHB",
-  "struct_6yieiUosI8n55HFNH6sc1E",
-  "struct_rbGXZIRavRMiH1t6AwY3XC",
-  "struct_1C0BjtB5SsjK4VFo76IvTB",
-  "struct_fe7TJqA5KkvdSuJ9ACOEtE",
-  "struct_QYQbPonDnj8SpvphQIjHLE",
-  "struct_0kz5Xf5aDCvwuRhz9h36UB",
-  "FDM_States_Bus",
-  "ATT_Euler_Dot_Bus",
-  "POS_WGS84_Dot_Bus",
-  "POS_NED_Dot_Bus",
-  "Position_States_Dot_Bus",
-  "Airframe_States_Dot_Bus",
-  "FDM_States_Dot_Bus",
-  "FDM_Rot_Body_Bus",
   "struct_ox3hNlE5f9EVkxBowKM3IG",
   "struct_vJMoFPSH9NALCP1mHITHrG",
   "struct_ZudztpyQGtxOgMLSxGNmCG",
@@ -318,34 +272,52 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&GRM_HIL_B.motor_state_perc), 0, 0, 189 },
+  { (char_T *)(&GRM_HIL_B.Constant[0]), 0, 0, 298 },
 
-  { (char_T *)(&GRM_HIL_B.LogicalOperator), 8, 0, 33 },
+  { (char_T *)(&GRM_HIL_B.Compare), 8, 0, 28 },
 
-  { (char_T *)(&GRM_HIL_B.IfActionSubsystem_m.In1), 0, 0, 1 },
+  { (char_T *)(&GRM_HIL_B.sf_Limiting_Rate_d.d_siB_l), 0, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_B.IfActionSubsystem1_e.In1), 0, 0, 1 },
+  { (char_T *)(&GRM_HIL_B.sf_Limiting_Acceleration_h.dd_siB_l), 0, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_B.IfActionSubsystem_p.In1), 0, 0, 1 },
+  { (char_T *)(&GRM_HIL_B.sf_Limiting_Rate_g.d_siB_l), 0, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_B.IfActionSubsystem1_j.In1), 0, 0, 1 },
+  { (char_T *)(&GRM_HIL_B.sf_Limiting_Acceleration_p.dd_siB_l), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.sf_Limiting_Rate_o.d_siB_l), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.sf_Limiting_Acceleration_i.dd_siB_l), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.sf_Limiting_Rate.d_siB_l), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.sf_Limiting_Acceleration.dd_siB_l), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.IfActionSubsystem_d.In1), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.IfActionSubsystem1_f.In1), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.IfActionSubsystem_k.In1), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.IfActionSubsystem1_i.In1), 0, 0, 1 },
 
   { (char_T *)(&GRM_HIL_B.IfActionSubsystem.In1), 0, 0, 1 },
 
   { (char_T *)(&GRM_HIL_B.IfActionSubsystem1.In1), 0, 0, 1 }
   ,
 
-  { (char_T *)(&GRM_HIL_DW.Memory1_1_PreviousInput), 0, 0, 7 },
+  { (char_T *)(&GRM_HIL_DW.Memory_PreviousInput), 0, 0, 12 },
 
-  { (char_T *)(&GRM_HIL_DW.ACC_PWORK.LoggedData[0]), 11, 0, 35 },
+  { (char_T *)
+    (&GRM_HIL_DW.TAQSigLogging_InsertedFor_Actuators_at_outport_0_1_PWORK.AQHandles
+     [0]), 11, 0, 68 },
 
   { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 6 },
 
-  { (char_T *)(&GRM_HIL_DW.Integrator_IWORK), 10, 0, 16 },
+  { (char_T *)(&GRM_HIL_DW.integration_eom_IWORK), 10, 0, 6 },
 
-  { (char_T *)(&GRM_HIL_DW.If_ActiveSubsystem), 2, 0, 26 },
+  { (char_T *)(&GRM_HIL_DW.If_ActiveSubsystem), 2, 0, 21 },
 
-  { (char_T *)(&GRM_HIL_DW.Memory_1_PreviousInput), 8, 0, 17 },
+  { (char_T *)(&GRM_HIL_DW.Voltage_Limitations_MODE), 8, 0, 9 },
 
   { (char_T *)(&GRM_HIL_DW.IfActionpass_roll.IfActionpass_yaw_SubsysRanBC), 2, 0,
     1 },
@@ -356,16 +328,16 @@ static DataTypeTransition rtBTransitions[] = {
   { (char_T *)(&GRM_HIL_DW.IfActionpass_yaw.IfActionpass_yaw_SubsysRanBC), 2, 0,
     1 },
 
-  { (char_T *)(&GRM_HIL_DW.IfActionSubsystem_m.IfActionSubsystem_SubsysRanBC), 2,
+  { (char_T *)(&GRM_HIL_DW.IfActionSubsystem_d.IfActionSubsystem_SubsysRanBC), 2,
     0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.IfActionSubsystem1_e.IfActionSubsystem1_SubsysRanBC),
+  { (char_T *)(&GRM_HIL_DW.IfActionSubsystem1_f.IfActionSubsystem1_SubsysRanBC),
     2, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.IfActionSubsystem_p.IfActionSubsystem_SubsysRanBC), 2,
+  { (char_T *)(&GRM_HIL_DW.IfActionSubsystem_k.IfActionSubsystem_SubsysRanBC), 2,
     0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.IfActionSubsystem1_j.IfActionSubsystem1_SubsysRanBC),
+  { (char_T *)(&GRM_HIL_DW.IfActionSubsystem1_i.IfActionSubsystem1_SubsysRanBC),
     2, 0, 1 },
 
   { (char_T *)(&GRM_HIL_DW.IfActionSubsystem.IfActionSubsystem_SubsysRanBC), 2,
@@ -374,21 +346,21 @@ static DataTypeTransition rtBTransitions[] = {
   { (char_T *)(&GRM_HIL_DW.IfActionSubsystem1.IfActionSubsystem1_SubsysRanBC), 2,
     0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.pass_l.pass_SubsysRanBC), 2, 0, 1 },
+  { (char_T *)(&GRM_HIL_DW.pass_e.pass_SubsysRanBC), 2, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.Saturation_e.Saturation_SubsysRanBC), 2, 0, 1 },
+  { (char_T *)(&GRM_HIL_DW.Saturation_n.Saturation_SubsysRanBC), 2, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.Enabledpass_a.Enabledpass_SubsysRanBC), 2, 0, 1 },
+  { (char_T *)(&GRM_HIL_DW.Enabledpass_d.Enabledpass_SubsysRanBC), 2, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.Enabledpass_a.Enabledpass_MODE), 8, 0, 1 },
+  { (char_T *)(&GRM_HIL_DW.Enabledpass_d.Enabledpass_MODE), 8, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.pass_c.pass_SubsysRanBC), 2, 0, 1 },
+  { (char_T *)(&GRM_HIL_DW.pass_p.pass_SubsysRanBC), 2, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.Saturation_j.Saturation_SubsysRanBC), 2, 0, 1 },
+  { (char_T *)(&GRM_HIL_DW.Saturation_l.Saturation_SubsysRanBC), 2, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.Enabledpass_j.Enabledpass_SubsysRanBC), 2, 0, 1 },
+  { (char_T *)(&GRM_HIL_DW.Enabledpass_k.Enabledpass_SubsysRanBC), 2, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.Enabledpass_j.Enabledpass_MODE), 8, 0, 1 },
+  { (char_T *)(&GRM_HIL_DW.Enabledpass_k.Enabledpass_MODE), 8, 0, 1 },
 
   { (char_T *)(&GRM_HIL_DW.pass.pass_SubsysRanBC), 2, 0, 1 },
 
@@ -401,7 +373,7 @@ static DataTypeTransition rtBTransitions[] = {
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
-  35U,
+  43U,
   rtBTransitions
 };
 
@@ -409,19 +381,11 @@ static DataTypeTransitionTable rtBTransTable = {
 static DataTypeTransition rtPTransitions[] = {
   { (char_T *)(&GRM_HIL_P.HIL_Sample_Time), 0, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.FDM_Linear_FDM), 105, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl), 82, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Gimbel_Ctrl_Gimbal_Ctrl), 85, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.External_Inputs_External_Inputs), 47, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.FDM_Linear_TF), 98, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Gimbal_TransferFunctions_TF), 83, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.External_Inputs_External_Inputs), 46, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Initial_States_Rigid_Body), 91, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.FlightController_FCC), 76, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.FlightController_FCC), 77, 0, 1 },
 
   { (char_T *)(&GRM_HIL_P.Servo_TF), 33, 0, 1 },
 
@@ -429,37 +393,40 @@ static DataTypeTransition rtPTransitions[] = {
 
   { (char_T *)(&GRM_HIL_P.Servo_PWM), 34, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.ReverseFinDeflection_Control_Surfaces), 69, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.FinDeflection_Control_Surfaces), 70, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.FinDeflection_Control_Surfaces), 69, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Servo_Cmd_Control_Surfaces), 70, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Servo_Cmd_Control_Surfaces), 69, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Gimbal_HW_Interface_HW), 79, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Initial_States_Airframe), 60, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.AnalogOutput3MotorsYawPitchRoll_FinalValue), 0, 0, 89
+  },
 
-  { (char_T *)(&GRM_HIL_P.PIDController_InitialConditionForFilter), 0, 0, 15 },
+  { (char_T *)(&GRM_HIL_P.DigitalInput_BitMode), 6, 0, 18 },
 
-  { (char_T *)(&GRM_HIL_P.States_hold_Y0), 126, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.States_hold_Y0), 103, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Gimbal_State_hold_Y0), 132, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Gimbal_State_hold_Y0), 109, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.hold_Y0), 143, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.hold_Y0), 120, 0, 1 },
 
   { (char_T *)(&GRM_HIL_P.Simulation_Control_hold_Y0), 18, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.External_Inputs_hold_Y0), 135, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.External_Inputs_hold_Y0), 112, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 155 },
+  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 117603 },
 
-  { (char_T *)(&GRM_HIL_P.Constant10_Value_c), 8, 0, 17 },
+  { (char_T *)(&GRM_HIL_P.Cn_delta_n_Interpolation_dimSize[0]), 7, 0, 135 },
 
-  { (char_T *)(&GRM_HIL_P.IfActionSubsystem_m.Out1_Y0), 0, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Constant10_Value_ca), 8, 0, 10 },
 
-  { (char_T *)(&GRM_HIL_P.IfActionSubsystem1_e.Out1_Y0), 0, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.IfActionSubsystem_d.Out1_Y0), 0, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.IfActionSubsystem_p.Out1_Y0), 0, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.IfActionSubsystem1_f.Out1_Y0), 0, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.IfActionSubsystem1_j.Out1_Y0), 0, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.IfActionSubsystem_k.Out1_Y0), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.IfActionSubsystem1_i.Out1_Y0), 0, 0, 1 },
 
   { (char_T *)(&GRM_HIL_P.IfActionSubsystem.Out1_Y0), 0, 0, 1 },
 
@@ -468,7 +435,7 @@ static DataTypeTransition rtPTransitions[] = {
 
 /* data type transition table for Parameters structure */
 static DataTypeTransitionTable rtPTransTable = {
-  29U,
+  26U,
   rtPTransitions
 };
 
