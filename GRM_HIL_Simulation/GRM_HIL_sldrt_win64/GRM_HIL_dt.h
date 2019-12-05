@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.63
+ * Model version              : 1.66
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Nov 27 00:50:20 2019
+ * C source code generated on : Wed Nov 27 14:53:03 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -297,7 +297,7 @@ static DataTypeTransition rtBTransitions[] = {
 
   { (char_T *)
     (&GRM_HIL_DW.TAQSigLogging_InsertedFor_Actuators_at_outport_0_1_PWORK.AQHandles
-     [0]), 11, 0, 79 },
+     [0]), 11, 0, 80 },
 
   { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 6 },
 

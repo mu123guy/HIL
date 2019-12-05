@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.63
+ * Model version              : 1.66
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Nov 27 00:50:20 2019
+ * C source code generated on : Wed Nov 27 14:53:03 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -1130,6 +1130,11 @@ typedef struct {
   void* Assertion2_slioAccessor;       /* '<S113>/Assertion2' */
   void *RealTimeSynchronization_PWORK; /* '<S241>/Real-Time Synchronization' */
   void *Send_to_FTHWICC_PWORK[2];      /* '<S41>/Send_to_FTHWICC' */
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_Gimbal_Phi_Cmd_deg_at_outport_0_PWORK;/* synthesized block */
+
   int32_T clockTickCounter;            /* '<S17>/Pulse Generator1' */
   int32_T clockTickCounter_d;          /* '<S17>/Pulse Generator' */
   int32_T clockTickCounter_d3;         /* '<S17>/Pulse Generator4' */

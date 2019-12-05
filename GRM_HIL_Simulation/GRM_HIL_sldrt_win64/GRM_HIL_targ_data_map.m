@@ -4384,8 +4384,8 @@
       dworkMap.sections(1) = section;
       clear section
       
-      section.nData     = 9;
-      section.data(9)  = dumData; %prealloc
+      section.nData     = 10;
+      section.data(10)  = dumData; %prealloc
       
 	  ;% GRM_HIL_DW.TAQSigLogging_InsertedFor_Actuators_at_outport_0_1_PWORK.AQHandles
 	  section.data(1).logicalSrcIdx = 10;
@@ -4423,6 +4423,10 @@
 	  section.data(9).logicalSrcIdx = 18;
 	  section.data(9).dtTransOffset = 77;
 	
+	  ;% GRM_HIL_DW.TAQSigLogging_InsertedFor_Gimbal_Phi_Cmd_deg_at_outport_0_PWORK.AQHandles
+	  section.data(10).logicalSrcIdx = 19;
+	  section.data(10).dtTransOffset = 79;
+	
       nTotData = nTotData + section.nData;
       dworkMap.sections(2) = section;
       clear section
@@ -4431,27 +4435,27 @@
       section.data(6)  = dumData; %prealloc
       
 	  ;% GRM_HIL_DW.clockTickCounter
-	  section.data(1).logicalSrcIdx = 19;
+	  section.data(1).logicalSrcIdx = 20;
 	  section.data(1).dtTransOffset = 0;
 	
 	  ;% GRM_HIL_DW.clockTickCounter_d
-	  section.data(2).logicalSrcIdx = 20;
+	  section.data(2).logicalSrcIdx = 21;
 	  section.data(2).dtTransOffset = 1;
 	
 	  ;% GRM_HIL_DW.clockTickCounter_d3
-	  section.data(3).logicalSrcIdx = 21;
+	  section.data(3).logicalSrcIdx = 22;
 	  section.data(3).dtTransOffset = 2;
 	
 	  ;% GRM_HIL_DW.clockTickCounter_e
-	  section.data(4).logicalSrcIdx = 22;
+	  section.data(4).logicalSrcIdx = 23;
 	  section.data(4).dtTransOffset = 3;
 	
 	  ;% GRM_HIL_DW.clockTickCounter_o
-	  section.data(5).logicalSrcIdx = 23;
+	  section.data(5).logicalSrcIdx = 24;
 	  section.data(5).dtTransOffset = 4;
 	
 	  ;% GRM_HIL_DW.clockTickCounter_l
-	  section.data(6).logicalSrcIdx = 24;
+	  section.data(6).logicalSrcIdx = 25;
 	  section.data(6).dtTransOffset = 5;
 	
       nTotData = nTotData + section.nData;
@@ -4462,15 +4466,15 @@
       section.data(3)  = dumData; %prealloc
       
 	  ;% GRM_HIL_DW.integration_eom_IWORK
-	  section.data(1).logicalSrcIdx = 25;
+	  section.data(1).logicalSrcIdx = 26;
 	  section.data(1).dtTransOffset = 0;
 	
 	  ;% GRM_HIL_DW.integration_eom_IWORK_g
-	  section.data(2).logicalSrcIdx = 26;
+	  section.data(2).logicalSrcIdx = 27;
 	  section.data(2).dtTransOffset = 1;
 	
 	  ;% GRM_HIL_DW.integration_eom_IWORK_l
-	  section.data(3).logicalSrcIdx = 27;
+	  section.data(3).logicalSrcIdx = 28;
 	  section.data(3).dtTransOffset = 2;
 	
       nTotData = nTotData + section.nData;
@@ -4481,7 +4485,7 @@
       section.data(1)  = dumData; %prealloc
       
 	  ;% GRM_HIL_DW.Output_DSTATE
-	  section.data(1).logicalSrcIdx = 28;
+	  section.data(1).logicalSrcIdx = 29;
 	  section.data(1).dtTransOffset = 0;
 	
       nTotData = nTotData + section.nData;
@@ -4492,31 +4496,31 @@
       section.data(7)  = dumData; %prealloc
       
 	  ;% GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC
-	  section.data(1).logicalSrcIdx = 29;
+	  section.data(1).logicalSrcIdx = 30;
 	  section.data(1).dtTransOffset = 0;
 	
 	  ;% GRM_HIL_DW.Send_to_FTHWICC_SubsysRanBC
-	  section.data(2).logicalSrcIdx = 30;
+	  section.data(2).logicalSrcIdx = 31;
 	  section.data(2).dtTransOffset = 1;
 	
 	  ;% GRM_HIL_DW.Construct_Bus_SubsysRanBC
-	  section.data(3).logicalSrcIdx = 31;
+	  section.data(3).logicalSrcIdx = 32;
 	  section.data(3).dtTransOffset = 2;
 	
 	  ;% GRM_HIL_DW.FB_Com_freq_emul_SubsysRanBC
-	  section.data(4).logicalSrcIdx = 32;
+	  section.data(4).logicalSrcIdx = 33;
 	  section.data(4).dtTransOffset = 3;
 	
 	  ;% GRM_HIL_DW.Saturate_SubsysRanBC
-	  section.data(5).logicalSrcIdx = 33;
+	  section.data(5).logicalSrcIdx = 34;
 	  section.data(5).dtTransOffset = 4;
 	
 	  ;% GRM_HIL_DW.Pass_SubsysRanBC
-	  section.data(6).logicalSrcIdx = 34;
+	  section.data(6).logicalSrcIdx = 35;
 	  section.data(6).dtTransOffset = 5;
 	
 	  ;% GRM_HIL_DW.Com_to_FCC_emul_SubsysRanBC
-	  section.data(7).logicalSrcIdx = 35;
+	  section.data(7).logicalSrcIdx = 36;
 	  section.data(7).dtTransOffset = 6;
 	
       nTotData = nTotData + section.nData;
@@ -4527,19 +4531,19 @@
       section.data(4)  = dumData; %prealloc
       
 	  ;% GRM_HIL_DW.Send_to_FTHWICC_MODE
-	  section.data(1).logicalSrcIdx = 36;
+	  section.data(1).logicalSrcIdx = 37;
 	  section.data(1).dtTransOffset = 0;
 	
 	  ;% GRM_HIL_DW.Saturate_MODE
-	  section.data(2).logicalSrcIdx = 37;
+	  section.data(2).logicalSrcIdx = 38;
 	  section.data(2).dtTransOffset = 1;
 	
 	  ;% GRM_HIL_DW.Pass_MODE
-	  section.data(3).logicalSrcIdx = 38;
+	  section.data(3).logicalSrcIdx = 39;
 	  section.data(3).dtTransOffset = 2;
 	
 	  ;% GRM_HIL_DW.Com_to_FCC_emul_MODE
-	  section.data(4).logicalSrcIdx = 39;
+	  section.data(4).logicalSrcIdx = 40;
 	  section.data(4).dtTransOffset = 3;
 	
       nTotData = nTotData + section.nData;
@@ -4572,8 +4576,8 @@
   ;%
 
 
-  targMap.checksum0 = 1533909352;
-  targMap.checksum1 = 1028304358;
-  targMap.checksum2 = 1223782786;
-  targMap.checksum3 = 426477796;
+  targMap.checksum0 = 13129397;
+  targMap.checksum1 = 3629284260;
+  targMap.checksum2 = 2072779249;
+  targMap.checksum3 = 3640574377;
 
