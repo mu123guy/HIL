@@ -28,7 +28,7 @@
 function Initial_States = init_Initial_States()
     
     %% Specify Rigid Body Initial States
-    Transl.VEL_u_K_R_E_B_mDs = 0;
+    Transl.VEL_u_K_R_E_B_mDs = 100;
     Transl.VEL_v_K_R_E_B_mDs = 0;
     Transl.VEL_w_K_R_E_B_mDs = 0;
     
@@ -44,9 +44,9 @@ function Initial_States = init_Initial_States()
     Att.ATT_Theta_rad = 0;
     Att.ATT_Psi_rad = 0;
     
-    Att.ATT_Phi_rad = deg2rad(10);
-    Att.ATT_Theta_rad = deg2rad(5);
-    Att.ATT_Psi_rad = deg2rad(20);
+    Att.ATT_Phi_rad = deg2rad(0);
+    Att.ATT_Theta_rad = deg2rad(0);
+    Att.ATT_Psi_rad = deg2rad(0);
     
     
     Pos.POS_lambda_WGS84_rad = 0;
@@ -54,7 +54,7 @@ function Initial_States = init_Initial_States()
     Pos.POS_h_WGS84_m = 0;
     Pos.POS_x_NED_m = 0;
     Pos.POS_y_NED_m = 0;
-    Pos.POS_z_NED_m = 0;
+    Pos.POS_z_NED_m = 100;
     
     
     Rigid_Body.Transl = Transl;

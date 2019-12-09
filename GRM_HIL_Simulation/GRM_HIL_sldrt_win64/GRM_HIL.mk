@@ -77,7 +77,7 @@ MAKEFILE_FILESEP = /
 #  REBUILD_ALL         - yes (1) or no (0): Rebuild all files
 
 MODEL                := GRM_HIL
-MODULES              := GRM_HIL_data.c GRM_HIL_tgtconn.c rtGetInf.c rtGetNaN.c rt_nonfinite.c
+MODULES              := GRM_HIL_data.c GRM_HIL_tgtconn.c rtGetInf.c rtGetNaN.c rt_nonfinite.c rt_zcfcn.c
 MAKEFILE             := GRM_HIL.mk
 MATLAB_ROOT          := C:/PROGRA~1/MATLAB/R2019b
 MATLAB_BIN           := C:/PROGRA~1/MATLAB/R2019b/bin
@@ -85,7 +85,11 @@ S_FUNCTIONS_LIB      :=
 SOLVER               := 
 NUMST                := 5
 TID01EQ              := 1
+<<<<<<< HEAD
+NCSTATES             := 39
+=======
 NCSTATES             := 33
+>>>>>>> origin/master
 BUILDARGS            :=  EXTMODE_STATIC_ALLOC=0 EXTMODE_STATIC_ALLOC_SIZE=1000000 TMW_EXTMODE_TESTING=0 COMBINE_OUTPUT_UPDATE_FCNS=0 INCLUDE_MDL_TERMINATE_FCN=1 MULTI_INSTANCE_CODE=0 ISPROTECTINGMODEL=NOTPROTECTING OPTS="-DTGTCONN -DEXT_MODE -DON_TARGET_WAIT_FOR_START=1"
 MULTITASKING         := 0
 EXT_MODE             := 1
@@ -157,7 +161,7 @@ REQ_INCLUDES := $(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/extern/include;$(
 REQ_INCLUDES += ;$(MATLAB_ROOT)/toolbox/shared/can/src/scanutil;$(SLDRTDIR)/src
 
 # additional includes
-REQ_INCLUDES += ;C:/Users/guy-m/Desktop/HIL/GRM_HIL_Simulation;C:/Users/guy-m/Desktop/HIL/GRM_HIL_Simulation/GRM_HIL_sldrt_win64;$(MATLAB_ROOT)/extern/include;$(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/rtw/c/src;$(MATLAB_ROOT)/rtw/c/src/ext_mode/common;$(MATLAB_ROOT)/toolbox/coder/rtiostream/src
+REQ_INCLUDES += ;C:/Users/guy-m/Desktop/HIL_branch/GRM_HIL_Simulation;C:/Users/guy-m/Desktop/HIL_branch/GRM_HIL_Simulation/GRM_HIL_sldrt_win64;$(MATLAB_ROOT)/extern/include;$(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/rtw/c/src;$(MATLAB_ROOT)/rtw/c/src/ext_mode/common;$(MATLAB_ROOT)/toolbox/coder/rtiostream/src
 
 INCLUDES := $(USER_INCLUDES);.;$(RELATIVE_PATH_TO_ANCHOR);$(REQ_INCLUDES)
 

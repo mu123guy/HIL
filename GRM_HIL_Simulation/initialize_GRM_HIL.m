@@ -20,9 +20,9 @@
 %
 %
 % AUTHOR:
-% Max Hiepp
+% Max Hiepp & Guy Nevo
 %
-
+clear,clc
 %% Toggle Command Line Output
 enable_output = 1;
 if(enable_output) disp([newline 'INITIALIZE GRM HARDWARE IN THE LOOP SIMULATION ENVIRONMENT' newline]), end
@@ -40,14 +40,23 @@ enable_external_mode = 1; % <1> for external mode, <0> for normal mode
 Emulate_FCC      = 1;
 Emulate_Servos   = 1;
 Emulate_Gimbal   = 2; % <2> if Gimbal is used and controlled via HW interface Control Computer
+<<<<<<< HEAD
+Emulate_IMU = 1;
+Emulate_State_Estimator = 1;
 
+=======
+>>>>>>> origin/master
+
+if (Emulate_IMU)
+    Emulate_State_Estimator = 1;
+end
 
 
 % Specify Variant of module to use
 Gimbal_Variant = 1;      % <1> for simulation via Transfer Functions
                          % <2> for physical simulation
                          % <3> for Simscape model
-FDM_Variant = 1;         % <1> Linear Version
+FDM_Variant = 4;         % <1> Linear Version
                          % <2> Basic Version
                          % <3> Student Version
                          % <4> Sophisticated Version
@@ -90,7 +99,7 @@ end
 if exist('HIL_Sample_Time','var')
     if(enable_output) disp(['inherit HIL sample frequency (' num2str(1/HIL_Sample_Time) 'Hz)' ]), end
 else
-    HIL_Sample_Time = 0.01; % -> tbd
+    HIL_Sample_Time = 0.001; % -> tbd
     if(enable_output) disp(['setting HIL sample frequency to ' num2str(1/HIL_Sample_Time) 'Hz ...' ]), end
 end
 

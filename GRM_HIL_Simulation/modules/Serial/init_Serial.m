@@ -34,7 +34,7 @@ function Serial = init_Serial (external_flg)
     %Pix.Receive.SampTime = HIL_Sample_Time; %??!
     
     
-    if external_flg
+    %if external_flg
     % specification for external mode connection
     
         % specify comport/baudrate/ect directly in library block!!!
@@ -44,7 +44,7 @@ function Serial = init_Serial (external_flg)
         Pix.Receive.MaxMissedTicks = 10;
         
         
-    end
+    %end
     
     % Specify Sample Time in Serial Recieve Block!!!
     

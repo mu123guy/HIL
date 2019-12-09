@@ -137,21 +137,16 @@ function FDM = init_FDM (variant)
         
     elseif variant == 4
     %% FDM Sophisticated
-        
         % Choose Variant Subsystem
         Mode.VSS_FDM_MODE = 4;
+        addpath(genpath([pwd,'\sophisticated']));
+        bus1 = para_def_grm;
+        bus2 = init_grm;
+        FDM.soph.bus1 = bus1;
+        FDM.soph.bus2 = bus2;
+        
         % for R2017a use this instead
-        %assignin('base', 'VSS_FDM_MODE', 3);
-        
-        % Parameters
-        Soph.param1 = 0;
-        
-        
-        
-        % Add to struct
-        FDM.Soph = Soph;
-        
-        
+        %assignin('base', 'VSS_FDM_MODE', 3); 
     end
     
     

@@ -7,9 +7,15 @@
  *
  * Code generation for model "GRM_HIL".
  *
+<<<<<<< HEAD
+ * Model version              : 1.67
+ * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
+ * C source code generated on : Thu Dec  5 17:25:03 2019
+=======
  * Model version              : 1.44
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
  * C source code generated on : Fri Nov  8 10:21:14 2019
+>>>>>>> origin/master
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -234,6 +240,16 @@ typedef struct {
 typedef struct {
   Servo_Positions_Bus Servo_Positions;
 } Servo_State_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_Disturbances_Bus_
+#define DEFINED_TYPEDEF_FOR_Disturbances_Bus_
+
+typedef struct {
+  real_T Disturbance_Force_N[3];
+  real_T Disturbance_Moment_Nm[3];
+} Disturbances_Bus;
 
 #endif
 
@@ -490,6 +506,8 @@ typedef struct {
 
 #endif
 
+<<<<<<< HEAD
+=======
 #ifndef DEFINED_TYPEDEF_FOR_FDM_States_Bus_
 #define DEFINED_TYPEDEF_FOR_FDM_States_Bus_
 
@@ -577,6 +595,7 @@ typedef struct {
 
 #endif
 
+>>>>>>> origin/master
 #ifndef DEFINED_TYPEDEF_FOR_struct_fqhbejXln8QRylaPqhUyTF_
 #define DEFINED_TYPEDEF_FOR_struct_fqhbejXln8QRylaPqhUyTF_
 
@@ -852,156 +871,6 @@ typedef struct {
   ATT_Euler_Bus Att;
   struct_mYoNNcm8zkJZX9FXsF2g2F Pos;
 } struct_FhGLidBATzAyVEgGPUcCPB;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_errdMCbHz1cMJbppgk8LIB_
-#define DEFINED_TYPEDEF_FOR_struct_errdMCbHz1cMJbppgk8LIB_
-
-typedef struct {
-  real_T alt_m;
-  real_T vel_mDs;
-  real_T mach;
-  real_T rho_kgDm3;
-  real_T q_kgDms2;
-} struct_errdMCbHz1cMJbppgk8LIB;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_gVgWE69OTiTtzAMsR3MJsC_
-#define DEFINED_TYPEDEF_FOR_struct_gVgWE69OTiTtzAMsR3MJsC_
-
-typedef struct {
-  real_T num;
-  real_T denom[2];
-} struct_gVgWE69OTiTtzAMsR3MJsC;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_gVSI4amxfkcy305kW5mKdH_
-#define DEFINED_TYPEDEF_FOR_struct_gVSI4amxfkcy305kW5mKdH_
-
-typedef struct {
-  real_T num[2];
-  real_T denom[3];
-} struct_gVSI4amxfkcy305kW5mKdH;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_wyEKKkcd8BACb1iLAvhQk_
-#define DEFINED_TYPEDEF_FOR_struct_wyEKKkcd8BACb1iLAvhQk_
-
-typedef struct {
-  real_T num[3];
-  real_T denom[3];
-} struct_wyEKKkcd8BACb1iLAvhQk;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_xafWrx5dwrT8wEsj34nY2B_
-#define DEFINED_TYPEDEF_FOR_struct_xafWrx5dwrT8wEsj34nY2B_
-
-typedef struct {
-  struct_gVgWE69OTiTtzAMsR3MJsC dr2roll;
-  struct_gVSI4amxfkcy305kW5mKdH dp2pitch;
-  struct_gVSI4amxfkcy305kW5mKdH dy2yaw;
-  struct_wyEKKkcd8BACb1iLAvhQk pitch2az;
-  struct_wyEKKkcd8BACb1iLAvhQk dp2az;
-  struct_wyEKKkcd8BACb1iLAvhQk yaw2ay;
-  struct_wyEKKkcd8BACb1iLAvhQk dy2ay;
-} struct_xafWrx5dwrT8wEsj34nY2B;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_VJfvuolwvM7SfBw5IatJHB_
-#define DEFINED_TYPEDEF_FOR_struct_VJfvuolwvM7SfBw5IatJHB_
-
-typedef struct {
-  real_T param1;
-  struct_errdMCbHz1cMJbppgk8LIB FS;
-  struct_xafWrx5dwrT8wEsj34nY2B TF;
-} struct_VJfvuolwvM7SfBw5IatJHB;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_6yieiUosI8n55HFNH6sc1E_
-#define DEFINED_TYPEDEF_FOR_struct_6yieiUosI8n55HFNH6sc1E_
-
-typedef struct {
-  real_T VSS_FDM_MODE;
-} struct_6yieiUosI8n55HFNH6sc1E;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_rbGXZIRavRMiH1t6AwY3XC_
-#define DEFINED_TYPEDEF_FOR_struct_rbGXZIRavRMiH1t6AwY3XC_
-
-typedef struct {
-  real_T burntime_s;
-  real_T thrust_avg_N;
-} struct_rbGXZIRavRMiH1t6AwY3XC;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_1C0BjtB5SsjK4VFo76IvTB_
-#define DEFINED_TYPEDEF_FOR_struct_1C0BjtB5SsjK4VFo76IvTB_
-
-typedef struct {
-  real_T d_m;
-  real_T S_ref_m2;
-  real_T MAC_m;
-  real_T mass_kg;
-  real_T mass_preburn_kg;
-  real_T I_x_kgDm2;
-  real_T I_y_kgDm2;
-  real_T I_z_kgDm2;
-  real_T I_x_preburn_kgDm2;
-  real_T I_y_preburn_kgDm2;
-  real_T I_z_preburn_kgDm2;
-  struct_rbGXZIRavRMiH1t6AwY3XC Propulsion;
-} struct_1C0BjtB5SsjK4VFo76IvTB;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_fe7TJqA5KkvdSuJ9ACOEtE_
-#define DEFINED_TYPEDEF_FOR_struct_fe7TJqA5KkvdSuJ9ACOEtE_
-
-typedef struct {
-  real_T C_l_delta;
-  real_T C_l_p;
-  real_T C_z_alpha;
-  real_T C_z_delta;
-  real_T C_m_alpha;
-  real_T C_m_delta;
-  real_T C_m_q;
-  real_T C_y_beta;
-  real_T C_y_delta;
-  real_T C_n_beta;
-  real_T C_n_delta;
-  real_T C_n_r;
-} struct_fe7TJqA5KkvdSuJ9ACOEtE;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_QYQbPonDnj8SpvphQIjHLE_
-#define DEFINED_TYPEDEF_FOR_struct_QYQbPonDnj8SpvphQIjHLE_
-
-typedef struct {
-  real_T gravity_mDs2;
-} struct_QYQbPonDnj8SpvphQIjHLE;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_0kz5Xf5aDCvwuRhz9h36UB_
-#define DEFINED_TYPEDEF_FOR_struct_0kz5Xf5aDCvwuRhz9h36UB_
-
-typedef struct {
-  struct_VJfvuolwvM7SfBw5IatJHB Lin;
-  struct_6yieiUosI8n55HFNH6sc1E Mode;
-  struct_1C0BjtB5SsjK4VFo76IvTB Configuration_Data;
-  struct_fe7TJqA5KkvdSuJ9ACOEtE Aero_Data;
-  struct_QYQbPonDnj8SpvphQIjHLE Environment_Data;
-} struct_0kz5Xf5aDCvwuRhz9h36UB;
 
 #endif
 
