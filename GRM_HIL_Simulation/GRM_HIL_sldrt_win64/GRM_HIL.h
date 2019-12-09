@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.66
+ * Model version              : 1.67
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Nov 27 14:53:03 2019
+ * C source code generated on : Thu Dec  5 17:25:03 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -3396,6 +3396,18 @@ struct P_GRM_HIL_T_ {
   real_T pNPB_Value[3];               /* Expression: HIL_Data.FDM.soph.bus1.pNPB
                                        * Referenced by: '<S173>/pNPB'
                                        */
+  real_T SineWave_Amp;                 /* Expression: 5
+                                        * Referenced by: '<Root>/Sine Wave'
+                                        */
+  real_T SineWave_Bias;                /* Expression: 0
+                                        * Referenced by: '<Root>/Sine Wave'
+                                        */
+  real_T SineWave_Freq;                /* Expression: 10
+                                        * Referenced by: '<Root>/Sine Wave'
+                                        */
+  real_T SineWave_Phase;               /* Expression: 0
+                                        * Referenced by: '<Root>/Sine Wave'
+                                        */
   real_T Q_1_Value_e[16];  /* Expression: [0 0 0 1; 0 0 1 0; 0 -1 0 0; -1 0 0 0]
                             * Referenced by: '<S155>/Q_1'
                             */

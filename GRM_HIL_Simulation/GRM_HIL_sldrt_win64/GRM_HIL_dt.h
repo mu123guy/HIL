@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.66
+ * Model version              : 1.67
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Nov 27 14:53:03 2019
+ * C source code generated on : Thu Dec  5 17:25:03 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -358,7 +358,7 @@ static DataTypeTransition rtPTransitions[] = {
 
   { (char_T *)(&GRM_HIL_P.Gimbal_Status_Y0), 64, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 117582 },
+  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 117586 },
 
   { (char_T *)(&GRM_HIL_P.Cn_delta_n_Interpolation_dimSize[0]), 7, 0, 135 },
 

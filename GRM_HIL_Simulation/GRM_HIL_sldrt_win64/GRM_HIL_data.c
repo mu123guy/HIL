@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.66
+ * Model version              : 1.67
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Nov 27 14:53:03 2019
+ * C source code generated on : Thu Dec  5 17:25:03 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22448,6 +22448,10 @@ P_GRM_HIL_T GRM_HIL_P = {
   3591.005625,
 
   { 0.0, 0.0, 0.0 },
+  5.0,
+  0.0,
+  10.0,
+  0.0,
 
   { 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,
     0.0 },

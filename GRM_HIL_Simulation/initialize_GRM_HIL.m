@@ -40,7 +40,13 @@ enable_external_mode = 1; % <1> for external mode, <0> for normal mode
 Emulate_FCC      = 1;
 Emulate_Servos   = 1;
 Emulate_Gimbal   = 2; % <2> if Gimbal is used and controlled via HW interface Control Computer
+Emulate_IMU = 1;
+Emulate_State_Estimator = 1;
 
+
+if (Emulate_IMU)
+    Emulate_State_Estimator = 1;
+end
 
 
 % Specify Variant of module to use
