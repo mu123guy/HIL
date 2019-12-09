@@ -7,9 +7,15 @@
  *
  * Code generation for model "GRM_HIL".
  *
+<<<<<<< HEAD
  * Model version              : 1.67
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
  * C source code generated on : Thu Dec  5 17:25:03 2019
+=======
+ * Model version              : 1.44
+ * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
+ * C source code generated on : Fri Nov  8 10:21:14 2019
+>>>>>>> origin/master
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -266,6 +272,7 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
+<<<<<<< HEAD
   { (char_T *)(&GRM_HIL_B.Constant[0]), 0, 0, 286 },
 
   { (char_T *)(&GRM_HIL_B.Receive_from_FTHWICC_o8), 5, 0, 3 },
@@ -308,11 +315,41 @@ static DataTypeTransition rtBTransitions[] = {
   { (char_T *)(&GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC), 2, 0, 7 },
 
   { (char_T *)(&GRM_HIL_DW.Send_to_FTHWICC_MODE), 8, 0, 4 }
+=======
+  { (char_T *)(&GRM_HIL_B.motor_state_perc), 0, 0, 153 },
+
+  { (char_T *)(&GRM_HIL_B.Receive_from_FTHWICC_o8), 5, 0, 3 },
+
+  { (char_T *)(&GRM_HIL_B.reset), 8, 0, 14 },
+
+  { (char_T *)(&GRM_HIL_B.sf_Counter_with_external_limit_b.value), 0, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_B.sf_Counter_with_external_limit.value), 0, 0, 1 }
+  ,
+
+  { (char_T *)(&GRM_HIL_DW.Memory_PreviousInput), 0, 0, 2 },
+
+  { (char_T *)(&GRM_HIL_DW.ACC_PWORK.LoggedData[0]), 11, 0, 25 },
+
+  { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 6 },
+
+  { (char_T *)(&GRM_HIL_DW.Integrator_IWORK), 10, 0, 13 },
+
+  { (char_T *)(&GRM_HIL_DW.Output_DSTATE), 5, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC), 2, 0, 12 },
+
+  { (char_T *)(&GRM_HIL_DW.lock_PreviousInput), 8, 0, 10 }
+>>>>>>> origin/master
 };
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
+<<<<<<< HEAD
   20U,
+=======
+  12U,
+>>>>>>> origin/master
   rtBTransitions
 };
 
@@ -320,9 +357,21 @@ static DataTypeTransitionTable rtBTransTable = {
 static DataTypeTransition rtPTransitions[] = {
   { (char_T *)(&GRM_HIL_P.HIL_Sample_Time), 0, 0, 1 },
 
+<<<<<<< HEAD
   { (char_T *)(&GRM_HIL_P.External_Inputs_External_Inputs), 47, 0, 1 },
 
   { (char_T *)(&GRM_HIL_P.FlightController_FCC), 77, 0, 1 },
+=======
+  { (char_T *)(&GRM_HIL_P.FDM_Linear_FDM), 98, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.FDM_Linear_TF), 91, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.External_Inputs_External_Inputs), 46, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.Initial_States_Rigid_Body), 84, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.FlightController_FCC), 76, 0, 1 },
+>>>>>>> origin/master
 
   { (char_T *)(&GRM_HIL_P.Servo_TF), 33, 0, 1 },
 
@@ -336,6 +385,7 @@ static DataTypeTransition rtPTransitions[] = {
 
   { (char_T *)(&GRM_HIL_P.Communication_FT_HWI_ControlComputer_HW), 79, 0, 1 },
 
+<<<<<<< HEAD
   { (char_T *)(&GRM_HIL_P.RealTimeSynchronization_MaxMissedTicks), 0, 0, 72 },
 
   { (char_T *)(&GRM_HIL_P.Send_to_FTHWICC_PacketID), 6, 0, 2 },
@@ -365,6 +415,42 @@ static DataTypeTransition rtPTransitions[] = {
   { (char_T *)(&GRM_HIL_P.FCC_heartbeat_Y0), 5, 0, 4 },
 
   { (char_T *)(&GRM_HIL_P.Constant10_Value_ca), 8, 0, 9 }
+=======
+  { (char_T *)(&GRM_HIL_P.Communication_FT_HWI_ControlComputer_FTHWICC), 78, 0,
+    1 },
+
+  { (char_T *)(&GRM_HIL_P.Initial_States_Airframe), 60, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.RealTimeSynchronization_MaxMissedTicks), 0, 0, 5 },
+
+  { (char_T *)(&GRM_HIL_P.Send_to_FTHWICC_PacketID), 6, 0, 2 },
+
+  { (char_T *)(&GRM_HIL_P.WrapToZero_Threshold), 5, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.States_hold_Y0), 119, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.Gimbal_State_hold_Y0), 125, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.hold_Y0), 136, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.Gimbal_Pos_Encoder_Y0), 124, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.Simulation_Control_hold_Y0), 18, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.Gimbal_Pos_Y0), 121, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.External_Inputs_hold_Y0), 128, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.Gimbal_Status_Y0), 63, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 112 },
+
+  { (char_T *)(&GRM_HIL_P.FCC_heartbeat_Y0), 5, 0, 4 },
+
+  { (char_T *)(&GRM_HIL_P.Constant10_Value_c), 8, 0, 13 },
+
+  { (char_T *)(&GRM_HIL_P.ManualSwitch_5_CurrentSetting), 3, 0, 6 }
+>>>>>>> origin/master
 };
 
 /* data type transition table for Parameters structure */

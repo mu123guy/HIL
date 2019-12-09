@@ -7,9 +7,15 @@
  *
  * Code generation for model "GRM_HIL".
  *
+<<<<<<< HEAD
  * Model version              : 1.67
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
  * C source code generated on : Thu Dec  5 17:25:03 2019
+=======
+ * Model version              : 1.44
+ * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
+ * C source code generated on : Fri Nov  8 10:21:14 2019
+>>>>>>> origin/master
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -500,6 +506,96 @@ typedef struct {
 
 #endif
 
+<<<<<<< HEAD
+=======
+#ifndef DEFINED_TYPEDEF_FOR_FDM_States_Bus_
+#define DEFINED_TYPEDEF_FOR_FDM_States_Bus_
+
+typedef struct {
+  ATT_Euler_Bus Attitude_States;
+  Translation_States_Bus Translation_States;
+  Position_States_Bus Position_States;
+  Airframe_States_Bus Airframe_States;
+} FDM_States_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_ATT_Euler_Dot_Bus_
+#define DEFINED_TYPEDEF_FOR_ATT_Euler_Dot_Bus_
+
+typedef struct {
+  real_T ATT_Dot_Phi_radDs;
+  real_T ATT_Dot_Theta_radDs;
+  real_T ATT_Dot_Psi_radDs;
+} ATT_Euler_Dot_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_POS_WGS84_Dot_Bus_
+#define DEFINED_TYPEDEF_FOR_POS_WGS84_Dot_Bus_
+
+typedef struct {
+  real_T POS_lambda_Dot_WGS84_radDs;
+  real_T POS_mue_Dot_WGS84_radDs;
+  real_T POS_h_Dot_WGS84_mDs;
+} POS_WGS84_Dot_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_POS_NED_Dot_Bus_
+#define DEFINED_TYPEDEF_FOR_POS_NED_Dot_Bus_
+
+typedef struct {
+  real_T POS_x_Dot_NED_mDs;
+  real_T POS_y_Dot_NED_mDs;
+  real_T POS_z_Dot_NED_mDs;
+} POS_NED_Dot_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_Position_States_Dot_Bus_
+#define DEFINED_TYPEDEF_FOR_Position_States_Dot_Bus_
+
+typedef struct {
+  POS_WGS84_Dot_Bus POS_WGS84_Dot;
+  POS_NED_Dot_Bus POS_NED_Dot;
+} Position_States_Dot_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_Airframe_States_Dot_Bus_
+#define DEFINED_TYPEDEF_FOR_Airframe_States_Dot_Bus_
+
+typedef struct {
+  real_T Motor_state_dot_percDs;
+} Airframe_States_Dot_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_FDM_States_Dot_Bus_
+#define DEFINED_TYPEDEF_FOR_FDM_States_Dot_Bus_
+
+typedef struct {
+  ATT_Euler_Dot_Bus ATT_Euler_Dot;
+  Translation_States_Dot_Bus Translation_States_Dot;
+  Position_States_Dot_Bus Position_States_Dot;
+  Airframe_States_Dot_Bus Airframe_States_Dot;
+} FDM_States_Dot_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_FDM_Rot_Body_Bus_
+#define DEFINED_TYPEDEF_FOR_FDM_Rot_Body_Bus_
+
+typedef struct {
+  real_T p_B_radDs;
+  real_T q_B_radDs;
+  real_T r_B_radDs;
+} FDM_Rot_Body_Bus;
+
+#endif
+
+>>>>>>> origin/master
 #ifndef DEFINED_TYPEDEF_FOR_struct_fqhbejXln8QRylaPqhUyTF_
 #define DEFINED_TYPEDEF_FOR_struct_fqhbejXln8QRylaPqhUyTF_
 
