@@ -7,15 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
-<<<<<<< HEAD
- * Model version              : 1.67
+ * Model version              : 1.72
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Thu Dec  5 17:25:03 2019
-=======
- * Model version              : 1.44
- * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Fri Nov  8 10:21:14 2019
->>>>>>> origin/master
+ * C source code generated on : Thu Dec 12 16:42:59 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -98,14 +92,8 @@ static uint_T rtDataTypeSizes[] = {
   sizeof(Encoder_Signal_Bus),
   sizeof(Gimbal_Encoder_Bus),
   sizeof(Gimbal_State_Bus),
-  sizeof(struct_skgRGNdg4uikkiJBtrraoB),
-  sizeof(struct_QhvhhqDV0L2yxKLWicNneD),
-  sizeof(struct_NXU1FRSfNm9MZqPmiPj5nG),
-  sizeof(struct_NKNq6gj8dL8ticSV3dO1LF),
-  sizeof(struct_6DMhF3HgatZ0SVFTbVEXUB),
-  sizeof(struct_0bCECObDp9cpwUujjacDoB),
-  sizeof(struct_mvMpa6roJ3cC08QEKeHpUD),
-  sizeof(struct_SpfmErt2JG4vKmjTJRH6OB),
+  sizeof(struct_fPSpQec4CK6Ld2LdBMMAbH),
+  sizeof(struct_o6lBeR5a4wCQZKjH0CEd8D),
   sizeof(Gimbal_Cmd_Bus),
   sizeof(struct_RIcaXENoLMkyG3vAzx3LrF),
   sizeof(int32_T),
@@ -119,33 +107,10 @@ static uint_T rtDataTypeSizes[] = {
   sizeof(struct_ox3hNlE5f9EVkxBowKM3IG),
   sizeof(int32_T),
   sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(struct_8dn0WBFJAEipy0bhP7ue2G),
-  sizeof(struct_4BEF1wwN52Uf7px5A1b9LF),
-  sizeof(int32_T),
   sizeof(struct_mYS1N2caX135AIcTArxUzD),
   sizeof(int32_T),
   sizeof(int32_T),
-  sizeof(struct_VkUZsEuPLDWiHwBdN4zERD),
-  sizeof(struct_naMSiPeANZdxK1BVj547qE),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(struct_lQamzfSfua9vI4k5KcpdyB),
-  sizeof(struct_biIcle9l5pPUJAEhBiubME),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(int32_T),
-  sizeof(struct_HOsjcyeSDQ7kNiQxBq2HXH),
-  sizeof(struct_F8un5srqOha4P4SBfdUeHD)
+  sizeof(struct_VkUZsEuPLDWiHwBdN4zERD)
 };
 
 /* data type name table */
@@ -220,14 +185,8 @@ static const char_T * rtDataTypeNames[] = {
   "Encoder_Signal_Bus",
   "Gimbal_Encoder_Bus",
   "Gimbal_State_Bus",
-  "struct_skgRGNdg4uikkiJBtrraoB",
-  "struct_QhvhhqDV0L2yxKLWicNneD",
-  "struct_NXU1FRSfNm9MZqPmiPj5nG",
-  "struct_NKNq6gj8dL8ticSV3dO1LF",
-  "struct_6DMhF3HgatZ0SVFTbVEXUB",
-  "struct_0bCECObDp9cpwUujjacDoB",
-  "struct_mvMpa6roJ3cC08QEKeHpUD",
-  "struct_SpfmErt2JG4vKmjTJRH6OB",
+  "struct_fPSpQec4CK6Ld2LdBMMAbH",
+  "struct_o6lBeR5a4wCQZKjH0CEd8D",
   "Gimbal_Cmd_Bus",
   "struct_RIcaXENoLMkyG3vAzx3LrF",
   "struct_6JYiwTdRKKhxfBKN0w9nVE",
@@ -239,45 +198,25 @@ static const char_T * rtDataTypeNames[] = {
   "struct_sFIRz83TC31UH8oSne9u9B",
   "struct_PMY2MVbokF6bomnXxgdnTE",
   "struct_ox3hNlE5f9EVkxBowKM3IG",
-  "struct_vJMoFPSH9NALCP1mHITHrG",
-  "struct_ZudztpyQGtxOgMLSxGNmCG",
-  "struct_bVdv2ZSjU8Gsc487I7DwfB",
-  "struct_M0NYTmdgUyy4iYfKd92SN",
-  "struct_uW0pADlVZ53DtScI11SOAD",
-  "struct_0NRBZ13rBacCjb5oc2qc9B",
-  "struct_tvjV6s09j6tJWl6vhEIiv",
-  "struct_b5bV3m2pbJeNECCAT0pZkB",
-  "struct_Tvr8NhakFinFbdhQqtcySF",
-  "struct_GqpaI653QCVFqyscAlJs7F",
-  "struct_8dn0WBFJAEipy0bhP7ue2G",
-  "struct_4BEF1wwN52Uf7px5A1b9LF",
   "struct_iVfILTItcdAMASpwpYoPC",
+  "struct_0NRBZ13rBacCjb5oc2qc9B",
   "struct_mYS1N2caX135AIcTArxUzD",
   "struct_0Ybs33XGG556qmFMMPfasF",
   "struct_RypLSVNConU9zljTETvwAE",
-  "struct_VkUZsEuPLDWiHwBdN4zERD",
-  "struct_naMSiPeANZdxK1BVj547qE",
-  "struct_h6u9GKWEdHHv63vdLURSfF",
-  "struct_JtK879baWFBLS8W1MIdCuF",
-  "struct_lQamzfSfua9vI4k5KcpdyB",
-  "struct_biIcle9l5pPUJAEhBiubME",
-  "struct_naAGVLIRZexd0Cf2GFXscC",
-  "struct_jpExsmCK6rgZqQumzT3j3D",
-  "struct_VVhaihDhHy5oT5WqtkJGhD",
-  "struct_Lh0M8667hlt1EnYL2Mmz5C",
-  "struct_ji72VK66eiPQtRblg6iKIE",
-  "struct_HOsjcyeSDQ7kNiQxBq2HXH",
-  "struct_F8un5srqOha4P4SBfdUeHD"
+  "struct_VkUZsEuPLDWiHwBdN4zERD"
 };
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-<<<<<<< HEAD
-  { (char_T *)(&GRM_HIL_B.Constant[0]), 0, 0, 286 },
+  { (char_T *)(&GRM_HIL_B.Constant[0]), 0, 0, 257 },
+
+  { (char_T *)(&GRM_HIL_B.DataTypeConversion3), 1, 0, 17 },
 
   { (char_T *)(&GRM_HIL_B.Receive_from_FTHWICC_o8), 5, 0, 3 },
 
-  { (char_T *)(&GRM_HIL_B.Compare), 8, 0, 11 },
+  { (char_T *)(&GRM_HIL_B.message[0]), 3, 0, 206 },
+
+  { (char_T *)(&GRM_HIL_B.Compare), 8, 0, 9 },
 
   { (char_T *)(&GRM_HIL_B.sf_Limiting_Rate_d.d_siB_l), 0, 0, 1 },
 
@@ -304,52 +243,22 @@ static DataTypeTransition rtBTransitions[] = {
 
   { (char_T *)
     (&GRM_HIL_DW.TAQSigLogging_InsertedFor_Actuators_at_outport_0_1_PWORK.AQHandles
-     [0]), 11, 0, 80 },
+     [0]), 11, 0, 87 },
 
-  { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 6 },
+  { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 8 },
 
   { (char_T *)(&GRM_HIL_DW.integration_eom_IWORK), 10, 0, 3 },
 
   { (char_T *)(&GRM_HIL_DW.Output_DSTATE), 5, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC), 2, 0, 7 },
+  { (char_T *)(&GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC), 2, 0, 9 },
 
   { (char_T *)(&GRM_HIL_DW.Send_to_FTHWICC_MODE), 8, 0, 4 }
-=======
-  { (char_T *)(&GRM_HIL_B.motor_state_perc), 0, 0, 153 },
-
-  { (char_T *)(&GRM_HIL_B.Receive_from_FTHWICC_o8), 5, 0, 3 },
-
-  { (char_T *)(&GRM_HIL_B.reset), 8, 0, 14 },
-
-  { (char_T *)(&GRM_HIL_B.sf_Counter_with_external_limit_b.value), 0, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_B.sf_Counter_with_external_limit.value), 0, 0, 1 }
-  ,
-
-  { (char_T *)(&GRM_HIL_DW.Memory_PreviousInput), 0, 0, 2 },
-
-  { (char_T *)(&GRM_HIL_DW.ACC_PWORK.LoggedData[0]), 11, 0, 25 },
-
-  { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 6 },
-
-  { (char_T *)(&GRM_HIL_DW.Integrator_IWORK), 10, 0, 13 },
-
-  { (char_T *)(&GRM_HIL_DW.Output_DSTATE), 5, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC), 2, 0, 12 },
-
-  { (char_T *)(&GRM_HIL_DW.lock_PreviousInput), 8, 0, 10 }
->>>>>>> origin/master
 };
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
-<<<<<<< HEAD
-  20U,
-=======
-  12U,
->>>>>>> origin/master
+  22U,
   rtBTransitions
 };
 
@@ -357,105 +266,46 @@ static DataTypeTransitionTable rtBTransTable = {
 static DataTypeTransition rtPTransitions[] = {
   { (char_T *)(&GRM_HIL_P.HIL_Sample_Time), 0, 0, 1 },
 
-<<<<<<< HEAD
   { (char_T *)(&GRM_HIL_P.External_Inputs_External_Inputs), 47, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.FlightController_FCC), 77, 0, 1 },
-=======
-  { (char_T *)(&GRM_HIL_P.FDM_Linear_FDM), 98, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.FDM_Linear_TF), 91, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.External_Inputs_External_Inputs), 46, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Initial_States_Rigid_Body), 84, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.FlightController_FCC), 76, 0, 1 },
->>>>>>> origin/master
 
   { (char_T *)(&GRM_HIL_P.Servo_TF), 33, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Servo_Cmd_PWM), 34, 0, 1 },
-
   { (char_T *)(&GRM_HIL_P.Servo_PWM), 34, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.FinDeflection_Control_Surfaces), 70, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Serial_Recieve_from_Pixhawk_Serial), 71, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Servo_Cmd_Control_Surfaces), 70, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Serial_Send_to_Pixhawk_Serial), 71, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Communication_FT_HWI_ControlComputer_HW), 79, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Communication_FT_HWI_ControlComputer_HW), 73, 0, 1 },
 
-<<<<<<< HEAD
-  { (char_T *)(&GRM_HIL_P.RealTimeSynchronization_MaxMissedTicks), 0, 0, 72 },
+  { (char_T *)(&GRM_HIL_P.RealTimeSynchronization_MaxMissedTicks), 0, 0, 74 },
 
-  { (char_T *)(&GRM_HIL_P.Send_to_FTHWICC_PacketID), 6, 0, 2 },
+  { (char_T *)(&GRM_HIL_P.PacketInput_PacketID), 6, 0, 4 },
 
   { (char_T *)(&GRM_HIL_P.WrapToZero_Threshold), 5, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.States_hold_Y0), 100, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Gimbal_Pos_Encoder_Y0), 88, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Gimbal_State_hold_Y0), 106, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.hold_Y0), 117, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Gimbal_Pos_Encoder_Y0), 105, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Simulation_Control_hold_Y0), 18, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Gimbal_Pos_Y0), 102, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.External_Inputs_hold_Y0), 109, 0, 1 },
+  { (char_T *)(&GRM_HIL_P.Gimbal_Pos_Y0), 85, 0, 1 },
 
   { (char_T *)(&GRM_HIL_P.Gimbal_Status_Y0), 64, 0, 1 },
 
-  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 117586 },
+  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 117584 },
+
+  { (char_T *)(&GRM_HIL_P.ServoCMD_Y0), 1, 0, 6 },
 
   { (char_T *)(&GRM_HIL_P.Cn_delta_n_Interpolation_dimSize[0]), 7, 0, 135 },
 
-  { (char_T *)(&GRM_HIL_P.FCC_heartbeat_Y0), 5, 0, 4 },
+  { (char_T *)(&GRM_HIL_P.PixHeartbeat_Y0), 5, 0, 6 },
 
-  { (char_T *)(&GRM_HIL_P.Constant10_Value_ca), 8, 0, 9 }
-=======
-  { (char_T *)(&GRM_HIL_P.Communication_FT_HWI_ControlComputer_FTHWICC), 78, 0,
-    1 },
+  { (char_T *)(&GRM_HIL_P.Constant10_Value_ca), 8, 0, 12 },
 
-  { (char_T *)(&GRM_HIL_P.Initial_States_Airframe), 60, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.RealTimeSynchronization_MaxMissedTicks), 0, 0, 5 },
-
-  { (char_T *)(&GRM_HIL_P.Send_to_FTHWICC_PacketID), 6, 0, 2 },
-
-  { (char_T *)(&GRM_HIL_P.WrapToZero_Threshold), 5, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.States_hold_Y0), 119, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Gimbal_State_hold_Y0), 125, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.hold_Y0), 136, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Gimbal_Pos_Encoder_Y0), 124, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Simulation_Control_hold_Y0), 18, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Gimbal_Pos_Y0), 121, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.External_Inputs_hold_Y0), 128, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Gimbal_Status_Y0), 63, 0, 1 },
-
-  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 112 },
-
-  { (char_T *)(&GRM_HIL_P.FCC_heartbeat_Y0), 5, 0, 4 },
-
-  { (char_T *)(&GRM_HIL_P.Constant10_Value_c), 8, 0, 13 },
-
-  { (char_T *)(&GRM_HIL_P.ManualSwitch_5_CurrentSetting), 3, 0, 6 }
->>>>>>> origin/master
+  { (char_T *)(&GRM_HIL_P.Data_Y0), 3, 0, 6 }
 };
 
 /* data type transition table for Parameters structure */
 static DataTypeTransitionTable rtPTransTable = {
-  24U,
+  19U,
   rtPTransitions
 };
 

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.320
+// Model version                  : 1.322
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Thu Oct 17 19:11:25 2019
+// C/C++ source code generated on : Thu Dec 12 14:42:20 2019
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -78,10 +78,11 @@ typedef struct {
   px4_Bus_sensor_gyro In1;             // '<S61>/In1'
   px4_Bus_sensor_accel In1_j;          // '<S59>/In1'
   px4_Bus_sensor_gyro b_varargout_2_k;
+  uint8_T TxDataLocChar[64];
+  real32_T u0[16];
+  px4_Bus_vehicle_attitude In1_c;      // '<S63>/In1'
   uint8_T message[56];                 // '<S51>/ExtractMessage'
-  uint8_T TxDataLocChar[48];
-  real32_T TmpSignalConversionAtSerial[12];
-  real32_T TmpRTBAtExecutionCycleInpor[6];// '<Root>/Sensor Input'
+  real32_T TmpRTBAtExecutionCycleInpor[10];// '<Root>/Sensor Input'
   uint16_T pwmValue[8];
   real32_T CMD_update[3];              // '<S54>/CMD_update'
   real32_T ACC_update[3];              // '<S54>/ACC_update'
@@ -138,7 +139,7 @@ typedef struct {
   real32_T DiscreteTransferFcn_states; // '<S23>/Discrete Transfer Fcn'
   real32_T DiscreteTransferFcn1_states;// '<S23>/Discrete Transfer Fcn1'
   real32_T DiscreteTransferFcn2_states;// '<S23>/Discrete Transfer Fcn2'
-  volatile real32_T TmpRTBAtExecutionCycleInport6_B[12];// synthesized block
+  volatile real32_T TmpRTBAtExecutionCycleInport6_B[20];// synthesized block
   int32_T SFunction_DIMS2[2];          // '<S51>/ExtractMessage'
   int32_T update_DIMS1[2];             // '<S8>/update'
   int32_T SFunction_DIMS2_f[2];        // '<S6>/DecodeCommand'
@@ -255,6 +256,9 @@ struct P_Pix_FCC_flash_T_ {
 
   real32_T TestSignal_feedback_Y0; // Computed Parameter: TestSignal_feedback_Y0
                                       //  Referenced by: '<S18>/TestSignal_feedback'
+
+  real32_T quaternion_Y0;              // Computed Parameter: quaternion_Y0
+                                          //  Referenced by: '<S18>/quaternion'
 
   real32_T Gain_Gain;           // Expression: FCC_PIX_Data.Controller.Roll.Gain
                                    //  Referenced by: '<S23>/Gain'
@@ -505,7 +509,7 @@ extern "C" {
 //  Block '<S37>/Data Type Propagation' : Unused code path elimination
 //  Block '<S40>/FixPt Data Type Duplicate' : Unused code path elimination
 //  Block '<S41>/FixPt Data Type Duplicate1' : Unused code path elimination
-//  Block '<S39>/Display' : Unused code path elimination
+//  Block '<S43>/Constant' : Unused code path elimination
 //  Block '<S48>/FixPt Data Type Propagation' : Unused code path elimination
 //  Block '<S49>/FixPt Data Type Duplicate' : Unused code path elimination
 //  Block '<S50>/FixPt Data Type Duplicate1' : Unused code path elimination
@@ -518,6 +522,7 @@ extern "C" {
 //  Block '<S19>/Data Type Conversion2' : Eliminate redundant data type conversion
 //  Block '<S19>/Data Type Conversion4' : Eliminate redundant data type conversion
 //  Block '<S19>/Data Type Conversion5' : Eliminate redundant data type conversion
+//  Block '<S19>/Data Type Conversion6' : Eliminate redundant data type conversion
 
 
 //-

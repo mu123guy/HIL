@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.320
+// Model version                  : 1.322
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Thu Oct 17 19:11:25 2019
+// C/C++ source code generated on : Thu Dec 12 14:42:20 2019
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -587,32 +587,55 @@ void Pix_FCC_flash_step1(void)         // Sample time: [0.004s, 0.0s]
   // End of MATLABSystem: '<S60>/SourceBlock'
   // End of Outputs for SubSystem: '<S60>/Enabled Subsystem'
 
+  // MATLABSystem: '<S62>/SourceBlock' incorporates:
+  //   Inport: '<S63>/In1'
+
+  b_varargout_1 = uORB_read_step(Pix_FCC_flash_DW.obj_c.orbMetadataObj,
+    &Pix_FCC_flash_DW.obj_c.eventStructObj, &b_varargout_2, false, 1.0);
+
+  // Outputs for Enabled SubSystem: '<S62>/Enabled Subsystem' incorporates:
+  //   EnablePort: '<S63>/Enable'
+
+  if (b_varargout_1) {
+    Pix_FCC_flash_B.In1_c = b_varargout_2;
+  }
+
+  // End of MATLABSystem: '<S62>/SourceBlock'
+  // End of Outputs for SubSystem: '<S62>/Enabled Subsystem'
+
   // RateTransition generated from: '<Root>/ExecutionCycle'
   Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B
-    [(Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 6] =
+    [(Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10] =
     Pix_FCC_flash_B.In1_j.x;
   Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B[1 +
-    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 6] =
+    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10] =
     Pix_FCC_flash_B.In1_j.y;
   Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B[2 +
-    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 6] =
+    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10] =
     Pix_FCC_flash_B.In1_j.z;
   Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B[3 +
-    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 6] =
+    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10] =
     Pix_FCC_flash_B.In1.x;
   Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B[4 +
-    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 6] =
+    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10] =
     Pix_FCC_flash_B.In1.y;
   Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B[5 +
-    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 6] =
+    (Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10] =
     Pix_FCC_flash_B.In1.z;
+  Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B
+    [(Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10 + 6] =
+    Pix_FCC_flash_B.In1_c.q[0];
+  Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B
+    [(Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10 + 7] =
+    Pix_FCC_flash_B.In1_c.q[1];
+  Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B
+    [(Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10 + 8] =
+    Pix_FCC_flash_B.In1_c.q[2];
+  Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B
+    [(Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0) * 10 + 9] =
+    Pix_FCC_flash_B.In1_c.q[3];
   Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_A = static_cast<int8_T>
     ((Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s == 0));
-
-  // MATLABSystem: '<S62>/SourceBlock'
-  uORB_read_step(Pix_FCC_flash_DW.obj_c.orbMetadataObj,
-                 &Pix_FCC_flash_DW.obj_c.eventStructObj, &b_varargout_2, false,
-                 1.0);
 }
 
 // Model step function for TID2
@@ -910,8 +933,8 @@ void Pix_FCC_flash_step2(void)         // Sample time: [0.01s, 0.0s]
   // RateTransition generated from: '<Root>/ExecutionCycle'
   Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s =
     Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_A;
-  Pix_FCC_flash_B.b_ii = Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s * 6;
-  for (Pix_FCC_flash_B.idx = 0; Pix_FCC_flash_B.idx < 6; Pix_FCC_flash_B.idx++)
+  Pix_FCC_flash_B.b_ii = Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_s * 10;
+  for (Pix_FCC_flash_B.idx = 0; Pix_FCC_flash_B.idx < 10; Pix_FCC_flash_B.idx++)
   {
     Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[Pix_FCC_flash_B.idx] =
       Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B[Pix_FCC_flash_B.idx +
@@ -1742,7 +1765,7 @@ void Pix_FCC_flash_step2(void)         // Sample time: [0.01s, 0.0s]
       //   Constant: '<S39>/Constant'
       //   MATLAB Function: '<S18>/DefineRCStatus'
       //   MATLAB Function: '<S18>/DefineStatus'
-      //   SignalConversion generated from: '<S43>/Serial Transmit'
+      //   MATLABSystem: '<S43>/Serial Transmit'
 
       if (Pix_FCC_flash_P.Constant_Value_h == 1.0) {
         memcpy((void *)&x[0], (void *)&Output, (uint32_T)((size_t)2 * sizeof
@@ -1759,16 +1782,16 @@ void Pix_FCC_flash_step2(void)         // Sample time: [0.01s, 0.0s]
         // S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
         //   SubSystem: '<S39>/Send Data'
 
-        memcpy((void *)&Pix_FCC_flash_B.TmpSignalConversionAtSerial[0], (void *)
-               &Pix_FCC_flash_B.pack[0], (uint32_T)((size_t)1 * sizeof(real32_T)));
+        memcpy((void *)&Pix_FCC_flash_B.u0[0], (void *)&Pix_FCC_flash_B.pack[0],
+               (uint32_T)((size_t)1 * sizeof(real32_T)));
 
         // End of Outputs for S-Function (fcncallgen): '<S39>/Function-Call Generator1' 
       } else {
         // S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
         //   SubSystem: '<S39>/Send Data'
 
-        // SignalConversion generated from: '<S43>/Serial Transmit'
-        Pix_FCC_flash_B.TmpSignalConversionAtSerial[0] = 0.0F;
+        // MATLABSystem: '<S43>/Serial Transmit'
+        Pix_FCC_flash_B.u0[0] = 0.0F;
 
         // End of Outputs for S-Function (fcncallgen): '<S39>/Function-Call Generator1' 
       }
@@ -1791,42 +1814,35 @@ void Pix_FCC_flash_step2(void)         // Sample time: [0.01s, 0.0s]
       //   SubSystem: '<S39>/Send Data'
 
       // Outputs for Function Call SubSystem: '<S2>/ACTION'
-      // SignalConversion generated from: '<S43>/Serial Transmit' incorporates:
+      // MATLABSystem: '<S43>/Serial Transmit' incorporates:
       //   DataTypeConversion: '<S18>/Data Type Conversion'
       //   Inport: '<S18>/SensorData'
       //   Inport: '<S18>/TestSignal'
+      //   SignalConversion generated from: '<S18>/SensorACC'
+      //   SignalConversion generated from: '<S18>/SensorROT'
+      //   SignalConversion generated from: '<S43>/Serial Transmit'
 
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[1] = static_cast<real32_T>
-        (Pix_FCC_flash_B.Add);
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[2] = static_cast<real32_T>
-        (Pix_FCC_flash_B.Add1);
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[3] = static_cast<real32_T>
-        (Pix_FCC_flash_B.Add2);
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[4] = static_cast<real32_T>
-        (Pix_FCC_flash_B.Add3);
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[5] =
-        Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[0];
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[8] =
-        Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[3];
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[6] =
-        Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[1];
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[9] =
-        Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[4];
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[7] =
-        Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[2];
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[10] =
-        Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[5];
-      Pix_FCC_flash_B.TmpSignalConversionAtSerial[11] =
-        Pix_FCC_flash_B.TestSignal_update;
+      Pix_FCC_flash_B.u0[1] = static_cast<real32_T>(Pix_FCC_flash_B.Add);
+      Pix_FCC_flash_B.u0[2] = static_cast<real32_T>(Pix_FCC_flash_B.Add1);
+      Pix_FCC_flash_B.u0[3] = static_cast<real32_T>(Pix_FCC_flash_B.Add2);
+      Pix_FCC_flash_B.u0[4] = static_cast<real32_T>(Pix_FCC_flash_B.Add3);
+      Pix_FCC_flash_B.u0[5] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[0];
+      Pix_FCC_flash_B.u0[8] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[3];
+      Pix_FCC_flash_B.u0[6] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[1];
+      Pix_FCC_flash_B.u0[9] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[4];
+      Pix_FCC_flash_B.u0[7] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[2];
+      Pix_FCC_flash_B.u0[10] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[5];
+      Pix_FCC_flash_B.u0[11] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[6];
+      Pix_FCC_flash_B.u0[12] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[7];
+      Pix_FCC_flash_B.u0[13] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[8];
+      Pix_FCC_flash_B.u0[14] = Pix_FCC_flash_B.TmpRTBAtExecutionCycleInpor[9];
+      Pix_FCC_flash_B.u0[15] = Pix_FCC_flash_B.TestSignal_update;
 
       // End of Outputs for SubSystem: '<S2>/ACTION'
-
-      // MATLABSystem: '<S43>/Serial Transmit'
       memcpy((void *)&Pix_FCC_flash_B.TxDataLocChar[0], (void *)
-             &Pix_FCC_flash_B.TmpSignalConversionAtSerial[0], (uint32_T)((size_t)
-              48 * sizeof(uint8_T)));
+             &Pix_FCC_flash_B.u0[0], (uint32_T)((size_t)64 * sizeof(uint8_T)));
       MW_SCI_Transmit(Pix_FCC_flash_DW.obj_h.MW_SCIHANDLE,
-                      Pix_FCC_flash_B.TxDataLocChar, 48U);
+                      Pix_FCC_flash_B.TxDataLocChar, 64U);
 
       // S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
       //   SubSystem: '<S39>/Send Terminator'
@@ -2033,7 +2049,7 @@ void Pix_FCC_flash_initialize(void)
     // End of Start for SubSystem: '<S1>/DecodeCommand'
 
     // InitializeConditions for RateTransition generated from: '<Root>/ExecutionCycle' 
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < 10; i++) {
       Pix_FCC_flash_DW.TmpRTBAtExecutionCycleInport6_B[i] =
         Pix_FCC_flash_P.TmpRTBAtExecutionCycleInport6_I;
     }
@@ -2160,6 +2176,12 @@ void Pix_FCC_flash_initialize(void)
     Pix_FCC_flash_B.In1 = Pix_FCC_flash_P.Out1_Y0_f;
 
     // End of SystemInitialize for SubSystem: '<S60>/Enabled Subsystem'
+
+    // SystemInitialize for Enabled SubSystem: '<S62>/Enabled Subsystem'
+    // SystemInitialize for Outport: '<S63>/Out1'
+    Pix_FCC_flash_B.In1_c = Pix_FCC_flash_P.Out1_Y0_a;
+
+    // End of SystemInitialize for SubSystem: '<S62>/Enabled Subsystem'
   }
 }
 

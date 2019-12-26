@@ -2,7 +2,7 @@
 ## Makefile generated for Simulink model 'Pix_FCC_flash'. 
 ## 
 ## Makefile     : Pix_FCC_flash.mk
-## Generated on : Thu Oct 17 17:15:35 2019
+## Generated on : Thu Dec 12 14:42:26 2019
 ## MATLAB Coder version: 4.3 (R2019b)
 ## 
 ## Build Info:
@@ -27,7 +27,7 @@ MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2019b
 MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2019b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
 MASTER_ANCHOR_DIR         = 
-START_DIR                 = C:/Users/guy-m/Desktop/Thesis/HIL/Pixhawk_FCC
+START_DIR                 = C:/Users/guy-m/Desktop/HIL/Pixhawk_FCC
 SOLVER                    = 
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0

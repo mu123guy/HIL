@@ -7,15 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
-<<<<<<< HEAD
- * Model version              : 1.67
+ * Model version              : 1.72
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Thu Dec  5 17:25:03 2019
-=======
- * Model version              : 1.44
- * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Fri Nov  8 10:21:14 2019
->>>>>>> origin/master
+ * C source code generated on : Thu Dec 12 16:42:59 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -506,96 +500,6 @@ typedef struct {
 
 #endif
 
-<<<<<<< HEAD
-=======
-#ifndef DEFINED_TYPEDEF_FOR_FDM_States_Bus_
-#define DEFINED_TYPEDEF_FOR_FDM_States_Bus_
-
-typedef struct {
-  ATT_Euler_Bus Attitude_States;
-  Translation_States_Bus Translation_States;
-  Position_States_Bus Position_States;
-  Airframe_States_Bus Airframe_States;
-} FDM_States_Bus;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_ATT_Euler_Dot_Bus_
-#define DEFINED_TYPEDEF_FOR_ATT_Euler_Dot_Bus_
-
-typedef struct {
-  real_T ATT_Dot_Phi_radDs;
-  real_T ATT_Dot_Theta_radDs;
-  real_T ATT_Dot_Psi_radDs;
-} ATT_Euler_Dot_Bus;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_POS_WGS84_Dot_Bus_
-#define DEFINED_TYPEDEF_FOR_POS_WGS84_Dot_Bus_
-
-typedef struct {
-  real_T POS_lambda_Dot_WGS84_radDs;
-  real_T POS_mue_Dot_WGS84_radDs;
-  real_T POS_h_Dot_WGS84_mDs;
-} POS_WGS84_Dot_Bus;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_POS_NED_Dot_Bus_
-#define DEFINED_TYPEDEF_FOR_POS_NED_Dot_Bus_
-
-typedef struct {
-  real_T POS_x_Dot_NED_mDs;
-  real_T POS_y_Dot_NED_mDs;
-  real_T POS_z_Dot_NED_mDs;
-} POS_NED_Dot_Bus;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Position_States_Dot_Bus_
-#define DEFINED_TYPEDEF_FOR_Position_States_Dot_Bus_
-
-typedef struct {
-  POS_WGS84_Dot_Bus POS_WGS84_Dot;
-  POS_NED_Dot_Bus POS_NED_Dot;
-} Position_States_Dot_Bus;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Airframe_States_Dot_Bus_
-#define DEFINED_TYPEDEF_FOR_Airframe_States_Dot_Bus_
-
-typedef struct {
-  real_T Motor_state_dot_percDs;
-} Airframe_States_Dot_Bus;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_FDM_States_Dot_Bus_
-#define DEFINED_TYPEDEF_FOR_FDM_States_Dot_Bus_
-
-typedef struct {
-  ATT_Euler_Dot_Bus ATT_Euler_Dot;
-  Translation_States_Dot_Bus Translation_States_Dot;
-  Position_States_Dot_Bus Position_States_Dot;
-  Airframe_States_Dot_Bus Airframe_States_Dot;
-} FDM_States_Dot_Bus;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_FDM_Rot_Body_Bus_
-#define DEFINED_TYPEDEF_FOR_FDM_Rot_Body_Bus_
-
-typedef struct {
-  real_T p_B_radDs;
-  real_T q_B_radDs;
-  real_T r_B_radDs;
-} FDM_Rot_Body_Bus;
-
-#endif
-
->>>>>>> origin/master
 #ifndef DEFINED_TYPEDEF_FOR_struct_fqhbejXln8QRylaPqhUyTF_
 #define DEFINED_TYPEDEF_FOR_struct_fqhbejXln8QRylaPqhUyTF_
 
@@ -753,87 +657,23 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_skgRGNdg4uikkiJBtrraoB_
-#define DEFINED_TYPEDEF_FOR_struct_skgRGNdg4uikkiJBtrraoB_
+#ifndef DEFINED_TYPEDEF_FOR_struct_fPSpQec4CK6Ld2LdBMMAbH_
+#define DEFINED_TYPEDEF_FOR_struct_fPSpQec4CK6Ld2LdBMMAbH_
 
 typedef struct {
-  real_T phi_f1_rad;
-  real_T phi_f2_rad;
-  real_T phi_f3_rad;
-  real_T phi_f4_rad;
-  real_T max_deflection_rad;
-} struct_skgRGNdg4uikkiJBtrraoB;
+  real_T MaxMissedTicks;
+} struct_fPSpQec4CK6Ld2LdBMMAbH;
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_QhvhhqDV0L2yxKLWicNneD_
-#define DEFINED_TYPEDEF_FOR_struct_QhvhhqDV0L2yxKLWicNneD_
+#ifndef DEFINED_TYPEDEF_FOR_struct_o6lBeR5a4wCQZKjH0CEd8D_
+#define DEFINED_TYPEDEF_FOR_struct_o6lBeR5a4wCQZKjH0CEd8D_
 
 typedef struct {
-  real_T Num[2];
-  real_T Denom[2];
-} struct_QhvhhqDV0L2yxKLWicNneD;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_NXU1FRSfNm9MZqPmiPj5nG_
-#define DEFINED_TYPEDEF_FOR_struct_NXU1FRSfNm9MZqPmiPj5nG_
-
-typedef struct {
-  real_T PreGain;
-  real_T Gain;
-  struct_QhvhhqDV0L2yxKLWicNneD Lead;
-} struct_NXU1FRSfNm9MZqPmiPj5nG;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_NKNq6gj8dL8ticSV3dO1LF_
-#define DEFINED_TYPEDEF_FOR_struct_NKNq6gj8dL8ticSV3dO1LF_
-
-typedef struct {
-  real_T PropGain;
-} struct_NKNq6gj8dL8ticSV3dO1LF;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_6DMhF3HgatZ0SVFTbVEXUB_
-#define DEFINED_TYPEDEF_FOR_struct_6DMhF3HgatZ0SVFTbVEXUB_
-
-typedef struct {
-  real_T Num;
-  real_T Denom[2];
-} struct_6DMhF3HgatZ0SVFTbVEXUB;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_0bCECObDp9cpwUujjacDoB_
-#define DEFINED_TYPEDEF_FOR_struct_0bCECObDp9cpwUujjacDoB_
-
-typedef struct {
-  real_T PropGain;
-  struct_6DMhF3HgatZ0SVFTbVEXUB IntGain;
-} struct_0bCECObDp9cpwUujjacDoB;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_mvMpa6roJ3cC08QEKeHpUD_
-#define DEFINED_TYPEDEF_FOR_struct_mvMpa6roJ3cC08QEKeHpUD_
-
-typedef struct {
-  struct_NKNq6gj8dL8ticSV3dO1LF innerLoop;
-  struct_0bCECObDp9cpwUujjacDoB outerLoop;
-} struct_mvMpa6roJ3cC08QEKeHpUD;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_SpfmErt2JG4vKmjTJRH6OB_
-#define DEFINED_TYPEDEF_FOR_struct_SpfmErt2JG4vKmjTJRH6OB_
-
-typedef struct {
-  struct_NXU1FRSfNm9MZqPmiPj5nG Roll;
-  struct_mvMpa6roJ3cC08QEKeHpUD Pitch;
-  struct_mvMpa6roJ3cC08QEKeHpUD Yaw;
-} struct_SpfmErt2JG4vKmjTJRH6OB;
+  real_T param1;
+  struct_fPSpQec4CK6Ld2LdBMMAbH Send;
+  struct_fPSpQec4CK6Ld2LdBMMAbH Receive;
+} struct_o6lBeR5a4wCQZKjH0CEd8D;
 
 #endif
 
@@ -883,30 +723,6 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_8dn0WBFJAEipy0bhP7ue2G_
-#define DEFINED_TYPEDEF_FOR_struct_8dn0WBFJAEipy0bhP7ue2G_
-
-typedef struct {
-  Translation_States_Bus Translation_States;
-  Translation_States_Dot_Bus Translation_States_Dot;
-  Rotation_States_Bus Rotation_States;
-  Attitude_States_Bus Attitude_States;
-  Position_States_Bus Position_States;
-} struct_8dn0WBFJAEipy0bhP7ue2G;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_4BEF1wwN52Uf7px5A1b9LF_
-#define DEFINED_TYPEDEF_FOR_struct_4BEF1wwN52Uf7px5A1b9LF_
-
-typedef struct {
-  struct_8dn0WBFJAEipy0bhP7ue2G Rigid_Body_States;
-  Airframe_States_Bus Airframe_States;
-  Atm_States_Bus Atm_States;
-} struct_4BEF1wwN52Uf7px5A1b9LF;
-
-#endif
-
 #ifndef DEFINED_TYPEDEF_FOR_struct_mYS1N2caX135AIcTArxUzD_
 #define DEFINED_TYPEDEF_FOR_struct_mYS1N2caX135AIcTArxUzD_
 
@@ -929,57 +745,23 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_naMSiPeANZdxK1BVj547qE_
-#define DEFINED_TYPEDEF_FOR_struct_naMSiPeANZdxK1BVj547qE_
+#ifndef struct_emxArray_uint8_T_1x64
+#define struct_emxArray_uint8_T_1x64
 
-typedef struct {
-  Gimbal_Status_Bus Gimbal_Status_Bus;
-  struct_mYS1N2caX135AIcTArxUzD Gimbal_Attitude_Bus;
-  struct_VkUZsEuPLDWiHwBdN4zERD Gimbal_Encoder_Bus;
-} struct_naMSiPeANZdxK1BVj547qE;
+struct emxArray_uint8_T_1x64
+{
+  uint8_T data[64];
+  int32_T size[2];
+};
 
-#endif
+#endif                                 /*struct_emxArray_uint8_T_1x64*/
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_lQamzfSfua9vI4k5KcpdyB_
-#define DEFINED_TYPEDEF_FOR_struct_lQamzfSfua9vI4k5KcpdyB_
+#ifndef typedef_emxArray_uint8_T_1x64_GRM_HIL_T
+#define typedef_emxArray_uint8_T_1x64_GRM_HIL_T
 
-typedef struct {
-  FDM_External_Inputs_Bus FDM_External_Inputs_Bus;
-  FCC_External_Inputs_Bus FCC_External_Inputs_Bus;
-} struct_lQamzfSfua9vI4k5KcpdyB;
+typedef struct emxArray_uint8_T_1x64 emxArray_uint8_T_1x64_GRM_HIL_T;
 
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_biIcle9l5pPUJAEhBiubME_
-#define DEFINED_TYPEDEF_FOR_struct_biIcle9l5pPUJAEhBiubME_
-
-typedef struct {
-  real_T signal1;
-} struct_biIcle9l5pPUJAEhBiubME;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_HOsjcyeSDQ7kNiQxBq2HXH_
-#define DEFINED_TYPEDEF_FOR_struct_HOsjcyeSDQ7kNiQxBq2HXH_
-
-typedef struct {
-  struct_biIcle9l5pPUJAEhBiubME Guidance_Cmd;
-  Controller_Cmd_Bus Controller_Cmd;
-  ATT_Cmd_Bus ATT_Cmd;
-  Control_Surface_Cmd_Bus Control_Surface_Cmd;
-  Servo_Cmd_Bus Servo_Cmd;
-} struct_HOsjcyeSDQ7kNiQxBq2HXH;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_F8un5srqOha4P4SBfdUeHD_
-#define DEFINED_TYPEDEF_FOR_struct_F8un5srqOha4P4SBfdUeHD_
-
-typedef struct {
-  struct_HOsjcyeSDQ7kNiQxBq2HXH Airframe_Cmd;
-} struct_F8un5srqOha4P4SBfdUeHD;
-
-#endif
+#endif                               /*typedef_emxArray_uint8_T_1x64_GRM_HIL_T*/
 
 /* Parameters (default storage) */
 typedef struct P_GRM_HIL_T_ P_GRM_HIL_T;

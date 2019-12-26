@@ -1,0 +1,5 @@
+test gimbal with local signalcommands
+use our own aerodynamic data
+work out control algorithms
+add imu block
+estimate "full" state

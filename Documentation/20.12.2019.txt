@@ -1,0 +1,18 @@
+What i did
+gathered information about aerodynamic derivatives
+mounted pixhawk to gimbal
+enabled pixhawk imu and estimator
+desgined control loop 
+looked into hardware (how to plug in servos?)
+
+Questions:
+Where can i get time constants for servo/sensors?
+Thomas's simulation is very sophisticated
+Did i design control loop well?
+How do i estimate states? what states can i estimate?
+Do out servos have encoders?
+
+
+
+check differences between delta coefficients
+State estimation
