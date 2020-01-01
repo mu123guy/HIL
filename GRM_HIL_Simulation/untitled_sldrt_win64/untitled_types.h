@@ -9,7 +9,7 @@
  *
  * Model version              : 1.0
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Nov 27 12:02:27 2019
+ * C source code generated on : Mon Dec 30 20:31:29 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,6 +23,23 @@
 #include "rtwtypes.h"
 #include "multiword_types.h"
 #include "zero_crossing_types.h"
+#ifndef struct_emxArray_uint8_T_1x64
+#define struct_emxArray_uint8_T_1x64
+
+struct emxArray_uint8_T_1x64
+{
+  uint8_T data[64];
+  int32_T size[2];
+};
+
+#endif                                 /*struct_emxArray_uint8_T_1x64*/
+
+#ifndef typedef_emxArray_uint8_T_1x64_untitled_T
+#define typedef_emxArray_uint8_T_1x64_untitled_T
+
+typedef struct emxArray_uint8_T_1x64 emxArray_uint8_T_1x64_untitled_T;
+
+#endif                              /*typedef_emxArray_uint8_T_1x64_untitled_T*/
 
 /* Parameters (default storage) */
 typedef struct P_untitled_T_ P_untitled_T;

@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.71
+ * Model version              : 1.80
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Thu Dec 12 15:00:53 2019
+ * C source code generated on : Mon Dec 30 21:34:10 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -311,6 +311,17 @@ typedef struct {
 
 #endif
 
+#ifndef DEFINED_TYPEDEF_FOR_Rotation_States_Dot_Bus_
+#define DEFINED_TYPEDEF_FOR_Rotation_States_Dot_Bus_
+
+typedef struct {
+  real_T w_x_dot_radDs2;
+  real_T w_y_dot_radDs2;
+  real_T w_z_dot_radDs2;
+} Rotation_States_Dot_Bus;
+
+#endif
+
 #ifndef DEFINED_TYPEDEF_FOR_ATT_Euler_Bus_
 #define DEFINED_TYPEDEF_FOR_ATT_Euler_Bus_
 
@@ -381,8 +392,9 @@ typedef struct {
 
 typedef struct {
   Translation_States_Bus Translation_States;
-  Translation_States_Dot_Bus Acceleration_States;
+  Translation_States_Dot_Bus Translation_States_Dot;
   Rotation_States_Bus Rotation_States;
+  Rotation_States_Dot_Bus Rotation_States_Dot;
   Attitude_States_Bus Attitude_States;
   Position_States_Bus Position_States;
 } Rigid_Body_States_Bus;
@@ -497,6 +509,29 @@ typedef struct {
   real_T Gimbal_Theta_Cmd_deg;
   real_T Gimbal_Psi_Cmd_deg;
 } Gimbal_Cmd_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_Gimbal_Ctrl_Bus_
+#define DEFINED_TYPEDEF_FOR_Gimbal_Ctrl_Bus_
+
+typedef struct {
+  real_T enable_gimbal_ctrl_flg;
+  real_T stop_gimbal_flg;
+  real_T Gimbal_Phi2Motor;
+  real_T Gimbal_Theta2Motor;
+  real_T Gimbal_Psi2Motor;
+} Gimbal_Ctrl_Bus;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_Gimbal_Monitor_Bus_
+#define DEFINED_TYPEDEF_FOR_Gimbal_Monitor_Bus_
+
+typedef struct {
+  boolean_T cmd_pass_enable_flg;
+  boolean_T emergency_stop_flg;
+} Gimbal_Monitor_Bus;
 
 #endif
 
@@ -677,13 +712,120 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_RIcaXENoLMkyG3vAzx3LrF_
-#define DEFINED_TYPEDEF_FOR_struct_RIcaXENoLMkyG3vAzx3LrF_
+#ifndef DEFINED_TYPEDEF_FOR_struct_2rU9DLCenxPBMI086Phyx_
+#define DEFINED_TYPEDEF_FOR_struct_2rU9DLCenxPBMI086Phyx_
 
 typedef struct {
+  real_T Num_Coef[2];
+  real_T Denom_Coef[3];
+} struct_2rU9DLCenxPBMI086Phyx;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_struct_u9tuPjUAEO3XkpAUDGTraG_
+#define DEFINED_TYPEDEF_FOR_struct_u9tuPjUAEO3XkpAUDGTraG_
+
+typedef struct {
+  real_T Num_Coef;
+  real_T Denom_Coef;
+} struct_u9tuPjUAEO3XkpAUDGTraG;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_struct_3GFOl0CrpEtPiCeQKu5bZE_
+#define DEFINED_TYPEDEF_FOR_struct_3GFOl0CrpEtPiCeQKu5bZE_
+
+typedef struct {
+  real_T Num_Coef[5];
+  real_T Denom_Coef[6];
+} struct_3GFOl0CrpEtPiCeQKu5bZE;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_struct_1jtd4lthR1rS618lzimrEB_
+#define DEFINED_TYPEDEF_FOR_struct_1jtd4lthR1rS618lzimrEB_
+
+typedef struct {
+  real_T Num_Coef[3];
+  real_T Denom_Coef[4];
+} struct_1jtd4lthR1rS618lzimrEB;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_struct_X0z48mq1MJmnXMBjrHYvYC_
+#define DEFINED_TYPEDEF_FOR_struct_X0z48mq1MJmnXMBjrHYvYC_
+
+typedef struct {
+  struct_2rU9DLCenxPBMI086Phyx Psi2Motor_to_Yaw;
+  struct_u9tuPjUAEO3XkpAUDGTraG Theta2Motor_to_Yaw;
+  struct_u9tuPjUAEO3XkpAUDGTraG Phi2Motor_to_Yaw;
+  struct_u9tuPjUAEO3XkpAUDGTraG Psi2Motor_to_Pitch;
+  struct_3GFOl0CrpEtPiCeQKu5bZE Theta2Motor_to_Pitch;
+  struct_u9tuPjUAEO3XkpAUDGTraG Phi2Motor_to_Pitch;
+  struct_u9tuPjUAEO3XkpAUDGTraG Psi2Motor_to_Roll;
+  struct_u9tuPjUAEO3XkpAUDGTraG Theta2Motor_to_Roll;
+  struct_1jtd4lthR1rS618lzimrEB Phi2Motor_to_Roll;
+} struct_X0z48mq1MJmnXMBjrHYvYC;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_struct_t5lid3aqguggysQaotuOhC_
+#define DEFINED_TYPEDEF_FOR_struct_t5lid3aqguggysQaotuOhC_
+
+typedef struct {
+  real_T SampFreq;
   real_T SampTime;
   real_T MaxMissTick;
-} struct_RIcaXENoLMkyG3vAzx3LrF;
+  real_T MaxCheck;
+  real_T YawMaxV;
+  real_T PitchMaxV;
+  real_T RollMaxV;
+  real_T Enable_Voltage_Limits_atOutput;
+  real_T Enable_Voltage_Limits_atController;
+  real_T YawCmdMaxVolt;
+  real_T YawCmdMinVolt;
+  real_T PitchCmdMaxVolt;
+  real_T PitchCmdMinVolt;
+  real_T RollCmdMaxVolt;
+  real_T RollCmdMinVolt;
+  real_T Yaw_soft_limit_vel;
+  real_T Yaw_hard_limit_vel;
+  real_T Yaw_limit_adaption_coef;
+  real_T Pitch_soft_limit_vel;
+  real_T Pitch_hard_limit_vel;
+  real_T Pitch_limit_adaption_coef;
+  real_T Roll_soft_limit_vel;
+  real_T Roll_hard_limit_vel;
+  real_T Roll_limit_adaption_coef;
+  real_T PID_Yaw_Proportional_Gain;
+  real_T PID_Yaw_Integral_Gain;
+  real_T PID_Yaw_Derivative_Gain;
+  real_T PID_Yaw_Filter_Coefficient;
+  real_T PID_Yaw_BackCalculation_Coefficient;
+  real_T PID_Pitch_Proportional_Gain;
+  real_T PID_Pitch_Integral_Gain;
+  real_T PID_Pitch_Derivative_Gain;
+  real_T PID_Pitch_Filter_Coefficient;
+  real_T PID_Pitch_BackCalculation_Coefficient;
+  real_T PID_Roll_Proportional_Gain;
+  real_T PID_Roll_Integral_Gain;
+  real_T PID_Roll_Derivative_Gain;
+  real_T PID_Roll_Filter_Coefficient;
+  real_T PID_Roll_BackCalculation_Coefficient;
+  real_T Enable_Limit_Controllers;
+  real_T Yaw_LC_Proportional_Gain;
+  real_T Yaw_LC_Integral_Gain;
+  real_T Yaw_LC_Derivative_Gain;
+  real_T Yaw_LC_Weighting;
+  real_T Pitch_LC_Proportional_Gain;
+  real_T Pitch_LC_Integral_Gain;
+  real_T Pitch_LC_Derivative_Gain;
+  real_T Pitch_LC_Weighting;
+  real_T Roll_LC_Proportional_Gain;
+  real_T Roll_LC_Integral_Gain;
+  real_T Roll_LC_Derivative_Gain;
+  real_T Roll_LC_Weighting;
+} struct_t5lid3aqguggysQaotuOhC;
 
 #endif
 
@@ -723,28 +865,6 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_struct_mYS1N2caX135AIcTArxUzD_
-#define DEFINED_TYPEDEF_FOR_struct_mYS1N2caX135AIcTArxUzD_
-
-typedef struct {
-  ATT_Euler_Bus ATT_Euler_Bus;
-  ATT_Quaternions_Bus ATT_Quaternions_Bus;
-} struct_mYS1N2caX135AIcTArxUzD;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_struct_VkUZsEuPLDWiHwBdN4zERD_
-#define DEFINED_TYPEDEF_FOR_struct_VkUZsEuPLDWiHwBdN4zERD_
-
-typedef struct {
-  Encoder_Resolved_Bus Encoder_Resolved;
-  Encoder_Signal_Bus Pos_Yaw_Encoder;
-  Encoder_Signal_Bus Pos_Pitch_Encoder;
-  Encoder_Signal_Bus Pos_Roll_Encoder;
-} struct_VkUZsEuPLDWiHwBdN4zERD;
-
-#endif
-
 #ifndef struct_emxArray_uint8_T_1x64
 #define struct_emxArray_uint8_T_1x64
 
@@ -762,6 +882,12 @@ struct emxArray_uint8_T_1x64
 typedef struct emxArray_uint8_T_1x64 emxArray_uint8_T_1x64_GRM_HIL_T;
 
 #endif                               /*typedef_emxArray_uint8_T_1x64_GRM_HIL_T*/
+
+/* Parameters for system: '<S173>/If Action Subsystem1' */
+typedef struct P_IfActionSubsystem1_GRM_HIL_T_ P_IfActionSubsystem1_GRM_HIL_T;
+
+/* Parameters for system: '<S173>/If Action Subsystem' */
+typedef struct P_IfActionSubsystem_GRM_HIL_T_ P_IfActionSubsystem_GRM_HIL_T;
 
 /* Parameters (default storage) */
 typedef struct P_GRM_HIL_T_ P_GRM_HIL_T;

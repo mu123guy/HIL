@@ -23,10 +23,6 @@
     %generatefile "machineSource" "lib_Serial_PIX_rtw.tlc"
     %<GENERATE_TYPE(block,"DumpMachineInitializer","machineSource")>\
   %endif
-  %if FILE_EXISTS("lib_Gimbal_rtw.tlc")
-    %generatefile "machineSource" "lib_Gimbal_rtw.tlc"
-    %<GENERATE_TYPE(block,"DumpMachineInitializer","machineSource")>\
-  %endif
   %if FILE_EXISTS("lib_FDM_rtw.tlc")
     %generatefile "machineSource" "lib_FDM_rtw.tlc"
     %<GENERATE_TYPE(block,"DumpMachineInitializer","machineSource")>\
@@ -49,8 +45,6 @@
   %openfile tmpFcnBuf
   %<DumpMachineTerminator(block)>\
   %generatefile "machineSource" "lib_Serial_PIX_rtw.tlc"
-  %<GENERATE_TYPE(block,"DumpMachineTerminator","machineSource")>\
-  %generatefile "machineSource" "lib_Gimbal_rtw.tlc"
   %<GENERATE_TYPE(block,"DumpMachineTerminator","machineSource")>\
   %generatefile "machineSource" "lib_FDM_rtw.tlc"
   %<GENERATE_TYPE(block,"DumpMachineTerminator","machineSource")>\

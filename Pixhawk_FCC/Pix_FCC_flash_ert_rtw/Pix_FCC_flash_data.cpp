@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.322
+// Model version                  : 1.324
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Thu Dec 12 14:42:20 2019
+// C/C++ source code generated on : Mon Dec 30 19:52:54 2019
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -317,13 +317,13 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
 
   0.0F,
 
-  // Computed Parameter: TestSignal_feedback_Y0
-  //  Referenced by: '<S18>/TestSignal_feedback'
+  // Computed Parameter: quaternion_Y0
+  //  Referenced by: '<S18>/quaternion'
 
   0.0F,
 
-  // Computed Parameter: quaternion_Y0
-  //  Referenced by: '<S18>/quaternion'
+  // Computed Parameter: TestSignal_feedback_Y0
+  //  Referenced by: '<S18>/TestSignal_feedback'
 
   0.0F,
 

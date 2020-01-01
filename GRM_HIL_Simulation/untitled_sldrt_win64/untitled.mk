@@ -83,8 +83,8 @@ MATLAB_ROOT          := C:/PROGRA~1/MATLAB/R2019b
 MATLAB_BIN           := C:/PROGRA~1/MATLAB/R2019b/bin
 S_FUNCTIONS_LIB      := 
 SOLVER               := 
-NUMST                := 4
-TID01EQ              := 1
+NUMST                := 1
+TID01EQ              := 0
 NCSTATES             := 0
 BUILDARGS            :=  EXTMODE_STATIC_ALLOC=0 EXTMODE_STATIC_ALLOC_SIZE=1000000 TMW_EXTMODE_TESTING=0 COMBINE_OUTPUT_UPDATE_FCNS=0 INCLUDE_MDL_TERMINATE_FCN=1 MULTI_INSTANCE_CODE=0 ISPROTECTINGMODEL=NOTPROTECTING OPTS="-DTGTCONN -DEXT_MODE -DON_TARGET_WAIT_FOR_START=1"
 MULTITASKING         := 0
@@ -93,7 +93,7 @@ EXTMODE_TRANSPORT    := 0
 
 MODELREFS            := 
 TARGET_LANG_EXT      := c
-OPTIMIZATION_FLAGS   := -O4 -O4 -O4 -O4 -O4 -O4 -O4 -O4 -O4 -O4 -O4 -O4
+OPTIMIZATION_FLAGS   := -O4
 ADDITIONAL_LDFLAGS   := 
 DEFINES_CUSTOM       := 
 
@@ -157,7 +157,7 @@ REQ_INCLUDES := $(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/extern/include;$(
 REQ_INCLUDES += ;$(MATLAB_ROOT)/toolbox/shared/can/src/scanutil;$(SLDRTDIR)/src
 
 # additional includes
-REQ_INCLUDES += ;C:/Users/guy-m/Desktop/HIL_branch/GRM_HIL_Simulation;C:/Users/guy-m/Desktop/HIL_branch/GRM_HIL_Simulation/untitled_sldrt_win64;$(MATLAB_ROOT)/extern/include;$(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/rtw/c/src;$(MATLAB_ROOT)/rtw/c/src/ext_mode/common;$(MATLAB_ROOT)/toolbox/coder/rtiostream/src
+REQ_INCLUDES += ;C:/Users/guy-m/Documents/MATLAB/HIL/GRM_HIL_Simulation;C:/Users/guy-m/Documents/MATLAB/HIL/GRM_HIL_Simulation/untitled_sldrt_win64;$(MATLAB_ROOT)/extern/include;$(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/rtw/c/src;$(MATLAB_ROOT)/rtw/c/src/ext_mode/common;$(MATLAB_ROOT)/toolbox/coder/rtiostream/src
 
 INCLUDES := $(USER_INCLUDES);.;$(RELATIVE_PATH_TO_ANCHOR);$(REQ_INCLUDES)
 

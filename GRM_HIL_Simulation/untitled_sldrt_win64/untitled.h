@@ -9,7 +9,7 @@
  *
  * Model version              : 1.0
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Wed Nov 27 12:02:27 2019
+ * C source code generated on : Mon Dec 30 20:31:29 2019
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -23,6 +23,7 @@
 #include <string.h>
 #ifndef untitled_COMMON_INCLUDES_
 # define untitled_COMMON_INCLUDES_
+#include "ToAsyncQueueTgtAppSvc/ToAsyncQueueTgtAppSvcCIntrf.h"
 #include "rtwtypes.h"
 #include "zero_crossing_types.h"
 #include "simstruc.h"
@@ -609,11 +610,11 @@
 #endif
 
 #ifndef rtmGetTaskCounters
-# define rtmGetTaskCounters(rtm)       ((rtm)->Timing.TaskCounters)
+# define rtmGetTaskCounters(rtm)       ()
 #endif
 
 #ifndef rtmSetTaskCounters
-# define rtmSetTaskCounters(rtm, val)  ((rtm)->Timing.TaskCounters = (val))
+# define rtmSetTaskCounters(rtm, val)  ()
 #endif
 
 #ifndef rtmGetTaskTimeArray
@@ -761,7 +762,7 @@
 #endif
 
 #ifndef rtmIsContinuousTask
-# define rtmIsContinuousTask(rtm, tid) ((tid) == 0)
+# define rtmIsContinuousTask(rtm, tid) 0
 #endif
 
 #ifndef rtmGetErrorStatus
@@ -772,16 +773,8 @@
 # define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
 #endif
 
-#ifndef rtmIsMajorTimeStep
-# define rtmIsMajorTimeStep(rtm)       (((rtm)->Timing.simTimeStep) == MAJOR_TIME_STEP)
-#endif
-
-#ifndef rtmIsMinorTimeStep
-# define rtmIsMinorTimeStep(rtm)       (((rtm)->Timing.simTimeStep) == MINOR_TIME_STEP)
-#endif
-
 #ifndef rtmIsSampleHit
-# define rtmIsSampleHit(rtm, sti, tid) ((rtmIsMajorTimeStep((rtm)) && (rtm)->Timing.sampleHits[(rtm)->Timing.sampleTimeTaskIDPtr[sti]]))
+# define rtmIsSampleHit(rtm, sti, tid) ((rtm)->Timing.sampleHits[(rtm)->Timing.sampleTimeTaskIDPtr[sti]])
 #endif
 
 #ifndef rtmGetStopRequested
@@ -851,56 +844,37 @@
 
 /* Block signals (default storage) */
 typedef struct {
-  real_T Receive_from_FTHWICC_o1;      /* '<Root>/Receive_from_FTHWICC' */
-  real_T Receive_from_FTHWICC_o2;      /* '<Root>/Receive_from_FTHWICC' */
-  real_T Receive_from_FTHWICC_o3;      /* '<Root>/Receive_from_FTHWICC' */
-  real_T Receive_from_FTHWICC_o4;      /* '<Root>/Receive_from_FTHWICC' */
-  real_T Receive_from_FTHWICC_o5;      /* '<Root>/Receive_from_FTHWICC' */
-  real_T Receive_from_FTHWICC_o6;      /* '<Root>/Receive_from_FTHWICC' */
-  real_T Receive_from_FTHWICC_o7;      /* '<Root>/Receive_from_FTHWICC' */
-  real_T Receive_from_FTHWICC_o9;      /* '<Root>/Receive_from_FTHWICC' */
-  real_T Output;                       /* '<S6>/Output' */
-  real_T Gain;                         /* '<S3>/Gain' */
-  real_T Output_k;                     /* '<S7>/Output' */
-  real_T Gain_d;                       /* '<S4>/Gain' */
-  real_T Output_d;                     /* '<S5>/Output' */
-  real_T Gain_o;                       /* '<S2>/Gain' */
-  int32_T Receive_from_FTHWICC_o12;    /* '<Root>/Receive_from_FTHWICC' */
-  int32_T Send_to_FTHWICC;             /* '<Root>/Send_to_FTHWICC' */
-  uint16_T Receive_from_FTHWICC_o8;    /* '<Root>/Receive_from_FTHWICC' */
-  uint16_T Output_o;                   /* '<S1>/Output' */
-  uint16_T FixPtSwitch;                /* '<S9>/FixPt Switch' */
-  boolean_T CastToBoolean;             /* '<Root>/Cast To Boolean' */
-  boolean_T NOT;                       /* '<Root>/NOT' */
+  uint8_T PacketInput_o1[78];          /* '<Root>/Packet Input' */
+  boolean_T AND;                       /* '<Root>/AND' */
+  boolean_T packetfound;               /* '<Root>/ExtractMessage' */
 } B_untitled_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  void *Receive_from_FTHWICC_PWORK;    /* '<Root>/Receive_from_FTHWICC' */
-  void *Send_to_FTHWICC_PWORK[2];      /* '<Root>/Send_to_FTHWICC' */
+  void *PacketInput_PWORK;             /* '<Root>/Packet Input' */
   struct {
-    void *LoggedData[2];
-  } Scope1_PWORK;                      /* '<Root>/Scope1' */
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQOutportLogging_InsertedFor_AND_at_outport_0_PWORK;/* synthesized block */
 
   struct {
-    void *LoggedData[2];
-  } Scope2_PWORK;                      /* '<Root>/Scope2' */
+    void *LoggedData;
+  } Scope_PWORK;                       /* '<Root>/Scope' */
 
-  struct {
-    void *LoggedData[2];
-  } Scope3_PWORK;                      /* '<Root>/Scope3' */
-
-  struct {
-    void *LoggedData[2];
-  } roll_PWORK;                        /* '<Root>/roll' */
-
-  void *RealTimeSynchronization_PWORK; /* '<Root>/Real-Time Synchronization' */
-  uint16_T Output_DSTATE;              /* '<S1>/Output' */
+  int32_T SFunction_DIMS2[2];          /* '<Root>/ExtractMessage' */
+  int8_T hold_SubsysRanBC;             /* '<Root>/hold' */
 } DW_untitled_T;
+
+/* External outputs (root outports fed by signals with default storage) */
+typedef struct {
+  boolean_T Status;                    /* '<Root>/Status' */
+} ExtY_untitled_T;
 
 /* Backward compatible GRT Identifiers */
 #define rtB                            untitled_B
 #define BlockIO                        B_untitled_T
+#define rtY                            untitled_Y
+#define ExternalOutputs                ExtY_untitled_T
 #define rtP                            untitled_P
 #define Parameters                     P_untitled_T
 #define rtDWork                        untitled_DW
@@ -908,119 +882,41 @@ typedef struct {
 
 /* Parameters (default storage) */
 struct P_untitled_T_ {
-  real_T Ramp1_InitialOutput;          /* Mask Parameter: Ramp1_InitialOutput
-                                        * Referenced by: '<S6>/Constant1'
+  real_T PacketInput_MaxMissedTicks;
+                                   /* Mask Parameter: PacketInput_MaxMissedTicks
+                                    * Referenced by: '<Root>/Packet Input'
+                                    */
+  real_T PacketInput_YieldWhenWaiting;
+                                 /* Mask Parameter: PacketInput_YieldWhenWaiting
+                                  * Referenced by: '<Root>/Packet Input'
+                                  */
+  int32_T PacketInput_PacketID;        /* Mask Parameter: PacketInput_PacketID
+                                        * Referenced by: '<Root>/Packet Input'
                                         */
-  real_T Ramp2_InitialOutput;          /* Mask Parameter: Ramp2_InitialOutput
-                                        * Referenced by: '<S7>/Constant1'
+  real32_T ServoCMD_Y0;                /* Computed Parameter: ServoCMD_Y0
+                                        * Referenced by: '<S3>/ServoCMD'
                                         */
-  real_T Ramp_InitialOutput;           /* Mask Parameter: Ramp_InitialOutput
-                                        * Referenced by: '<S5>/Constant1'
+  real32_T SensorACC_Y0;               /* Computed Parameter: SensorACC_Y0
+                                        * Referenced by: '<S3>/SensorACC'
                                         */
-  real_T Receive_from_FTHWICC_MaxMissedTicks;
-                          /* Mask Parameter: Receive_from_FTHWICC_MaxMissedTicks
-                           * Referenced by: '<Root>/Receive_from_FTHWICC'
-                           */
-  real_T Send_to_FTHWICC_MaxMissedTicks;
-                               /* Mask Parameter: Send_to_FTHWICC_MaxMissedTicks
-                                * Referenced by: '<Root>/Send_to_FTHWICC'
-                                */
-  real_T RealTimeSynchronization_MaxMissedTicks;
-                       /* Mask Parameter: RealTimeSynchronization_MaxMissedTicks
-                        * Referenced by: '<Root>/Real-Time Synchronization'
-                        */
-  real_T Receive_from_FTHWICC_YieldWhenWaiting;
-                        /* Mask Parameter: Receive_from_FTHWICC_YieldWhenWaiting
-                         * Referenced by: '<Root>/Receive_from_FTHWICC'
-                         */
-  real_T Send_to_FTHWICC_YieldWhenWaiting;
-                             /* Mask Parameter: Send_to_FTHWICC_YieldWhenWaiting
-                              * Referenced by: '<Root>/Send_to_FTHWICC'
-                              */
-  real_T RealTimeSynchronization_YieldWhenWaiting;
-                     /* Mask Parameter: RealTimeSynchronization_YieldWhenWaiting
-                      * Referenced by: '<Root>/Real-Time Synchronization'
-                      */
-  real_T Ramp1_slope;                  /* Mask Parameter: Ramp1_slope
-                                        * Referenced by: '<S6>/Step'
+  real32_T SensorROT_Y0;               /* Computed Parameter: SensorROT_Y0
+                                        * Referenced by: '<S3>/SensorROT'
                                         */
-  real_T Ramp2_slope;                  /* Mask Parameter: Ramp2_slope
-                                        * Referenced by: '<S7>/Step'
+  real32_T quaternion_Y0;              /* Computed Parameter: quaternion_Y0
+                                        * Referenced by: '<S3>/quaternion'
                                         */
-  real_T Ramp_slope;                   /* Mask Parameter: Ramp_slope
-                                        * Referenced by: '<S5>/Step'
+  real32_T TestSignal_Y0;              /* Computed Parameter: TestSignal_Y0
+                                        * Referenced by: '<S3>/TestSignal'
                                         */
-  real_T Ramp1_start;                  /* Mask Parameter: Ramp1_start
-                                        * Referenced by:
-                                        *   '<S6>/Constant'
-                                        *   '<S6>/Step'
+  uint16_T PixHeartbeat_Y0;            /* Computed Parameter: PixHeartbeat_Y0
+                                        * Referenced by: '<S3>/PixHeartbeat'
                                         */
-  real_T Ramp2_start;                  /* Mask Parameter: Ramp2_start
-                                        * Referenced by:
-                                        *   '<S7>/Constant'
-                                        *   '<S7>/Step'
+  uint8_T PixStatus_Y0;                /* Computed Parameter: PixStatus_Y0
+                                        * Referenced by: '<S3>/PixStatus'
                                         */
-  real_T Ramp_start;                   /* Mask Parameter: Ramp_start
-                                        * Referenced by:
-                                        *   '<S5>/Constant'
-                                        *   '<S5>/Step'
+  uint8_T PixRCStatus_Y0;              /* Computed Parameter: PixRCStatus_Y0
+                                        * Referenced by: '<S3>/PixRCStatus'
                                         */
-  int32_T Receive_from_FTHWICC_PacketID;
-                                /* Mask Parameter: Receive_from_FTHWICC_PacketID
-                                 * Referenced by: '<Root>/Receive_from_FTHWICC'
-                                 */
-  int32_T Send_to_FTHWICC_PacketID;  /* Mask Parameter: Send_to_FTHWICC_PacketID
-                                      * Referenced by: '<Root>/Send_to_FTHWICC'
-                                      */
-  uint16_T WrapToZero_Threshold;       /* Mask Parameter: WrapToZero_Threshold
-                                        * Referenced by: '<S9>/FixPt Switch'
-                                        */
-  real_T Step_Y0;                      /* Expression: 0
-                                        * Referenced by: '<S6>/Step'
-                                        */
-  real_T Shaft2radPitch_Gain;          /* Expression: -(2*pi)/(65536)
-                                        * Referenced by: '<Root>/Shaft2radPitch'
-                                        */
-  real_T Gain_Gain;                    /* Expression: 180/pi
-                                        * Referenced by: '<S3>/Gain'
-                                        */
-  real_T Step_Y0_l;                    /* Expression: 0
-                                        * Referenced by: '<S7>/Step'
-                                        */
-  real_T Shaft2radYaw1_Gain;           /* Expression: (2*pi)/(65536)
-                                        * Referenced by: '<Root>/Shaft2radYaw1'
-                                        */
-  real_T Gain_Gain_b;                  /* Expression: 180/pi
-                                        * Referenced by: '<S4>/Gain'
-                                        */
-  real_T Step_Y0_a;                    /* Expression: 0
-                                        * Referenced by: '<S5>/Step'
-                                        */
-  real_T Shaft2radRoll1_Gain;          /* Expression: -(2*pi)/(65536)
-                                        * Referenced by: '<Root>/Shaft2radRoll1'
-                                        */
-  real_T Gain_Gain_j;                  /* Expression: 180/pi
-                                        * Referenced by: '<S2>/Gain'
-                                        */
-  real_T Constant_Value;               /* Expression: 1
-                                        * Referenced by: '<Root>/Constant'
-                                        */
-  real_T Zero_Value;                   /* Expression: 0
-                                        * Referenced by: '<Root>/Zero'
-                                        */
-  real_T Zero1_Value;                  /* Expression: 0
-                                        * Referenced by: '<Root>/Zero1'
-                                        */
-  uint16_T Constant_Value_b;           /* Computed Parameter: Constant_Value_b
-                                        * Referenced by: '<S9>/Constant'
-                                        */
-  uint16_T Output_InitialCondition;
-                                  /* Computed Parameter: Output_InitialCondition
-                                   * Referenced by: '<S1>/Output'
-                                   */
-  uint16_T FixPtConstant_Value;       /* Computed Parameter: FixPtConstant_Value
-                                       * Referenced by: '<S8>/FixPt Constant'
-                                       */
 };
 
 /* Real-time Model Data Structure */
@@ -1098,19 +994,6 @@ struct tag_RTM_untitled_T {
     uint32_T clockTick0;
     uint32_T clockTickH0;
     time_T stepSize0;
-    uint32_T clockTick1;
-    uint32_T clockTickH1;
-    time_T stepSize1;
-    uint32_T clockTick2;
-    uint32_T clockTickH2;
-    time_T stepSize2;
-    uint32_T clockTick3;
-    uint32_T clockTickH3;
-    time_T stepSize3;
-    struct {
-      uint8_T TID[4];
-    } TaskCounters;
-
     time_T tStart;
     time_T tFinal;
     time_T timeOfLastOutput;
@@ -1124,12 +1007,12 @@ struct tag_RTM_untitled_T {
     int_T *sampleHits;
     int_T *perTaskSampleHits;
     time_T *t;
-    time_T sampleTimesArray[4];
-    time_T offsetTimesArray[4];
-    int_T sampleTimeTaskIDArray[4];
-    int_T sampleHitArray[4];
-    int_T perTaskSampleHitsArray[16];
-    time_T tArray[4];
+    time_T sampleTimesArray[1];
+    time_T offsetTimesArray[1];
+    int_T sampleTimeTaskIDArray[1];
+    int_T sampleHitArray[1];
+    int_T perTaskSampleHitsArray[1];
+    time_T tArray[1];
   } Timing;
 };
 
@@ -1141,6 +1024,9 @@ extern B_untitled_T untitled_B;
 
 /* Block states (default storage) */
 extern DW_untitled_T untitled_DW;
+
+/* External outputs (root outports fed by signals with default storage) */
+extern ExtY_untitled_T untitled_Y;
 
 /* Model entry point functions */
 extern void untitled_initialize(void);
@@ -1178,14 +1064,8 @@ extern RT_MODEL_untitled_T *const untitled_M;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'untitled'
- * '<S1>'   : 'untitled/Counter Free-Running'
- * '<S2>'   : 'untitled/Radians to Degrees'
- * '<S3>'   : 'untitled/Radians to Degrees1'
- * '<S4>'   : 'untitled/Radians to Degrees2'
- * '<S5>'   : 'untitled/Ramp'
- * '<S6>'   : 'untitled/Ramp1'
- * '<S7>'   : 'untitled/Ramp2'
- * '<S8>'   : 'untitled/Counter Free-Running/Increment Real World'
- * '<S9>'   : 'untitled/Counter Free-Running/Wrap To Zero'
+ * '<S1>'   : 'untitled/ByteUnpack'
+ * '<S2>'   : 'untitled/ExtractMessage'
+ * '<S3>'   : 'untitled/hold'
  */
 #endif                                 /* RTW_HEADER_untitled_h_ */

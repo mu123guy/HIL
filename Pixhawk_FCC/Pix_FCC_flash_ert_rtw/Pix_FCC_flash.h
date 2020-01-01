@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.322
+// Model version                  : 1.324
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Thu Dec 12 14:42:20 2019
+// C/C++ source code generated on : Mon Dec 30 19:52:54 2019
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -254,11 +254,11 @@ struct P_Pix_FCC_flash_T_ {
   real32_T SensorROT_Y0;               // Computed Parameter: SensorROT_Y0
                                           //  Referenced by: '<S18>/SensorROT'
 
-  real32_T TestSignal_feedback_Y0; // Computed Parameter: TestSignal_feedback_Y0
-                                      //  Referenced by: '<S18>/TestSignal_feedback'
-
   real32_T quaternion_Y0;              // Computed Parameter: quaternion_Y0
                                           //  Referenced by: '<S18>/quaternion'
+
+  real32_T TestSignal_feedback_Y0; // Computed Parameter: TestSignal_feedback_Y0
+                                      //  Referenced by: '<S18>/TestSignal_feedback'
 
   real32_T Gain_Gain;           // Expression: FCC_PIX_Data.Controller.Roll.Gain
                                    //  Referenced by: '<S23>/Gain'

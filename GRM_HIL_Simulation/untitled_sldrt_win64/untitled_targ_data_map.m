@@ -28,168 +28,80 @@
     ;%
     ;% Auto data (untitled_P)
     ;%
-      section.nData     = 15;
-      section.data(15)  = dumData; %prealloc
+      section.nData     = 2;
+      section.data(2)  = dumData; %prealloc
       
-	  ;% untitled_P.Ramp1_InitialOutput
-	  section.data(1).logicalSrcIdx = 1;
+	  ;% untitled_P.PacketInput_MaxMissedTicks
+	  section.data(1).logicalSrcIdx = 0;
 	  section.data(1).dtTransOffset = 0;
 	
-	  ;% untitled_P.Ramp2_InitialOutput
-	  section.data(2).logicalSrcIdx = 2;
+	  ;% untitled_P.PacketInput_YieldWhenWaiting
+	  section.data(2).logicalSrcIdx = 1;
 	  section.data(2).dtTransOffset = 1;
-	
-	  ;% untitled_P.Ramp_InitialOutput
-	  section.data(3).logicalSrcIdx = 3;
-	  section.data(3).dtTransOffset = 2;
-	
-	  ;% untitled_P.Receive_from_FTHWICC_MaxMissedTicks
-	  section.data(4).logicalSrcIdx = 5;
-	  section.data(4).dtTransOffset = 3;
-	
-	  ;% untitled_P.Send_to_FTHWICC_MaxMissedTicks
-	  section.data(5).logicalSrcIdx = 6;
-	  section.data(5).dtTransOffset = 4;
-	
-	  ;% untitled_P.RealTimeSynchronization_MaxMissedTicks
-	  section.data(6).logicalSrcIdx = 7;
-	  section.data(6).dtTransOffset = 5;
-	
-	  ;% untitled_P.Receive_from_FTHWICC_YieldWhenWaiting
-	  section.data(7).logicalSrcIdx = 8;
-	  section.data(7).dtTransOffset = 6;
-	
-	  ;% untitled_P.Send_to_FTHWICC_YieldWhenWaiting
-	  section.data(8).logicalSrcIdx = 9;
-	  section.data(8).dtTransOffset = 7;
-	
-	  ;% untitled_P.RealTimeSynchronization_YieldWhenWaiting
-	  section.data(9).logicalSrcIdx = 10;
-	  section.data(9).dtTransOffset = 8;
-	
-	  ;% untitled_P.Ramp1_slope
-	  section.data(10).logicalSrcIdx = 11;
-	  section.data(10).dtTransOffset = 9;
-	
-	  ;% untitled_P.Ramp2_slope
-	  section.data(11).logicalSrcIdx = 12;
-	  section.data(11).dtTransOffset = 10;
-	
-	  ;% untitled_P.Ramp_slope
-	  section.data(12).logicalSrcIdx = 13;
-	  section.data(12).dtTransOffset = 11;
-	
-	  ;% untitled_P.Ramp1_start
-	  section.data(13).logicalSrcIdx = 14;
-	  section.data(13).dtTransOffset = 12;
-	
-	  ;% untitled_P.Ramp2_start
-	  section.data(14).logicalSrcIdx = 15;
-	  section.data(14).dtTransOffset = 13;
-	
-	  ;% untitled_P.Ramp_start
-	  section.data(15).logicalSrcIdx = 16;
-	  section.data(15).dtTransOffset = 14;
 	
       nTotData = nTotData + section.nData;
       paramMap.sections(1) = section;
       clear section
       
-      section.nData     = 2;
-      section.data(2)  = dumData; %prealloc
+      section.nData     = 1;
+      section.data(1)  = dumData; %prealloc
       
-	  ;% untitled_P.Receive_from_FTHWICC_PacketID
-	  section.data(1).logicalSrcIdx = 17;
+	  ;% untitled_P.PacketInput_PacketID
+	  section.data(1).logicalSrcIdx = 2;
 	  section.data(1).dtTransOffset = 0;
-	
-	  ;% untitled_P.Send_to_FTHWICC_PacketID
-	  section.data(2).logicalSrcIdx = 18;
-	  section.data(2).dtTransOffset = 1;
 	
       nTotData = nTotData + section.nData;
       paramMap.sections(2) = section;
       clear section
       
-      section.nData     = 1;
-      section.data(1)  = dumData; %prealloc
+      section.nData     = 5;
+      section.data(5)  = dumData; %prealloc
       
-	  ;% untitled_P.WrapToZero_Threshold
-	  section.data(1).logicalSrcIdx = 19;
+	  ;% untitled_P.ServoCMD_Y0
+	  section.data(1).logicalSrcIdx = 3;
 	  section.data(1).dtTransOffset = 0;
+	
+	  ;% untitled_P.SensorACC_Y0
+	  section.data(2).logicalSrcIdx = 4;
+	  section.data(2).dtTransOffset = 1;
+	
+	  ;% untitled_P.SensorROT_Y0
+	  section.data(3).logicalSrcIdx = 5;
+	  section.data(3).dtTransOffset = 2;
+	
+	  ;% untitled_P.quaternion_Y0
+	  section.data(4).logicalSrcIdx = 6;
+	  section.data(4).dtTransOffset = 3;
+	
+	  ;% untitled_P.TestSignal_Y0
+	  section.data(5).logicalSrcIdx = 7;
+	  section.data(5).dtTransOffset = 4;
 	
       nTotData = nTotData + section.nData;
       paramMap.sections(3) = section;
       clear section
       
-      section.nData     = 12;
-      section.data(12)  = dumData; %prealloc
+      section.nData     = 1;
+      section.data(1)  = dumData; %prealloc
       
-	  ;% untitled_P.Step_Y0
-	  section.data(1).logicalSrcIdx = 20;
+	  ;% untitled_P.PixHeartbeat_Y0
+	  section.data(1).logicalSrcIdx = 8;
 	  section.data(1).dtTransOffset = 0;
-	
-	  ;% untitled_P.Shaft2radPitch_Gain
-	  section.data(2).logicalSrcIdx = 21;
-	  section.data(2).dtTransOffset = 1;
-	
-	  ;% untitled_P.Gain_Gain
-	  section.data(3).logicalSrcIdx = 22;
-	  section.data(3).dtTransOffset = 2;
-	
-	  ;% untitled_P.Step_Y0_l
-	  section.data(4).logicalSrcIdx = 23;
-	  section.data(4).dtTransOffset = 3;
-	
-	  ;% untitled_P.Shaft2radYaw1_Gain
-	  section.data(5).logicalSrcIdx = 24;
-	  section.data(5).dtTransOffset = 4;
-	
-	  ;% untitled_P.Gain_Gain_b
-	  section.data(6).logicalSrcIdx = 25;
-	  section.data(6).dtTransOffset = 5;
-	
-	  ;% untitled_P.Step_Y0_a
-	  section.data(7).logicalSrcIdx = 26;
-	  section.data(7).dtTransOffset = 6;
-	
-	  ;% untitled_P.Shaft2radRoll1_Gain
-	  section.data(8).logicalSrcIdx = 27;
-	  section.data(8).dtTransOffset = 7;
-	
-	  ;% untitled_P.Gain_Gain_j
-	  section.data(9).logicalSrcIdx = 28;
-	  section.data(9).dtTransOffset = 8;
-	
-	  ;% untitled_P.Constant_Value
-	  section.data(10).logicalSrcIdx = 29;
-	  section.data(10).dtTransOffset = 9;
-	
-	  ;% untitled_P.Zero_Value
-	  section.data(11).logicalSrcIdx = 30;
-	  section.data(11).dtTransOffset = 10;
-	
-	  ;% untitled_P.Zero1_Value
-	  section.data(12).logicalSrcIdx = 31;
-	  section.data(12).dtTransOffset = 11;
 	
       nTotData = nTotData + section.nData;
       paramMap.sections(4) = section;
       clear section
       
-      section.nData     = 3;
-      section.data(3)  = dumData; %prealloc
+      section.nData     = 2;
+      section.data(2)  = dumData; %prealloc
       
-	  ;% untitled_P.Constant_Value_b
-	  section.data(1).logicalSrcIdx = 32;
+	  ;% untitled_P.PixStatus_Y0
+	  section.data(1).logicalSrcIdx = 9;
 	  section.data(1).dtTransOffset = 0;
 	
-	  ;% untitled_P.Output_InitialCondition
-	  section.data(2).logicalSrcIdx = 33;
+	  ;% untitled_P.PixRCStatus_Y0
+	  section.data(2).logicalSrcIdx = 10;
 	  section.data(2).dtTransOffset = 1;
-	
-	  ;% untitled_P.FixPtConstant_Value
-	  section.data(3).logicalSrcIdx = 34;
-	  section.data(3).dtTransOffset = 2;
 	
       nTotData = nTotData + section.nData;
       paramMap.sections(5) = section;
@@ -213,7 +125,7 @@
   ;%**************************
       
     nTotData      = 0; %add to this count as we go
-    nTotSects     = 4;
+    nTotSects     = 2;
     sectIdxOffset = 0;
     
     ;%
@@ -236,64 +148,12 @@
     ;%
     ;% Auto data (untitled_B)
     ;%
-      section.nData     = 14;
-      section.data(14)  = dumData; %prealloc
+      section.nData     = 1;
+      section.data(1)  = dumData; %prealloc
       
-	  ;% untitled_B.Receive_from_FTHWICC_o1
+	  ;% untitled_B.PacketInput_o1
 	  section.data(1).logicalSrcIdx = 0;
 	  section.data(1).dtTransOffset = 0;
-	
-	  ;% untitled_B.Receive_from_FTHWICC_o2
-	  section.data(2).logicalSrcIdx = 1;
-	  section.data(2).dtTransOffset = 1;
-	
-	  ;% untitled_B.Receive_from_FTHWICC_o3
-	  section.data(3).logicalSrcIdx = 2;
-	  section.data(3).dtTransOffset = 2;
-	
-	  ;% untitled_B.Receive_from_FTHWICC_o4
-	  section.data(4).logicalSrcIdx = 3;
-	  section.data(4).dtTransOffset = 3;
-	
-	  ;% untitled_B.Receive_from_FTHWICC_o5
-	  section.data(5).logicalSrcIdx = 4;
-	  section.data(5).dtTransOffset = 4;
-	
-	  ;% untitled_B.Receive_from_FTHWICC_o6
-	  section.data(6).logicalSrcIdx = 5;
-	  section.data(6).dtTransOffset = 5;
-	
-	  ;% untitled_B.Receive_from_FTHWICC_o7
-	  section.data(7).logicalSrcIdx = 6;
-	  section.data(7).dtTransOffset = 6;
-	
-	  ;% untitled_B.Receive_from_FTHWICC_o9
-	  section.data(8).logicalSrcIdx = 7;
-	  section.data(8).dtTransOffset = 7;
-	
-	  ;% untitled_B.Output
-	  section.data(9).logicalSrcIdx = 8;
-	  section.data(9).dtTransOffset = 8;
-	
-	  ;% untitled_B.Gain
-	  section.data(10).logicalSrcIdx = 9;
-	  section.data(10).dtTransOffset = 9;
-	
-	  ;% untitled_B.Output_k
-	  section.data(11).logicalSrcIdx = 10;
-	  section.data(11).dtTransOffset = 10;
-	
-	  ;% untitled_B.Gain_d
-	  section.data(12).logicalSrcIdx = 11;
-	  section.data(12).dtTransOffset = 11;
-	
-	  ;% untitled_B.Output_d
-	  section.data(13).logicalSrcIdx = 12;
-	  section.data(13).dtTransOffset = 12;
-	
-	  ;% untitled_B.Gain_o
-	  section.data(14).logicalSrcIdx = 13;
-	  section.data(14).dtTransOffset = 13;
 	
       nTotData = nTotData + section.nData;
       sigMap.sections(1) = section;
@@ -302,50 +162,16 @@
       section.nData     = 2;
       section.data(2)  = dumData; %prealloc
       
-	  ;% untitled_B.Receive_from_FTHWICC_o12
-	  section.data(1).logicalSrcIdx = 14;
+	  ;% untitled_B.AND
+	  section.data(1).logicalSrcIdx = 1;
 	  section.data(1).dtTransOffset = 0;
 	
-	  ;% untitled_B.Send_to_FTHWICC
-	  section.data(2).logicalSrcIdx = 15;
+	  ;% untitled_B.packetfound
+	  section.data(2).logicalSrcIdx = 2;
 	  section.data(2).dtTransOffset = 1;
 	
       nTotData = nTotData + section.nData;
       sigMap.sections(2) = section;
-      clear section
-      
-      section.nData     = 3;
-      section.data(3)  = dumData; %prealloc
-      
-	  ;% untitled_B.Receive_from_FTHWICC_o8
-	  section.data(1).logicalSrcIdx = 16;
-	  section.data(1).dtTransOffset = 0;
-	
-	  ;% untitled_B.Output_o
-	  section.data(2).logicalSrcIdx = 17;
-	  section.data(2).dtTransOffset = 1;
-	
-	  ;% untitled_B.FixPtSwitch
-	  section.data(3).logicalSrcIdx = 18;
-	  section.data(3).dtTransOffset = 2;
-	
-      nTotData = nTotData + section.nData;
-      sigMap.sections(3) = section;
-      clear section
-      
-      section.nData     = 2;
-      section.data(2)  = dumData; %prealloc
-      
-	  ;% untitled_B.CastToBoolean
-	  section.data(1).logicalSrcIdx = 19;
-	  section.data(1).dtTransOffset = 0;
-	
-	  ;% untitled_B.NOT
-	  section.data(2).logicalSrcIdx = 20;
-	  section.data(2).dtTransOffset = 1;
-	
-      nTotData = nTotData + section.nData;
-      sigMap.sections(4) = section;
       clear section
       
     
@@ -366,8 +192,8 @@
   ;%*******************
       
     nTotData      = 0; %add to this count as we go
-    nTotSects     = 2;
-    sectIdxOffset = 4;
+    nTotSects     = 3;
+    sectIdxOffset = 2;
     
     ;%
     ;% Define dummy sections & preallocate arrays
@@ -389,36 +215,20 @@
     ;%
     ;% Auto data (untitled_DW)
     ;%
-      section.nData     = 7;
-      section.data(7)  = dumData; %prealloc
+      section.nData     = 3;
+      section.data(3)  = dumData; %prealloc
       
-	  ;% untitled_DW.Receive_from_FTHWICC_PWORK
+	  ;% untitled_DW.PacketInput_PWORK
 	  section.data(1).logicalSrcIdx = 0;
 	  section.data(1).dtTransOffset = 0;
 	
-	  ;% untitled_DW.Send_to_FTHWICC_PWORK
+	  ;% untitled_DW.TAQOutportLogging_InsertedFor_AND_at_outport_0_PWORK.AQHandles
 	  section.data(2).logicalSrcIdx = 1;
 	  section.data(2).dtTransOffset = 1;
 	
-	  ;% untitled_DW.Scope1_PWORK.LoggedData
+	  ;% untitled_DW.Scope_PWORK.LoggedData
 	  section.data(3).logicalSrcIdx = 2;
-	  section.data(3).dtTransOffset = 3;
-	
-	  ;% untitled_DW.Scope2_PWORK.LoggedData
-	  section.data(4).logicalSrcIdx = 3;
-	  section.data(4).dtTransOffset = 5;
-	
-	  ;% untitled_DW.Scope3_PWORK.LoggedData
-	  section.data(5).logicalSrcIdx = 4;
-	  section.data(5).dtTransOffset = 7;
-	
-	  ;% untitled_DW.roll_PWORK.LoggedData
-	  section.data(6).logicalSrcIdx = 5;
-	  section.data(6).dtTransOffset = 9;
-	
-	  ;% untitled_DW.RealTimeSynchronization_PWORK
-	  section.data(7).logicalSrcIdx = 6;
-	  section.data(7).dtTransOffset = 11;
+	  section.data(3).dtTransOffset = 2;
 	
       nTotData = nTotData + section.nData;
       dworkMap.sections(1) = section;
@@ -427,12 +237,23 @@
       section.nData     = 1;
       section.data(1)  = dumData; %prealloc
       
-	  ;% untitled_DW.Output_DSTATE
-	  section.data(1).logicalSrcIdx = 7;
+	  ;% untitled_DW.SFunction_DIMS2
+	  section.data(1).logicalSrcIdx = 3;
 	  section.data(1).dtTransOffset = 0;
 	
       nTotData = nTotData + section.nData;
       dworkMap.sections(2) = section;
+      clear section
+      
+      section.nData     = 1;
+      section.data(1)  = dumData; %prealloc
+      
+	  ;% untitled_DW.hold_SubsysRanBC
+	  section.data(1).logicalSrcIdx = 4;
+	  section.data(1).dtTransOffset = 0;
+	
+      nTotData = nTotData + section.nData;
+      dworkMap.sections(3) = section;
       clear section
       
     
@@ -461,8 +282,8 @@
   ;%
 
 
-  targMap.checksum0 = 1722486940;
-  targMap.checksum1 = 1529124782;
-  targMap.checksum2 = 1081057874;
-  targMap.checksum3 = 748924235;
+  targMap.checksum0 = 1700691872;
+  targMap.checksum1 = 3920744144;
+  targMap.checksum2 = 1044725010;
+  targMap.checksum3 = 2977772078;
 

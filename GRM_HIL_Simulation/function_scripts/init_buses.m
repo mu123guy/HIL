@@ -80,6 +80,7 @@ PWM_Cmd_Bus;
 
 Rigid_Body_States_Bus;
 Rotation_States_Bus;
+Rotation_States_Dot_Bus;
 
 Servo_Cmd_Bus;
 Servo_Positions_Bus;
