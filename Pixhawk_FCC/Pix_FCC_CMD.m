@@ -12,7 +12,7 @@ if(enable_output) disp([newline 'SENDING INITIALIZATION COMMAND TO PIXHAWK' newl
 %% Set up serial communication
 % change the comport value below to the one on which the Pixhawk board is
 % connected on your Host machine
-comport = 'COM11';
+comport = 'COM3';
 delete(instrfind('Port',comport));
 
 %open serial object

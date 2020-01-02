@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.324
+// Model version                  : 1.333
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Mon Dec 30 19:52:54 2019
+// C/C++ source code generated on : Thu Jan  2 23:39:39 2020
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -37,69 +37,23 @@ volatile boolean_T stopRequested = false;
 volatile boolean_T runModel = true;
 sem_t stopSem;
 sem_t baserateTaskSem;
-sem_t subrateTaskSem[2];
-int taskId[2];
 pthread_t schedulerThread;
 pthread_t baseRateThread;
 void *threadJoinStatus;
 int terminatingmodel = 0;
-pthread_t subRateThread[2];
-int subratePriority[2];
-void *subrateTask(void *arg)
-{
-  int tid = *((int *) arg);
-  int subRateId;
-  subRateId = tid + 1;
-  while (runModel) {
-    sem_wait(&subrateTaskSem[tid]);
-    if (terminatingmodel)
-      break;
-
-#ifdef MW_RTOS_DEBUG
-
-    printf(" -subrate task %d semaphore received\n", subRateId);
-
-#endif
-
-    Pix_FCC_flash_step(subRateId);
-
-    // Get model outputs here
-  }
-
-  pthread_exit((void *)0);
-  return NULL;
-}
-
 void *baseRateTask(void *arg)
 {
-  int_T i;
   runModel = (rtmGetErrorStatus(Pix_FCC_flash_M) == (NULL));
   while (runModel) {
     sem_wait(&baserateTaskSem);
-
-#ifdef MW_RTOS_DEBUG
-
-    printf("*base rate task semaphore received\n");
-    fflush(stdout);
-
-#endif
-
-    for (i = 1
-         ; i <= 2; i++) {
-      if (rtmStepTask(Pix_FCC_flash_M, i)
-          ) {
-        sem_post(&subrateTaskSem[ i - 1
-                 ]);
-      }
-    }
-
-    Pix_FCC_flash_step(0);
+    Pix_FCC_flash_step();
 
     // Get model outputs here
     stopRequested = !((rtmGetErrorStatus(Pix_FCC_flash_M) == (NULL)));
     runModel = !stopRequested;
   }
 
+  runModel = 0;
   terminateTask(arg);
   pthread_exit((void *)0);
   return NULL;
@@ -117,20 +71,6 @@ void *terminateTask(void *arg)
   terminatingmodel = 1;
 
   {
-    int i;
-
-    // Signal all periodic tasks to complete
-    for (i=0; i<2; i++) {
-      CHECK_STATUS(sem_post(&subrateTaskSem[i]), 0, "sem_post");
-      CHECK_STATUS(sem_destroy(&subrateTaskSem[i]), 0, "sem_destroy");
-    }
-
-    // Wait for all periodic tasks to complete
-    for (i=0; i<2; i++) {
-      CHECK_STATUS(pthread_join(subRateThread[i], &threadJoinStatus), 0,
-                   "pthread_join");
-    }
-
     runModel = 0;
   }
 
@@ -146,15 +86,13 @@ void *terminateTask(void *arg)
 
 int px4_simulink_app_task_main (int argc, char *argv[])
 {
-  subratePriority[0] = 249;
-  subratePriority[1] = 248;
   rtmSetErrorStatus(Pix_FCC_flash_M, 0);
 
   // Initialize model
   Pix_FCC_flash_initialize();
 
   // Call RTOS Initialization function
-  nuttxRTOSInit(0.002, 2);
+  nuttxRTOSInit(0.01, 0);
 
   // Wait for stop semaphore
   sem_wait(&stopSem);

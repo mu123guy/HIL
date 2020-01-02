@@ -93,7 +93,7 @@ EXTMODE_TRANSPORT    := 0
 
 MODELREFS            := 
 TARGET_LANG_EXT      := c
-OPTIMIZATION_FLAGS   := -O4 -O4 -O4 -O4 -O4 -O4 -O4 -O4
+OPTIMIZATION_FLAGS   := -O4
 ADDITIONAL_LDFLAGS   := 
 DEFINES_CUSTOM       := 
 
@@ -157,7 +157,7 @@ REQ_INCLUDES := $(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/extern/include;$(
 REQ_INCLUDES += ;$(MATLAB_ROOT)/toolbox/shared/can/src/scanutil;$(SLDRTDIR)/src
 
 # additional includes
-REQ_INCLUDES += ;C:/Users/guy-m/Documents/MATLAB/HIL/GRM_HIL_Simulation;C:/Users/guy-m/Documents/MATLAB/HIL/GRM_HIL_Simulation/GRM_HIL_sldrt_win64;$(MATLAB_ROOT)/extern/include;$(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/rtw/c/src;$(MATLAB_ROOT)/rtw/c/src/ext_mode/common;$(MATLAB_ROOT)/toolbox/coder/rtiostream/src
+REQ_INCLUDES += ;C:/Users/guy-m/Desktop/HIL/GRM_HIL_Simulation;C:/Users/guy-m/Desktop/HIL/GRM_HIL_Simulation/GRM_HIL_sldrt_win64;$(MATLAB_ROOT)/extern/include;$(MATLAB_ROOT)/simulink/include;$(MATLAB_ROOT)/rtw/c/src;$(MATLAB_ROOT)/rtw/c/src/ext_mode/common;$(MATLAB_ROOT)/toolbox/coder/rtiostream/src
 
 INCLUDES := $(USER_INCLUDES);.;$(RELATIVE_PATH_TO_ANCHOR);$(REQ_INCLUDES)
 

@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.80
+ * Model version              : 1.88
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Mon Dec 30 21:34:10 2019
+ * C source code generated on : Fri Jan  3 00:07:39 2020
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -212,11 +212,13 @@ static const char_T * rtDataTypeNames[] = {
 
 /* data type transitions for block I/O structure */
 static DataTypeTransition rtBTransitions[] = {
-  { (char_T *)(&GRM_HIL_B.Constant[0]), 0, 0, 306 },
+  { (char_T *)(&GRM_HIL_B.Constant[0]), 0, 0, 310 },
 
-  { (char_T *)(&GRM_HIL_B.DataTypeConversion3), 1, 0, 13 },
+  { (char_T *)(&GRM_HIL_B.MathFunction1), 1, 0, 14 },
 
-  { (char_T *)(&GRM_HIL_B.message[0]), 3, 0, 206 },
+  { (char_T *)(&GRM_HIL_B.DataTypeConversion1_p), 5, 0, 3 },
+
+  { (char_T *)(&GRM_HIL_B.message[0]), 3, 0, 334 },
 
   { (char_T *)(&GRM_HIL_B.Compare), 8, 0, 28 },
 
@@ -249,17 +251,19 @@ static DataTypeTransition rtBTransitions[] = {
   { (char_T *)(&GRM_HIL_B.IfActionSubsystem1.In1), 0, 0, 1 }
   ,
 
-  { (char_T *)(&GRM_HIL_DW.Memory1_1_PreviousInput), 0, 0, 15 },
+  { (char_T *)(&GRM_HIL_DW.Memory1_1_PreviousInput), 0, 0, 19 },
 
-  { (char_T *)(&GRM_HIL_DW.Accel_PWORK.LoggedData[0]), 11, 0, 101 },
+  { (char_T *)(&GRM_HIL_DW.Accel_PWORK.LoggedData[0]), 11, 0, 118 },
 
-  { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 8 },
+  { (char_T *)(&GRM_HIL_DW.clockTickCounter), 6, 0, 10 },
 
   { (char_T *)(&GRM_HIL_DW.integration_eom_IWORK), 10, 0, 12 },
 
+  { (char_T *)(&GRM_HIL_DW.Output_DSTATE), 5, 0, 1 },
+
   { (char_T *)(&GRM_HIL_DW.If_ActiveSubsystem), 2, 0, 23 },
 
-  { (char_T *)(&GRM_HIL_DW.Memory_1_PreviousInput), 8, 0, 13 },
+  { (char_T *)(&GRM_HIL_DW.Memory_1_PreviousInput), 8, 0, 14 },
 
   { (char_T *)(&GRM_HIL_DW.IfActionpass_roll.IfActionpass_yaw_SubsysRanBC), 2, 0,
     1 },
@@ -315,7 +319,7 @@ static DataTypeTransition rtBTransitions[] = {
 
 /* data type transition table for block I/O structure */
 static DataTypeTransitionTable rtBTransTable = {
-  45U,
+  47U,
   rtBTransitions
 };
 
@@ -341,13 +345,15 @@ static DataTypeTransition rtPTransitions[] = {
 
   { (char_T *)(&GRM_HIL_P.PacketInput_PacketID), 6, 0, 2 },
 
-  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 117651 },
+  { (char_T *)(&GRM_HIL_P.WrapToZero_Threshold), 5, 0, 1 },
+
+  { (char_T *)(&GRM_HIL_P.Constant11_Value), 0, 0, 117665 },
 
   { (char_T *)(&GRM_HIL_P.ServoCMD_Y0), 1, 0, 6 },
 
   { (char_T *)(&GRM_HIL_P.Cn_delta_n_Interpolation_dimSize[0]), 7, 0, 135 },
 
-  { (char_T *)(&GRM_HIL_P.PixHeartbeat_Y0), 5, 0, 2 },
+  { (char_T *)(&GRM_HIL_P.PixHeartbeat_Y0), 5, 0, 4 },
 
   { (char_T *)(&GRM_HIL_P.Constant10_Value_ca), 8, 0, 15 },
 
@@ -368,7 +374,7 @@ static DataTypeTransition rtPTransitions[] = {
 
 /* data type transition table for Parameters structure */
 static DataTypeTransitionTable rtPTransTable = {
-  22U,
+  23U,
   rtPTransitions
 };
 

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.324
+// Model version                  : 1.333
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Mon Dec 30 19:52:54 2019
+// C/C++ source code generated on : Thu Jan  2 23:39:39 2020
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -114,23 +114,8 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
 
   0.0,
 
-  // Mask Parameter: WrapToZero_Threshold
-  //  Referenced by: '<S50>/FixPt Switch'
-
-  65535U,
-
-  // Mask Parameter: CompareToConstant_const_h
-  //  Referenced by: '<S36>/Constant'
-
-  1U,
-
-  // Mask Parameter: CounterLimited_uplimit
-  //  Referenced by: '<S41>/FixPt Switch'
-
-  1U,
-
   // Computed Parameter: Out1_Y0
-  //  Referenced by: '<S59>/Out1'
+  //  Referenced by: '<S60>/Out1'
 
   {
     (0ULL),                            // timestamp
@@ -153,7 +138,7 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   },
 
   // Computed Parameter: Constant_Value
-  //  Referenced by: '<S58>/Constant'
+  //  Referenced by: '<S59>/Constant'
 
   {
     (0ULL),                            // timestamp
@@ -176,7 +161,7 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   },
 
   // Computed Parameter: Out1_Y0_f
-  //  Referenced by: '<S61>/Out1'
+  //  Referenced by: '<S62>/Out1'
 
   {
     (0ULL),                            // timestamp
@@ -199,7 +184,7 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   },
 
   // Computed Parameter: Constant_Value_e
-  //  Referenced by: '<S60>/Constant'
+  //  Referenced by: '<S61>/Constant'
 
   {
     (0ULL),                            // timestamp
@@ -222,7 +207,7 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   },
 
   // Computed Parameter: Out1_Y0_a
-  //  Referenced by: '<S63>/Out1'
+  //  Referenced by: '<S64>/Out1'
 
   {
     (0ULL),                            // timestamp
@@ -245,7 +230,7 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   },
 
   // Computed Parameter: Constant_Value_l
-  //  Referenced by: '<S62>/Constant'
+  //  Referenced by: '<S63>/Constant'
 
   {
     (0ULL),                            // timestamp
@@ -278,27 +263,27 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   1.0,
 
   // Computed Parameter: CMD_Y0
-  //  Referenced by: '<S54>/CMD'
+  //  Referenced by: '<S55>/CMD'
 
   0.0F,
 
   // Computed Parameter: ACC_Y0
-  //  Referenced by: '<S54>/ACC'
+  //  Referenced by: '<S55>/ACC'
 
   0.0F,
 
   // Computed Parameter: ROT_Y0
-  //  Referenced by: '<S54>/ROT'
+  //  Referenced by: '<S55>/ROT'
 
   0.0F,
 
   // Computed Parameter: ATT_Y0
-  //  Referenced by: '<S54>/ATT'
+  //  Referenced by: '<S55>/ATT'
 
   0.0F,
 
   // Computed Parameter: TestSignal_Y0
-  //  Referenced by: '<S54>/TestSignal'
+  //  Referenced by: '<S55>/TestSignal'
 
   0.0F,
 
@@ -327,6 +312,56 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
 
   0.0F,
 
+  // Expression: FCC_PIX_Data.Controller.Yaw.outerLoop.IntGain.Num
+  //  Referenced by: '<S23>/Discrete Transfer Fcn2'
+
+  -0.58935F,
+
+  // Expression: FCC_PIX_Data.Controller.Yaw.outerLoop.IntGain.Denom
+  //  Referenced by: '<S23>/Discrete Transfer Fcn2'
+
+  { 1.0F, 0.0F },
+
+  // Computed Parameter: DiscreteTransferFcn2_InitialSta
+  //  Referenced by: '<S23>/Discrete Transfer Fcn2'
+
+  0.0F,
+
+  // Expression: FCC_PIX_Data.Controller.Yaw.outerLoop.PropGain
+  //  Referenced by: '<S23>/Gain4'
+
+  -0.01779F,
+
+  // Expression: FCC_PIX_Data.Controller.Yaw.innerLoop.PropGain
+  //  Referenced by: '<S23>/Gain2'
+
+  0.7231F,
+
+  // Expression: FCC_PIX_Data.Controller.Pitch.outerLoop.IntGain.Num
+  //  Referenced by: '<S23>/Discrete Transfer Fcn1'
+
+  -0.58935F,
+
+  // Expression: FCC_PIX_Data.Controller.Pitch.outerLoop.IntGain.Denom
+  //  Referenced by: '<S23>/Discrete Transfer Fcn1'
+
+  { 1.0F, 0.0F },
+
+  // Computed Parameter: DiscreteTransferFcn1_InitialSta
+  //  Referenced by: '<S23>/Discrete Transfer Fcn1'
+
+  0.0F,
+
+  // Expression: FCC_PIX_Data.Controller.Pitch.outerLoop.PropGain
+  //  Referenced by: '<S23>/Gain3'
+
+  -0.01779F,
+
+  // Expression: FCC_PIX_Data.Controller.Pitch.innerLoop.PropGain
+  //  Referenced by: '<S23>/Gain1'
+
+  0.7231F,
+
   // Expression: FCC_PIX_Data.Controller.Roll.Gain
   //  Referenced by: '<S23>/Gain'
 
@@ -347,56 +382,6 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
 
   0.0F,
 
-  // Expression: FCC_PIX_Data.Controller.Pitch.outerLoop.IntGain.Num
-  //  Referenced by: '<S23>/Discrete Transfer Fcn1'
-
-  -0.58935F,
-
-  // Expression: FCC_PIX_Data.Controller.Pitch.outerLoop.IntGain.Denom
-  //  Referenced by: '<S23>/Discrete Transfer Fcn1'
-
-  { 1.0F, 0.0F },
-
-  // Computed Parameter: DiscreteTransferFcn1_InitialSta
-  //  Referenced by: '<S23>/Discrete Transfer Fcn1'
-
-  0.0F,
-
-  // Expression: FCC_PIX_Data.Controller.Yaw.outerLoop.IntGain.Num
-  //  Referenced by: '<S23>/Discrete Transfer Fcn2'
-
-  -0.58935F,
-
-  // Expression: FCC_PIX_Data.Controller.Yaw.outerLoop.IntGain.Denom
-  //  Referenced by: '<S23>/Discrete Transfer Fcn2'
-
-  { 1.0F, 0.0F },
-
-  // Computed Parameter: DiscreteTransferFcn2_InitialSta
-  //  Referenced by: '<S23>/Discrete Transfer Fcn2'
-
-  0.0F,
-
-  // Expression: FCC_PIX_Data.Controller.Pitch.outerLoop.PropGain
-  //  Referenced by: '<S23>/Gain3'
-
-  -0.01779F,
-
-  // Expression: FCC_PIX_Data.Controller.Pitch.innerLoop.PropGain
-  //  Referenced by: '<S23>/Gain1'
-
-  0.7231F,
-
-  // Expression: FCC_PIX_Data.Controller.Yaw.outerLoop.PropGain
-  //  Referenced by: '<S23>/Gain4'
-
-  -0.01779F,
-
-  // Expression: FCC_PIX_Data.Controller.Yaw.innerLoop.PropGain
-  //  Referenced by: '<S23>/Gain2'
-
-  0.7231F,
-
   // Expression: FCC_PIX_Data.Control_Surfaces.max_deflection_rad
   //  Referenced by: '<S26>/Limit2maxDeflection'
 
@@ -406,11 +391,6 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   //  Referenced by: '<S26>/Limit2maxDeflection'
 
   -0.34906584F,
-
-  // Computed Parameter: TmpRTBAtExecutionCycleInport6_I
-  //  Referenced by: synthesized block
-
-  0.0F,
 
   // Computed Parameter: ms2us_1_Gain
   //  Referenced by: '<S38>/ms2us_1'
@@ -432,28 +412,13 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
 
   64000U,
 
-  // Computed Parameter: Constant_Value_p
-  //  Referenced by: '<S50>/Constant'
-
-  0U,
-
   // Computed Parameter: heartbeat_Y0
   //  Referenced by: '<S20>/heartbeat'
 
   0U,
 
-  // Computed Parameter: FixPtConstant_Value
-  //  Referenced by: '<S49>/FixPt Constant'
-
-  1U,
-
-  // Computed Parameter: Output_InitialCondition
-  //  Referenced by: '<S48>/Output'
-
-  0U,
-
   // Computed Parameter: SimHeartbeat_Y0
-  //  Referenced by: '<S54>/SimHeartbeat'
+  //  Referenced by: '<S55>/SimHeartbeat'
 
   0U,
 
@@ -473,7 +438,7 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   0,
 
   // Computed Parameter: packetfound_flg_Y0
-  //  Referenced by: '<S51>/packetfound_flg'
+  //  Referenced by: '<S52>/packetfound_flg'
 
   0,
 
@@ -493,12 +458,12 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   1U,
 
   // Computed Parameter: SimStatus_Y0
-  //  Referenced by: '<S54>/SimStatus'
+  //  Referenced by: '<S55>/SimStatus'
 
   0U,
 
   // Computed Parameter: SimRCStatus_Y0
-  //  Referenced by: '<S54>/SimRCStatus'
+  //  Referenced by: '<S55>/SimRCStatus'
 
   0U,
 
@@ -511,21 +476,6 @@ P_Pix_FCC_flash_T Pix_FCC_flash_P = {
   //  Referenced by: '<S18>/RCStatus'
 
   0U,
-
-  // Computed Parameter: Constant_Value_b
-  //  Referenced by: '<S41>/Constant'
-
-  0U,
-
-  // Computed Parameter: Output_InitialCondition_n
-  //  Referenced by: '<S37>/Output'
-
-  0U,
-
-  // Computed Parameter: FixPtConstant_Value_m
-  //  Referenced by: '<S40>/FixPt Constant'
-
-  1U,
 
   // Start of '<S39>/Send WhiteNoise End'
   {

@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.80
+ * Model version              : 1.88
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Mon Dec 30 21:34:10 2019
+ * C source code generated on : Fri Jan  3 00:07:39 2020
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -43,7 +43,7 @@ const double SLDRTTimers[2] = {
 /* list of Simulink Desktop Real-Time boards */
 const int SLDRTBoardCount = 1;
 SLDRTBOARD SLDRTBoards[1] = {
-  { "Standard_Devices/Serial_Port", 11U, 8, SLDRTBoardOptions0 },
+  { "Standard_Devices/Serial_Port", 3U, 8, SLDRTBoardOptions0 },
 };
 
 /* Block signals (default storage) */
@@ -402,7 +402,7 @@ static void rate_scheduler(void)
    * counter is reset when it reaches its limit (zero means run).
    */
   (GRM_HIL_M->Timing.TaskCounters.TID[2])++;
-  if ((GRM_HIL_M->Timing.TaskCounters.TID[2]) > 4) {/* Sample time: [0.005s, 0.0s] */
+  if ((GRM_HIL_M->Timing.TaskCounters.TID[2]) > 49) {/* Sample time: [0.05s, 0.0s] */
     GRM_HIL_M->Timing.TaskCounters.TID[2] = 0;
   }
 
@@ -947,7 +947,6 @@ void GRM_HIL_output(void)
   int8_T ii_data[78];
   boolean_T p;
   int32_T idx;
-  uint16_T PixHeartbeat;
   real32_T ServoCMD1;
   real32_T ServoCMD2;
   real32_T ServoCMD3;
@@ -999,6 +998,7 @@ void GRM_HIL_output(void)
   real_T rtb_Product_i[3];
   real_T rtb_d_qGE[4];
   real_T rtb_VectorConcatenate_hm[3];
+  int32_T idx_0;
   real_T rtb_Add1;
   real_T rtb_Add3;
   real_T rtb_ProportionalGain;
@@ -1008,6 +1008,7 @@ void GRM_HIL_output(void)
   real_T rtb_ProportionalGain_a;
   real_T rtb_DerivativeGain_j0;
   real_T rtb_VectorConcatenate3[9];
+  uint16_T rtb_FixPtSum1;
   real_T rtb_d_qBI[4];
   real_T rtb_JBBB[9];
   int8_T rtAction;
@@ -1112,11 +1113,9 @@ void GRM_HIL_output(void)
   real_T rtb_MultiportSwitch[9];
   real_T rtb_MultiportSwitch1[9];
   real_T rtb_MultiportSwitch2[9];
-  uint8_T MessageToSend[128];
   real_T rtb_MatrixMultiply_tmp[9];
   real_T rtb_vBEB_a_tmp[9];
   int32_T i;
-  int32_T loop_ub;
   real_T tmp[16];
   int32_T start_size[2];
   int32_T tmp_size[2];
@@ -1238,8 +1237,22 @@ void GRM_HIL_output(void)
     /* Outputs for Enabled SubSystem: '<S21>/Receive_ExternalMode' incorporates:
      *  EnablePort: '<S23>/Enable'
      */
-    /* Constant: '<S21>/One' */
-    if (GRM_HIL_P.One_Value_g > 0.0) {
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      /* Constant: '<S21>/One' */
+      if (GRM_HIL_P.One_Value_g > 0.0) {
+        if (!GRM_HIL_DW.Receive_ExternalMode_MODE) {
+          /* Enable for Sin: '<S23>/Sine Wave' */
+          GRM_HIL_DW.systemEnable_c = 1;
+          GRM_HIL_DW.Receive_ExternalMode_MODE = true;
+        }
+      } else {
+        GRM_HIL_DW.Receive_ExternalMode_MODE = false;
+      }
+
+      /* End of Constant: '<S21>/One' */
+    }
+
+    if (GRM_HIL_DW.Receive_ExternalMode_MODE) {
       /* S-Function (sldrtpi): '<S23>/Packet Input' */
       /* S-Function Block: <S23>/Packet Input */
       {
@@ -1262,16 +1275,42 @@ void GRM_HIL_output(void)
         }
       }
 
+      /* ToAsyncQueueBlock generated from: '<S23>/Packet Input' */
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        {
+          double time = GRM_HIL_M->Timing.t[1];
+          void *pData = (void *)&GRM_HIL_B.PacketInput_o1[0];
+          int32_T size = 78*sizeof(uint8_T);
+          sendToAsyncQueueTgtAppSvc(3685774264U, time, pData, size);
+        }
+      }
+
       /* Logic: '<S23>/AND' incorporates:
        *  Logic: '<S23>/NOT'
        */
       GRM_HIL_B.AND_h = (rtb_LogicalOperator1_c && (!rtb_LogicalOperator2));
+
+      /* Sin: '<S23>/Sine Wave' */
+      if (GRM_HIL_DW.systemEnable_c != 0) {
+        rtb_Product_idx_0 = GRM_HIL_P.SineWave_Freq * GRM_HIL_M->Timing.t[1];
+        GRM_HIL_DW.lastSin_h = sin(rtb_Product_idx_0);
+        GRM_HIL_DW.lastCos_c = cos(rtb_Product_idx_0);
+        GRM_HIL_DW.systemEnable_c = 0;
+      }
+
+      GRM_HIL_B.SineWave_g = ((GRM_HIL_DW.lastSin_h * GRM_HIL_P.SineWave_PCos +
+        GRM_HIL_DW.lastCos_c * GRM_HIL_P.SineWave_PSin) *
+        GRM_HIL_P.SineWave_HCos + (GRM_HIL_DW.lastCos_c *
+        GRM_HIL_P.SineWave_PCos - GRM_HIL_DW.lastSin_h * GRM_HIL_P.SineWave_PSin)
+        * GRM_HIL_P.SineWave_Hsin) * GRM_HIL_P.SineWave_Amp +
+        GRM_HIL_P.SineWave_Bias;
+
+      /* End of Sin: '<S23>/Sine Wave' */
       if (rtmIsMajorTimeStep(GRM_HIL_M)) {
         srUpdateBC(GRM_HIL_DW.Receive_ExternalMode_SubsysRanBC);
       }
     }
 
-    /* End of Constant: '<S21>/One' */
     /* End of Outputs for SubSystem: '<S21>/Receive_ExternalMode' */
 
     /* Outputs for Enabled SubSystem: '<S21>/input_hold' incorporates:
@@ -1287,19 +1326,19 @@ void GRM_HIL_output(void)
       }
 
       idx = 0;
-      i = 0;
+      idx_0 = 0;
       exitg1 = false;
-      while ((!exitg1) && (i < 78)) {
-        if (x[i]) {
+      while ((!exitg1) && (idx_0 < 78)) {
+        if (x[idx_0]) {
           idx++;
-          ii_data[idx - 1] = (int8_T)(i + 1);
+          ii_data[idx - 1] = (int8_T)(idx_0 + 1);
           if (idx >= 78) {
             exitg1 = true;
           } else {
-            i++;
+            idx_0++;
           }
         } else {
-          i++;
+          idx_0++;
         }
       }
 
@@ -1309,8 +1348,8 @@ void GRM_HIL_output(void)
 
       start_size[0] = 1;
       start_size[1] = idx;
-      loop_ub = idx - 1;
-      for (i = 0; i <= loop_ub; i++) {
+      idx_0 = idx - 1;
+      for (i = 0; i <= idx_0; i++) {
         start_data[i] = ii_data[i];
       }
 
@@ -1323,43 +1362,48 @@ void GRM_HIL_output(void)
       GRM_HIL_nullAssignment(start_data, start_size, x, start_size_0);
       tmp_size[0] = 1;
       tmp_size[1] = start_size[1];
-      loop_ub = start_size[0] * start_size[1];
-      for (i = 0; i < loop_ub; i++) {
+      idx_0 = start_size[0] * start_size[1];
+      for (i = 0; i < idx_0; i++) {
         x[i] = (GRM_HIL_B.PacketInput_o1[(int32_T)((start_data[i] + 2.0) - 1.0)
                 - 1] != 5);
       }
 
       GRM_HIL_nullAssignment(start_data, start_size, x, tmp_size);
       if (start_size[1] != 0) {
-        i = 0;
+        idx_0 = 5;
+        idx = 0;
         exitg1 = false;
-        while ((!exitg1) && (i <= start_size[1] - 2)) {
+        while ((!exitg1) && (idx <= start_size[1] - 2)) {
+          idx_0 = 6;
           p = false;
-          rtb_q_conj_e = start_data[i + 1];
-          if (rtb_q_conj_e - start_data[i] == 66.0) {
+          rtb_q_conj_e = start_data[idx + 1];
+          if (rtb_q_conj_e - start_data[idx] == 66.0) {
             p = true;
           }
 
           if (p) {
-            if (start_data[i] + 2.0 > rtb_q_conj_e - 1.0) {
+            if (start_data[idx] + 2.0 > rtb_q_conj_e - 1.0) {
+              idx_0 = 0;
               idx = 0;
-              i = 0;
             } else {
-              idx = (int32_T)(start_data[i] + 2.0) - 1;
-              i = (int32_T)(start_data[i + 1] - 1.0);
+              idx_0 = (int32_T)(start_data[idx] + 2.0) - 1;
+              idx = (int32_T)(start_data[idx + 1] - 1.0);
             }
 
-            packet_size_idx_1_tmp = i - idx;
+            packet_size_idx_1_tmp = idx - idx_0;
             for (i = 0; i < packet_size_idx_1_tmp; i++) {
-              packet_data[i] = GRM_HIL_B.PacketInput_o1[idx + i];
+              packet_data[i] = GRM_HIL_B.PacketInput_o1[idx_0 + i];
             }
 
             packetfound = true;
+            idx_0 = 9;
             exitg1 = true;
           } else {
-            i++;
+            idx++;
           }
         }
+      } else {
+        idx_0 = 777;
       }
 
       GRM_HIL_DW.SFunction_DIMS2[0] = 1;
@@ -1369,11 +1413,13 @@ void GRM_HIL_output(void)
                (uint8_T));
       }
 
+      GRM_HIL_B.stage = idx_0;
+
       /* MATLAB Function: '<S24>/ByteUnpack' */
       x_0[0] = rtb_message[0];
       x_0[1] = rtb_message[1];
-      memcpy((void *)&PixHeartbeat, (void *)&x_0[0], (uint32_T)((size_t)1 *
-              sizeof(uint16_T)));
+      memcpy((void *)&GRM_HIL_B.PixHeartbeat, (void *)&x_0[0], (uint32_T)
+             ((size_t)1 * sizeof(uint16_T)));
       b_x[0] = rtb_message[4];
       b_x[1] = rtb_message[5];
       b_x[2] = rtb_message[6];
@@ -1465,6 +1511,26 @@ void GRM_HIL_output(void)
       memcpy((void *)&quaternion1, (void *)&b_x[0], (uint32_T)((size_t)1 *
               sizeof(real32_T)));
 
+      /* ToAsyncQueueBlock generated from: '<S24>/ByteUnpack' */
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        {
+          double time = GRM_HIL_M->Timing.t[1];
+          void *pData = (void *)&GRM_HIL_B.PixHeartbeat;
+          int32_T size = 1*sizeof(uint16_T);
+          sendToAsyncQueueTgtAppSvc(2759144746U, time, pData, size);
+        }
+      }
+
+      /* ToAsyncQueueBlock generated from: '<S24>/ExtractMessage' */
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        {
+          double time = GRM_HIL_M->Timing.t[1];
+          void *pData = (void *)&GRM_HIL_B.stage;
+          int32_T size = 1*sizeof(real_T);
+          sendToAsyncQueueTgtAppSvc(2918050724U, time, pData, size);
+        }
+      }
+
       /* Outputs for Enabled SubSystem: '<S24>/hold' incorporates:
        *  EnablePort: '<S27>/Enable'
        */
@@ -1495,6 +1561,25 @@ void GRM_HIL_output(void)
     }
 
     /* End of Outputs for SubSystem: '<S21>/input_hold' */
+    /* Sum: '<Root>/Sum of Elements' incorporates:
+     *  Math: '<Root>/Math Function'
+     */
+    ServoCMD1 = (GRM_HIL_B.SensorACC_update[0] * GRM_HIL_B.SensorACC_update[0] +
+                 GRM_HIL_B.SensorACC_update[1] * GRM_HIL_B.SensorACC_update[1])
+      + GRM_HIL_B.SensorACC_update[2] * GRM_HIL_B.SensorACC_update[2];
+
+    /* Math: '<Root>/Math Function1'
+     *
+     * About '<Root>/Math Function1':
+     *  Operator: sqrt
+     */
+    if (ServoCMD1 < 0.0F) {
+      GRM_HIL_B.MathFunction1 = -sqrtf(fabsf(ServoCMD1));
+    } else {
+      GRM_HIL_B.MathFunction1 = sqrtf(ServoCMD1);
+    }
+
+    /* End of Math: '<Root>/Math Function1' */
     /* Constant: '<S327>/Constant' */
     memcpy(&GRM_HIL_B.Constant[0], &GRM_HIL_P.Constant_Value_pl[0], 13U * sizeof
            (real_T));
@@ -1834,112 +1919,112 @@ void GRM_HIL_output(void)
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Fin_1_Pos_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2140956229U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2019685508U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Fin_2_Pos_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(91297154U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3549267901U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Fin_3_Pos_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3961555730U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3530171564U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Fin_4_Pos_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(340338113U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2103377955U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.A;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2568482423U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3732719497U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.B;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1091074086U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1853753753U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Z;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(334380635U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3445598233U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.A_i;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(4240702777U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(773567699U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.B_d;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1457474277U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(816143410U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Z_d;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(778328578U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(256366903U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.A_m;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1911152822U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3390687037U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.B_c;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(243055163U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(4127515693U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Z_h;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1553536316U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3084088169U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.A_f;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2252178214U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3421848115U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.B_n;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3046925383U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1717588779U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Z_l;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(98658301U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(457575933U, time, pData, size);
       }
     }
 
@@ -3190,11 +3275,11 @@ void GRM_HIL_output(void)
 
   /* TransferFcn: '<S38>/Theta2Motor -> Pitch' */
   rtb_Gain2_dm = 0.0;
-  for (i = 0; i < 5; i++) {
+  for (idx_0 = 0; idx_0 < 5; idx_0++) {
     rtb_Gain2_dm +=
-      GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Pitch.Num_Coef[i] /
-      GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Pitch.Denom_Coef[0] *
-      GRM_HIL_X.Theta2MotorPitch_CSTATE[i];
+      GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Pitch.Num_Coef[idx_0]
+      / GRM_HIL_P.Gimbal_TransferFunctions_TF.Theta2Motor_to_Pitch.Denom_Coef[0]
+      * GRM_HIL_X.Theta2MotorPitch_CSTATE[idx_0];
   }
 
   /* End of TransferFcn: '<S38>/Theta2Motor -> Pitch' */
@@ -3317,182 +3402,182 @@ void GRM_HIL_output(void)
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Gimbal_operational_flg;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(4271458147U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3581233937U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Gimbal_Ramp_flg;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1667283167U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2815326209U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Gimbal_Limit_flg;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(330095875U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2575509423U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Gimbal_StopSim_flg;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2974578811U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1882671143U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ATT_Phi_rad_p;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3272284154U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2864846352U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ATT_Theta_rad_c;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(4276801769U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2296397721U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ATT_Psi_rad_h;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(758605789U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3654869859U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.q0;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2968662525U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1660762U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.q1;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(711998586U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3530392617U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.q2;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(489013774U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(360685698U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.q3;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(990335688U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(264416174U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Sum;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1762475248U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1636319246U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Sum1;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3524641181U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2336629595U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Sum2;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(887991463U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(43165169U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Data_plus;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(6048736U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3414981629U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Data_minus;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2356421171U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(907881417U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Clock_plus;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(334056625U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1479291502U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Clock_minus;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(457307751U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(170020782U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Data_plus_n;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(154285846U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3816275064U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Data_minus_l;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1101895719U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3029744459U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Clock_plus_b;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3455757931U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3394260916U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Clock_minus_b;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1964388435U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1624853172U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Data_plus_nf;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3123378252U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(991454816U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Data_minus_g;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1280640585U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3634553370U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Clock_plus_g;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1326155582U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3023253040U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.Clock_minus_d;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2626027710U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2118052306U, time, pData, size);
       }
     }
 
@@ -6560,10 +6645,6 @@ void GRM_HIL_output(void)
 
   /* Gain: '<S194>/Gain22' */
   GRM_HIL_B.mass_kg = GRM_HIL_P.Gain22_Gain * rtb_Subtract_ju;
-
-  /* Outputs for Enabled SubSystem: '<S22>/send_to_pix' incorporates:
-   *  EnablePort: '<S30>/Enable'
-   */
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* Gain: '<S194>/Gain19' incorporates:
@@ -6590,210 +6671,210 @@ void GRM_HIL_output(void)
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.VEL_u_K_R_E_B_mDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2318716864U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1287033222U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.VEL_v_K_R_E_B_mDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(275619629U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(152349803U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.VEL_w_K_R_E_B_mDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(289611216U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3727675641U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ACC_x_B_mDs2;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1546305623U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1120039989U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ACC_y_B_mDs2;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1228842561U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(661038555U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ACC_z_B_mDs2;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(497431319U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(597447160U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.w_x_K_IB_B_radDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2783482357U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1734883718U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.w_y_K_IB_B_radDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3636659203U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2367144326U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.w_z_K_IB_B_radDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2269924592U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1276640874U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.w_x_dot_radDs2;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2724233414U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3895289340U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.w_y_dot_radDs2;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(244963533U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2066199556U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.w_z_dot_radDs2;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3312762433U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(4205680335U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ATT_Phi_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2537379206U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(522730590U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ATT_Theta_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(4238173465U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3092216102U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.ATT_Psi_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(4188830167U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(4188492723U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.q0_a;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1469129362U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(193847979U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.q1_j;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2341666507U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1824299271U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.q2_f;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3525066349U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2907518382U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.q3_j;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(65106792U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2404931514U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.POS_lambda_WGS84_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2406039303U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3714020394U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.POS_mue_WGS84_rad;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3485916143U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2740487818U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.POS_h_WGS84_m;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(4009801111U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(3980315156U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.POS_x_NED_m;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2752322902U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2315970546U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.POS_y_NED_m;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2801806173U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2298037004U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.POS_z_NED_m;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(3278277326U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2543975020U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.motor_state_perc;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2717196622U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(252484842U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.mass_kg;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2739331901U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1884870U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.VEL_u_Wind_A_E_O_mDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1899969369U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2113530626U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.VEL_v_Wind_A_E_O_mDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(1771928370U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1212837408U, time, pData, size);
       }
 
       {
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.VEL_w_Wind_A_E_O_mDs;
         int32_T size = 1*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(541992360U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(2362669800U, time, pData, size);
       }
     }
 
@@ -7100,27 +7181,39 @@ void GRM_HIL_output(void)
 
     /* DataTypeConversion: '<S22>/Data Type Conversion2' */
     GRM_HIL_B.DataTypeConversion2 = (real32_T)rtb_Gain1_c;
+
+    /* UnitDelay: '<S384>/Output' */
+    rtb_FixPtSum1 = GRM_HIL_DW.Output_DSTATE;
+
+    /* DataTypeConversion: '<S383>/Data Type Conversion1' incorporates:
+     *  UnitDelay: '<S384>/Output'
+     */
+    GRM_HIL_B.DataTypeConversion1_p = GRM_HIL_DW.Output_DSTATE;
+
+    /* Outputs for Enabled SubSystem: '<S22>/send_to_pix' incorporates:
+     *  EnablePort: '<S30>/Enable'
+     */
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
       if (GRM_HIL_B.OR) {
         GRM_HIL_DW.send_to_pix_MODE = true;
       } else {
         if (GRM_HIL_DW.send_to_pix_MODE) {
-          /* Disable for Enabled SubSystem: '<S30>/Send_ExternalMode' */
-          GRM_HIL_DW.Send_ExternalMode_MODE = false;
-
-          /* End of Disable for SubSystem: '<S30>/Send_ExternalMode' */
-
           /* Disable for Enabled SubSystem: '<S30>/no_CRC' */
           GRM_HIL_DW.no_CRC_MODE = false;
 
           /* End of Disable for SubSystem: '<S30>/no_CRC' */
+
+          /* Disable for Enabled SubSystem: '<S30>/Send_ExternalMode' */
+          GRM_HIL_DW.Send_ExternalMode_MODE = false;
+
+          /* End of Disable for SubSystem: '<S30>/Send_ExternalMode' */
           GRM_HIL_DW.send_to_pix_MODE = false;
         }
       }
     }
-  }
 
-  /* End of Outputs for SubSystem: '<S22>/send_to_pix' */
+    /* End of Outputs for SubSystem: '<S22>/send_to_pix' */
+  }
 
   /* MATLAB Function: '<S22>/CreateVector' incorporates:
    *  DataTypeConversion: '<S22>/Data Type Conversion10'
@@ -7147,46 +7240,16 @@ void GRM_HIL_output(void)
    *  EnablePort: '<S30>/Enable'
    */
   if (GRM_HIL_DW.send_to_pix_MODE) {
-    /* Outputs for Enabled SubSystem: '<S30>/Send_ExternalMode' incorporates:
-     *  EnablePort: '<S33>/Enable'
-     */
-    if ((rtmIsMajorTimeStep(GRM_HIL_M) &&
-         GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) && rtmIsMajorTimeStep
-        (GRM_HIL_M)) {
-      /* Constant: '<S30>/One' */
-      GRM_HIL_DW.Send_ExternalMode_MODE = (GRM_HIL_P.One_Value > 0.0);
-    }
-
-    if (GRM_HIL_DW.Send_ExternalMode_MODE) {
-      if (rtmIsMajorTimeStep(GRM_HIL_M) &&
-          GRM_HIL_M->Timing.TaskCounters.TID[2] == 0) {
-        /* S-Function (sldrtpo): '<S33>/Packet Output' */
-        /* S-Function Block: <S33>/Packet Output */
-        {
-          int status = RTBIO_DriverIO(0, STREAMOUTPUT, IOSTATUS, 128U, NULL,
-            NULL, NULL);
-          rtb_error = (status>>1) & 0x1;/* Data Error port */
-        }
-      }
-
-      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-        srUpdateBC(GRM_HIL_DW.Send_ExternalMode_SubsysRanBC);
-      }
-    }
-
-    /* End of Outputs for SubSystem: '<S30>/Send_ExternalMode' */
-
     /* MATLAB Function: '<S30>/MessageAssembly' incorporates:
      *  Constant: '<S20>/Constant6'
      *  Constant: '<S22>/Constant'
      *  Constant: '<S22>/Constant1'
-     *  Constant: '<S22>/Constant2'
      *  Constant: '<S30>/Constant'
      *  MATLAB Function: '<S22>/CreateVector'
      */
     if (GRM_HIL_P.Constant_Value == 1.0) {
-      memcpy((void *)&x_0[0], (void *)&GRM_HIL_P.Constant2_Value_l, (uint32_T)
-             ((size_t)2 * sizeof(uint8_T)));
+      memcpy((void *)&x_0[0], (void *)&GRM_HIL_B.DataTypeConversion1_p,
+             (uint32_T)((size_t)2 * sizeof(uint8_T)));
       memcpy((void *)&b_x[0], (void *)&GRM_HIL_B.DataTypeConversion3, (uint32_T)
              ((size_t)4 * sizeof(uint8_T)));
       memcpy((void *)&c_y[0], (void *)&GRM_HIL_B.DataTypeConversion1, (uint32_T)
@@ -7270,25 +7333,25 @@ void GRM_HIL_output(void)
       package[51] = m_y[3];
       package[55] = n_y[3];
       for (i = 0; i < 5; i++) {
-        MessageToSend[i] = 0U;
+        GRM_HIL_B.MessageToSend[i] = 0U;
       }
 
-      MessageToSend[5] = 7U;
-      MessageToSend[6] = 7U;
-      MessageToSend[63] = 7U;
-      MessageToSend[64] = 7U;
+      GRM_HIL_B.MessageToSend[5] = 7U;
+      GRM_HIL_B.MessageToSend[6] = 7U;
+      GRM_HIL_B.MessageToSend[63] = 7U;
+      GRM_HIL_B.MessageToSend[64] = 7U;
       for (i = 0; i < 56; i++) {
-        MessageToSend[i + 7] = package[i];
-        MessageToSend[i + 65] = package[i];
+        GRM_HIL_B.MessageToSend[i + 7] = package[i];
+        GRM_HIL_B.MessageToSend[i + 65] = package[i];
       }
 
-      MessageToSend[121] = 7U;
-      MessageToSend[122] = 7U;
+      GRM_HIL_B.MessageToSend[121] = 7U;
+      GRM_HIL_B.MessageToSend[122] = 7U;
       for (i = 0; i < 5; i++) {
-        MessageToSend[i + 123] = 0U;
+        GRM_HIL_B.MessageToSend[i + 123] = 0U;
       }
     } else {
-      memset(&MessageToSend[0], 0, sizeof(uint8_T) << 7U);
+      memset(&GRM_HIL_B.MessageToSend[0], 0, sizeof(uint8_T) << 7U);
     }
 
     /* End of MATLAB Function: '<S30>/MessageAssembly' */
@@ -7314,19 +7377,182 @@ void GRM_HIL_output(void)
      */
     if (GRM_HIL_DW.no_CRC_MODE) {
       /* Inport: '<S34>/message' */
-      memcpy(&GRM_HIL_B.message[0], &MessageToSend[0], sizeof(uint8_T) << 7U);
+      memcpy(&GRM_HIL_B.message[0], &GRM_HIL_B.MessageToSend[0], sizeof(uint8_T)
+             << 7U);
       if (rtmIsMajorTimeStep(GRM_HIL_M)) {
         srUpdateBC(GRM_HIL_DW.no_CRC_SubsysRanBC);
       }
     }
 
     /* End of Outputs for SubSystem: '<S30>/no_CRC' */
+    if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+        GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+      /* Constant: '<S30>/One' */
+      GRM_HIL_B.One = GRM_HIL_P.One_Value;
+
+      /* Outputs for Enabled SubSystem: '<S30>/Send_ExternalMode' incorporates:
+       *  EnablePort: '<S33>/Enable'
+       */
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        if (GRM_HIL_B.One > 0.0) {
+          if (!GRM_HIL_DW.Send_ExternalMode_MODE) {
+            /* Enable for Sin: '<S33>/Sine Wave' */
+            GRM_HIL_DW.systemEnable = 1;
+            GRM_HIL_DW.Send_ExternalMode_MODE = true;
+          }
+        } else {
+          GRM_HIL_DW.Send_ExternalMode_MODE = false;
+        }
+      }
+
+      /* End of Outputs for SubSystem: '<S30>/Send_ExternalMode' */
+    }
+
+    /* Outputs for Enabled SubSystem: '<S30>/Send_ExternalMode' incorporates:
+     *  EnablePort: '<S33>/Enable'
+     */
+    if (GRM_HIL_DW.Send_ExternalMode_MODE) {
+      if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+          GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+        /* ToAsyncQueueBlock generated from: '<S33>/Selector1' */
+        if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+          {
+            double time = GRM_HIL_M->Timing.t[1];
+            void *pData = (void *)&GRM_HIL_B.message[7];
+            int32_T size = 2*sizeof(uint8_T);
+            sendToAsyncQueueTgtAppSvc(2879851527U, time, pData, size);
+          }
+        }
+
+        /* ToAsyncQueueBlock generated from: '<S33>/message_to_send' */
+        if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+          {
+            double time = GRM_HIL_M->Timing.t[1];
+            void *pData = (void *)&GRM_HIL_B.message[0];
+            int32_T size = 128*sizeof(uint8_T);
+            sendToAsyncQueueTgtAppSvc(1359870183U, time, pData, size);
+          }
+        }
+      }
+
+      if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+          GRM_HIL_M->Timing.TaskCounters.TID[2] == 0) {
+        /* S-Function (sldrtpo): '<S33>/Packet Output' */
+        /* S-Function Block: <S33>/Packet Output */
+        {
+          int status = RTBIO_DriverIO(0, STREAMOUTPUT, IOSTATUS, 128U, NULL,
+            NULL, NULL);
+          rtb_error = (status>>1) & 0x1;/* Data Error port */
+        }
+      }
+
+      if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+          GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+        /* Sin: '<S33>/Sine Wave' */
+        if (GRM_HIL_DW.systemEnable != 0) {
+          rtb_Gain2_dm_tmp = GRM_HIL_P.SineWave_Freq_c * GRM_HIL_M->Timing.t[1];
+          GRM_HIL_DW.lastSin = sin(rtb_Gain2_dm_tmp);
+          GRM_HIL_DW.lastCos = cos(rtb_Gain2_dm_tmp);
+          GRM_HIL_DW.systemEnable = 0;
+        }
+
+        GRM_HIL_B.SineWave = ((GRM_HIL_DW.lastSin * GRM_HIL_P.SineWave_PCos_i +
+          GRM_HIL_DW.lastCos * GRM_HIL_P.SineWave_PSin_i) *
+                              GRM_HIL_P.SineWave_HCos_g + (GRM_HIL_DW.lastCos *
+          GRM_HIL_P.SineWave_PCos_i - GRM_HIL_DW.lastSin *
+          GRM_HIL_P.SineWave_PSin_i) * GRM_HIL_P.SineWave_Hsin_e) *
+          GRM_HIL_P.SineWave_Amp_c + GRM_HIL_P.SineWave_Bias_b;
+
+        /* End of Sin: '<S33>/Sine Wave' */
+      }
+
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        srUpdateBC(GRM_HIL_DW.Send_ExternalMode_SubsysRanBC);
+      }
+    }
+
+    /* End of Outputs for SubSystem: '<S30>/Send_ExternalMode' */
+    if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+        GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+      /* ToAsyncQueueBlock generated from: '<S30>/One' */
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        {
+          double time = GRM_HIL_M->Timing.t[1];
+          void *pData = (void *)&GRM_HIL_B.One;
+          int32_T size = 1*sizeof(real_T);
+          sendToAsyncQueueTgtAppSvc(1870408404U, time, pData, size);
+        }
+      }
+
+      /* ToAsyncQueueBlock generated from: '<S30>/Selector1' */
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        {
+          double time = GRM_HIL_M->Timing.t[1];
+          void *pData = (void *)&GRM_HIL_B.message[7];
+          int32_T size = 2*sizeof(uint8_T);
+          sendToAsyncQueueTgtAppSvc(3754433230U, time, pData, size);
+        }
+      }
+
+      /* ToAsyncQueueBlock generated from: '<S30>/Selector' */
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        {
+          double time = GRM_HIL_M->Timing.t[1];
+          void *pData = (void *)&GRM_HIL_B.MessageToSend[7];
+          int32_T size = 2*sizeof(uint8_T);
+          sendToAsyncQueueTgtAppSvc(3676730362U, time, pData, size);
+        }
+      }
+
+      /* ToAsyncQueueBlock generated from: '<S30>/SimHeartbeat' */
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        {
+          double time = GRM_HIL_M->Timing.t[1];
+          void *pData = (void *)&GRM_HIL_B.DataTypeConversion1_p;
+          int32_T size = 1*sizeof(uint16_T);
+          sendToAsyncQueueTgtAppSvc(4163126211U, time, pData, size);
+        }
+      }
+    }
+
     if (rtmIsMajorTimeStep(GRM_HIL_M)) {
       srUpdateBC(GRM_HIL_DW.send_to_pix_SubsysRanBC);
     }
   }
 
   /* End of Outputs for SubSystem: '<S22>/send_to_pix' */
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* ToAsyncQueueBlock generated from: '<S20>/Serial_Recieve_from_Pixhawk' */
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      {
+        double time = GRM_HIL_M->Timing.t[1];
+        void *pData = (void *)&GRM_HIL_B.SensorACC_update[0];
+        int32_T size = 3*sizeof(real32_T);
+        sendToAsyncQueueTgtAppSvc(3186272768U, time, pData, size);
+      }
+    }
+
+    /* ToAsyncQueueBlock generated from: '<S20>/Serial_Recieve_from_Pixhawk' */
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      {
+        double time = GRM_HIL_M->Timing.t[1];
+        void *pData = (void *)&GRM_HIL_B.SensorROT_update[0];
+        int32_T size = 3*sizeof(real32_T);
+        sendToAsyncQueueTgtAppSvc(4127958108U, time, pData, size);
+      }
+    }
+
+    /* ToAsyncQueueBlock generated from: '<S21>/Receive_ExternalMode' */
+    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+      {
+        double time = GRM_HIL_M->Timing.t[1];
+        void *pData = (void *)&GRM_HIL_B.AND_h;
+        int32_T size = 1*sizeof(boolean_T);
+        sendToAsyncQueueTgtAppSvc(9729822U, time, pData, size);
+      }
+    }
+  }
 
   /* Step: '<Root>/Step1' */
   if (rtb_q_conj_e < GRM_HIL_P.Step1_Time) {
@@ -7348,9 +7574,9 @@ void GRM_HIL_output(void)
   rtb_Gain1_c = (rtb_Switch1 + rtb_Gain2_dm) * GRM_HIL_P.Gain1_Gain_j2;
 
   /* Sin: '<Root>/Sine Wave' */
-  rtb_Gain2_dm = sin(GRM_HIL_P.SineWave_Freq * rtb_q_conj_e +
-                     GRM_HIL_P.SineWave_Phase) * GRM_HIL_P.SineWave_Amp +
-    GRM_HIL_P.SineWave_Bias;
+  rtb_Gain2_dm = sin(GRM_HIL_P.SineWave_Freq_d * rtb_q_conj_e +
+                     GRM_HIL_P.SineWave_Phase) * GRM_HIL_P.SineWave_Amp_o +
+    GRM_HIL_P.SineWave_Bias_j;
 
   /* Gain: '<Root>/Gain2' */
   rtb_Gain2_dm *= GRM_HIL_P.Gain2_Gain_i2;
@@ -9325,32 +9551,49 @@ void GRM_HIL_output(void)
 
   /* Product: '<S336>/Divide1' */
   rt_mldivide_U1d3x3_U2d3x1_Yd3x1_snf(rtb_JBBB, frac_0, &GRM_HIL_B.d_x[10]);
+  if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+      GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Outputs for Enabled SubSystem: '<S8>/Synchronize_to_realtime' incorporates:
+     *  EnablePort: '<S382>/Enable'
+     */
+    /* Logic: '<S8>/Logical Operator2' incorporates:
+     *  Constant: '<S8>/Constant1'
+     *  Constant: '<S8>/Constant3'
+     *  Constant: '<S8>/Constant9'
+     *  Logic: '<S8>/NOT'
+     */
+    if (GRM_HIL_P.Constant1_Value_c3 && (!GRM_HIL_P.Constant9_Value_b) &&
+        GRM_HIL_P.Constant3_Value_it) {
+      /* S-Function (sldrtsync): '<S382>/Real-Time Synchronization' */
+      /* S-Function Block: <S382>/Real-Time Synchronization */
+      {
+      }
 
-  /* Outputs for Enabled SubSystem: '<S8>/Synchronize_to_realtime' incorporates:
-   *  EnablePort: '<S382>/Enable'
-   */
-  /* Logic: '<S8>/Logical Operator2' incorporates:
-   *  Constant: '<S8>/Constant1'
-   *  Constant: '<S8>/Constant3'
-   *  Constant: '<S8>/Constant9'
-   *  Logic: '<S8>/NOT'
-   */
-  if ((rtmIsMajorTimeStep(GRM_HIL_M) &&
-       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) &&
-      (GRM_HIL_P.Constant1_Value_c3 && (!GRM_HIL_P.Constant9_Value_b) &&
-       GRM_HIL_P.Constant3_Value_it)) {
-    /* S-Function (sldrtsync): '<S382>/Real-Time Synchronization' */
-    /* S-Function Block: <S382>/Real-Time Synchronization */
-    {
+      if (rtmIsMajorTimeStep(GRM_HIL_M)) {
+        srUpdateBC(GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC);
+      }
     }
 
-    if (rtmIsMajorTimeStep(GRM_HIL_M)) {
-      srUpdateBC(GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC);
+    /* End of Logic: '<S8>/Logical Operator2' */
+    /* End of Outputs for SubSystem: '<S8>/Synchronize_to_realtime' */
+
+    /* Sum: '<S385>/FixPt Sum1' incorporates:
+     *  Constant: '<S385>/FixPt Constant'
+     */
+    rtb_FixPtSum1 = (uint16_T)((uint32_T)rtb_FixPtSum1 +
+      GRM_HIL_P.FixPtConstant_Value);
+
+    /* Switch: '<S386>/FixPt Switch' incorporates:
+     *  Constant: '<S386>/Constant'
+     */
+    if (rtb_FixPtSum1 > GRM_HIL_P.WrapToZero_Threshold) {
+      GRM_HIL_B.FixPtSwitch = GRM_HIL_P.Constant_Value_lk;
+    } else {
+      GRM_HIL_B.FixPtSwitch = rtb_FixPtSum1;
     }
+
+    /* End of Switch: '<S386>/FixPt Switch' */
   }
-
-  /* End of Logic: '<S8>/Logical Operator2' */
-  /* End of Outputs for SubSystem: '<S8>/Synchronize_to_realtime' */
 
   /* SignalConversion generated from: '<S10>/Vector Concatenate2' */
   GRM_HIL_B.VectorConcatenate2[0] = GRM_HIL_B.w_x_dot_radDs2;
@@ -9368,7 +9611,7 @@ void GRM_HIL_output(void)
         double time = GRM_HIL_M->Timing.t[1];
         void *pData = (void *)&GRM_HIL_B.VectorConcatenate2[0];
         int32_T size = 3*sizeof(real_T);
-        sendToAsyncQueueTgtAppSvc(2255843209U, time, pData, size);
+        sendToAsyncQueueTgtAppSvc(1536843864U, time, pData, size);
       }
     }
 
@@ -9576,7 +9819,7 @@ void GRM_HIL_output(void)
   /* Gain: '<S411>/wn^2' */
   rtb_ProportionalGain_a = GRM_HIL_P.ThreeaxisInertialMeasurementUnit_w_g *
     GRM_HIL_P.ThreeaxisInertialMeasurementUnit_w_g;
-  for (i = 0; i < 3; i++) {
+  for (idx_0 = 0; idx_0 < 3; idx_0++) {
     /* SecondOrderIntegrator: '<S411>/Integrator, Second-Order Limited' */
     rtb_Add1 = GRM_HIL_X.IntegratorSecondOrderLimited_CSTATE_a[idx];
     idx++;
@@ -9597,18 +9840,18 @@ void GRM_HIL_output(void)
      *  Sum: '<S411>/Sum3'
      *  UnitConversion: '<S391>/Unit Conversion'
      * */
-    GRM_HIL_B.Sum2_i[i] = (((((GRM_HIL_P.ZeroOrderHold_Gain_e *
+    GRM_HIL_B.Sum2_i[idx_0] = (((((GRM_HIL_P.ZeroOrderHold_Gain_e *
       GRM_HIL_B.w_x_K_IB_B_radDs *
-      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_sf_cc[i] +
-      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_sf_cc[i + 3] *
+      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_sf_cc[idx_0] +
+      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_sf_cc[idx_0 + 3] *
       (GRM_HIL_P.ZeroOrderHold_Gain_e * GRM_HIL_B.w_y_K_IB_B_radDs)) +
-      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_sf_cc[i + 6] *
+      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_sf_cc[idx_0 + 6] *
       (GRM_HIL_P.ZeroOrderHold_Gain_e * GRM_HIL_B.w_z_K_IB_B_radDs)) +
-      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_bias[i]) +
-      0.10197162129779282 * rtb_VectorConcatenate_hm[i] *
+      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_bias[idx_0]) +
+      0.10197162129779282 * rtb_VectorConcatenate_hm[idx_0] *
       GRM_HIL_P.ZeroOrderHold1_Gain_n *
-      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_sens[i]) -
-      GRM_HIL_X.IntegratorSecondOrderLimited_CSTATE_a[i]) *
+      GRM_HIL_P.ThreeaxisInertialMeasurementUnit_g_sens[idx_0]) -
+      GRM_HIL_X.IntegratorSecondOrderLimited_CSTATE_a[idx_0]) *
       rtb_ProportionalGain_a - rtb_jxk * rtb_Add1;
   }
 }
@@ -9617,11 +9860,23 @@ void GRM_HIL_output(void)
 void GRM_HIL_update(void)
 {
   real_T *lastU;
-
-  /* Update for Integrator: '<S334>/integration_eom' */
-  GRM_HIL_DW.integration_eom_IWORK = 0;
+  real_T HoldSine;
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Update for Enabled SubSystem: '<S21>/Receive_ExternalMode' incorporates:
+     *  EnablePort: '<S23>/Enable'
+     */
+    if (GRM_HIL_DW.Receive_ExternalMode_MODE) {
+      /* Update for Sin: '<S23>/Sine Wave' */
+      HoldSine = GRM_HIL_DW.lastSin_h;
+      GRM_HIL_DW.lastSin_h = GRM_HIL_DW.lastSin_h * GRM_HIL_P.SineWave_HCos +
+        GRM_HIL_DW.lastCos_c * GRM_HIL_P.SineWave_Hsin;
+      GRM_HIL_DW.lastCos_c = GRM_HIL_DW.lastCos_c * GRM_HIL_P.SineWave_HCos -
+        HoldSine * GRM_HIL_P.SineWave_Hsin;
+    }
+
+    /* End of Update for SubSystem: '<S21>/Receive_ExternalMode' */
+
     /* Update for Memory generated from: '<S35>/Memory' */
     GRM_HIL_DW.Memory_1_PreviousInput = GRM_HIL_B.cmd_pass_enable_flg;
 
@@ -9631,6 +9886,9 @@ void GRM_HIL_update(void)
     /* Update for Memory generated from: '<S35>/Memory1' */
     GRM_HIL_DW.Memory1_1_PreviousInput = GRM_HIL_B.Sum;
   }
+
+  /* Update for Integrator: '<S334>/integration_eom' */
+  GRM_HIL_DW.integration_eom_IWORK = 0;
 
   /* Update for TransportDelay: '<S175>/Transport Delay' */
   {
@@ -9720,6 +9978,9 @@ void GRM_HIL_update(void)
       GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
     /* Update for Memory: '<S28>/Memory' */
     GRM_HIL_DW.Memory_PreviousInput = GRM_HIL_B.value;
+
+    /* Update for UnitDelay: '<S384>/Output' */
+    GRM_HIL_DW.Output_DSTATE = GRM_HIL_B.FixPtSwitch;
   }
 
   /* Update for Enabled SubSystem: '<S22>/send_to_pix' incorporates:
@@ -9728,30 +9989,41 @@ void GRM_HIL_update(void)
   /* Update for Enabled SubSystem: '<S30>/Send_ExternalMode' incorporates:
    *  EnablePort: '<S33>/Enable'
    */
-  if (GRM_HIL_DW.send_to_pix_MODE && GRM_HIL_DW.Send_ExternalMode_MODE &&
-      (rtmIsMajorTimeStep(GRM_HIL_M) &&
-       GRM_HIL_M->Timing.TaskCounters.TID[2] == 0)) {
-    /* Update for S-Function (sldrtpo): '<S33>/Packet Output' */
+  if (GRM_HIL_DW.send_to_pix_MODE && GRM_HIL_DW.Send_ExternalMode_MODE) {
+    if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+        GRM_HIL_M->Timing.TaskCounters.TID[2] == 0) {
+      /* Update for S-Function (sldrtpo): '<S33>/Packet Output' */
 
-    /* S-Function Block: <S33>/Packet Output */
-    {
-      uint8_T outdata[128U];
-      RTWin_ANYTYPEPTR outdp;
-      outdp.p_uint8_T = outdata;
-
+      /* S-Function Block: <S33>/Packet Output */
       {
-        int_T i1;
-        const uint8_T *u0 = &GRM_HIL_B.message[0];
-        for (i1=0; i1 < 128; i1++) {
-          {
-            uint8_T pktout = u0[i1];
-            *outdp.p_uint8_T++ = pktout;
+        uint8_T outdata[128U];
+        RTWin_ANYTYPEPTR outdp;
+        outdp.p_uint8_T = outdata;
+
+        {
+          int_T i1;
+          const uint8_T *u0 = &GRM_HIL_B.message[0];
+          for (i1=0; i1 < 128; i1++) {
+            {
+              uint8_T pktout = u0[i1];
+              *outdp.p_uint8_T++ = pktout;
+            }
           }
         }
-      }
 
-      RTBIO_DriverIO(0, STREAMOUTPUT, IOWRITE, 128U,
-                     &GRM_HIL_P.PacketOutput_PacketID, (double*) outdata, NULL);
+        RTBIO_DriverIO(0, STREAMOUTPUT, IOWRITE, 128U,
+                       &GRM_HIL_P.PacketOutput_PacketID, (double*) outdata, NULL);
+      }
+    }
+
+    if (rtmIsMajorTimeStep(GRM_HIL_M) &&
+        GRM_HIL_M->Timing.TaskCounters.TID[1] == 0) {
+      /* Update for Sin: '<S33>/Sine Wave' */
+      HoldSine = GRM_HIL_DW.lastSin;
+      GRM_HIL_DW.lastSin = GRM_HIL_DW.lastSin * GRM_HIL_P.SineWave_HCos_g +
+        GRM_HIL_DW.lastCos * GRM_HIL_P.SineWave_Hsin_e;
+      GRM_HIL_DW.lastCos = GRM_HIL_DW.lastCos * GRM_HIL_P.SineWave_HCos_g -
+        HoldSine * GRM_HIL_P.SineWave_Hsin_e;
     }
   }
 
@@ -9835,7 +10107,7 @@ void GRM_HIL_update(void)
 
   if (rtmIsMajorTimeStep(GRM_HIL_M) &&
       GRM_HIL_M->Timing.TaskCounters.TID[2] == 0) {
-    /* Update absolute timer for sample time: [0.005s, 0.0s] */
+    /* Update absolute timer for sample time: [0.05s, 0.0s] */
     /* The "clockTick2" counts the number of times the code of this task has
      * been executed. The absolute time is the multiplication of "clockTick2"
      * and "Timing.stepSize2". Size of "clockTick2" ensures timer will not
@@ -10182,6 +10454,9 @@ void GRM_HIL_derivatives(void)
 /* Model initialize function */
 void GRM_HIL_initialize(void)
 {
+  /* Start for Enabled SubSystem: '<S21>/Receive_ExternalMode' */
+  GRM_HIL_DW.Receive_ExternalMode_MODE = false;
+
   /* Start for Constant: '<S327>/Constant' */
   memcpy(&GRM_HIL_B.Constant[0], &GRM_HIL_P.Constant_Value_pl[0], 13U * sizeof
          (real_T));
@@ -10323,6 +10598,11 @@ void GRM_HIL_initialize(void)
   /* Start for Enabled SubSystem: '<S22>/send_to_pix' */
   GRM_HIL_DW.send_to_pix_MODE = false;
 
+  /* Start for Enabled SubSystem: '<S30>/no_CRC' */
+  GRM_HIL_DW.no_CRC_MODE = false;
+
+  /* End of Start for SubSystem: '<S30>/no_CRC' */
+
   /* Start for Enabled SubSystem: '<S30>/Send_ExternalMode' */
   GRM_HIL_DW.Send_ExternalMode_MODE = false;
 
@@ -10332,13 +10612,6 @@ void GRM_HIL_initialize(void)
   /* no initial value should be set */
 
   /* End of Start for SubSystem: '<S30>/Send_ExternalMode' */
-
-  /* Start for Enabled SubSystem: '<S30>/no_CRC' */
-  GRM_HIL_DW.no_CRC_MODE = false;
-
-  /* End of Start for SubSystem: '<S30>/no_CRC' */
-  /* End of Start for SubSystem: '<S22>/send_to_pix' */
-
   /* Start for If: '<S175>/If' */
   GRM_HIL_DW.If_ActiveSubsystem = -1;
 
@@ -10490,6 +10763,9 @@ void GRM_HIL_initialize(void)
 
     /* InitializeConditions for Memory: '<S28>/Memory' */
     GRM_HIL_DW.Memory_PreviousInput = GRM_HIL_P.Memory_InitialCondition;
+
+    /* InitializeConditions for UnitDelay: '<S384>/Output' */
+    GRM_HIL_DW.Output_DSTATE = GRM_HIL_P.Output_InitialCondition;
 
     /* InitializeConditions for Integrator: '<S270>/Integrator' */
     GRM_HIL_X.Integrator_CSTATE_h = GRM_HIL_P.Rudder_d_siB_0;
@@ -10691,8 +10967,6 @@ void GRM_HIL_initialize(void)
 /* Model terminate function */
 void GRM_HIL_terminate(void)
 {
-  /* Terminate for Enabled SubSystem: '<S22>/send_to_pix' */
-  /* Terminate for Enabled SubSystem: '<S30>/Send_ExternalMode' */
   /* Terminate for S-Function (sldrtpo): '<S33>/Packet Output' */
 
   /* S-Function Block: <S33>/Packet Output */
@@ -10827,7 +11101,7 @@ RT_MODEL_GRM_HIL_T *GRM_HIL(void)
     /* task periods */
     GRM_HIL_M->Timing.sampleTimes[0] = (0.0);
     GRM_HIL_M->Timing.sampleTimes[1] = (0.001);
-    GRM_HIL_M->Timing.sampleTimes[2] = (0.005);
+    GRM_HIL_M->Timing.sampleTimes[2] = (0.05);
     GRM_HIL_M->Timing.sampleTimes[3] = (0.1);
 
     /* task offsets */
@@ -10851,20 +11125,20 @@ RT_MODEL_GRM_HIL_T *GRM_HIL(void)
   rtmSetTFinal(GRM_HIL_M, 60.0);
   GRM_HIL_M->Timing.stepSize0 = 0.001;
   GRM_HIL_M->Timing.stepSize1 = 0.001;
-  GRM_HIL_M->Timing.stepSize2 = 0.005;
+  GRM_HIL_M->Timing.stepSize2 = 0.05;
   GRM_HIL_M->Timing.stepSize3 = 0.1;
   rtmSetFirstInitCond(GRM_HIL_M, 1);
 
   /* External mode info */
-  GRM_HIL_M->Sizes.checksums[0] = (3965642908U);
-  GRM_HIL_M->Sizes.checksums[1] = (1526870505U);
-  GRM_HIL_M->Sizes.checksums[2] = (1653494978U);
-  GRM_HIL_M->Sizes.checksums[3] = (1390838483U);
+  GRM_HIL_M->Sizes.checksums[0] = (2623358458U);
+  GRM_HIL_M->Sizes.checksums[1] = (3566981983U);
+  GRM_HIL_M->Sizes.checksums[2] = (2857640668U);
+  GRM_HIL_M->Sizes.checksums[3] = (3835257173U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
     static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[109];
+    static const sysRanDType *systemRan[110];
     GRM_HIL_M->extModeInfo = (&rt_ExtModeInfo);
     rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
     systemRan[0] = &rtAlwaysEnabled;
@@ -10993,6 +11267,7 @@ RT_MODEL_GRM_HIL_T *GRM_HIL(void)
     systemRan[107] = &rtAlwaysEnabled;
     systemRan[108] = (sysRanDType *)
       &GRM_HIL_DW.Synchronize_to_realtime_SubsysRanBC;
+    systemRan[109] = &rtAlwaysEnabled;
     rteiSetModelMappingInfoPtr(GRM_HIL_M->extModeInfo,
       &GRM_HIL_M->SpecialInfo.mappingInfo);
     rteiSetChecksumsPtr(GRM_HIL_M->extModeInfo, GRM_HIL_M->Sizes.checksums);
@@ -11050,9 +11325,9 @@ RT_MODEL_GRM_HIL_T *GRM_HIL(void)
   GRM_HIL_M->Sizes.numU = (0);         /* Number of model inputs */
   GRM_HIL_M->Sizes.sysDirFeedThru = (0);/* The model is not direct feedthrough */
   GRM_HIL_M->Sizes.numSampTimes = (4); /* Number of sample times */
-  GRM_HIL_M->Sizes.numBlocks = (2348); /* Number of blocks */
-  GRM_HIL_M->Sizes.numBlockIO = (241); /* Number of block outputs */
-  GRM_HIL_M->Sizes.numBlockPrms = (117950);/* Sum of parameter "widths" */
+  GRM_HIL_M->Sizes.numBlocks = (2377); /* Number of blocks */
+  GRM_HIL_M->Sizes.numBlockIO = (249); /* Number of block outputs */
+  GRM_HIL_M->Sizes.numBlockPrms = (117967);/* Sum of parameter "widths" */
   return GRM_HIL_M;
 }
 

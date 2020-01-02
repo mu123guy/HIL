@@ -7,9 +7,9 @@
  *
  * Code generation for model "GRM_HIL".
  *
- * Model version              : 1.79
+ * Model version              : 1.89
  * Simulink Coder version : 9.2 (R2019b) 18-Jul-2019
- * C source code generated on : Mon Dec 30 20:23:20 2019
+ * C source code generated on : Fri Jan  3 00:14:15 2020
  *
  * Target selection: sldrt.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -1103,14 +1103,23 @@ typedef struct {
   real_T SumI4_g;                      /* '<S143>/SumI4' */
   real_T Abs_l;                        /* '<S65>/Abs' */
   real_T Abs_j;                        /* '<S56>/Abs' */
+  real_T One;                          /* '<S30>/One' */
+  real_T SineWave;                     /* '<S33>/Sine Wave' */
   real_T value;                        /* '<S28>/Counter_with_external_limit' */
+  real_T stage;                        /* '<S24>/ExtractMessage' */
+  real_T SineWave_g;                   /* '<S23>/Sine Wave' */
+  real32_T MathFunction1;              /* '<Root>/Math Function1' */
   real32_T DataTypeConversion3;        /* '<S22>/Data Type Conversion3' */
   real32_T DataTypeConversion1;        /* '<S22>/Data Type Conversion1' */
   real32_T DataTypeConversion2;        /* '<S22>/Data Type Conversion2' */
   real32_T ServoCMD_update[4];         /* '<S27>/ServoCMD_update' */
   real32_T SensorACC_update[3];        /* '<S27>/SensorACC_update' */
   real32_T SensorROT_update[3];        /* '<S27>/SensorROT_update' */
+  uint16_T DataTypeConversion1_p;      /* '<S383>/Data Type Conversion1' */
+  uint16_T FixPtSwitch;                /* '<S386>/FixPt Switch' */
+  uint16_T PixHeartbeat;               /* '<S24>/ByteUnpack' */
   uint8_T message[128];                /* '<S34>/message' */
+  uint8_T MessageToSend[128];          /* '<S30>/MessageAssembly' */
   uint8_T PacketInput_o1[78];          /* '<S23>/Packet Input' */
   boolean_T Compare;                   /* '<S387>/Compare' */
   boolean_T LogicalOperator;           /* '<S71>/Logical Operator' */
@@ -1170,6 +1179,10 @@ typedef struct {
   real_T LastUAtTimeA_b;               /* '<S304>/Derivative' */
   real_T TimeStampB_j;                 /* '<S304>/Derivative' */
   real_T LastUAtTimeB_p;               /* '<S304>/Derivative' */
+  real_T lastSin;                      /* '<S33>/Sine Wave' */
+  real_T lastCos;                      /* '<S33>/Sine Wave' */
+  real_T lastSin_h;                    /* '<S23>/Sine Wave' */
+  real_T lastCos_c;                    /* '<S23>/Sine Wave' */
   struct {
     real_T modelTStart;
     real_T TUbufferArea[2048];
@@ -1198,6 +1211,10 @@ typedef struct {
   } Scope_PWORK;                       /* '<Root>/Scope' */
 
   struct {
+    void *LoggedData;
+  } Scope1_PWORK;                      /* '<Root>/Scope1' */
+
+  struct {
     void *AQHandles[16];
     void *SlioLTF;
   } TAQSigLogging_InsertedFor_Actuators_at_outport_0_1_PWORK;/* synthesized block */
@@ -1223,6 +1240,21 @@ typedef struct {
     void *AQHandles[30];
     void *SlioLTF;
   } TAQSigLogging_InsertedFor_Simulation_at_outport_0_1_PWORK;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_Serial_Recieve_from_Pixhawk_at_outport_6_PWORK;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_Serial_Recieve_from_Pixhawk_at_outport_7_PWORK;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_Receive_ExternalMode_at_outport_0_PWORK;/* synthesized block */
 
   struct {
     void *LoggedData;
@@ -1261,15 +1293,78 @@ typedef struct {
   } TAQSigLogging_InsertedFor_VectorConcatenate2_at_outport_0_PWORK;/* synthesized block */
 
   void *RealTimeSynchronization_PWORK; /* '<S382>/Real-Time Synchronization' */
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_One_at_outport_0_PWORK;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_Selector1_at_outport_0_PWORK;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_Selector_at_outport_0_PWORK;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_SimHeartbeat_at_outport_0_PWORK;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_Selector1_at_outport_0_PWORK_o;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_message_to_send_at_outport_0_PWORK;/* synthesized block */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace_PWORK;                 /* '<S33>/To Workspace' */
+
   void *PacketOutput_PWORK[2];         /* '<S33>/Packet Output' */
+  struct {
+    void *LoggedData;
+  } Scope_PWORK_k;                     /* '<S33>/Scope' */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_ByteUnpack_at_outport_0_PWORK;/* synthesized block */
+
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_ExtractMessage_at_outport_2_PWORK;/* synthesized block */
+
   void *PacketInput_PWORK;             /* '<S23>/Packet Input' */
+  struct {
+    void *AQHandles;
+    void *SlioLTF;
+  } TAQSigLogging_InsertedFor_PacketInput_at_outport_0_PWORK;/* synthesized block */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace_PWORK_d;               /* '<S23>/To Workspace' */
+
+  struct {
+    void *LoggedData;
+  } Scope_PWORK_m;                     /* '<S23>/Scope' */
+
   int32_T clockTickCounter;            /* '<S19>/Pulse Generator1' */
   int32_T clockTickCounter_d;          /* '<S19>/Pulse Generator' */
   int32_T clockTickCounter_d3;         /* '<S19>/Pulse Generator4' */
   int32_T clockTickCounter_e;          /* '<S19>/Pulse Generator3' */
   int32_T clockTickCounter_o;          /* '<S19>/Pulse Generator7' */
   int32_T clockTickCounter_l;          /* '<S19>/Pulse Generator6' */
+  int32_T systemEnable;                /* '<S33>/Sine Wave' */
   int32_T SFunction_DIMS2[2];          /* '<S24>/ExtractMessage' */
+  int32_T systemEnable_c;              /* '<S23>/Sine Wave' */
   int_T integration_eom_IWORK;         /* '<S334>/integration_eom' */
   struct {
     int_T Tail;
@@ -1298,6 +1393,7 @@ typedef struct {
                                  /* '<S399>/Integrator, Second-Order Limited' */
   int_T IntegratorSecondOrderLimited_MODE_i[3];
                                  /* '<S411>/Integrator, Second-Order Limited' */
+  uint16_T Output_DSTATE;              /* '<S384>/Output' */
   int8_T If_ActiveSubsystem;           /* '<S175>/If' */
   int8_T If_ActiveSubsystem_l;         /* '<S173>/If' */
   int8_T If_ActiveSubsystem_g;         /* '<S174>/If' */
@@ -1336,6 +1432,7 @@ typedef struct {
   boolean_T send_to_pix_MODE;          /* '<S22>/send_to_pix' */
   boolean_T no_CRC_MODE;               /* '<S30>/no_CRC' */
   boolean_T Send_ExternalMode_MODE;    /* '<S30>/Send_ExternalMode' */
+  boolean_T Receive_ExternalMode_MODE; /* '<S21>/Receive_ExternalMode' */
   DW_IfActionpass_yaw_GRM_HIL_T IfActionpass_roll;/* '<S51>/If Action pass_roll' */
   DW_IfActionpass_yaw_GRM_HIL_T IfActionpass_pitch;/* '<S51>/If Action pass_pitch' */
   DW_IfActionpass_yaw_GRM_HIL_T IfActionpass_yaw;/* '<S51>/If Action pass_yaw' */
@@ -2028,6 +2125,9 @@ struct P_GRM_HIL_T_ {
   int32_T PacketOutput_PacketID;       /* Mask Parameter: PacketOutput_PacketID
                                         * Referenced by: '<S33>/Packet Output'
                                         */
+  uint16_T WrapToZero_Threshold;       /* Mask Parameter: WrapToZero_Threshold
+                                        * Referenced by: '<S386>/FixPt Switch'
+                                        */
   real_T Constant11_Value;             /* Expression: 1
                                         * Referenced by: '<S19>/Constant11'
                                         */
@@ -2046,14 +2146,56 @@ struct P_GRM_HIL_T_ {
   real_T Constant13_Value;             /* Expression: 1
                                         * Referenced by: '<S19>/Constant13'
                                         */
+  real_T SineWave_Amp;                 /* Expression: 1
+                                        * Referenced by: '<S23>/Sine Wave'
+                                        */
+  real_T SineWave_Bias;                /* Expression: 0
+                                        * Referenced by: '<S23>/Sine Wave'
+                                        */
+  real_T SineWave_Freq;                /* Expression: 1
+                                        * Referenced by: '<S23>/Sine Wave'
+                                        */
+  real_T SineWave_Hsin;                /* Computed Parameter: SineWave_Hsin
+                                        * Referenced by: '<S23>/Sine Wave'
+                                        */
+  real_T SineWave_HCos;                /* Computed Parameter: SineWave_HCos
+                                        * Referenced by: '<S23>/Sine Wave'
+                                        */
+  real_T SineWave_PSin;                /* Computed Parameter: SineWave_PSin
+                                        * Referenced by: '<S23>/Sine Wave'
+                                        */
+  real_T SineWave_PCos;                /* Computed Parameter: SineWave_PCos
+                                        * Referenced by: '<S23>/Sine Wave'
+                                        */
+  real_T SineWave_Amp_c;               /* Expression: 1
+                                        * Referenced by: '<S33>/Sine Wave'
+                                        */
+  real_T SineWave_Bias_b;              /* Expression: 0
+                                        * Referenced by: '<S33>/Sine Wave'
+                                        */
+  real_T SineWave_Freq_c;              /* Expression: 1
+                                        * Referenced by: '<S33>/Sine Wave'
+                                        */
+  real_T SineWave_Hsin_e;              /* Computed Parameter: SineWave_Hsin_e
+                                        * Referenced by: '<S33>/Sine Wave'
+                                        */
+  real_T SineWave_HCos_g;              /* Computed Parameter: SineWave_HCos_g
+                                        * Referenced by: '<S33>/Sine Wave'
+                                        */
+  real_T SineWave_PSin_i;              /* Computed Parameter: SineWave_PSin_i
+                                        * Referenced by: '<S33>/Sine Wave'
+                                        */
+  real_T SineWave_PCos_i;              /* Computed Parameter: SineWave_PCos_i
+                                        * Referenced by: '<S33>/Sine Wave'
+                                        */
   real_T status_Y0;                    /* Computed Parameter: status_Y0
                                         * Referenced by: '<S30>/status'
                                         */
-  real_T One_Value;                    /* Expression: 1
-                                        * Referenced by: '<S30>/One'
-                                        */
   real_T Constant_Value;               /* Expression: 1
                                         * Referenced by: '<S30>/Constant'
+                                        */
+  real_T One_Value;                    /* Expression: 1
+                                        * Referenced by: '<S30>/One'
                                         */
   real_T Constant_Value_g;             /* Expression: 1
                                         * Referenced by: '<S73>/Constant'
@@ -3763,13 +3905,13 @@ struct P_GRM_HIL_T_ {
   real_T Gain1_Gain_j2;                /* Expression: 0
                                         * Referenced by: '<Root>/Gain1'
                                         */
-  real_T SineWave_Amp;                 /* Expression: 5
+  real_T SineWave_Amp_o;               /* Expression: 5
                                         * Referenced by: '<Root>/Sine Wave'
                                         */
-  real_T SineWave_Bias;                /* Expression: 0
+  real_T SineWave_Bias_j;              /* Expression: 0
                                         * Referenced by: '<Root>/Sine Wave'
                                         */
-  real_T SineWave_Freq;                /* Expression: 10
+  real_T SineWave_Freq_d;              /* Expression: 10
                                         * Referenced by: '<Root>/Sine Wave'
                                         */
   real_T SineWave_Phase;               /* Expression: 0
@@ -4417,9 +4559,16 @@ struct P_GRM_HIL_T_ {
   uint16_T PixHeartbeat_Y0;            /* Computed Parameter: PixHeartbeat_Y0
                                         * Referenced by: '<S27>/PixHeartbeat'
                                         */
-  uint16_T Constant2_Value_l;          /* Computed Parameter: Constant2_Value_l
-                                        * Referenced by: '<S22>/Constant2'
+  uint16_T Constant_Value_lk;          /* Computed Parameter: Constant_Value_lk
+                                        * Referenced by: '<S386>/Constant'
                                         */
+  uint16_T Output_InitialCondition;
+                                  /* Computed Parameter: Output_InitialCondition
+                                   * Referenced by: '<S384>/Output'
+                                   */
+  uint16_T FixPtConstant_Value;       /* Computed Parameter: FixPtConstant_Value
+                                       * Referenced by: '<S385>/FixPt Constant'
+                                       */
   boolean_T Constant10_Value_ca;
                 /* Expression: External_Inputs.FCC.CMD.yaw.pulse.alternating_flg
                  * Referenced by: '<S19>/Constant10'
