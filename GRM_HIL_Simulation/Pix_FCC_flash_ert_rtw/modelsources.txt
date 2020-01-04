@@ -1,2 +1,0 @@
-  Pix_FCC_flash.cpp
-
