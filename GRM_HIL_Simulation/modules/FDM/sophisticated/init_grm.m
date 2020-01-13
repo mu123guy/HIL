@@ -104,7 +104,8 @@ function bus2 = init_grm()
         bus2.qEG_0 = bus2.qIE_0;
         bus2.qIG_0 = qumul(bus2.qIE_0,bus2.qEG_0);
         %   With the orientation of the missile relative to the NED-Frame
-        bus2.qGB_0 = euler_to_q([0;-1.356;0]);
+        bus2.euler = [0;-1.356;0]
+        bus2.qGB_0 = euler_to_q(bus2.euler);
             %bus2.qGB_0 = euler_to_q([0;0;0]);
     %     qGB_0 = euler_to_q([0;0;0]);
         bus2.qIB_0 = qumul(bus2.qIG_0,bus2.qGB_0);
