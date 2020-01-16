@@ -36,12 +36,12 @@ function External_Inputs = init_External_Inputs()
     
     % Generate Commands
     FCC.CMD.roll.pulse_cmd_flg = 0; %0->constant commands
-    FCC.CMD.pitch.pulse_cmd_flg = 1;
+    FCC.CMD.pitch.pulse_cmd_flg = 0;
     FCC.CMD.yaw.pulse_cmd_flg = 0;
     % Constant Commands
     FCC.CMD.roll.constant.phi_rad = 0;
-    FCC.CMD.pitch.constant.acc_z_mDs2 = 0;
-    FCC.CMD.yaw.constant.acc_y_mDs2 = 0;
+    FCC.CMD.pitch.constant.theta_rad = 0;
+    FCC.CMD.yaw.constant.psi_rad = 0;
     % Pulse commands
     FCC.CMD.roll.pulse.alternating_flg = 1; % alternate between + and - for every pulse
     FCC.CMD.roll.pulse.ampl_rad = 2;

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.334
+// Model version                  : 1.342
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Sun Jan  5 13:31:16 2020
+// C/C++ source code generated on : Thu Jan 16 20:05:28 2020
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -141,7 +141,7 @@ typedef struct {
 
 #endif
 
-// Custom Type definition for MATLABSystem: '<S15>/Serial Transmit'
+// Custom Type definition for MATLABSystem: '<S40>/Serial Transmit'
 #include "MW_SVD.h"
 #ifndef typedef_px4_internal_block_Hardware_P_T
 #define typedef_px4_internal_block_Hardware_P_T
@@ -152,8 +152,8 @@ typedef struct {
 
 #endif                                 //typedef_px4_internal_block_Hardware_P_T
 
-#ifndef typedef_px4_internal_block_PX4SCIWrit_T
-#define typedef_px4_internal_block_PX4SCIWrit_T
+#ifndef typedef_px4_internal_block_PX4SCIRead_T
+#define typedef_px4_internal_block_PX4SCIRead_T
 
 typedef struct {
   boolean_T matlabCodegenIsDeleted;
@@ -161,18 +161,10 @@ typedef struct {
   boolean_T isSetupComplete;
   px4_internal_block_Hardware_P_T Hw;
   MW_Handle_Type MW_SCIHANDLE;
-} px4_internal_block_PX4SCIWrit_T;
+  real_T SampleTime;
+} px4_internal_block_PX4SCIRead_T;
 
-#endif                                 //typedef_px4_internal_block_PX4SCIWrit_T
-
-#ifndef typedef_struct_T_Pix_FCC_flash_T
-#define typedef_struct_T_Pix_FCC_flash_T
-
-typedef struct {
-  char_T Value[10];
-} struct_T_Pix_FCC_flash_T;
-
-#endif                                 //typedef_struct_T_Pix_FCC_flash_T
+#endif                                 //typedef_px4_internal_block_PX4SCIRead_T
 
 #ifndef typedef_px4_internal_block_PWM_Pix_FC_T
 #define typedef_px4_internal_block_PWM_Pix_FC_T
@@ -191,6 +183,42 @@ typedef struct {
 } px4_internal_block_PWM_Pix_FC_T;
 
 #endif                                 //typedef_px4_internal_block_PWM_Pix_FC_T
+
+#ifndef typedef_px4_internal_block_PX4SCIWrit_T
+#define typedef_px4_internal_block_PX4SCIWrit_T
+
+typedef struct {
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  px4_internal_block_Hardware_P_T Hw;
+  MW_Handle_Type MW_SCIHANDLE;
+} px4_internal_block_PX4SCIWrit_T;
+
+#endif                                 //typedef_px4_internal_block_PX4SCIWrit_T
+
+#ifndef typedef_d_px4_internal_block_SampleTi_T
+#define typedef_d_px4_internal_block_SampleTi_T
+
+typedef struct {
+  int32_T __dummy;
+} d_px4_internal_block_SampleTi_T;
+
+#endif                                 //typedef_d_px4_internal_block_SampleTi_T
+
+#ifndef typedef_px4_internal_block_Subscriber_T
+#define typedef_px4_internal_block_Subscriber_T
+
+typedef struct {
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  d_px4_internal_block_SampleTi_T SampleTimeHandler;
+  pollfd_t eventStructObj;
+  orb_metadata_t * orbMetadataObj;
+} px4_internal_block_Subscriber_T;
+
+#endif                                 //typedef_px4_internal_block_Subscriber_T
 
 #ifndef struct_emxArray_uint8_T_4x1
 #define struct_emxArray_uint8_T_4x1
@@ -227,6 +255,15 @@ struct emxArray_uint8_T_1x56
 typedef struct emxArray_uint8_T_1x56 emxArray_uint8_T_1x56_Pix_FCC_T;
 
 #endif                                 //typedef_emxArray_uint8_T_1x56_Pix_FCC_T
+
+#ifndef typedef_struct_T_Pix_FCC_flash_T
+#define typedef_struct_T_Pix_FCC_flash_T
+
+typedef struct {
+  char_T Value[10];
+} struct_T_Pix_FCC_flash_T;
+
+#endif                                 //typedef_struct_T_Pix_FCC_flash_T
 
 #ifndef struct_tag_szZFJqmKnebQAQ37SIlrwwB
 #define struct_tag_szZFJqmKnebQAQ37SIlrwwB
@@ -275,40 +312,6 @@ typedef struct {
 } c_struct_T_Pix_FCC_flash_T;
 
 #endif                                 //typedef_c_struct_T_Pix_FCC_flash_T
-
-#ifndef typedef_px4_internal_block_PX4SCIRead_T
-#define typedef_px4_internal_block_PX4SCIRead_T
-
-typedef struct {
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  px4_internal_block_Hardware_P_T Hw;
-  MW_Handle_Type MW_SCIHANDLE;
-  real_T SampleTime;
-} px4_internal_block_PX4SCIRead_T;
-
-#endif                                 //typedef_px4_internal_block_PX4SCIRead_T
-
-#ifndef typedef_px4_internal_block_Subscriber_T
-#define typedef_px4_internal_block_Subscriber_T
-
-typedef struct {
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  px4_internal_block_Hardware_P_T SampleTimeHandler;
-  pollfd_t eventStructObj;
-  orb_metadata_t * orbMetadataObj;
-} px4_internal_block_Subscriber_T;
-
-#endif                                 //typedef_px4_internal_block_Subscriber_T
-
-// Parameters for system: '<S9>/Send WhiteNoise Beginning'
-typedef struct P_SendWhiteNoiseBeginning_Pix_T_ P_SendWhiteNoiseBeginning_Pix_T;
-
-// Parameters for system: '<S9>/Send Header'
-typedef struct P_SendHeader_Pix_FCC_flash_T_ P_SendHeader_Pix_FCC_flash_T;
 
 // Parameters (default storage)
 typedef struct P_Pix_FCC_flash_T_ P_Pix_FCC_flash_T;

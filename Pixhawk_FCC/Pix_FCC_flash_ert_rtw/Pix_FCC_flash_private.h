@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.334
+// Model version                  : 1.342
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Sun Jan  5 13:31:16 2020
+// C/C++ source code generated on : Thu Jan 16 20:05:28 2020
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -19,7 +19,6 @@
 #ifndef RTW_HEADER_Pix_FCC_flash_private_h_
 #define RTW_HEADER_Pix_FCC_flash_private_h_
 #include "rtwtypes.h"
-#include "Pix_FCC_flash.h"
 #ifndef UCHAR_MAX
 #include <limits.h>
 #endif
@@ -69,17 +68,7 @@ preprocessor word size checks.
 #endif
 
 // Skipping ulong_long/long_long check: insufficient preprocessor integer range. 
-extern void P_SendWhiteNoiseBeginning_Start(DW_SendWhiteNoiseBeginning_Pi_T
-  *localDW);
-extern void Pix_FCC_SendWhiteNoiseBeginning(DW_SendWhiteNoiseBeginning_Pi_T
-  *localDW, P_SendWhiteNoiseBeginning_Pix_T *localP);
-extern void Pix_FCC_flash_SendHeader_Start(DW_SendHeader_Pix_FCC_flash_T
-  *localDW);
-extern void Pix_FCC_flash_SendHeader(DW_SendHeader_Pix_FCC_flash_T *localDW,
-  P_SendHeader_Pix_FCC_flash_T *localP);
-extern void Pi_SendWhiteNoiseBeginning_Term(DW_SendWhiteNoiseBeginning_Pi_T
-  *localDW);
-extern void Pix_FCC_flash_SendHeader_Term(DW_SendHeader_Pix_FCC_flash_T *localDW);
+extern real_T rt_atan2d_snf(real_T u0, real_T u1);
 
 #endif                                 // RTW_HEADER_Pix_FCC_flash_private_h_
 

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Pix_FCC_flash'.
 //
-// Model version                  : 1.334
+// Model version                  : 1.342
 // Simulink Coder version         : 9.2 (R2019b) 18-Jul-2019
-// C/C++ source code generated on : Sun Jan  5 13:31:16 2020
+// C/C++ source code generated on : Thu Jan 16 20:05:28 2020
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -30,243 +30,30 @@ RT_MODEL_Pix_FCC_flash_T Pix_FCC_flash_M_ = RT_MODEL_Pix_FCC_flash_T();
 RT_MODEL_Pix_FCC_flash_T *const Pix_FCC_flash_M = &Pix_FCC_flash_M_;
 
 // Forward declaration for local functions
-static void Pix_FCC_flash_SystemCore_setup(px4_internal_block_PX4SCIWrit_T *obj);
-static void Pix_FCC_flas_SystemCore_release(const
-  px4_internal_block_PX4SCIWrit_T *obj);
-static void Pix_FCC_flash_SystemCore_delete(const
-  px4_internal_block_PX4SCIWrit_T *obj);
-static void matlabCodegenHandle_matlabCodeg(px4_internal_block_PX4SCIWrit_T *obj);
-
-// Forward declaration for local functions
-static void Pix_FCC_flas_SystemCore_setup_e(px4_internal_block_PX4SCIWrit_T *obj);
-static void Pix_FCC_fl_SystemCore_release_d(const
-  px4_internal_block_PX4SCIWrit_T *obj);
-static void Pix_FCC_fla_SystemCore_delete_h(const
-  px4_internal_block_PX4SCIWrit_T *obj);
-static void matlabCodegenHandle_matlabCod_a(px4_internal_block_PX4SCIWrit_T *obj);
-
-// Forward declaration for local functions
 static void Pix_FCC_flash_nullAssignment(real_T x_data[], int32_T x_size[2],
   const boolean_T idx_data[], const int32_T idx_size[2]);
-static void Pix_FCC_fl_SystemCore_release_b(const
+static void Pix_FCC_flas_SystemCore_release(const
   px4_internal_block_PX4SCIRead_T *obj);
-static void Pix_FCC_fla_SystemCore_delete_b(const
+static void Pix_FCC_flash_SystemCore_delete(const
   px4_internal_block_PX4SCIRead_T *obj);
-static void matlabCodegenHandle_matlabCod_b(px4_internal_block_PX4SCIRead_T *obj);
+static void matlabCodegenHandle_matlabCodeg(px4_internal_block_PX4SCIRead_T *obj);
+static void Pix_FCC__SystemCore_release_b2q(const
+  px4_internal_block_Subscriber_T *obj);
+static void Pix_FCC_f_SystemCore_delete_b2q(const
+  px4_internal_block_Subscriber_T *obj);
+static void matlabCodegenHandle_matlabC_b2q(px4_internal_block_Subscriber_T *obj);
 static void Pix_FCC_f_SystemCore_release_b2(const
   px4_internal_block_PX4SCIWrit_T *obj);
 static void Pix_FCC_fl_SystemCore_delete_b2(const
   px4_internal_block_PX4SCIWrit_T *obj);
 static void matlabCodegenHandle_matlabCo_b2(px4_internal_block_PX4SCIWrit_T *obj);
-static void Pix_F_SystemCore_release_b2qa4v(const
-  px4_internal_block_Subscriber_T *obj);
-static void Pix_FC_SystemCore_delete_b2qa4v(const
-  px4_internal_block_Subscriber_T *obj);
-static void matlabCodegenHandle_matl_b2qa4v(px4_internal_block_Subscriber_T *obj);
-static void Pix_FCC_SystemCore_release_b2qa(px4_internal_block_PWM_Pix_FC_T *obj);
-static void Pix_FCC__SystemCore_delete_b2qa(px4_internal_block_PWM_Pix_FC_T *obj);
-static void matlabCodegenHandle_matlab_b2qa(px4_internal_block_PWM_Pix_FC_T *obj);
-static void Pix_FCC_flas_SystemCore_setup_b(px4_internal_block_PX4SCIRead_T *obj);
+static void Pix_FCC_fl_SystemCore_release_b(px4_internal_block_PWM_Pix_FC_T *obj);
+static void Pix_FCC_fla_SystemCore_delete_b(px4_internal_block_PWM_Pix_FC_T *obj);
+static void matlabCodegenHandle_matlabCod_b(px4_internal_block_PWM_Pix_FC_T *obj);
+static void Pix_FCC_flash_SystemCore_setup(px4_internal_block_PX4SCIRead_T *obj);
 static void Pix_FCC_fla_SystemCore_setup_b2(px4_internal_block_PX4SCIWrit_T *obj);
-static void Pix_FCC_f_SystemCore_setup_b2qa(px4_internal_block_PWM_Pix_FC_T *obj,
+static void Pix_FCC_flas_SystemCore_setup_b(px4_internal_block_PWM_Pix_FC_T *obj,
   boolean_T varargin_1, boolean_T varargin_2);
-static void Pix_FCC_flash_SystemCore_setup(px4_internal_block_PX4SCIWrit_T *obj)
-{
-  uint32_T RxPinLoc;
-  uint32_T TxPinLoc;
-  char_T SCIModuleLoc[11];
-  MW_SCI_StopBits_Type StopBitsValue;
-  MW_SCI_Parity_Type ParityValue;
-  int32_T i;
-  static const char_T tmp[10] = { '/', 'd', 'e', 'v', '/', 't', 't', 'y', 'S',
-    '6' };
-
-  obj->isSetupComplete = false;
-  obj->isInitialized = 1;
-  RxPinLoc = MW_UNDEFINED_VALUE;
-  TxPinLoc = MW_UNDEFINED_VALUE;
-  for (i = 0; i < 10; i++) {
-    SCIModuleLoc[i] = tmp[i];
-  }
-
-  SCIModuleLoc[10] = '\x00';
-  obj->MW_SCIHANDLE = MW_SCI_Open(SCIModuleLoc, true, RxPinLoc, TxPinLoc);
-  MW_SCI_SetBaudrate(obj->MW_SCIHANDLE, 9600U);
-  StopBitsValue = MW_SCI_STOPBITS_1;
-  ParityValue = MW_SCI_PARITY_NONE;
-  MW_SCI_SetFrameFormat(obj->MW_SCIHANDLE, 8, ParityValue, StopBitsValue);
-  obj->isSetupComplete = true;
-}
-
-static void Pix_FCC_flas_SystemCore_release(const
-  px4_internal_block_PX4SCIWrit_T *obj)
-{
-  if ((obj->isInitialized == 1) && obj->isSetupComplete) {
-    MW_SCI_Close(obj->MW_SCIHANDLE);
-  }
-}
-
-static void Pix_FCC_flash_SystemCore_delete(const
-  px4_internal_block_PX4SCIWrit_T *obj)
-{
-  Pix_FCC_flas_SystemCore_release(obj);
-}
-
-static void matlabCodegenHandle_matlabCodeg(px4_internal_block_PX4SCIWrit_T *obj)
-{
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-    Pix_FCC_flash_SystemCore_delete(obj);
-  }
-}
-
-//
-// Start for function-call system:
-//    '<S9>/Send WhiteNoise Beginning'
-//    '<S9>/Send WhiteNoise End'
-//    '<S39>/Send WhiteNoise Beginning'
-//    '<S39>/Send WhiteNoise End'
-//
-void P_SendWhiteNoiseBeginning_Start(DW_SendWhiteNoiseBeginning_Pi_T *localDW)
-{
-  // Start for MATLABSystem: '<S15>/Serial Transmit'
-  localDW->obj.isInitialized = 0;
-  localDW->obj.matlabCodegenIsDeleted = false;
-  localDW->objisempty = true;
-  Pix_FCC_flash_SystemCore_setup(&localDW->obj);
-}
-
-//
-// Output and update for function-call system:
-//    '<S9>/Send WhiteNoise Beginning'
-//    '<S9>/Send WhiteNoise End'
-//    '<S39>/Send WhiteNoise Beginning'
-//    '<S39>/Send WhiteNoise End'
-//
-void Pix_FCC_SendWhiteNoiseBeginning(DW_SendWhiteNoiseBeginning_Pi_T *localDW,
-  P_SendWhiteNoiseBeginning_Pix_T *localP)
-{
-  uint8_T TxDataLocChar[5];
-
-  // MATLABSystem: '<S15>/Serial Transmit' incorporates:
-  //   Constant: '<S15>/Header'
-
-  memcpy((void *)&TxDataLocChar[0], (void *)&localP->Header_Value[0], (uint32_T)
-         ((size_t)5 * sizeof(uint8_T)));
-  MW_SCI_Transmit(localDW->obj.MW_SCIHANDLE, TxDataLocChar, 5U);
-}
-
-//
-// Termination for function-call system:
-//    '<S9>/Send WhiteNoise Beginning'
-//    '<S9>/Send WhiteNoise End'
-//    '<S39>/Send WhiteNoise Beginning'
-//    '<S39>/Send WhiteNoise End'
-//
-void Pi_SendWhiteNoiseBeginning_Term(DW_SendWhiteNoiseBeginning_Pi_T *localDW)
-{
-  // Terminate for MATLABSystem: '<S15>/Serial Transmit'
-  matlabCodegenHandle_matlabCodeg(&localDW->obj);
-}
-
-static void Pix_FCC_flas_SystemCore_setup_e(px4_internal_block_PX4SCIWrit_T *obj)
-{
-  uint32_T RxPinLoc;
-  uint32_T TxPinLoc;
-  char_T SCIModuleLoc[11];
-  MW_SCI_StopBits_Type StopBitsValue;
-  MW_SCI_Parity_Type ParityValue;
-  int32_T i;
-  static const char_T tmp[10] = { '/', 'd', 'e', 'v', '/', 't', 't', 'y', 'S',
-    '6' };
-
-  obj->isSetupComplete = false;
-  obj->isInitialized = 1;
-  RxPinLoc = MW_UNDEFINED_VALUE;
-  TxPinLoc = MW_UNDEFINED_VALUE;
-  for (i = 0; i < 10; i++) {
-    SCIModuleLoc[i] = tmp[i];
-  }
-
-  SCIModuleLoc[10] = '\x00';
-  obj->MW_SCIHANDLE = MW_SCI_Open(SCIModuleLoc, true, RxPinLoc, TxPinLoc);
-  MW_SCI_SetBaudrate(obj->MW_SCIHANDLE, 9600U);
-  StopBitsValue = MW_SCI_STOPBITS_1;
-  ParityValue = MW_SCI_PARITY_NONE;
-  MW_SCI_SetFrameFormat(obj->MW_SCIHANDLE, 8, ParityValue, StopBitsValue);
-  obj->isSetupComplete = true;
-}
-
-static void Pix_FCC_fl_SystemCore_release_d(const
-  px4_internal_block_PX4SCIWrit_T *obj)
-{
-  if ((obj->isInitialized == 1) && obj->isSetupComplete) {
-    MW_SCI_Close(obj->MW_SCIHANDLE);
-  }
-}
-
-static void Pix_FCC_fla_SystemCore_delete_h(const
-  px4_internal_block_PX4SCIWrit_T *obj)
-{
-  Pix_FCC_fl_SystemCore_release_d(obj);
-}
-
-static void matlabCodegenHandle_matlabCod_a(px4_internal_block_PX4SCIWrit_T *obj)
-{
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-    Pix_FCC_fla_SystemCore_delete_h(obj);
-  }
-}
-
-//
-// Start for function-call system:
-//    '<S9>/Send Header'
-//    '<S9>/Send Terminator'
-//    '<S39>/Send Header'
-//    '<S39>/Send Terminator'
-//
-void Pix_FCC_flash_SendHeader_Start(DW_SendHeader_Pix_FCC_flash_T *localDW)
-{
-  // Start for MATLABSystem: '<S12>/Serial Transmit'
-  localDW->obj.isInitialized = 0;
-  localDW->obj.matlabCodegenIsDeleted = false;
-  localDW->objisempty = true;
-  Pix_FCC_flas_SystemCore_setup_e(&localDW->obj);
-}
-
-//
-// Output and update for function-call system:
-//    '<S9>/Send Header'
-//    '<S9>/Send Terminator'
-//    '<S39>/Send Header'
-//    '<S39>/Send Terminator'
-//
-void Pix_FCC_flash_SendHeader(DW_SendHeader_Pix_FCC_flash_T *localDW,
-  P_SendHeader_Pix_FCC_flash_T *localP)
-{
-  uint8_T TxDataLocChar[2];
-
-  // MATLABSystem: '<S12>/Serial Transmit' incorporates:
-  //   Constant: '<S12>/Header'
-
-  memcpy((void *)&TxDataLocChar[0], (void *)&localP->Header_Value[0], (uint32_T)
-         ((size_t)2 * sizeof(uint8_T)));
-  MW_SCI_Transmit(localDW->obj.MW_SCIHANDLE, TxDataLocChar, 2U);
-}
-
-//
-// Termination for function-call system:
-//    '<S9>/Send Header'
-//    '<S9>/Send Terminator'
-//    '<S39>/Send Header'
-//    '<S39>/Send Terminator'
-//
-void Pix_FCC_flash_SendHeader_Term(DW_SendHeader_Pix_FCC_flash_T *localDW)
-{
-  // Terminate for MATLABSystem: '<S12>/Serial Transmit'
-  matlabCodegenHandle_matlabCod_a(&localDW->obj);
-}
 
 // Function for MATLAB Function: '<S6>/DecodeCommand'
 static void Pix_FCC_flash_nullAssignment(real_T x_data[], int32_T x_size[2],
@@ -296,7 +83,43 @@ static void Pix_FCC_flash_nullAssignment(real_T x_data[], int32_T x_size[2],
   }
 }
 
-static void Pix_FCC_fl_SystemCore_release_b(const
+real_T rt_atan2d_snf(real_T u0, real_T u1)
+{
+  real_T y;
+  int32_T u0_0;
+  int32_T u1_0;
+  if (rtIsNaN(u0) || rtIsNaN(u1)) {
+    y = (rtNaN);
+  } else if (rtIsInf(u0) && rtIsInf(u1)) {
+    if (u0 > 0.0) {
+      u0_0 = 1;
+    } else {
+      u0_0 = -1;
+    }
+
+    if (u1 > 0.0) {
+      u1_0 = 1;
+    } else {
+      u1_0 = -1;
+    }
+
+    y = atan2(static_cast<real_T>(u0_0), static_cast<real_T>(u1_0));
+  } else if (u1 == 0.0) {
+    if (u0 > 0.0) {
+      y = RT_PI / 2.0;
+    } else if (u0 < 0.0) {
+      y = -(RT_PI / 2.0);
+    } else {
+      y = 0.0;
+    }
+  } else {
+    y = atan2(u0, u1);
+  }
+
+  return y;
+}
+
+static void Pix_FCC_flas_SystemCore_release(const
   px4_internal_block_PX4SCIRead_T *obj)
 {
   if ((obj->isInitialized == 1) && obj->isSetupComplete) {
@@ -304,17 +127,39 @@ static void Pix_FCC_fl_SystemCore_release_b(const
   }
 }
 
-static void Pix_FCC_fla_SystemCore_delete_b(const
+static void Pix_FCC_flash_SystemCore_delete(const
   px4_internal_block_PX4SCIRead_T *obj)
 {
-  Pix_FCC_fl_SystemCore_release_b(obj);
+  Pix_FCC_flas_SystemCore_release(obj);
 }
 
-static void matlabCodegenHandle_matlabCod_b(px4_internal_block_PX4SCIRead_T *obj)
+static void matlabCodegenHandle_matlabCodeg(px4_internal_block_PX4SCIRead_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
-    Pix_FCC_fla_SystemCore_delete_b(obj);
+    Pix_FCC_flash_SystemCore_delete(obj);
+  }
+}
+
+static void Pix_FCC__SystemCore_release_b2q(const
+  px4_internal_block_Subscriber_T *obj)
+{
+  if ((obj->isInitialized == 1) && obj->isSetupComplete) {
+    uORB_read_terminate(&obj->eventStructObj);
+  }
+}
+
+static void Pix_FCC_f_SystemCore_delete_b2q(const
+  px4_internal_block_Subscriber_T *obj)
+{
+  Pix_FCC__SystemCore_release_b2q(obj);
+}
+
+static void matlabCodegenHandle_matlabC_b2q(px4_internal_block_Subscriber_T *obj)
+{
+  if (!obj->matlabCodegenIsDeleted) {
+    obj->matlabCodegenIsDeleted = true;
+    Pix_FCC_f_SystemCore_delete_b2q(obj);
   }
 }
 
@@ -340,29 +185,7 @@ static void matlabCodegenHandle_matlabCo_b2(px4_internal_block_PX4SCIWrit_T *obj
   }
 }
 
-static void Pix_F_SystemCore_release_b2qa4v(const
-  px4_internal_block_Subscriber_T *obj)
-{
-  if ((obj->isInitialized == 1) && obj->isSetupComplete) {
-    uORB_read_terminate(&obj->eventStructObj);
-  }
-}
-
-static void Pix_FC_SystemCore_delete_b2qa4v(const
-  px4_internal_block_Subscriber_T *obj)
-{
-  Pix_F_SystemCore_release_b2qa4v(obj);
-}
-
-static void matlabCodegenHandle_matl_b2qa4v(px4_internal_block_Subscriber_T *obj)
-{
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-    Pix_FC_SystemCore_delete_b2qa4v(obj);
-  }
-}
-
-static void Pix_FCC_SystemCore_release_b2qa(px4_internal_block_PWM_Pix_FC_T *obj)
+static void Pix_FCC_fl_SystemCore_release_b(px4_internal_block_PWM_Pix_FC_T *obj)
 {
   uint16_T status;
   if ((obj->isInitialized == 1) && obj->isSetupComplete) {
@@ -376,21 +199,26 @@ static void Pix_FCC_SystemCore_release_b2qa(px4_internal_block_PWM_Pix_FC_T *obj
   }
 }
 
-static void Pix_FCC__SystemCore_delete_b2qa(px4_internal_block_PWM_Pix_FC_T *obj)
+static void Pix_FCC_fla_SystemCore_delete_b(px4_internal_block_PWM_Pix_FC_T *obj)
 {
-  Pix_FCC_SystemCore_release_b2qa(obj);
+  Pix_FCC_fl_SystemCore_release_b(obj);
 }
 
-static void matlabCodegenHandle_matlab_b2qa(px4_internal_block_PWM_Pix_FC_T *obj)
+static void matlabCodegenHandle_matlabCod_b(px4_internal_block_PWM_Pix_FC_T *obj)
 {
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
-    Pix_FCC__SystemCore_delete_b2qa(obj);
+    Pix_FCC_fla_SystemCore_delete_b(obj);
   }
 }
 
-static void Pix_FCC_flas_SystemCore_setup_b(px4_internal_block_PX4SCIRead_T *obj)
+static void Pix_FCC_flash_SystemCore_setup(px4_internal_block_PX4SCIRead_T *obj)
 {
+  uint32_T RxPinLoc;
+  uint32_T TxPinLoc;
+  char_T SCIModuleLoc[11];
+  MW_SCI_StopBits_Type StopBitsValue;
+  MW_SCI_Parity_Type ParityValue;
   MW_SCI_HardwareFlowControl_Type HardwareFlowControlValue;
   int32_T i;
   static const char_T tmp[10] = { '/', 'd', 'e', 'v', '/', 't', 't', 'y', 'S',
@@ -398,30 +226,32 @@ static void Pix_FCC_flas_SystemCore_setup_b(px4_internal_block_PX4SCIRead_T *obj
 
   obj->isSetupComplete = false;
   obj->isInitialized = 1;
-  Pix_FCC_flash_B.RxPinLoc = MW_UNDEFINED_VALUE;
-  Pix_FCC_flash_B.TxPinLoc = MW_UNDEFINED_VALUE;
+  RxPinLoc = MW_UNDEFINED_VALUE;
+  TxPinLoc = MW_UNDEFINED_VALUE;
   for (i = 0; i < 10; i++) {
-    Pix_FCC_flash_B.SCIModuleLoc[i] = tmp[i];
+    SCIModuleLoc[i] = tmp[i];
   }
 
-  Pix_FCC_flash_B.SCIModuleLoc[10] = '\x00';
-  obj->MW_SCIHANDLE = MW_SCI_Open(Pix_FCC_flash_B.SCIModuleLoc, true,
-    Pix_FCC_flash_B.RxPinLoc, Pix_FCC_flash_B.TxPinLoc);
+  SCIModuleLoc[10] = '\x00';
+  obj->MW_SCIHANDLE = MW_SCI_Open(SCIModuleLoc, true, RxPinLoc, TxPinLoc);
   MW_SCI_SetBaudrate(obj->MW_SCIHANDLE, 9600U);
-  Pix_FCC_flash_B.StopBitsValue = MW_SCI_STOPBITS_1;
-  Pix_FCC_flash_B.ParityValue = MW_SCI_PARITY_NONE;
-  MW_SCI_SetFrameFormat(obj->MW_SCIHANDLE, 8, Pix_FCC_flash_B.ParityValue,
-                        Pix_FCC_flash_B.StopBitsValue);
-  Pix_FCC_flash_B.RxPinLoc = MW_UNDEFINED_VALUE;
-  Pix_FCC_flash_B.TxPinLoc = MW_UNDEFINED_VALUE;
+  StopBitsValue = MW_SCI_STOPBITS_1;
+  ParityValue = MW_SCI_PARITY_NONE;
+  MW_SCI_SetFrameFormat(obj->MW_SCIHANDLE, 8, ParityValue, StopBitsValue);
+  RxPinLoc = MW_UNDEFINED_VALUE;
+  TxPinLoc = MW_UNDEFINED_VALUE;
   HardwareFlowControlValue = MW_SCI_FLOWCONTROL_RTS_CTS;
   MW_SCI_ConfigureHardwareFlowControl(obj->MW_SCIHANDLE,
-    HardwareFlowControlValue, Pix_FCC_flash_B.RxPinLoc, Pix_FCC_flash_B.TxPinLoc);
+    HardwareFlowControlValue, RxPinLoc, TxPinLoc);
   obj->isSetupComplete = true;
 }
 
 static void Pix_FCC_fla_SystemCore_setup_b2(px4_internal_block_PX4SCIWrit_T *obj)
 {
+  uint32_T RxPinLoc;
+  uint32_T TxPinLoc;
+  char_T SCIModuleLoc[11];
+  MW_SCI_StopBits_Type StopBitsValue;
   MW_SCI_Parity_Type ParityValue;
   int32_T i;
   static const char_T tmp[10] = { '/', 'd', 'e', 'v', '/', 't', 't', 'y', 'S',
@@ -429,24 +259,22 @@ static void Pix_FCC_fla_SystemCore_setup_b2(px4_internal_block_PX4SCIWrit_T *obj
 
   obj->isSetupComplete = false;
   obj->isInitialized = 1;
-  Pix_FCC_flash_B.RxPinLoc_p = MW_UNDEFINED_VALUE;
-  Pix_FCC_flash_B.TxPinLoc_c = MW_UNDEFINED_VALUE;
+  RxPinLoc = MW_UNDEFINED_VALUE;
+  TxPinLoc = MW_UNDEFINED_VALUE;
   for (i = 0; i < 10; i++) {
-    Pix_FCC_flash_B.SCIModuleLoc_b[i] = tmp[i];
+    SCIModuleLoc[i] = tmp[i];
   }
 
-  Pix_FCC_flash_B.SCIModuleLoc_b[10] = '\x00';
-  obj->MW_SCIHANDLE = MW_SCI_Open(Pix_FCC_flash_B.SCIModuleLoc_b, true,
-    Pix_FCC_flash_B.RxPinLoc_p, Pix_FCC_flash_B.TxPinLoc_c);
+  SCIModuleLoc[10] = '\x00';
+  obj->MW_SCIHANDLE = MW_SCI_Open(SCIModuleLoc, true, RxPinLoc, TxPinLoc);
   MW_SCI_SetBaudrate(obj->MW_SCIHANDLE, 9600U);
-  Pix_FCC_flash_B.StopBitsValue_f = MW_SCI_STOPBITS_1;
+  StopBitsValue = MW_SCI_STOPBITS_1;
   ParityValue = MW_SCI_PARITY_NONE;
-  MW_SCI_SetFrameFormat(obj->MW_SCIHANDLE, 8, ParityValue,
-                        Pix_FCC_flash_B.StopBitsValue_f);
+  MW_SCI_SetFrameFormat(obj->MW_SCIHANDLE, 8, ParityValue, StopBitsValue);
   obj->isSetupComplete = true;
 }
 
-static void Pix_FCC_f_SystemCore_setup_b2qa(px4_internal_block_PWM_Pix_FC_T *obj,
+static void Pix_FCC_flas_SystemCore_setup_b(px4_internal_block_PWM_Pix_FC_T *obj,
   boolean_T varargin_1, boolean_T varargin_2)
 {
   uint16_T status;
@@ -503,18 +331,17 @@ static void Pix_FCC_f_SystemCore_setup_b2qa(px4_internal_block_PWM_Pix_FC_T *obj
 void Pix_FCC_flash_step(void)
 {
   uint8_T sizeptr;
-  real32_T ACC3;
-  real32_T ROT1;
-  real32_T ROT2;
-  real32_T ROT3;
-  real32_T ATT_phi;
-  real32_T ATT_theta;
-  real32_T ATT_psi;
+  boolean_T p;
+  int32_T b_ii;
+  uint8_T package[4];
+  int32_T idx;
+  real32_T CMD1;
+  real32_T CMD2;
+  real32_T CMD3;
+  real32_T ACC1;
   uint8_T x[2];
   uint16_T status;
-  uint8_T TxDataLocChar;
   int32_T rtb_mode;
-  boolean_T rtb_Compare;
   int32_T rtb_enable_execution;
   int32_T loop_ub;
   boolean_T exitg1;
@@ -547,102 +374,91 @@ void Pix_FCC_flash_step(void)
     Pix_FCC_flash_B.packet_data[2] = 0U;
     Pix_FCC_flash_B.packet_data[3] = 0U;
     Pix_FCC_flash_B.cmd_found_flg = false;
-    for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii < 128;
-         Pix_FCC_flash_B.b_ii++) {
-      Pix_FCC_flash_B.x[Pix_FCC_flash_B.b_ii] =
-        (Pix_FCC_flash_B.RxData[Pix_FCC_flash_B.b_ii] == 8);
+    for (b_ii = 0; b_ii < 128; b_ii++) {
+      Pix_FCC_flash_B.x[b_ii] = (Pix_FCC_flash_B.RxData[b_ii] == 8);
     }
 
-    Pix_FCC_flash_B.idx = 0;
-    Pix_FCC_flash_B.b_ii = 0;
+    idx = 0;
+    b_ii = 0;
     exitg1 = false;
-    while ((!exitg1) && (Pix_FCC_flash_B.b_ii < 128)) {
-      if (Pix_FCC_flash_B.x[Pix_FCC_flash_B.b_ii]) {
-        Pix_FCC_flash_B.idx++;
-        Pix_FCC_flash_B.RxDataLocChar[Pix_FCC_flash_B.idx - 1] =
-          static_cast<uint8_T>((Pix_FCC_flash_B.b_ii + 1));
-        if (Pix_FCC_flash_B.idx >= 128) {
+    while ((!exitg1) && (b_ii < 128)) {
+      if (Pix_FCC_flash_B.x[b_ii]) {
+        idx++;
+        Pix_FCC_flash_B.RxDataLocChar[idx - 1] = static_cast<uint8_T>((b_ii + 1));
+        if (idx >= 128) {
           exitg1 = true;
         } else {
-          Pix_FCC_flash_B.b_ii++;
+          b_ii++;
         }
       } else {
-        Pix_FCC_flash_B.b_ii++;
+        b_ii++;
       }
     }
 
-    if (1 > Pix_FCC_flash_B.idx) {
-      Pix_FCC_flash_B.idx = 0;
+    if (1 > idx) {
+      idx = 0;
     }
 
     Pix_FCC_flash_B.start_size[0] = 1;
-    Pix_FCC_flash_B.start_size[1] = Pix_FCC_flash_B.idx;
-    loop_ub = Pix_FCC_flash_B.idx - 1;
-    for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii <= loop_ub;
-         Pix_FCC_flash_B.b_ii++) {
-      Pix_FCC_flash_B.start_data[Pix_FCC_flash_B.b_ii] =
-        Pix_FCC_flash_B.RxDataLocChar[Pix_FCC_flash_B.b_ii];
+    Pix_FCC_flash_B.start_size[1] = idx;
+    loop_ub = idx - 1;
+    for (b_ii = 0; b_ii <= loop_ub; b_ii++) {
+      Pix_FCC_flash_B.start_data[b_ii] = Pix_FCC_flash_B.RxDataLocChar[b_ii];
     }
 
-    Pix_FCC_flash_B.start_size_n[0] = 1;
-    Pix_FCC_flash_B.start_size_n[1] = Pix_FCC_flash_B.idx;
-    for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii < Pix_FCC_flash_B.idx;
-         Pix_FCC_flash_B.b_ii++) {
-      Pix_FCC_flash_B.x[Pix_FCC_flash_B.b_ii] =
-        ((Pix_FCC_flash_B.start_data[Pix_FCC_flash_B.b_ii] + 2.0) - 1.0 > 128.0);
+    Pix_FCC_flash_B.start_size_f[0] = 1;
+    Pix_FCC_flash_B.start_size_f[1] = idx;
+    for (b_ii = 0; b_ii < idx; b_ii++) {
+      Pix_FCC_flash_B.x[b_ii] = ((Pix_FCC_flash_B.start_data[b_ii] + 2.0) - 1.0 >
+        128.0);
     }
 
     Pix_FCC_flash_nullAssignment(Pix_FCC_flash_B.start_data,
       Pix_FCC_flash_B.start_size, Pix_FCC_flash_B.x,
-      Pix_FCC_flash_B.start_size_n);
-    Pix_FCC_flash_B.tmp_size_m[0] = 1;
-    Pix_FCC_flash_B.tmp_size_m[1] = Pix_FCC_flash_B.start_size[1];
+      Pix_FCC_flash_B.start_size_f);
+    Pix_FCC_flash_B.tmp_size_c[0] = 1;
+    Pix_FCC_flash_B.tmp_size_c[1] = Pix_FCC_flash_B.start_size[1];
     loop_ub = Pix_FCC_flash_B.start_size[0] * Pix_FCC_flash_B.start_size[1];
-    for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii < loop_ub;
-         Pix_FCC_flash_B.b_ii++) {
-      Pix_FCC_flash_B.x[Pix_FCC_flash_B.b_ii] = (Pix_FCC_flash_B.RxData[
-        static_cast<int32_T>(((Pix_FCC_flash_B.start_data[Pix_FCC_flash_B.b_ii]
-        + 2.0) - 1.0)) - 1] != 8);
+    for (b_ii = 0; b_ii < loop_ub; b_ii++) {
+      Pix_FCC_flash_B.x[b_ii] = (Pix_FCC_flash_B.RxData[static_cast<int32_T>
+        (((Pix_FCC_flash_B.start_data[b_ii] + 2.0) - 1.0)) - 1] != 8);
     }
 
     Pix_FCC_flash_nullAssignment(Pix_FCC_flash_B.start_data,
-      Pix_FCC_flash_B.start_size, Pix_FCC_flash_B.x, Pix_FCC_flash_B.tmp_size_m);
+      Pix_FCC_flash_B.start_size, Pix_FCC_flash_B.x, Pix_FCC_flash_B.tmp_size_c);
     if (Pix_FCC_flash_B.start_size[1] != 0) {
-      Pix_FCC_flash_B.b_ii = 0;
+      b_ii = 0;
       exitg1 = false;
-      while ((!exitg1) && (Pix_FCC_flash_B.b_ii <= Pix_FCC_flash_B.start_size[1]
-                           - 2)) {
-        rtb_Compare = false;
-        Pix_FCC_flash_B.Add = Pix_FCC_flash_B.start_data[Pix_FCC_flash_B.b_ii +
-          1];
-        if (Pix_FCC_flash_B.Add -
-            Pix_FCC_flash_B.start_data[Pix_FCC_flash_B.b_ii] == 6.0) {
-          rtb_Compare = true;
+      while ((!exitg1) && (b_ii <= Pix_FCC_flash_B.start_size[1] - 2)) {
+        p = false;
+        Pix_FCC_flash_B.pulse_width_ms_k = Pix_FCC_flash_B.start_data[b_ii + 1];
+        if (Pix_FCC_flash_B.pulse_width_ms_k - Pix_FCC_flash_B.start_data[b_ii] ==
+            6.0) {
+          p = true;
         }
 
-        if (rtb_Compare) {
-          if (Pix_FCC_flash_B.start_data[Pix_FCC_flash_B.b_ii] + 2.0 >
-              Pix_FCC_flash_B.Add - 1.0) {
-            Pix_FCC_flash_B.idx = 0;
+        if (p) {
+          if (Pix_FCC_flash_B.start_data[b_ii] + 2.0 >
+              Pix_FCC_flash_B.pulse_width_ms_k - 1.0) {
+            idx = 0;
             rtb_enable_execution = 0;
           } else {
-            Pix_FCC_flash_B.idx = static_cast<int32_T>
-              ((Pix_FCC_flash_B.start_data[Pix_FCC_flash_B.b_ii] + 2.0)) - 1;
+            idx = static_cast<int32_T>((Pix_FCC_flash_B.start_data[b_ii] + 2.0))
+              - 1;
             rtb_enable_execution = static_cast<int32_T>
-              ((Pix_FCC_flash_B.start_data[Pix_FCC_flash_B.b_ii + 1] - 1.0));
+              ((Pix_FCC_flash_B.start_data[b_ii + 1] - 1.0));
           }
 
-          rtb_enable_execution -= Pix_FCC_flash_B.idx;
-          for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii <
-               rtb_enable_execution; Pix_FCC_flash_B.b_ii++) {
-            Pix_FCC_flash_B.packet_data[Pix_FCC_flash_B.b_ii] =
-              Pix_FCC_flash_B.RxData[Pix_FCC_flash_B.idx + Pix_FCC_flash_B.b_ii];
+          rtb_enable_execution -= idx;
+          for (b_ii = 0; b_ii < rtb_enable_execution; b_ii++) {
+            Pix_FCC_flash_B.packet_data[b_ii] = Pix_FCC_flash_B.RxData[idx +
+              b_ii];
           }
 
           Pix_FCC_flash_B.cmd_found_flg = true;
           exitg1 = true;
         } else {
-          Pix_FCC_flash_B.b_ii++;
+          b_ii++;
         }
       }
     } else {
@@ -659,67 +475,6 @@ void Pix_FCC_flash_step(void)
              rtb_enable_execution * sizeof(uint8_T));
     }
 
-    // Outputs for Enabled SubSystem: '<S6>/ConfirmCommand' incorporates:
-    //   EnablePort: '<S9>/Enable'
-
-    if (Pix_FCC_flash_B.cmd_found_flg) {
-      // MATLAB Function: '<S9>/pack'
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.cmd[0];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.cmd[1];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.cmd[2];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.cmd[3];
-      memcpy((void *)&Pix_FCC_flash_B.CMD1, (void *)&Pix_FCC_flash_B.pack[0],
-             (uint32_T)((size_t)1 * sizeof(real32_T)));
-
-      // S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-      //   SubSystem: '<S9>/Send WhiteNoise Beginning'
-
-      Pix_FCC_SendWhiteNoiseBeginning(&Pix_FCC_flash_DW.SendWhiteNoiseBeginning,
-        &Pix_FCC_flash_P.SendWhiteNoiseBeginning);
-
-      // S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-      //   SubSystem: '<S9>/Send Header'
-
-      Pix_FCC_flash_SendHeader(&Pix_FCC_flash_DW.SendHeader,
-        &Pix_FCC_flash_P.SendHeader);
-
-      // S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-      //   SubSystem: '<S9>/Send RC Confrimation'
-
-      // MATLABSystem: '<S13>/Serial Transmit' incorporates:
-      //   Constant: '<S13>/Header'
-
-      memcpy((void *)&TxDataLocChar, (void *)&Pix_FCC_flash_P.Header_Value,
-             (uint32_T)((size_t)1 * sizeof(uint8_T)));
-      MW_SCI_Transmit(Pix_FCC_flash_DW.obj_k.MW_SCIHANDLE, &TxDataLocChar, 1U);
-
-      // S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-      //   SubSystem: '<S9>/Send Data'
-
-      // MATLABSystem: '<S11>/Serial Transmit' incorporates:
-      //   MATLAB Function: '<S9>/pack'
-
-      memcpy((void *)&Pix_FCC_flash_B.pack[0], (void *)&Pix_FCC_flash_B.CMD1,
-             (uint32_T)((size_t)4 * sizeof(uint8_T)));
-      MW_SCI_Transmit(Pix_FCC_flash_DW.obj_b.MW_SCIHANDLE, Pix_FCC_flash_B.pack,
-                      4U);
-
-      // S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-      //   SubSystem: '<S9>/Send Terminator'
-
-      Pix_FCC_flash_SendHeader(&Pix_FCC_flash_DW.SendTerminator,
-        &Pix_FCC_flash_P.SendTerminator);
-
-      // S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-      //   SubSystem: '<S9>/Send WhiteNoise End'
-
-      Pix_FCC_SendWhiteNoiseBeginning(&Pix_FCC_flash_DW.SendWhiteNoiseEnd,
-        &Pix_FCC_flash_P.SendWhiteNoiseEnd);
-
-      // End of Outputs for S-Function (fcncallgen): '<S9>/Function-Call Generator1' 
-    }
-
-    // End of Outputs for SubSystem: '<S6>/ConfirmCommand'
     // End of Outputs for SubSystem: '<S1>/DecodeCommand'
   } else {
     memset(&Pix_FCC_flash_B.RxData[0], 0, sizeof(uint8_T) << 7U);
@@ -767,56 +522,56 @@ void Pix_FCC_flash_step(void)
 
   // End of MATLAB Function: '<S1>/SetMode'
 
+  // MATLABSystem: '<S55>/SourceBlock' incorporates:
+  //   Inport: '<S56>/In1'
+
+  p = uORB_read_step(Pix_FCC_flash_DW.obj_d.orbMetadataObj,
+                     &Pix_FCC_flash_DW.obj_d.eventStructObj,
+                     &Pix_FCC_flash_B.b_varargout_2, false, 1.0);
+
+  // Outputs for Enabled SubSystem: '<S55>/Enabled Subsystem' incorporates:
+  //   EnablePort: '<S56>/Enable'
+
+  if (p) {
+    Pix_FCC_flash_B.In1_j = Pix_FCC_flash_B.b_varargout_2;
+  }
+
+  // End of MATLABSystem: '<S55>/SourceBlock'
+  // End of Outputs for SubSystem: '<S55>/Enabled Subsystem'
+
+  // MATLABSystem: '<S57>/SourceBlock' incorporates:
+  //   Inport: '<S58>/In1'
+
+  p = uORB_read_step(Pix_FCC_flash_DW.obj_f.orbMetadataObj,
+                     &Pix_FCC_flash_DW.obj_f.eventStructObj,
+                     &Pix_FCC_flash_B.b_varargout_2_k, false, 1.0);
+
+  // Outputs for Enabled SubSystem: '<S57>/Enabled Subsystem' incorporates:
+  //   EnablePort: '<S58>/Enable'
+
+  if (p) {
+    Pix_FCC_flash_B.In1 = Pix_FCC_flash_B.b_varargout_2_k;
+  }
+
+  // End of MATLABSystem: '<S57>/SourceBlock'
+  // End of Outputs for SubSystem: '<S57>/Enabled Subsystem'
+
   // MATLABSystem: '<S59>/SourceBlock' incorporates:
   //   Inport: '<S60>/In1'
 
-  rtb_Compare = uORB_read_step(Pix_FCC_flash_DW.obj_d.orbMetadataObj,
-    &Pix_FCC_flash_DW.obj_d.eventStructObj, &Pix_FCC_flash_B.b_varargout_2,
-    false, 1.0);
+  p = uORB_read_step(Pix_FCC_flash_DW.obj_c.orbMetadataObj,
+                     &Pix_FCC_flash_DW.obj_c.eventStructObj,
+                     &Pix_FCC_flash_B.b_varargout_2_c, false, 1.0);
 
   // Outputs for Enabled SubSystem: '<S59>/Enabled Subsystem' incorporates:
   //   EnablePort: '<S60>/Enable'
 
-  if (rtb_Compare) {
-    Pix_FCC_flash_B.In1_j = Pix_FCC_flash_B.b_varargout_2;
+  if (p) {
+    Pix_FCC_flash_B.In1_c = Pix_FCC_flash_B.b_varargout_2_c;
   }
 
   // End of MATLABSystem: '<S59>/SourceBlock'
   // End of Outputs for SubSystem: '<S59>/Enabled Subsystem'
-
-  // MATLABSystem: '<S61>/SourceBlock' incorporates:
-  //   Inport: '<S62>/In1'
-
-  rtb_Compare = uORB_read_step(Pix_FCC_flash_DW.obj_f.orbMetadataObj,
-    &Pix_FCC_flash_DW.obj_f.eventStructObj, &Pix_FCC_flash_B.b_varargout_2_k,
-    false, 1.0);
-
-  // Outputs for Enabled SubSystem: '<S61>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S62>/Enable'
-
-  if (rtb_Compare) {
-    Pix_FCC_flash_B.In1 = Pix_FCC_flash_B.b_varargout_2_k;
-  }
-
-  // End of MATLABSystem: '<S61>/SourceBlock'
-  // End of Outputs for SubSystem: '<S61>/Enabled Subsystem'
-
-  // MATLABSystem: '<S63>/SourceBlock' incorporates:
-  //   Inport: '<S64>/In1'
-
-  rtb_Compare = uORB_read_step(Pix_FCC_flash_DW.obj_c.orbMetadataObj,
-    &Pix_FCC_flash_DW.obj_c.eventStructObj, &Pix_FCC_flash_B.b_varargout_2_c,
-    false, 1.0);
-
-  // Outputs for Enabled SubSystem: '<S63>/Enabled Subsystem' incorporates:
-  //   EnablePort: '<S64>/Enable'
-
-  if (rtb_Compare) {
-    Pix_FCC_flash_B.In1_c = Pix_FCC_flash_B.b_varargout_2_c;
-  }
-
-  // End of MATLABSystem: '<S63>/SourceBlock'
-  // End of Outputs for SubSystem: '<S63>/Enabled Subsystem'
 
   // MATLAB Function: '<S5>/ControlExecution' incorporates:
   //   Logic: '<S5>/NOT'
@@ -849,129 +604,113 @@ void Pix_FCC_flash_step(void)
     // S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
     //   SubSystem: '<S2>/process_received_data'
 
-    // Outputs for Enabled SubSystem: '<S21>/input_hold' incorporates:
-    //   EnablePort: '<S52>/Enable'
+    // Outputs for Enabled SubSystem: '<S13>/input_hold' incorporates:
+    //   EnablePort: '<S48>/Enable'
 
     // Logic: '<S2>/NOT' incorporates:
-    //   Inport: '<S55>/ACC_update'
-    //   Inport: '<S55>/ATT_update'
-    //   Inport: '<S55>/CMD_update'
-    //   Inport: '<S55>/ROT_update'
-    //   Inport: '<S55>/SimHeartbeat_update'
-    //   Inport: '<S55>/TestSignal_update'
-    //   MATLAB Function: '<S52>/ByteUnpack'
-    //   MATLAB Function: '<S52>/ExtractMessage'
+    //   Inport: '<S51>/CMD_update'
+    //   Inport: '<S51>/SimHeartbeat_update'
+    //   Inport: '<S51>/TestSignal_update'
+    //   MATLAB Function: '<S48>/ByteUnpack'
+    //   MATLAB Function: '<S48>/ExtractMessage'
     //   MATLABSystem: '<Root>/Receive Data'
 
     if (sizeptr == 0) {
-      // MATLAB Function: '<S52>/ExtractMessage'
+      // MATLAB Function: '<S48>/ExtractMessage'
       rtb_enable_execution = 56;
-      for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii < 56;
-           Pix_FCC_flash_B.b_ii++) {
-        Pix_FCC_flash_B.packet_data_c[Pix_FCC_flash_B.b_ii] = 0U;
+      for (b_ii = 0; b_ii < 56; b_ii++) {
+        Pix_FCC_flash_B.packet_data_c[b_ii] = 0U;
       }
 
       Pix_FCC_flash_B.packetfound = false;
-      for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii < 128;
-           Pix_FCC_flash_B.b_ii++) {
-        Pix_FCC_flash_B.x[Pix_FCC_flash_B.b_ii] =
-          (Pix_FCC_flash_B.RxData[Pix_FCC_flash_B.b_ii] == 7);
+      for (b_ii = 0; b_ii < 128; b_ii++) {
+        Pix_FCC_flash_B.x[b_ii] = (Pix_FCC_flash_B.RxData[b_ii] == 7);
       }
 
-      Pix_FCC_flash_B.idx = 0;
-      Pix_FCC_flash_B.b_ii = 0;
+      idx = 0;
+      b_ii = 0;
       exitg1 = false;
-      while ((!exitg1) && (Pix_FCC_flash_B.b_ii < 128)) {
-        if (Pix_FCC_flash_B.x[Pix_FCC_flash_B.b_ii]) {
-          Pix_FCC_flash_B.idx++;
-          Pix_FCC_flash_B.RxDataLocChar[Pix_FCC_flash_B.idx - 1] =
-            static_cast<uint8_T>((Pix_FCC_flash_B.b_ii + 1));
-          if (Pix_FCC_flash_B.idx >= 128) {
+      while ((!exitg1) && (b_ii < 128)) {
+        if (Pix_FCC_flash_B.x[b_ii]) {
+          idx++;
+          Pix_FCC_flash_B.RxDataLocChar[idx - 1] = static_cast<uint8_T>((b_ii +
+            1));
+          if (idx >= 128) {
             exitg1 = true;
           } else {
-            Pix_FCC_flash_B.b_ii++;
+            b_ii++;
           }
         } else {
-          Pix_FCC_flash_B.b_ii++;
+          b_ii++;
         }
       }
 
-      if (1 > Pix_FCC_flash_B.idx) {
-        Pix_FCC_flash_B.idx = 0;
+      if (1 > idx) {
+        idx = 0;
       }
 
-      Pix_FCC_flash_B.start_size_g[0] = 1;
-      Pix_FCC_flash_B.start_size_g[1] = Pix_FCC_flash_B.idx;
-      loop_ub = Pix_FCC_flash_B.idx - 1;
-      for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii <= loop_ub;
-           Pix_FCC_flash_B.b_ii++) {
-        Pix_FCC_flash_B.start_data_m[Pix_FCC_flash_B.b_ii] =
-          Pix_FCC_flash_B.RxDataLocChar[Pix_FCC_flash_B.b_ii];
+      Pix_FCC_flash_B.start_size_b[0] = 1;
+      Pix_FCC_flash_B.start_size_b[1] = idx;
+      loop_ub = idx - 1;
+      for (b_ii = 0; b_ii <= loop_ub; b_ii++) {
+        Pix_FCC_flash_B.start_data_m[b_ii] = Pix_FCC_flash_B.RxDataLocChar[b_ii];
       }
 
-      Pix_FCC_flash_B.start_size_g1[0] = 1;
-      Pix_FCC_flash_B.start_size_g1[1] = Pix_FCC_flash_B.idx;
-      for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii < Pix_FCC_flash_B.idx;
-           Pix_FCC_flash_B.b_ii++) {
-        Pix_FCC_flash_B.x[Pix_FCC_flash_B.b_ii] =
-          ((Pix_FCC_flash_B.start_data_m[Pix_FCC_flash_B.b_ii] + 2.0) - 1.0 >
-           128.0);
+      Pix_FCC_flash_B.start_size_p[0] = 1;
+      Pix_FCC_flash_B.start_size_p[1] = idx;
+      for (b_ii = 0; b_ii < idx; b_ii++) {
+        Pix_FCC_flash_B.x[b_ii] = ((Pix_FCC_flash_B.start_data_m[b_ii] + 2.0) -
+          1.0 > 128.0);
       }
 
       Pix_FCC_flash_nullAssignment(Pix_FCC_flash_B.start_data_m,
-        Pix_FCC_flash_B.start_size_g, Pix_FCC_flash_B.x,
-        Pix_FCC_flash_B.start_size_g1);
+        Pix_FCC_flash_B.start_size_b, Pix_FCC_flash_B.x,
+        Pix_FCC_flash_B.start_size_p);
       Pix_FCC_flash_B.tmp_size[0] = 1;
-      Pix_FCC_flash_B.tmp_size[1] = Pix_FCC_flash_B.start_size_g[1];
-      loop_ub = Pix_FCC_flash_B.start_size_g[0] * Pix_FCC_flash_B.start_size_g[1];
-      for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii < loop_ub;
-           Pix_FCC_flash_B.b_ii++) {
-        Pix_FCC_flash_B.x[Pix_FCC_flash_B.b_ii] = (Pix_FCC_flash_B.RxData[
-          static_cast<int32_T>
-          (((Pix_FCC_flash_B.start_data_m[Pix_FCC_flash_B.b_ii] + 2.0) - 1.0)) -
-          1] != 7);
+      Pix_FCC_flash_B.tmp_size[1] = Pix_FCC_flash_B.start_size_b[1];
+      loop_ub = Pix_FCC_flash_B.start_size_b[0] * Pix_FCC_flash_B.start_size_b[1];
+      for (b_ii = 0; b_ii < loop_ub; b_ii++) {
+        Pix_FCC_flash_B.x[b_ii] = (Pix_FCC_flash_B.RxData[static_cast<int32_T>
+          (((Pix_FCC_flash_B.start_data_m[b_ii] + 2.0) - 1.0)) - 1] != 7);
       }
 
       Pix_FCC_flash_nullAssignment(Pix_FCC_flash_B.start_data_m,
-        Pix_FCC_flash_B.start_size_g, Pix_FCC_flash_B.x,
+        Pix_FCC_flash_B.start_size_b, Pix_FCC_flash_B.x,
         Pix_FCC_flash_B.tmp_size);
-      if (Pix_FCC_flash_B.start_size_g[1] != 0) {
-        Pix_FCC_flash_B.b_ii = 0;
+      if (Pix_FCC_flash_B.start_size_b[1] != 0) {
+        b_ii = 0;
         exitg1 = false;
-        while ((!exitg1) && (Pix_FCC_flash_B.b_ii <=
-                             Pix_FCC_flash_B.start_size_g[1] - 2)) {
-          rtb_Compare = false;
-          Pix_FCC_flash_B.Add =
-            Pix_FCC_flash_B.start_data_m[Pix_FCC_flash_B.b_ii + 1];
-          if (Pix_FCC_flash_B.Add -
-              Pix_FCC_flash_B.start_data_m[Pix_FCC_flash_B.b_ii] == 58.0) {
-            rtb_Compare = true;
+        while ((!exitg1) && (b_ii <= Pix_FCC_flash_B.start_size_b[1] - 2)) {
+          p = false;
+          Pix_FCC_flash_B.pulse_width_ms_k = Pix_FCC_flash_B.start_data_m[b_ii +
+            1];
+          if (Pix_FCC_flash_B.pulse_width_ms_k -
+              Pix_FCC_flash_B.start_data_m[b_ii] == 58.0) {
+            p = true;
           }
 
-          if (rtb_Compare) {
-            if (Pix_FCC_flash_B.start_data_m[Pix_FCC_flash_B.b_ii] + 2.0 >
-                Pix_FCC_flash_B.Add - 1.0) {
-              Pix_FCC_flash_B.idx = 0;
+          if (p) {
+            if (Pix_FCC_flash_B.start_data_m[b_ii] + 2.0 >
+                Pix_FCC_flash_B.pulse_width_ms_k - 1.0) {
+              idx = 0;
               rtb_enable_execution = 0;
             } else {
-              Pix_FCC_flash_B.idx = static_cast<int32_T>
-                ((Pix_FCC_flash_B.start_data_m[Pix_FCC_flash_B.b_ii] + 2.0)) - 1;
+              idx = static_cast<int32_T>((Pix_FCC_flash_B.start_data_m[b_ii] +
+                2.0)) - 1;
               rtb_enable_execution = static_cast<int32_T>
-                ((Pix_FCC_flash_B.start_data_m[Pix_FCC_flash_B.b_ii + 1] - 1.0));
+                ((Pix_FCC_flash_B.start_data_m[b_ii + 1] - 1.0));
             }
 
-            rtb_enable_execution -= Pix_FCC_flash_B.idx;
-            for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii <
-                 rtb_enable_execution; Pix_FCC_flash_B.b_ii++) {
-              Pix_FCC_flash_B.packet_data_c[Pix_FCC_flash_B.b_ii] =
-                Pix_FCC_flash_B.RxData[Pix_FCC_flash_B.idx +
-                Pix_FCC_flash_B.b_ii];
+            rtb_enable_execution -= idx;
+            for (b_ii = 0; b_ii < rtb_enable_execution; b_ii++) {
+              Pix_FCC_flash_B.packet_data_c[b_ii] = Pix_FCC_flash_B.RxData[idx +
+                b_ii];
             }
 
             Pix_FCC_flash_B.packetfound = true;
             exitg1 = true;
           } else {
-            Pix_FCC_flash_B.b_ii++;
+            b_ii++;
           }
         }
       }
@@ -983,442 +722,394 @@ void Pix_FCC_flash_step(void)
                rtb_enable_execution * sizeof(uint8_T));
       }
 
-      // MATLAB Function: '<S52>/ByteUnpack' incorporates:
-      //   MATLAB Function: '<S52>/ExtractMessage'
+      // MATLAB Function: '<S48>/ByteUnpack' incorporates:
+      //   MATLAB Function: '<S48>/ExtractMessage'
 
       x[0] = Pix_FCC_flash_B.message[0];
       x[1] = Pix_FCC_flash_B.message[1];
       memcpy((void *)&status, (void *)&x[0], (uint32_T)((size_t)1 * sizeof
               (uint16_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[4];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[5];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[6];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[7];
-      memcpy((void *)&Pix_FCC_flash_B.CMD1, (void *)&Pix_FCC_flash_B.pack[0],
-             (uint32_T)((size_t)1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[8];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[9];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[10];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[11];
-      memcpy((void *)&Pix_FCC_flash_B.CMD2, (void *)&Pix_FCC_flash_B.pack[0],
-             (uint32_T)((size_t)1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[12];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[13];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[14];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[15];
-      memcpy((void *)&Pix_FCC_flash_B.CMD3, (void *)&Pix_FCC_flash_B.pack[0],
-             (uint32_T)((size_t)1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[16];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[17];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[18];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[19];
-      memcpy((void *)&Pix_FCC_flash_B.ACC1, (void *)&Pix_FCC_flash_B.pack[0],
-             (uint32_T)((size_t)1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[20];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[21];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[22];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[23];
-      memcpy((void *)&Pix_FCC_flash_B.ACC2, (void *)&Pix_FCC_flash_B.pack[0],
-             (uint32_T)((size_t)1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[24];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[25];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[26];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[27];
-      memcpy((void *)&ACC3, (void *)&Pix_FCC_flash_B.pack[0], (uint32_T)((size_t)
-              1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[28];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[29];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[30];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[31];
-      memcpy((void *)&ROT1, (void *)&Pix_FCC_flash_B.pack[0], (uint32_T)((size_t)
-              1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[32];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[33];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[34];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[35];
-      memcpy((void *)&ROT2, (void *)&Pix_FCC_flash_B.pack[0], (uint32_T)((size_t)
-              1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[36];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[37];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[38];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[39];
-      memcpy((void *)&ROT3, (void *)&Pix_FCC_flash_B.pack[0], (uint32_T)((size_t)
-              1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[40];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[41];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[42];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[43];
-      memcpy((void *)&ATT_phi, (void *)&Pix_FCC_flash_B.pack[0], (uint32_T)
-             ((size_t)1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[44];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[45];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[46];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[47];
-      memcpy((void *)&ATT_theta, (void *)&Pix_FCC_flash_B.pack[0], (uint32_T)
-             ((size_t)1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[48];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[49];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[50];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[51];
-      memcpy((void *)&ATT_psi, (void *)&Pix_FCC_flash_B.pack[0], (uint32_T)
-             ((size_t)1 * sizeof(real32_T)));
-      Pix_FCC_flash_B.pack[0] = Pix_FCC_flash_B.message[52];
-      Pix_FCC_flash_B.pack[1] = Pix_FCC_flash_B.message[53];
-      Pix_FCC_flash_B.pack[2] = Pix_FCC_flash_B.message[54];
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.message[55];
-      memcpy((void *)&Pix_FCC_flash_B.TestSignal, (void *)&Pix_FCC_flash_B.pack
-             [0], (uint32_T)((size_t)1 * sizeof(real32_T)));
+      package[0] = Pix_FCC_flash_B.message[4];
+      package[1] = Pix_FCC_flash_B.message[5];
+      package[2] = Pix_FCC_flash_B.message[6];
+      package[3] = Pix_FCC_flash_B.message[7];
+      memcpy((void *)&CMD1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[8];
+      package[1] = Pix_FCC_flash_B.message[9];
+      package[2] = Pix_FCC_flash_B.message[10];
+      package[3] = Pix_FCC_flash_B.message[11];
+      memcpy((void *)&CMD2, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[12];
+      package[1] = Pix_FCC_flash_B.message[13];
+      package[2] = Pix_FCC_flash_B.message[14];
+      package[3] = Pix_FCC_flash_B.message[15];
+      memcpy((void *)&CMD3, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[16];
+      package[1] = Pix_FCC_flash_B.message[17];
+      package[2] = Pix_FCC_flash_B.message[18];
+      package[3] = Pix_FCC_flash_B.message[19];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[20];
+      package[1] = Pix_FCC_flash_B.message[21];
+      package[2] = Pix_FCC_flash_B.message[22];
+      package[3] = Pix_FCC_flash_B.message[23];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[24];
+      package[1] = Pix_FCC_flash_B.message[25];
+      package[2] = Pix_FCC_flash_B.message[26];
+      package[3] = Pix_FCC_flash_B.message[27];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[28];
+      package[1] = Pix_FCC_flash_B.message[29];
+      package[2] = Pix_FCC_flash_B.message[30];
+      package[3] = Pix_FCC_flash_B.message[31];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[32];
+      package[1] = Pix_FCC_flash_B.message[33];
+      package[2] = Pix_FCC_flash_B.message[34];
+      package[3] = Pix_FCC_flash_B.message[35];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[36];
+      package[1] = Pix_FCC_flash_B.message[37];
+      package[2] = Pix_FCC_flash_B.message[38];
+      package[3] = Pix_FCC_flash_B.message[39];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[40];
+      package[1] = Pix_FCC_flash_B.message[41];
+      package[2] = Pix_FCC_flash_B.message[42];
+      package[3] = Pix_FCC_flash_B.message[43];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[44];
+      package[1] = Pix_FCC_flash_B.message[45];
+      package[2] = Pix_FCC_flash_B.message[46];
+      package[3] = Pix_FCC_flash_B.message[47];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[48];
+      package[1] = Pix_FCC_flash_B.message[49];
+      package[2] = Pix_FCC_flash_B.message[50];
+      package[3] = Pix_FCC_flash_B.message[51];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
+      package[0] = Pix_FCC_flash_B.message[52];
+      package[1] = Pix_FCC_flash_B.message[53];
+      package[2] = Pix_FCC_flash_B.message[54];
+      package[3] = Pix_FCC_flash_B.message[55];
+      memcpy((void *)&ACC1, (void *)&package[0], (uint32_T)((size_t)1 * sizeof
+              (real32_T)));
 
-      // Outputs for Enabled SubSystem: '<S52>/hold' incorporates:
-      //   EnablePort: '<S55>/Enable'
+      // Outputs for Enabled SubSystem: '<S48>/hold' incorporates:
+      //   EnablePort: '<S51>/Enable'
 
       if (Pix_FCC_flash_B.packetfound) {
-        Pix_FCC_flash_B.CMD_update[0] = Pix_FCC_flash_B.CMD1;
-        Pix_FCC_flash_B.CMD_update[1] = Pix_FCC_flash_B.CMD2;
-        Pix_FCC_flash_B.CMD_update[2] = Pix_FCC_flash_B.CMD3;
-        Pix_FCC_flash_B.ACC_update[0] = Pix_FCC_flash_B.ACC1;
-        Pix_FCC_flash_B.ACC_update[1] = Pix_FCC_flash_B.ACC2;
-        Pix_FCC_flash_B.ACC_update[2] = ACC3;
-        Pix_FCC_flash_B.ROT_update[0] = ROT1;
-        Pix_FCC_flash_B.ROT_update[1] = ROT2;
-        Pix_FCC_flash_B.ROT_update[2] = ROT3;
-        Pix_FCC_flash_B.ATT_update[0] = ATT_phi;
-        Pix_FCC_flash_B.ATT_update[1] = ATT_theta;
-        Pix_FCC_flash_B.ATT_update[2] = ATT_psi;
+        Pix_FCC_flash_B.CMD_update[0] = CMD1;
+        Pix_FCC_flash_B.CMD_update[1] = CMD2;
+        Pix_FCC_flash_B.CMD_update[2] = CMD3;
         Pix_FCC_flash_B.SimHeartbeat_update = status;
-        Pix_FCC_flash_B.TestSignal_update = Pix_FCC_flash_B.TestSignal;
+        Pix_FCC_flash_B.TestSignal_update = ACC1;
       }
 
-      // End of Outputs for SubSystem: '<S52>/hold'
+      // End of Outputs for SubSystem: '<S48>/hold'
     }
 
     // End of Logic: '<S2>/NOT'
-    // End of Outputs for SubSystem: '<S21>/input_hold'
+    // End of Outputs for SubSystem: '<S13>/input_hold'
 
     // S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
     //   SubSystem: '<S2>/ACTION'
 
-    // RelationalOperator: '<S22>/Compare' incorporates:
-    //   Constant: '<S22>/Constant'
+    // Sqrt: '<S31>/sqrt' incorporates:
+    //   DataTypeConversion: '<S10>/Cast To Double1'
+    //   Inport: '<S10>/Estimator'
+    //   Product: '<S32>/Product'
+    //   Product: '<S32>/Product1'
+    //   Product: '<S32>/Product2'
+    //   Product: '<S32>/Product3'
+    //   Sum: '<S32>/Sum'
 
-    rtb_Compare = (rtb_mode != Pix_FCC_flash_P.CompareToConstant_const);
+    Pix_FCC_flash_B.Product3 = sqrt(((static_cast<real_T>
+      (Pix_FCC_flash_B.In1_c.q[0]) * Pix_FCC_flash_B.In1_c.q[0] +
+      static_cast<real_T>(Pix_FCC_flash_B.In1_c.q[1]) * Pix_FCC_flash_B.In1_c.q
+      [1]) + static_cast<real_T>(Pix_FCC_flash_B.In1_c.q[2]) *
+      Pix_FCC_flash_B.In1_c.q[2]) + static_cast<real_T>(Pix_FCC_flash_B.In1_c.q
+      [3]) * Pix_FCC_flash_B.In1_c.q[3]);
 
-    // Switch: '<S18>/Switch' incorporates:
-    //   Constant: '<S3>/Constant'
-    //   Inport: '<S18>/SensorData'
+    // Product: '<S26>/Product' incorporates:
+    //   DataTypeConversion: '<S10>/Cast To Double1'
+    //   Inport: '<S10>/Estimator'
 
-    if (Pix_FCC_flash_P.Constant_Value_i) {
-      Pix_FCC_flash_B.CMD2 = Pix_FCC_flash_B.ACC_update[1];
-    } else {
-      Pix_FCC_flash_B.CMD2 = Pix_FCC_flash_B.In1_j.y;
-    }
+    Pix_FCC_flash_B.pulse_width_ms_k = Pix_FCC_flash_B.In1_c.q[0] /
+      Pix_FCC_flash_B.Product3;
 
-    // Sum: '<S23>/Sum3'
-    Pix_FCC_flash_B.CMD1 = Pix_FCC_flash_B.CMD_update[2] - Pix_FCC_flash_B.CMD2;
+    // Product: '<S26>/Product1' incorporates:
+    //   DataTypeConversion: '<S10>/Cast To Double1'
+    //   Inport: '<S10>/Estimator'
 
-    // Switch: '<S18>/Switch1' incorporates:
-    //   Inport: '<S18>/SensorData'
+    Pix_FCC_flash_B.pulse_width_ms = Pix_FCC_flash_B.In1_c.q[1] /
+      Pix_FCC_flash_B.Product3;
 
-    if (rtb_Compare) {
-      Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_B.ROT_update[2];
-    } else {
-      Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_B.In1.z;
-    }
+    // Product: '<S26>/Product2' incorporates:
+    //   DataTypeConversion: '<S10>/Cast To Double1'
+    //   Inport: '<S10>/Estimator'
 
-    // Gain: '<S23>/Gain2' incorporates:
-    //   DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn2'
-    //   Gain: '<S23>/Gain4'
-    //   Sum: '<S23>/Sum4'
-    //   Sum: '<S23>/Sum6'
+    Pix_FCC_flash_B.Product2 = Pix_FCC_flash_B.In1_c.q[2] /
+      Pix_FCC_flash_B.Product3;
 
-    Pix_FCC_flash_B.CMD3 = ((Pix_FCC_flash_P.Gain4_Gain * Pix_FCC_flash_B.CMD1 +
-      Pix_FCC_flash_P.DiscreteTransferFcn2_NumCoef *
-      Pix_FCC_flash_DW.DiscreteTransferFcn2_states) - Pix_FCC_flash_B.ACC1) *
-      Pix_FCC_flash_P.Gain2_Gain;
+    // Product: '<S26>/Product3' incorporates:
+    //   DataTypeConversion: '<S10>/Cast To Double1'
+    //   Inport: '<S10>/Estimator'
 
-    // Switch: '<S18>/Switch' incorporates:
-    //   Constant: '<S3>/Constant'
-    //   Inport: '<S18>/SensorData'
+    Pix_FCC_flash_B.Product3 = Pix_FCC_flash_B.In1_c.q[3] /
+      Pix_FCC_flash_B.Product3;
 
-    if (Pix_FCC_flash_P.Constant_Value_i) {
-      Pix_FCC_flash_B.CMD2 = Pix_FCC_flash_B.ACC_update[2];
-    } else {
-      Pix_FCC_flash_B.CMD2 = Pix_FCC_flash_B.In1_j.z;
-    }
+    // Fcn: '<S19>/fcn4'
+    Pix_FCC_flash_B.pulse_width_ms_o = (Pix_FCC_flash_B.Product2 *
+      Pix_FCC_flash_B.Product3 + Pix_FCC_flash_B.pulse_width_ms_k *
+      Pix_FCC_flash_B.pulse_width_ms) * 2.0;
 
-    // Sum: '<S23>/Sum1'
-    Pix_FCC_flash_B.CMD2 = Pix_FCC_flash_B.CMD_update[1] - Pix_FCC_flash_B.CMD2;
+    // Fcn: '<S19>/fcn5'
+    Pix_FCC_flash_B.pulse_width_ms_k = ((Pix_FCC_flash_B.pulse_width_ms_k *
+      Pix_FCC_flash_B.pulse_width_ms_k - Pix_FCC_flash_B.pulse_width_ms *
+      Pix_FCC_flash_B.pulse_width_ms) - Pix_FCC_flash_B.Product2 *
+      Pix_FCC_flash_B.Product2) + Pix_FCC_flash_B.Product3 *
+      Pix_FCC_flash_B.Product3;
 
-    // Switch: '<S18>/Switch1' incorporates:
-    //   Inport: '<S18>/SensorData'
+    // Trigonometry: '<S25>/Trigonometric Function3'
+    Pix_FCC_flash_B.pulse_width_ms_k = rt_atan2d_snf
+      (Pix_FCC_flash_B.pulse_width_ms_o, Pix_FCC_flash_B.pulse_width_ms_k);
 
-    if (rtb_Compare) {
-      Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_B.ROT_update[1];
-    } else {
-      Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_B.In1.y;
-    }
+    // Sum: '<S18>/Add4' incorporates:
+    //   Constant: '<S18>/Constant'
+    //   Sum: '<S18>/Add5'
 
-    // Gain: '<S23>/Gain1' incorporates:
-    //   DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn1'
-    //   Gain: '<S23>/Gain3'
-    //   Sum: '<S23>/Sum2'
-    //   Sum: '<S23>/Sum5'
-
-    Pix_FCC_flash_B.ACC1 = ((Pix_FCC_flash_P.Gain3_Gain * Pix_FCC_flash_B.CMD2 +
-      Pix_FCC_flash_P.DiscreteTransferFcn1_NumCoef *
-      Pix_FCC_flash_DW.DiscreteTransferFcn1_states) - Pix_FCC_flash_B.ACC1) *
-      Pix_FCC_flash_P.Gain1_Gain;
-
-    // Sum: '<S26>/Add4' incorporates:
-    //   Constant: '<S26>/Constant'
-    //   Sum: '<S26>/Add5'
-
-    Pix_FCC_flash_B.Add =
+    Pix_FCC_flash_B.Product3 =
       Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.phi_f1_rad +
-      Pix_FCC_flash_B.ATT_update[0];
+      Pix_FCC_flash_B.pulse_width_ms_k;
 
-    // Sum: '<S26>/Add' incorporates:
-    //   Fcn: '<S26>/Fcn'
-    //   Fcn: '<S26>/Fcn1'
-    //   Product: '<S26>/Multiply'
-    //   Product: '<S26>/Multiply1'
-    //   Sum: '<S26>/Add4'
+    // Sum: '<S18>/Add' incorporates:
+    //   Constant: '<S15>/Zero'
+    //   Fcn: '<S18>/Fcn'
+    //   Fcn: '<S18>/Fcn1'
+    //   Product: '<S18>/Multiply'
+    //   Product: '<S18>/Multiply1'
+    //   Sum: '<S18>/Add4'
 
-    Pix_FCC_flash_B.Add = -cos(Pix_FCC_flash_B.Add) * Pix_FCC_flash_B.CMD3 + sin
-      (Pix_FCC_flash_B.Add) * Pix_FCC_flash_B.ACC1;
+    Pix_FCC_flash_B.Product3 = -cos(Pix_FCC_flash_B.Product3) *
+      Pix_FCC_flash_P.Zero_Value + sin(Pix_FCC_flash_B.Product3) *
+      Pix_FCC_flash_P.Zero_Value;
 
-    // Sum: '<S26>/Add6' incorporates:
-    //   Constant: '<S26>/Constant1'
-    //   Sum: '<S26>/Add7'
+    // Sum: '<S18>/Add6' incorporates:
+    //   Constant: '<S18>/Constant1'
+    //   Sum: '<S18>/Add7'
 
-    Pix_FCC_flash_B.Add1 =
+    Pix_FCC_flash_B.pulse_width_ms =
       Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.phi_f2_rad +
-      Pix_FCC_flash_B.ATT_update[0];
+      Pix_FCC_flash_B.pulse_width_ms_k;
 
-    // Sum: '<S26>/Add1' incorporates:
-    //   Fcn: '<S26>/Fcn2'
-    //   Fcn: '<S26>/Fcn3'
-    //   Product: '<S26>/Multiply2'
-    //   Product: '<S26>/Multiply3'
-    //   Sum: '<S26>/Add6'
+    // Sum: '<S18>/Add1' incorporates:
+    //   Constant: '<S15>/Zero'
+    //   Fcn: '<S18>/Fcn2'
+    //   Fcn: '<S18>/Fcn3'
+    //   Product: '<S18>/Multiply2'
+    //   Product: '<S18>/Multiply3'
+    //   Sum: '<S18>/Add6'
 
-    Pix_FCC_flash_B.Add1 = -cos(Pix_FCC_flash_B.Add1) * Pix_FCC_flash_B.CMD3 +
-      sin(Pix_FCC_flash_B.Add1) * Pix_FCC_flash_B.ACC1;
+    Pix_FCC_flash_B.pulse_width_ms = -cos(Pix_FCC_flash_B.pulse_width_ms) *
+      Pix_FCC_flash_P.Zero_Value + sin(Pix_FCC_flash_B.pulse_width_ms) *
+      Pix_FCC_flash_P.Zero_Value;
 
-    // Sum: '<S26>/Add8' incorporates:
-    //   Constant: '<S26>/Constant2'
-    //   Sum: '<S26>/Add9'
+    // Sum: '<S18>/Add8' incorporates:
+    //   Constant: '<S18>/Constant2'
+    //   Sum: '<S18>/Add9'
 
-    Pix_FCC_flash_B.Add2 =
+    Pix_FCC_flash_B.Product2 =
       Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.phi_f3_rad +
-      Pix_FCC_flash_B.ATT_update[0];
+      Pix_FCC_flash_B.pulse_width_ms_k;
 
-    // Sum: '<S26>/Add2' incorporates:
-    //   Fcn: '<S26>/Fcn4'
-    //   Fcn: '<S26>/Fcn5'
-    //   Product: '<S26>/Multiply4'
-    //   Product: '<S26>/Multiply5'
-    //   Sum: '<S26>/Add8'
+    // Sum: '<S18>/Add2' incorporates:
+    //   Constant: '<S15>/Zero'
+    //   Fcn: '<S18>/Fcn4'
+    //   Fcn: '<S18>/Fcn5'
+    //   Product: '<S18>/Multiply4'
+    //   Product: '<S18>/Multiply5'
+    //   Sum: '<S18>/Add8'
 
-    Pix_FCC_flash_B.Add2 = -cos(Pix_FCC_flash_B.Add2) * Pix_FCC_flash_B.CMD3 +
-      sin(Pix_FCC_flash_B.Add2) * Pix_FCC_flash_B.ACC1;
+    Pix_FCC_flash_B.Product2 = -cos(Pix_FCC_flash_B.Product2) *
+      Pix_FCC_flash_P.Zero_Value + sin(Pix_FCC_flash_B.Product2) *
+      Pix_FCC_flash_P.Zero_Value;
 
-    // Sum: '<S26>/Add10' incorporates:
-    //   Constant: '<S26>/Constant3'
-    //   Sum: '<S26>/Add11'
+    // Sum: '<S18>/Add10' incorporates:
+    //   Constant: '<S18>/Constant3'
+    //   Sum: '<S18>/Add11'
 
-    Pix_FCC_flash_B.Add3 =
+    Pix_FCC_flash_B.pulse_width_ms_o =
       Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.phi_f4_rad +
-      Pix_FCC_flash_B.ATT_update[0];
+      Pix_FCC_flash_B.pulse_width_ms_k;
 
-    // Sum: '<S26>/Add3' incorporates:
-    //   Fcn: '<S26>/Fcn6'
-    //   Fcn: '<S26>/Fcn7'
-    //   Product: '<S26>/Multiply6'
-    //   Product: '<S26>/Multiply7'
-    //   Sum: '<S26>/Add10'
+    // Sum: '<S18>/Add3' incorporates:
+    //   Constant: '<S15>/Zero'
+    //   Fcn: '<S18>/Fcn6'
+    //   Fcn: '<S18>/Fcn7'
+    //   Product: '<S18>/Multiply6'
+    //   Product: '<S18>/Multiply7'
+    //   Sum: '<S18>/Add10'
 
-    Pix_FCC_flash_B.Add3 = -cos(Pix_FCC_flash_B.Add3) * Pix_FCC_flash_B.CMD3 +
-      sin(Pix_FCC_flash_B.Add3) * Pix_FCC_flash_B.ACC1;
+    Pix_FCC_flash_B.pulse_width_ms_o = -cos(Pix_FCC_flash_B.pulse_width_ms_o) *
+      Pix_FCC_flash_P.Zero_Value + sin(Pix_FCC_flash_B.pulse_width_ms_o) *
+      Pix_FCC_flash_P.Zero_Value;
 
-    // Switch: '<S18>/Switch1' incorporates:
-    //   Inport: '<S18>/SensorData'
+    // Gain: '<S15>/Gain5' incorporates:
+    //   Gain: '<S15>/Kp'
+    //   Inport: '<S10>/Estimator'
+    //   Sum: '<S15>/Sum'
+    //   Sum: '<S15>/Sum7'
 
-    if (rtb_Compare) {
-      Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_B.ROT_update[0];
+    Pix_FCC_flash_B.pulse_width_ms_k = ((Pix_FCC_flash_B.CMD_update[0] -
+      Pix_FCC_flash_B.pulse_width_ms_k) * Pix_FCC_flash_P.Kp_Gain -
+      Pix_FCC_flash_B.In1_c.rollspeed) * Pix_FCC_flash_P.Gain5_Gain;
+
+    // Saturate: '<S18>/Limit2maxDeflection'
+    if (Pix_FCC_flash_B.pulse_width_ms_k >
+        Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad) {
+      Pix_FCC_flash_B.pulse_width_ms_k =
+        Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad;
     } else {
-      Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_B.In1.x;
-    }
-
-    // DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn' incorporates:
-    //   Gain: '<S23>/Gain'
-    //   Sum: '<S23>/Sum'
-
-    Pix_FCC_flash_B.CMD3 = ((Pix_FCC_flash_B.CMD_update[0] -
-      Pix_FCC_flash_B.ACC1) * Pix_FCC_flash_P.Gain_Gain -
-      Pix_FCC_flash_P.DiscreteTransferFcn_DenCoef[1] *
-      Pix_FCC_flash_DW.DiscreteTransferFcn_states) /
-      Pix_FCC_flash_P.DiscreteTransferFcn_DenCoef[0];
-    Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_P.DiscreteTransferFcn_NumCoef[0] *
-      Pix_FCC_flash_B.CMD3 + Pix_FCC_flash_P.DiscreteTransferFcn_NumCoef[1] *
-      Pix_FCC_flash_DW.DiscreteTransferFcn_states;
-
-    // Saturate: '<S26>/Limit2maxDeflection' incorporates:
-    //   DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn'
-
-    if (Pix_FCC_flash_B.ACC1 > Pix_FCC_flash_P.Limit2maxDeflection_UpperSat) {
-      Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_P.Limit2maxDeflection_UpperSat;
-    } else {
-      if (Pix_FCC_flash_B.ACC1 < Pix_FCC_flash_P.Limit2maxDeflection_LowerSat) {
-        Pix_FCC_flash_B.ACC1 = Pix_FCC_flash_P.Limit2maxDeflection_LowerSat;
+      if (Pix_FCC_flash_B.pulse_width_ms_k <
+          -Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad) {
+        Pix_FCC_flash_B.pulse_width_ms_k =
+          -Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad;
       }
     }
 
-    // End of Saturate: '<S26>/Limit2maxDeflection'
+    // End of Saturate: '<S18>/Limit2maxDeflection'
 
-    // Sum: '<S26>/Add16' incorporates:
-    //   Abs: '<S26>/Abs'
-    //   Constant: '<S26>/Constant4'
+    // Sum: '<S18>/Add16' incorporates:
+    //   Abs: '<S18>/Abs'
+    //   Constant: '<S18>/Constant4'
 
     Pix_FCC_flash_B.Add16 =
-      Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad -
-      static_cast<real32_T>(fabs(static_cast<real_T>(Pix_FCC_flash_B.ACC1)));
+      Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad - fabs
+      (Pix_FCC_flash_B.pulse_width_ms_k);
 
-    // Outputs for Enabled SubSystem: '<S28>/Pass' incorporates:
-    //   EnablePort: '<S30>/Enable'
+    // Outputs for Enabled SubSystem: '<S21>/Pass' incorporates:
+    //   EnablePort: '<S23>/Enable'
 
-    // Outputs for Enabled SubSystem: '<S28>/Saturate' incorporates:
-    //   EnablePort: '<S31>/Enable'
+    // Outputs for Enabled SubSystem: '<S21>/Saturate' incorporates:
+    //   EnablePort: '<S24>/Enable'
 
-    // Logic: '<S28>/Logical Operator' incorporates:
-    //   Abs: '<S29>/Abs'
-    //   Abs: '<S29>/Abs1'
-    //   Abs: '<S29>/Abs2'
-    //   Abs: '<S29>/Abs3'
-    //   Logic: '<S29>/OR'
-    //   RelationalOperator: '<S29>/Relational Operator'
-    //   RelationalOperator: '<S29>/Relational Operator1'
-    //   RelationalOperator: '<S29>/Relational Operator2'
-    //   RelationalOperator: '<S29>/Relational Operator3'
+    // Logic: '<S21>/Logical Operator' incorporates:
+    //   Abs: '<S22>/Abs'
+    //   Abs: '<S22>/Abs1'
+    //   Abs: '<S22>/Abs2'
+    //   Abs: '<S22>/Abs3'
+    //   Logic: '<S22>/OR'
+    //   RelationalOperator: '<S22>/Relational Operator'
+    //   RelationalOperator: '<S22>/Relational Operator1'
+    //   RelationalOperator: '<S22>/Relational Operator2'
+    //   RelationalOperator: '<S22>/Relational Operator3'
 
-    if ((fabs(Pix_FCC_flash_B.Add) > Pix_FCC_flash_B.Add16) || (fabs
-         (Pix_FCC_flash_B.Add1) > Pix_FCC_flash_B.Add16) || (fabs
-         (Pix_FCC_flash_B.Add2) > Pix_FCC_flash_B.Add16) || (fabs
-         (Pix_FCC_flash_B.Add3) > Pix_FCC_flash_B.Add16)) {
-      // MinMax: '<S31>/Max'
-      if ((Pix_FCC_flash_B.Add > Pix_FCC_flash_B.Add1) || rtIsNaN
-          (Pix_FCC_flash_B.Add1)) {
-        Pix_FCC_flash_B.Abs1 = Pix_FCC_flash_B.Add;
+    if ((fabs(Pix_FCC_flash_B.Product3) > Pix_FCC_flash_B.Add16) || (fabs
+         (Pix_FCC_flash_B.pulse_width_ms) > Pix_FCC_flash_B.Add16) || (fabs
+         (Pix_FCC_flash_B.Product2) > Pix_FCC_flash_B.Add16) || (fabs
+         (Pix_FCC_flash_B.pulse_width_ms_o) > Pix_FCC_flash_B.Add16)) {
+      // MinMax: '<S24>/Max'
+      if ((Pix_FCC_flash_B.Product3 > Pix_FCC_flash_B.pulse_width_ms) || rtIsNaN
+          (Pix_FCC_flash_B.pulse_width_ms)) {
+        Pix_FCC_flash_B.Abs1 = Pix_FCC_flash_B.Product3;
       } else {
-        Pix_FCC_flash_B.Abs1 = Pix_FCC_flash_B.Add1;
+        Pix_FCC_flash_B.Abs1 = Pix_FCC_flash_B.pulse_width_ms;
       }
 
-      if ((!(Pix_FCC_flash_B.Abs1 > Pix_FCC_flash_B.Add2)) && (!rtIsNaN
-           (Pix_FCC_flash_B.Add2))) {
-        Pix_FCC_flash_B.Abs1 = Pix_FCC_flash_B.Add2;
+      if ((!(Pix_FCC_flash_B.Abs1 > Pix_FCC_flash_B.Product2)) && (!rtIsNaN
+           (Pix_FCC_flash_B.Product2))) {
+        Pix_FCC_flash_B.Abs1 = Pix_FCC_flash_B.Product2;
       }
 
-      if ((!(Pix_FCC_flash_B.Abs1 > Pix_FCC_flash_B.Add3)) && (!rtIsNaN
-           (Pix_FCC_flash_B.Add3))) {
-        Pix_FCC_flash_B.Abs1 = Pix_FCC_flash_B.Add3;
+      if ((!(Pix_FCC_flash_B.Abs1 > Pix_FCC_flash_B.pulse_width_ms_o)) &&
+          (!rtIsNaN(Pix_FCC_flash_B.pulse_width_ms_o))) {
+        Pix_FCC_flash_B.Abs1 = Pix_FCC_flash_B.pulse_width_ms_o;
       }
 
-      // End of MinMax: '<S31>/Max'
+      // End of MinMax: '<S24>/Max'
 
-      // Abs: '<S31>/Abs1'
+      // Abs: '<S24>/Abs1'
       Pix_FCC_flash_B.Abs1 = fabs(Pix_FCC_flash_B.Abs1);
 
-      // Product: '<S31>/Multiply' incorporates:
-      //   Product: '<S31>/Divide'
+      // Product: '<S24>/Multiply' incorporates:
+      //   Product: '<S24>/Divide'
 
-      Pix_FCC_flash_B.Add = Pix_FCC_flash_B.Add / Pix_FCC_flash_B.Abs1 *
-        Pix_FCC_flash_B.Add16;
+      Pix_FCC_flash_B.Product3 = Pix_FCC_flash_B.Product3 / Pix_FCC_flash_B.Abs1
+        * Pix_FCC_flash_B.Add16;
 
-      // Product: '<S31>/Multiply1' incorporates:
-      //   Product: '<S31>/Divide1'
+      // Product: '<S24>/Multiply1' incorporates:
+      //   Product: '<S24>/Divide1'
 
-      Pix_FCC_flash_B.Add1 = Pix_FCC_flash_B.Add1 / Pix_FCC_flash_B.Abs1 *
-        Pix_FCC_flash_B.Add16;
+      Pix_FCC_flash_B.pulse_width_ms = Pix_FCC_flash_B.pulse_width_ms /
+        Pix_FCC_flash_B.Abs1 * Pix_FCC_flash_B.Add16;
 
-      // Product: '<S31>/Multiply3' incorporates:
-      //   Product: '<S31>/Divide2'
+      // Product: '<S24>/Multiply3' incorporates:
+      //   Product: '<S24>/Divide2'
 
-      Pix_FCC_flash_B.Add3 = Pix_FCC_flash_B.Add3 / Pix_FCC_flash_B.Abs1 *
-        Pix_FCC_flash_B.Add16;
+      Pix_FCC_flash_B.pulse_width_ms_o = Pix_FCC_flash_B.pulse_width_ms_o /
+        Pix_FCC_flash_B.Abs1 * Pix_FCC_flash_B.Add16;
 
-      // Product: '<S31>/Multiply2' incorporates:
-      //   Product: '<S31>/Divide4'
+      // Product: '<S24>/Multiply2' incorporates:
+      //   Product: '<S24>/Divide4'
 
-      Pix_FCC_flash_B.Add2 = Pix_FCC_flash_B.Add2 / Pix_FCC_flash_B.Abs1 *
-        Pix_FCC_flash_B.Add16;
+      Pix_FCC_flash_B.Product2 = Pix_FCC_flash_B.Product2 / Pix_FCC_flash_B.Abs1
+        * Pix_FCC_flash_B.Add16;
     }
 
-    // End of Logic: '<S28>/Logical Operator'
-    // End of Outputs for SubSystem: '<S28>/Saturate'
-    // End of Outputs for SubSystem: '<S28>/Pass'
+    // End of Logic: '<S21>/Logical Operator'
+    // End of Outputs for SubSystem: '<S21>/Saturate'
+    // End of Outputs for SubSystem: '<S21>/Pass'
 
-    // Product: '<S32>/Product' incorporates:
-    //   Constant: '<S32>/Constant6'
+    // Product: '<S33>/Product' incorporates:
     //   Constant: '<S33>/Constant6'
     //   Constant: '<S34>/Constant6'
     //   Constant: '<S35>/Constant6'
-    //   Product: '<S33>/Product'
+    //   Constant: '<S36>/Constant6'
     //   Product: '<S34>/Product'
     //   Product: '<S35>/Product'
+    //   Product: '<S36>/Product'
 
     Pix_FCC_flash_B.Add16 =
       Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms -
       Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_middle_pos_ms;
 
-    // Sum: '<S32>/Add' incorporates:
-    //   Constant: '<S27>/Constant'
-    //   Constant: '<S32>/Constant2'
-    //   Constant: '<S32>/Constant6'
-    //   Product: '<S32>/Divide'
-    //   Product: '<S32>/Product'
-    //   Sum: '<S26>/Add15'
-
-    Pix_FCC_flash_B.Add = (Pix_FCC_flash_B.ACC1 + Pix_FCC_flash_B.Add) /
-      Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad *
-      Pix_FCC_flash_B.Add16 +
-      Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_middle_pos_ms;
-
-    // Saturate: '<S32>/Saturation'
-    if (Pix_FCC_flash_B.Add >
-        Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms) {
-      Pix_FCC_flash_B.Add =
-        Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms;
-    } else {
-      if (Pix_FCC_flash_B.Add <
-          Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms) {
-        Pix_FCC_flash_B.Add =
-          Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms;
-      }
-    }
-
-    // End of Saturate: '<S32>/Saturation'
-
     // Sum: '<S33>/Add' incorporates:
-    //   Constant: '<S27>/Constant'
+    //   Constant: '<S20>/Constant'
     //   Constant: '<S33>/Constant2'
+    //   Constant: '<S33>/Constant6'
     //   Product: '<S33>/Divide'
     //   Product: '<S33>/Product'
-    //   Sum: '<S26>/Add12'
+    //   Sum: '<S18>/Add15'
 
-    Pix_FCC_flash_B.Add1 = (Pix_FCC_flash_B.ACC1 + Pix_FCC_flash_B.Add1) /
+    Pix_FCC_flash_B.Product3 = (Pix_FCC_flash_B.pulse_width_ms_k +
+      Pix_FCC_flash_B.Product3) /
       Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad *
       Pix_FCC_flash_B.Add16 +
       Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_middle_pos_ms;
 
     // Saturate: '<S33>/Saturation'
-    if (Pix_FCC_flash_B.Add1 >
+    if (Pix_FCC_flash_B.Product3 >
         Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms) {
-      Pix_FCC_flash_B.Add1 =
+      Pix_FCC_flash_B.Product3 =
         Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms;
     } else {
-      if (Pix_FCC_flash_B.Add1 <
+      if (Pix_FCC_flash_B.Product3 <
           Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms) {
-        Pix_FCC_flash_B.Add1 =
+        Pix_FCC_flash_B.Product3 =
           Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms;
       }
     }
@@ -1426,26 +1117,27 @@ void Pix_FCC_flash_step(void)
     // End of Saturate: '<S33>/Saturation'
 
     // Sum: '<S34>/Add' incorporates:
-    //   Constant: '<S27>/Constant'
+    //   Constant: '<S20>/Constant'
     //   Constant: '<S34>/Constant2'
     //   Product: '<S34>/Divide'
     //   Product: '<S34>/Product'
-    //   Sum: '<S26>/Add13'
+    //   Sum: '<S18>/Add12'
 
-    Pix_FCC_flash_B.Add2 = (Pix_FCC_flash_B.ACC1 + Pix_FCC_flash_B.Add2) /
+    Pix_FCC_flash_B.pulse_width_ms = (Pix_FCC_flash_B.pulse_width_ms_k +
+      Pix_FCC_flash_B.pulse_width_ms) /
       Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad *
       Pix_FCC_flash_B.Add16 +
       Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_middle_pos_ms;
 
     // Saturate: '<S34>/Saturation'
-    if (Pix_FCC_flash_B.Add2 >
+    if (Pix_FCC_flash_B.pulse_width_ms >
         Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms) {
-      Pix_FCC_flash_B.Add2 =
+      Pix_FCC_flash_B.pulse_width_ms =
         Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms;
     } else {
-      if (Pix_FCC_flash_B.Add2 <
+      if (Pix_FCC_flash_B.pulse_width_ms <
           Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms) {
-        Pix_FCC_flash_B.Add2 =
+        Pix_FCC_flash_B.pulse_width_ms =
           Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms;
       }
     }
@@ -1453,96 +1145,111 @@ void Pix_FCC_flash_step(void)
     // End of Saturate: '<S34>/Saturation'
 
     // Sum: '<S35>/Add' incorporates:
-    //   Constant: '<S27>/Constant'
+    //   Constant: '<S20>/Constant'
     //   Constant: '<S35>/Constant2'
     //   Product: '<S35>/Divide'
     //   Product: '<S35>/Product'
-    //   Sum: '<S26>/Add14'
+    //   Sum: '<S18>/Add13'
 
-    Pix_FCC_flash_B.Add3 = (Pix_FCC_flash_B.ACC1 + Pix_FCC_flash_B.Add3) /
+    Pix_FCC_flash_B.Product2 = (Pix_FCC_flash_B.pulse_width_ms_k +
+      Pix_FCC_flash_B.Product2) /
       Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad *
       Pix_FCC_flash_B.Add16 +
       Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_middle_pos_ms;
 
     // Saturate: '<S35>/Saturation'
-    if (Pix_FCC_flash_B.Add3 >
+    if (Pix_FCC_flash_B.Product2 >
         Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms) {
-      Pix_FCC_flash_B.Add3 =
+      Pix_FCC_flash_B.Product2 =
         Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms;
     } else {
-      if (Pix_FCC_flash_B.Add3 <
+      if (Pix_FCC_flash_B.Product2 <
           Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms) {
-        Pix_FCC_flash_B.Add3 =
+        Pix_FCC_flash_B.Product2 =
           Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms;
       }
     }
 
     // End of Saturate: '<S35>/Saturation'
 
-    // Update for DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn2'
-    Pix_FCC_flash_DW.DiscreteTransferFcn2_states = (Pix_FCC_flash_B.CMD1 -
-      Pix_FCC_flash_P.DiscreteTransferFcn2_DenCoef[1] *
-      Pix_FCC_flash_DW.DiscreteTransferFcn2_states) /
-      Pix_FCC_flash_P.DiscreteTransferFcn2_DenCoef[0];
+    // Sum: '<S36>/Add' incorporates:
+    //   Constant: '<S20>/Constant'
+    //   Constant: '<S36>/Constant2'
+    //   Product: '<S36>/Divide'
+    //   Product: '<S36>/Product'
+    //   Sum: '<S18>/Add14'
 
-    // Update for DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn1'
-    Pix_FCC_flash_DW.DiscreteTransferFcn1_states = (Pix_FCC_flash_B.CMD2 -
-      Pix_FCC_flash_P.DiscreteTransferFcn1_DenCoef[1] *
-      Pix_FCC_flash_DW.DiscreteTransferFcn1_states) /
-      Pix_FCC_flash_P.DiscreteTransferFcn1_DenCoef[0];
+    Pix_FCC_flash_B.pulse_width_ms_k = (Pix_FCC_flash_B.pulse_width_ms_k +
+      Pix_FCC_flash_B.pulse_width_ms_o) /
+      Pix_FCC_flash_P.FCC_PIX_Data.Control_Surfaces.max_deflection_rad *
+      Pix_FCC_flash_B.Add16 +
+      Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_middle_pos_ms;
 
-    // Update for DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn'
-    Pix_FCC_flash_DW.DiscreteTransferFcn_states = Pix_FCC_flash_B.CMD3;
+    // Saturate: '<S36>/Saturation'
+    if (Pix_FCC_flash_B.pulse_width_ms_k >
+        Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms) {
+      Pix_FCC_flash_B.pulse_width_ms_k =
+        Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_max_ms;
+    } else {
+      if (Pix_FCC_flash_B.pulse_width_ms_k <
+          Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms) {
+        Pix_FCC_flash_B.pulse_width_ms_k =
+          Pix_FCC_flash_P.FCC_PIX_Data.Servo.PWM.Pulswidth_cmd_min_ms;
+      }
+    }
+
+    // End of Saturate: '<S36>/Saturation'
 
     // S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
     //   SubSystem: '<S2>/OUTPUT'
 
-    // MATLAB Function: '<S39>/MessageAssembly' incorporates:
-    //   Constant: '<S39>/Constant'
-    //   MATLAB Function: '<S18>/DefineRCStatus'
-    //   MATLAB Function: '<S18>/DefineStatus'
-    //   MATLAB Function: '<S39>/convert2uint8'
-    //   SignalConversion generated from: '<S48>/ SFunction '
+    // MATLAB Function: '<S40>/MessageAssembly' incorporates:
+    //   Constant: '<S40>/Constant'
+    //   MATLAB Function: '<S10>/DefineRCStatus'
+    //   MATLAB Function: '<S10>/DefineStatus'
+    //   MATLAB Function: '<S40>/convert2uint8'
+    //   SignalConversion generated from: '<S44>/ SFunction '
 
     if (Pix_FCC_flash_P.Constant_Value_h == 1.0) {
       memcpy((void *)&x[0], (void *)&Pix_FCC_flash_B.SimHeartbeat_update,
              (uint32_T)((size_t)2 * sizeof(uint8_T)));
-      Pix_FCC_flash_B.pack[0] = x[0];
-      Pix_FCC_flash_B.pack[1] = x[1];
+      package[0] = x[0];
+      package[1] = x[1];
 
       // Outputs for Function Call SubSystem: '<S2>/ACTION'
-      Pix_FCC_flash_B.pack[2] = static_cast<uint8_T>(rtb_mode);
-      Pix_FCC_flash_B.pack[3] = Pix_FCC_flash_B.packetfound;
+      package[2] = static_cast<uint8_T>(rtb_mode);
+      package[3] = Pix_FCC_flash_B.packetfound;
 
       // End of Outputs for SubSystem: '<S2>/ACTION'
       memcpy((void *)&Pix_FCC_flash_B.TmpSignalConversionAtSFunct[0], (void *)
-             &Pix_FCC_flash_B.pack[0], (uint32_T)((size_t)1 * sizeof(real32_T)));
+             &package[0], (uint32_T)((size_t)1 * sizeof(real32_T)));
     } else {
-      // SignalConversion generated from: '<S48>/ SFunction ' incorporates:
-      //   MATLAB Function: '<S39>/convert2uint8'
+      // SignalConversion generated from: '<S44>/ SFunction ' incorporates:
+      //   MATLAB Function: '<S40>/convert2uint8'
 
       Pix_FCC_flash_B.TmpSignalConversionAtSFunct[0] = 0.0F;
     }
 
-    // End of MATLAB Function: '<S39>/MessageAssembly'
+    // End of MATLAB Function: '<S40>/MessageAssembly'
 
     // S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
     //   SubSystem: '<S2>/ACTION'
 
-    // SignalConversion generated from: '<S48>/ SFunction ' incorporates:
-    //   DataTypeConversion: '<S18>/Data Type Conversion'
-    //   Inport: '<S18>/SensorData'
-    //   Inport: '<S18>/TestSignal'
-    //   MATLAB Function: '<S39>/convert2uint8'
+    // SignalConversion generated from: '<S44>/ SFunction ' incorporates:
+    //   DataTypeConversion: '<S10>/Data Type Conversion'
+    //   Inport: '<S10>/Estimator'
+    //   Inport: '<S10>/SensorData'
+    //   Inport: '<S10>/TestSignal'
+    //   MATLAB Function: '<S40>/convert2uint8'
 
     Pix_FCC_flash_B.TmpSignalConversionAtSFunct[1] = static_cast<real32_T>
-      (Pix_FCC_flash_B.Add);
+      (Pix_FCC_flash_B.Product3);
     Pix_FCC_flash_B.TmpSignalConversionAtSFunct[2] = static_cast<real32_T>
-      (Pix_FCC_flash_B.Add1);
+      (Pix_FCC_flash_B.pulse_width_ms);
     Pix_FCC_flash_B.TmpSignalConversionAtSFunct[3] = static_cast<real32_T>
-      (Pix_FCC_flash_B.Add2);
+      (Pix_FCC_flash_B.Product2);
     Pix_FCC_flash_B.TmpSignalConversionAtSFunct[4] = static_cast<real32_T>
-      (Pix_FCC_flash_B.Add3);
+      (Pix_FCC_flash_B.pulse_width_ms_k);
     Pix_FCC_flash_B.TmpSignalConversionAtSFunct[5] = Pix_FCC_flash_B.In1_j.x;
     Pix_FCC_flash_B.TmpSignalConversionAtSFunct[8] = Pix_FCC_flash_B.In1.x;
     Pix_FCC_flash_B.TmpSignalConversionAtSFunct[6] = Pix_FCC_flash_B.In1_j.y;
@@ -1556,59 +1263,57 @@ void Pix_FCC_flash_step(void)
     Pix_FCC_flash_B.TmpSignalConversionAtSFunct[15] =
       Pix_FCC_flash_B.TestSignal_update;
 
-    // MATLAB Function: '<S39>/convert2uint8'
+    // MATLAB Function: '<S40>/convert2uint8'
     memcpy((void *)&Pix_FCC_flash_B.msgOut[0], (void *)
            &Pix_FCC_flash_B.TmpSignalConversionAtSFunct[0], (uint32_T)((size_t)
             64 * sizeof(uint8_T)));
 
-    // S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-    //   SubSystem: '<S39>/Send WhiteNoise Beginning'
+    // SignalConversion generated from: '<S40>/Serial Transmit' incorporates:
+    //   Constant: '<S40>/Header'
+    //   Constant: '<S40>/Header1'
 
-    Pix_FCC_SendWhiteNoiseBeginning(&Pix_FCC_flash_DW.SendWhiteNoiseBeginning_p,
-      &Pix_FCC_flash_P.SendWhiteNoiseBeginning_p);
+    Pix_FCC_flash_B.TmpSignalConversionAtSerial[0] =
+      Pix_FCC_flash_P.Header_Value[0];
+    Pix_FCC_flash_B.TmpSignalConversionAtSerial[1] =
+      Pix_FCC_flash_P.Header_Value[1];
+    Pix_FCC_flash_B.TmpSignalConversionAtSerial[2] =
+      Pix_FCC_flash_P.Header_Value[2];
+    Pix_FCC_flash_B.TmpSignalConversionAtSerial[67] =
+      Pix_FCC_flash_P.Header1_Value[0];
+    Pix_FCC_flash_B.TmpSignalConversionAtSerial[68] =
+      Pix_FCC_flash_P.Header1_Value[1];
+    Pix_FCC_flash_B.TmpSignalConversionAtSerial[69] =
+      Pix_FCC_flash_P.Header1_Value[2];
+    for (b_ii = 0; b_ii < 64; b_ii++) {
+      Pix_FCC_flash_B.TmpSignalConversionAtSerial[b_ii + 3] =
+        Pix_FCC_flash_B.msgOut[b_ii];
+      Pix_FCC_flash_B.TmpSignalConversionAtSerial[b_ii + 70] =
+        Pix_FCC_flash_B.msgOut[b_ii];
+    }
 
-    // S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-    //   SubSystem: '<S39>/Send Header'
+    // End of SignalConversion generated from: '<S40>/Serial Transmit'
 
-    Pix_FCC_flash_SendHeader(&Pix_FCC_flash_DW.SendHeader_k,
-      &Pix_FCC_flash_P.SendHeader_k);
-
-    // S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-    //   SubSystem: '<S39>/Send Data'
-
-    // MATLABSystem: '<S43>/Serial Transmit'
+    // MATLABSystem: '<S40>/Serial Transmit'
     memcpy((void *)&Pix_FCC_flash_B.TxDataLocChar[0], (void *)
-           &Pix_FCC_flash_B.msgOut[0], (uint32_T)((size_t)64 * sizeof(uint8_T)));
-    MW_SCI_Transmit(Pix_FCC_flash_DW.obj_h.MW_SCIHANDLE,
-                    Pix_FCC_flash_B.TxDataLocChar, 64U);
+           &Pix_FCC_flash_B.TmpSignalConversionAtSerial[0], (uint32_T)((size_t)
+            134 * sizeof(uint8_T)));
+    MW_SCI_Transmit(Pix_FCC_flash_DW.obj_i.MW_SCIHANDLE,
+                    Pix_FCC_flash_B.TxDataLocChar, 134U);
 
-    // S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-    //   SubSystem: '<S39>/Send Terminator'
-
-    Pix_FCC_flash_SendHeader(&Pix_FCC_flash_DW.SendTerminator_g,
-      &Pix_FCC_flash_P.SendTerminator_g);
-
-    // S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-    //   SubSystem: '<S39>/Send WhiteNoise End'
-
-    Pix_FCC_SendWhiteNoiseBeginning(&Pix_FCC_flash_DW.SendWhiteNoiseEnd_a,
-      &Pix_FCC_flash_P.SendWhiteNoiseEnd_a);
-
-    // End of Outputs for S-Function (fcncallgen): '<S39>/Function-Call Generator1' 
+    // End of Outputs for S-Function (fcncallgen): '<S2>/Function-Call Generator2' 
 
     // S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
     //   SubSystem: '<S2>/ACTION'
 
-    // DataTypeConversion: '<S19>/Data Type Conversion3' incorporates:
-    //   DataTypeConversion: '<S18>/Data Type Conversion'
+    // DataTypeConversion: '<S11>/Data Type Conversion3' incorporates:
+    //   DataTypeConversion: '<S10>/Data Type Conversion'
 
-    Pix_FCC_flash_B.CMD2 = static_cast<real32_T>(floor(static_cast<real_T>(
-      static_cast<real32_T>(Pix_FCC_flash_B.Add))));
-    if (rtIsNaNF(Pix_FCC_flash_B.CMD2) || rtIsInfF(Pix_FCC_flash_B.CMD2)) {
-      Pix_FCC_flash_B.CMD2 = 0.0F;
+    CMD1 = static_cast<real32_T>(floor(static_cast<real_T>(static_cast<real32_T>
+      (Pix_FCC_flash_B.Product3))));
+    if (rtIsNaNF(CMD1) || rtIsInfF(CMD1)) {
+      CMD1 = 0.0F;
     } else {
-      Pix_FCC_flash_B.CMD2 = static_cast<real32_T>(fmod(static_cast<real_T>
-        (Pix_FCC_flash_B.CMD2), 65536.0));
+      CMD1 = static_cast<real32_T>(fmod(static_cast<real_T>(CMD1), 65536.0));
     }
 
     // End of Outputs for S-Function (fcncallgen): '<S2>/Function-Call Generator2' 
@@ -1616,13 +1321,12 @@ void Pix_FCC_flash_step(void)
     // S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
     //   SubSystem: '<S2>/ACTION'
 
-    Pix_FCC_flash_B.CMD1 = static_cast<real32_T>(floor(static_cast<real_T>(
-      static_cast<real32_T>(Pix_FCC_flash_B.Add1))));
-    if (rtIsNaNF(Pix_FCC_flash_B.CMD1) || rtIsInfF(Pix_FCC_flash_B.CMD1)) {
-      Pix_FCC_flash_B.CMD1 = 0.0F;
+    CMD2 = static_cast<real32_T>(floor(static_cast<real_T>(static_cast<real32_T>
+      (Pix_FCC_flash_B.pulse_width_ms))));
+    if (rtIsNaNF(CMD2) || rtIsInfF(CMD2)) {
+      CMD2 = 0.0F;
     } else {
-      Pix_FCC_flash_B.CMD1 = static_cast<real32_T>(fmod(static_cast<real_T>
-        (Pix_FCC_flash_B.CMD1), 65536.0));
+      CMD2 = static_cast<real32_T>(fmod(static_cast<real_T>(CMD2), 65536.0));
     }
 
     // End of Outputs for S-Function (fcncallgen): '<S2>/Function-Call Generator2' 
@@ -1630,13 +1334,12 @@ void Pix_FCC_flash_step(void)
     // S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
     //   SubSystem: '<S2>/ACTION'
 
-    Pix_FCC_flash_B.CMD3 = static_cast<real32_T>(floor(static_cast<real_T>(
-      static_cast<real32_T>(Pix_FCC_flash_B.Add2))));
-    if (rtIsNaNF(Pix_FCC_flash_B.CMD3) || rtIsInfF(Pix_FCC_flash_B.CMD3)) {
-      Pix_FCC_flash_B.CMD3 = 0.0F;
+    CMD3 = static_cast<real32_T>(floor(static_cast<real_T>(static_cast<real32_T>
+      (Pix_FCC_flash_B.Product2))));
+    if (rtIsNaNF(CMD3) || rtIsInfF(CMD3)) {
+      CMD3 = 0.0F;
     } else {
-      Pix_FCC_flash_B.CMD3 = static_cast<real32_T>(fmod(static_cast<real_T>
-        (Pix_FCC_flash_B.CMD3), 65536.0));
+      CMD3 = static_cast<real32_T>(fmod(static_cast<real_T>(CMD3), 65536.0));
     }
 
     // End of Outputs for S-Function (fcncallgen): '<S2>/Function-Call Generator2' 
@@ -1644,24 +1347,23 @@ void Pix_FCC_flash_step(void)
     // S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
     //   SubSystem: '<S2>/ACTION'
 
-    Pix_FCC_flash_B.ACC1 = static_cast<real32_T>(floor(static_cast<real_T>(
-      static_cast<real32_T>(Pix_FCC_flash_B.Add3))));
-    if (rtIsNaNF(Pix_FCC_flash_B.ACC1) || rtIsInfF(Pix_FCC_flash_B.ACC1)) {
-      Pix_FCC_flash_B.ACC1 = 0.0F;
+    ACC1 = static_cast<real32_T>(floor(static_cast<real_T>(static_cast<real32_T>
+      (Pix_FCC_flash_B.pulse_width_ms_k))));
+    if (rtIsNaNF(ACC1) || rtIsInfF(ACC1)) {
+      ACC1 = 0.0F;
     } else {
-      Pix_FCC_flash_B.ACC1 = static_cast<real32_T>(fmod(static_cast<real_T>
-        (Pix_FCC_flash_B.ACC1), 65536.0));
+      ACC1 = static_cast<real32_T>(fmod(static_cast<real_T>(ACC1), 65536.0));
     }
 
-    // MATLABSystem: '<S38>/PX4 PWM Output' incorporates:
-    //   Constant: '<S19>/HIL_detect_flg'
-    //   Constant: '<S19>/PWM_arm_flg'
-    //   Constant: '<S19>/Recovery_activation_flg'
-    //   DataTypeConversion: '<S19>/Data Type Conversion3'
-    //   Gain: '<S38>/ms2us_1'
-    //   Gain: '<S38>/ms2us_2'
-    //   Gain: '<S38>/ms2us_3'
-    //   Gain: '<S38>/ms2us_4'
+    // MATLABSystem: '<S39>/PX4 PWM Output' incorporates:
+    //   Constant: '<S11>/HIL_detect_flg'
+    //   Constant: '<S11>/PWM_arm_flg'
+    //   Constant: '<S11>/Recovery_activation_flg'
+    //   DataTypeConversion: '<S11>/Data Type Conversion3'
+    //   Gain: '<S39>/ms2us_1'
+    //   Gain: '<S39>/ms2us_2'
+    //   Gain: '<S39>/ms2us_3'
+    //   Gain: '<S39>/ms2us_4'
 
     if (Pix_FCC_flash_P.PWM_arm_flg_Value) {
       if (!Pix_FCC_flash_DW.obj_j.isArmed) {
@@ -1671,34 +1373,29 @@ void Pix_FCC_flash_step(void)
           ((Pix_FCC_flash_DW.obj_j.errorStatus | status));
       }
 
-      for (Pix_FCC_flash_B.b_ii = 0; Pix_FCC_flash_B.b_ii < 8;
-           Pix_FCC_flash_B.b_ii++) {
-        Pix_FCC_flash_B.pwmValue[Pix_FCC_flash_B.b_ii] = 0U;
+      for (b_ii = 0; b_ii < 8; b_ii++) {
+        Pix_FCC_flash_B.pwmValue[b_ii] = 0U;
       }
 
       Pix_FCC_flash_B.pwmValue[0] = static_cast<uint16_T>(((static_cast<uint32_T>
-        (static_cast<uint16_T>((Pix_FCC_flash_B.CMD2 < 0.0F ?
-        static_cast<int32_T>(static_cast<uint16_T>(-static_cast<int16_T>(
-        static_cast<uint16_T>(-Pix_FCC_flash_B.CMD2)))) : static_cast<int32_T>(
-        static_cast<uint16_T>(Pix_FCC_flash_B.CMD2))))) *
+        (static_cast<uint16_T>((CMD1 < 0.0F ? static_cast<int32_T>
+        (static_cast<uint16_T>(-static_cast<int16_T>(static_cast<uint16_T>(-CMD1))))
+        : static_cast<int32_T>(static_cast<uint16_T>(CMD1))))) *
         Pix_FCC_flash_P.ms2us_1_Gain) >> 6));
       Pix_FCC_flash_B.pwmValue[1] = static_cast<uint16_T>(((static_cast<uint32_T>
-        (static_cast<uint16_T>((Pix_FCC_flash_B.CMD1 < 0.0F ?
-        static_cast<int32_T>(static_cast<uint16_T>(-static_cast<int16_T>(
-        static_cast<uint16_T>(-Pix_FCC_flash_B.CMD1)))) : static_cast<int32_T>(
-        static_cast<uint16_T>(Pix_FCC_flash_B.CMD1))))) *
+        (static_cast<uint16_T>((CMD2 < 0.0F ? static_cast<int32_T>
+        (static_cast<uint16_T>(-static_cast<int16_T>(static_cast<uint16_T>(-CMD2))))
+        : static_cast<int32_T>(static_cast<uint16_T>(CMD2))))) *
         Pix_FCC_flash_P.ms2us_2_Gain) >> 6));
       Pix_FCC_flash_B.pwmValue[2] = static_cast<uint16_T>(((static_cast<uint32_T>
-        (static_cast<uint16_T>((Pix_FCC_flash_B.CMD3 < 0.0F ?
-        static_cast<int32_T>(static_cast<uint16_T>(-static_cast<int16_T>(
-        static_cast<uint16_T>(-Pix_FCC_flash_B.CMD3)))) : static_cast<int32_T>(
-        static_cast<uint16_T>(Pix_FCC_flash_B.CMD3))))) *
+        (static_cast<uint16_T>((CMD3 < 0.0F ? static_cast<int32_T>
+        (static_cast<uint16_T>(-static_cast<int16_T>(static_cast<uint16_T>(-CMD3))))
+        : static_cast<int32_T>(static_cast<uint16_T>(CMD3))))) *
         Pix_FCC_flash_P.ms2us_3_Gain) >> 6));
       Pix_FCC_flash_B.pwmValue[3] = static_cast<uint16_T>(((static_cast<uint32_T>
-        (static_cast<uint16_T>((Pix_FCC_flash_B.ACC1 < 0.0F ?
-        static_cast<int32_T>(static_cast<uint16_T>(-static_cast<int16_T>(
-        static_cast<uint16_T>(-Pix_FCC_flash_B.ACC1)))) : static_cast<int32_T>(
-        static_cast<uint16_T>(Pix_FCC_flash_B.ACC1))))) *
+        (static_cast<uint16_T>((ACC1 < 0.0F ? static_cast<int32_T>
+        (static_cast<uint16_T>(-static_cast<int16_T>(static_cast<uint16_T>(-ACC1))))
+        : static_cast<int32_T>(static_cast<uint16_T>(ACC1))))) *
         Pix_FCC_flash_P.ms2us_4_Gain) >> 6));
       Pix_FCC_flash_B.pwmValue[4] =
         Pix_FCC_flash_P.Recovery_activation_flg_Value;
@@ -1728,7 +1425,7 @@ void Pix_FCC_flash_step(void)
         ((Pix_FCC_flash_DW.obj_j.errorStatus | status));
     }
 
-    // End of MATLABSystem: '<S38>/PX4 PWM Output'
+    // End of MATLABSystem: '<S39>/PX4 PWM Output'
     // End of Outputs for S-Function (fcncallgen): '<S2>/Function-Call Generator2' 
   }
 
@@ -1755,51 +1452,9 @@ void Pix_FCC_flash_initialize(void)
   Pix_FCC_flash_DW.obj.isInitialized = 0;
   Pix_FCC_flash_DW.obj.matlabCodegenIsDeleted = false;
   Pix_FCC_flash_DW.obj.SampleTime = Pix_FCC_flash_P.ReceiveData_SampleTime;
-  Pix_FCC_flas_SystemCore_setup_b(&Pix_FCC_flash_DW.obj);
+  Pix_FCC_flash_SystemCore_setup(&Pix_FCC_flash_DW.obj);
 
-  // Start for Enabled SubSystem: '<S1>/DecodeCommand'
-  // Start for Enabled SubSystem: '<S6>/ConfirmCommand'
-  // Start for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send WhiteNoise Beginning'
-
-  P_SendWhiteNoiseBeginning_Start(&Pix_FCC_flash_DW.SendWhiteNoiseBeginning);
-
-  // Start for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send Header'
-
-  Pix_FCC_flash_SendHeader_Start(&Pix_FCC_flash_DW.SendHeader);
-
-  // Start for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send RC Confrimation'
-
-  // Start for MATLABSystem: '<S13>/Serial Transmit'
-  Pix_FCC_flash_DW.obj_k.isInitialized = 0;
-  Pix_FCC_flash_DW.obj_k.matlabCodegenIsDeleted = false;
-  Pix_FCC_fla_SystemCore_setup_b2(&Pix_FCC_flash_DW.obj_k);
-
-  // Start for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send Data'
-
-  // Start for MATLABSystem: '<S11>/Serial Transmit'
-  Pix_FCC_flash_DW.obj_b.isInitialized = 0;
-  Pix_FCC_flash_DW.obj_b.matlabCodegenIsDeleted = false;
-  Pix_FCC_fla_SystemCore_setup_b2(&Pix_FCC_flash_DW.obj_b);
-
-  // Start for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send Terminator'
-
-  Pix_FCC_flash_SendHeader_Start(&Pix_FCC_flash_DW.SendTerminator);
-
-  // Start for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send WhiteNoise End'
-
-  P_SendWhiteNoiseBeginning_Start(&Pix_FCC_flash_DW.SendWhiteNoiseEnd);
-
-  // End of Start for S-Function (fcncallgen): '<S9>/Function-Call Generator1'
-  // End of Start for SubSystem: '<S6>/ConfirmCommand'
-  // End of Start for SubSystem: '<S1>/DecodeCommand'
-
-  // Start for MATLABSystem: '<S59>/SourceBlock'
+  // Start for MATLABSystem: '<S55>/SourceBlock'
   Pix_FCC_flash_DW.obj_d.matlabCodegenIsDeleted = false;
   Pix_FCC_flash_DW.obj_d.isSetupComplete = false;
   Pix_FCC_flash_DW.obj_d.isInitialized = 1;
@@ -1808,7 +1463,7 @@ void Pix_FCC_flash_initialize(void)
                        &Pix_FCC_flash_DW.obj_d.eventStructObj);
   Pix_FCC_flash_DW.obj_d.isSetupComplete = true;
 
-  // Start for MATLABSystem: '<S61>/SourceBlock'
+  // Start for MATLABSystem: '<S57>/SourceBlock'
   Pix_FCC_flash_DW.obj_f.matlabCodegenIsDeleted = false;
   Pix_FCC_flash_DW.obj_f.isSetupComplete = false;
   Pix_FCC_flash_DW.obj_f.isInitialized = 1;
@@ -1817,7 +1472,7 @@ void Pix_FCC_flash_initialize(void)
                        &Pix_FCC_flash_DW.obj_f.eventStructObj);
   Pix_FCC_flash_DW.obj_f.isSetupComplete = true;
 
-  // Start for MATLABSystem: '<S63>/SourceBlock'
+  // Start for MATLABSystem: '<S59>/SourceBlock'
   Pix_FCC_flash_DW.obj_c.matlabCodegenIsDeleted = false;
   Pix_FCC_flash_DW.obj_c.isSetupComplete = false;
   Pix_FCC_flash_DW.obj_c.isInitialized = 1;
@@ -1830,43 +1485,18 @@ void Pix_FCC_flash_initialize(void)
   // Start for S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
   //   SubSystem: '<S2>/OUTPUT'
 
-  // Start for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send WhiteNoise Beginning'
+  // Start for MATLABSystem: '<S40>/Serial Transmit'
+  Pix_FCC_flash_DW.obj_i.isInitialized = 0;
+  Pix_FCC_flash_DW.obj_i.matlabCodegenIsDeleted = false;
+  Pix_FCC_fla_SystemCore_setup_b2(&Pix_FCC_flash_DW.obj_i);
 
-  P_SendWhiteNoiseBeginning_Start(&Pix_FCC_flash_DW.SendWhiteNoiseBeginning_p);
-
-  // Start for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send Header'
-
-  Pix_FCC_flash_SendHeader_Start(&Pix_FCC_flash_DW.SendHeader_k);
-
-  // Start for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send Data'
-
-  // Start for MATLABSystem: '<S43>/Serial Transmit'
-  Pix_FCC_flash_DW.obj_h.isInitialized = 0;
-  Pix_FCC_flash_DW.obj_h.matlabCodegenIsDeleted = false;
-  Pix_FCC_fla_SystemCore_setup_b2(&Pix_FCC_flash_DW.obj_h);
-
-  // Start for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send Terminator'
-
-  Pix_FCC_flash_SendHeader_Start(&Pix_FCC_flash_DW.SendTerminator_g);
-
-  // Start for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send WhiteNoise End'
-
-  P_SendWhiteNoiseBeginning_Start(&Pix_FCC_flash_DW.SendWhiteNoiseEnd_a);
-
-  // End of Start for S-Function (fcncallgen): '<S39>/Function-Call Generator1'
-
-  // Start for MATLABSystem: '<S38>/PX4 PWM Output' incorporates:
-  //   Constant: '<S19>/PWM_arm_flg'
+  // Start for MATLABSystem: '<S39>/PX4 PWM Output' incorporates:
+  //   Constant: '<S11>/PWM_arm_flg'
 
   Pix_FCC_flash_DW.obj_j.errorStatus = 0U;
   Pix_FCC_flash_DW.obj_j.isInitialized = 0;
   Pix_FCC_flash_DW.obj_j.matlabCodegenIsDeleted = false;
-  Pix_FCC_f_SystemCore_setup_b2qa(&Pix_FCC_flash_DW.obj_j,
+  Pix_FCC_flas_SystemCore_setup_b(&Pix_FCC_flash_DW.obj_j,
     Pix_FCC_flash_P.PWM_arm_flg_Value, Pix_FCC_flash_P.PWM_arm_flg_Value);
 
   // End of Start for S-Function (fcncallgen): '<S2>/Function-Call Generator2'
@@ -1899,94 +1529,47 @@ void Pix_FCC_flash_initialize(void)
 
   // End of SystemInitialize for SubSystem: '<S1>/memory'
 
-  // SystemInitialize for Enabled SubSystem: '<S59>/Enabled Subsystem'
-  // SystemInitialize for Outport: '<S60>/Out1'
+  // SystemInitialize for Enabled SubSystem: '<S55>/Enabled Subsystem'
+  // SystemInitialize for Outport: '<S56>/Out1'
   Pix_FCC_flash_B.In1_j = Pix_FCC_flash_P.Out1_Y0;
 
-  // End of SystemInitialize for SubSystem: '<S59>/Enabled Subsystem'
+  // End of SystemInitialize for SubSystem: '<S55>/Enabled Subsystem'
 
-  // SystemInitialize for Enabled SubSystem: '<S61>/Enabled Subsystem'
-  // SystemInitialize for Outport: '<S62>/Out1'
+  // SystemInitialize for Enabled SubSystem: '<S57>/Enabled Subsystem'
+  // SystemInitialize for Outport: '<S58>/Out1'
   Pix_FCC_flash_B.In1 = Pix_FCC_flash_P.Out1_Y0_f;
 
-  // End of SystemInitialize for SubSystem: '<S61>/Enabled Subsystem'
+  // End of SystemInitialize for SubSystem: '<S57>/Enabled Subsystem'
 
-  // SystemInitialize for Enabled SubSystem: '<S63>/Enabled Subsystem'
-  // SystemInitialize for Outport: '<S64>/Out1'
+  // SystemInitialize for Enabled SubSystem: '<S59>/Enabled Subsystem'
+  // SystemInitialize for Outport: '<S60>/Out1'
   Pix_FCC_flash_B.In1_c = Pix_FCC_flash_P.Out1_Y0_a;
 
-  // End of SystemInitialize for SubSystem: '<S63>/Enabled Subsystem'
+  // End of SystemInitialize for SubSystem: '<S59>/Enabled Subsystem'
 
   // SystemInitialize for Enabled SubSystem: '<Root>/ExecutionCycle'
   // SystemInitialize for S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
   //   SubSystem: '<S2>/process_received_data'
 
-  // SystemInitialize for Enabled SubSystem: '<S21>/input_hold'
-  // SystemInitialize for Enabled SubSystem: '<S52>/hold'
-  // SystemInitialize for Outport: '<S55>/SimHeartbeat'
+  // SystemInitialize for Enabled SubSystem: '<S13>/input_hold'
+  // SystemInitialize for Enabled SubSystem: '<S48>/hold'
+  // SystemInitialize for Outport: '<S51>/SimHeartbeat'
   Pix_FCC_flash_B.SimHeartbeat_update = Pix_FCC_flash_P.SimHeartbeat_Y0;
 
-  // SystemInitialize for Outport: '<S55>/CMD'
+  // SystemInitialize for Outport: '<S51>/CMD'
   Pix_FCC_flash_B.CMD_update[0] = Pix_FCC_flash_P.CMD_Y0;
-
-  // SystemInitialize for Outport: '<S55>/ACC'
-  Pix_FCC_flash_B.ACC_update[0] = Pix_FCC_flash_P.ACC_Y0;
-
-  // SystemInitialize for Outport: '<S55>/ROT'
-  Pix_FCC_flash_B.ROT_update[0] = Pix_FCC_flash_P.ROT_Y0;
-
-  // SystemInitialize for Outport: '<S55>/ATT'
-  Pix_FCC_flash_B.ATT_update[0] = Pix_FCC_flash_P.ATT_Y0;
-
-  // SystemInitialize for Outport: '<S55>/CMD'
   Pix_FCC_flash_B.CMD_update[1] = Pix_FCC_flash_P.CMD_Y0;
-
-  // SystemInitialize for Outport: '<S55>/ACC'
-  Pix_FCC_flash_B.ACC_update[1] = Pix_FCC_flash_P.ACC_Y0;
-
-  // SystemInitialize for Outport: '<S55>/ROT'
-  Pix_FCC_flash_B.ROT_update[1] = Pix_FCC_flash_P.ROT_Y0;
-
-  // SystemInitialize for Outport: '<S55>/ATT'
-  Pix_FCC_flash_B.ATT_update[1] = Pix_FCC_flash_P.ATT_Y0;
-
-  // SystemInitialize for Outport: '<S55>/CMD'
   Pix_FCC_flash_B.CMD_update[2] = Pix_FCC_flash_P.CMD_Y0;
 
-  // SystemInitialize for Outport: '<S55>/ACC'
-  Pix_FCC_flash_B.ACC_update[2] = Pix_FCC_flash_P.ACC_Y0;
-
-  // SystemInitialize for Outport: '<S55>/ROT'
-  Pix_FCC_flash_B.ROT_update[2] = Pix_FCC_flash_P.ROT_Y0;
-
-  // SystemInitialize for Outport: '<S55>/ATT'
-  Pix_FCC_flash_B.ATT_update[2] = Pix_FCC_flash_P.ATT_Y0;
-
-  // SystemInitialize for Outport: '<S55>/TestSignal'
+  // SystemInitialize for Outport: '<S51>/TestSignal'
   Pix_FCC_flash_B.TestSignal_update = Pix_FCC_flash_P.TestSignal_Y0;
 
-  // End of SystemInitialize for SubSystem: '<S52>/hold'
+  // End of SystemInitialize for SubSystem: '<S48>/hold'
 
-  // SystemInitialize for Outport: '<S52>/packetfound_flg'
+  // SystemInitialize for Outport: '<S48>/packetfound_flg'
   Pix_FCC_flash_B.packetfound = Pix_FCC_flash_P.packetfound_flg_Y0;
 
-  // End of SystemInitialize for SubSystem: '<S21>/input_hold'
-
-  // SystemInitialize for S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
-  //   SubSystem: '<S2>/ACTION'
-
-  // InitializeConditions for DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn2' 
-  Pix_FCC_flash_DW.DiscreteTransferFcn2_states =
-    Pix_FCC_flash_P.DiscreteTransferFcn2_InitialSta;
-
-  // InitializeConditions for DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn1' 
-  Pix_FCC_flash_DW.DiscreteTransferFcn1_states =
-    Pix_FCC_flash_P.DiscreteTransferFcn1_InitialSta;
-
-  // InitializeConditions for DiscreteTransferFcn: '<S23>/Discrete Transfer Fcn' 
-  Pix_FCC_flash_DW.DiscreteTransferFcn_states =
-    Pix_FCC_flash_P.DiscreteTransferFcn_InitialStat;
-
+  // End of SystemInitialize for SubSystem: '<S13>/input_hold'
   // End of SystemInitialize for S-Function (fcncallgen): '<S2>/Function-Call Generator2' 
   // End of SystemInitialize for SubSystem: '<Root>/ExecutionCycle'
 }
@@ -1995,89 +1578,26 @@ void Pix_FCC_flash_initialize(void)
 void Pix_FCC_flash_terminate(void)
 {
   // Terminate for MATLABSystem: '<Root>/Receive Data'
-  matlabCodegenHandle_matlabCod_b(&Pix_FCC_flash_DW.obj);
+  matlabCodegenHandle_matlabCodeg(&Pix_FCC_flash_DW.obj);
 
-  // Terminate for Enabled SubSystem: '<S1>/DecodeCommand'
-  // Terminate for Enabled SubSystem: '<S6>/ConfirmCommand'
-  // Terminate for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send WhiteNoise Beginning'
+  // Terminate for MATLABSystem: '<S55>/SourceBlock'
+  matlabCodegenHandle_matlabC_b2q(&Pix_FCC_flash_DW.obj_d);
 
-  Pi_SendWhiteNoiseBeginning_Term(&Pix_FCC_flash_DW.SendWhiteNoiseBeginning);
-
-  // Terminate for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send Header'
-
-  Pix_FCC_flash_SendHeader_Term(&Pix_FCC_flash_DW.SendHeader);
-
-  // Terminate for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send RC Confrimation'
-
-  // Terminate for MATLABSystem: '<S13>/Serial Transmit'
-  matlabCodegenHandle_matlabCo_b2(&Pix_FCC_flash_DW.obj_k);
-
-  // Terminate for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send Data'
-
-  // Terminate for MATLABSystem: '<S11>/Serial Transmit'
-  matlabCodegenHandle_matlabCo_b2(&Pix_FCC_flash_DW.obj_b);
-
-  // Terminate for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send Terminator'
-
-  Pix_FCC_flash_SendHeader_Term(&Pix_FCC_flash_DW.SendTerminator);
-
-  // Terminate for S-Function (fcncallgen): '<S9>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S9>/Send WhiteNoise End'
-
-  Pi_SendWhiteNoiseBeginning_Term(&Pix_FCC_flash_DW.SendWhiteNoiseEnd);
-
-  // End of Terminate for S-Function (fcncallgen): '<S9>/Function-Call Generator1' 
-  // End of Terminate for SubSystem: '<S6>/ConfirmCommand'
-  // End of Terminate for SubSystem: '<S1>/DecodeCommand'
+  // Terminate for MATLABSystem: '<S57>/SourceBlock'
+  matlabCodegenHandle_matlabC_b2q(&Pix_FCC_flash_DW.obj_f);
 
   // Terminate for MATLABSystem: '<S59>/SourceBlock'
-  matlabCodegenHandle_matl_b2qa4v(&Pix_FCC_flash_DW.obj_d);
-
-  // Terminate for MATLABSystem: '<S61>/SourceBlock'
-  matlabCodegenHandle_matl_b2qa4v(&Pix_FCC_flash_DW.obj_f);
-
-  // Terminate for MATLABSystem: '<S63>/SourceBlock'
-  matlabCodegenHandle_matl_b2qa4v(&Pix_FCC_flash_DW.obj_c);
+  matlabCodegenHandle_matlabC_b2q(&Pix_FCC_flash_DW.obj_c);
 
   // Terminate for Enabled SubSystem: '<Root>/ExecutionCycle'
   // Terminate for S-Function (fcncallgen): '<S2>/Function-Call Generator2' incorporates:
   //   SubSystem: '<S2>/OUTPUT'
 
-  // Terminate for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send WhiteNoise Beginning'
+  // Terminate for MATLABSystem: '<S40>/Serial Transmit'
+  matlabCodegenHandle_matlabCo_b2(&Pix_FCC_flash_DW.obj_i);
 
-  Pi_SendWhiteNoiseBeginning_Term(&Pix_FCC_flash_DW.SendWhiteNoiseBeginning_p);
-
-  // Terminate for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send Header'
-
-  Pix_FCC_flash_SendHeader_Term(&Pix_FCC_flash_DW.SendHeader_k);
-
-  // Terminate for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send Data'
-
-  // Terminate for MATLABSystem: '<S43>/Serial Transmit'
-  matlabCodegenHandle_matlabCo_b2(&Pix_FCC_flash_DW.obj_h);
-
-  // Terminate for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send Terminator'
-
-  Pix_FCC_flash_SendHeader_Term(&Pix_FCC_flash_DW.SendTerminator_g);
-
-  // Terminate for S-Function (fcncallgen): '<S39>/Function-Call Generator1' incorporates:
-  //   SubSystem: '<S39>/Send WhiteNoise End'
-
-  Pi_SendWhiteNoiseBeginning_Term(&Pix_FCC_flash_DW.SendWhiteNoiseEnd_a);
-
-  // End of Terminate for S-Function (fcncallgen): '<S39>/Function-Call Generator1' 
-
-  // Terminate for MATLABSystem: '<S38>/PX4 PWM Output'
-  matlabCodegenHandle_matlab_b2qa(&Pix_FCC_flash_DW.obj_j);
+  // Terminate for MATLABSystem: '<S39>/PX4 PWM Output'
+  matlabCodegenHandle_matlabCod_b(&Pix_FCC_flash_DW.obj_j);
 
   // End of Terminate for S-Function (fcncallgen): '<S2>/Function-Call Generator2' 
   // End of Terminate for SubSystem: '<Root>/ExecutionCycle'

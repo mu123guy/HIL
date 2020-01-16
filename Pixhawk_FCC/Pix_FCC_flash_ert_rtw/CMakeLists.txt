@@ -31,6 +31,7 @@ SRCS
    MW_uORB_Read.h
    rtGetInf.h
    rtGetNaN.h
+   rt_defines.h
    rt_nonfinite.h
    MW_custom_RTOS_header.h
    Pix_FCC_flash.h
