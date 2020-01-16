@@ -71,6 +71,8 @@ function Simulation_Ctrl = init_Simulation_Ctrl(realtime,external,HW_usage)
     assignin('base', 'VSS_FCC_EMUL', Simulink.Variant('HIL_Data.Simulation_Ctrl.VSS.VSS_FCC==2'));
     assignin('base', 'VSS_ACT_REAL', Simulink.Variant('HIL_Data.Simulation_Ctrl.VSS.VSS_ACT==1')); 
     assignin('base', 'VSS_ACT_EMUL', Simulink.Variant('HIL_Data.Simulation_Ctrl.VSS.VSS_ACT==2'));
+    assignin('base', 'VSS_FLIGHTGEAR_ON', Simulink.Variant('HIL_Data.Simulation_Ctrl.external_flg==0'));
+    assignin('base', 'VSS_FLIGHTGEAR_OFF', Simulink.Variant('HIL_Data.Simulation_Ctrl.external_flg==1 '));
     
     % for R2017a use this instead
     %assignin('base', 'VSS_GIMBAL_REAL', Simulink.Variant('VSS_Gimbal==1'));
